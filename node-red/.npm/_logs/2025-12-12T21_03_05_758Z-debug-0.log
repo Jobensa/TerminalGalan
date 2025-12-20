@@ -1,0 +1,33 @@
+0 verbose cli /usr/local/bin/node /usr/local/bin/npm
+1 info using npm@10.8.2
+2 info using node@v20.19.4
+3 silly config load:file:/usr/local/lib/node_modules/npm/npmrc
+4 silly config load:file:/data/.npmrc
+5 silly config load:file:/usr/src/node-red/.npmrc
+6 silly config load:file:/usr/local/etc/npmrc
+7 verbose title npm install node-red-node-sqlite@1.1.1
+8 verbose argv "install" "--no-audit" "--no-update-notifier" "--no-fund" "--save" "--save-prefix" "~" "--omit" "dev" "--engine-strict" "node-red-node-sqlite@1.1.1"
+9 verbose logfile logs-max:10 dir:/data/.npm/_logs/2025-12-12T21_03_05_758Z-
+10 verbose logfile /data/.npm/_logs/2025-12-12T21_03_05_758Z-debug-0.log
+11 silly packumentCache heap:2197815296 maxSize:549453824 maxEntrySize:274726912
+12 silly logfile start cleaning logs, removing 1 files
+13 silly logfile done cleaning log files
+14 silly idealTree buildDeps
+15 silly fetch manifest node-red-node-sqlite@1.1.1
+16 silly packumentCache full:https://registry.npmjs.org/node-red-node-sqlite cache-miss
+17 http fetch GET 200 https://registry.npmjs.org/node-red-node-sqlite 1785ms (cache updated)
+18 silly packumentCache full:https://registry.npmjs.org/node-red-node-sqlite set size:undefined disposed:false
+19 silly placeDep ROOT node-red-node-sqlite@1.1.1 REPLACE for: node-red-project@0.0.1 want: 1.1.1
+20 silly reify mark retired [ '/data/node_modules/node-red-node-sqlite' ]
+21 silly reify moves {
+21 silly reify   '/data/node_modules/node-red-node-sqlite': '/data/node_modules/.node-red-node-sqlite-AXc6FkYk'
+21 silly reify }
+22 silly tarball no local data for node-red-node-sqlite@https://registry.npmjs.org/node-red-node-sqlite/-/node-red-node-sqlite-1.1.1.tgz. Extracting by manifest.
+23 http fetch GET 200 https://registry.npmjs.org/node-red-node-sqlite/-/node-red-node-sqlite-1.1.1.tgz 140ms (cache miss)
+24 silly CHANGE node_modules/node-red-node-sqlite
+25 verbose cwd /data
+26 verbose os Linux 6.12.57+deb13-amd64
+27 verbose node v20.19.4
+28 verbose npm  v10.8.2
+29 verbose exit 0
+30 info ok

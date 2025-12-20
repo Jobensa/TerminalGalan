@@ -1,0 +1,165 @@
+<template>
+    <div style="width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; background-color: #333;">
+
+    <style>
+        /* Animación de rotación para bombas/válvulas */
+        @keyframes rotar {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .animacion-girar {
+            animation: rotar 2s linear infinite;
+            transform-box: fill-box;
+            transform-origin: center;
+        }
+
+        /* Animación de flujo para tuberías */
+        @keyframes fluir {
+            to { stroke-dashoffset: -50; }
+        }
+        .animacion-flujo {
+            stroke-dasharray: 10 5;
+            animation: fluir 1s linear infinite;
+        }
+
+        /* Cursor de mano para los botones */
+        .boton-interactivo {
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+        .boton-interactivo:active {
+            opacity: 0.7;
+        }
+    </style>
+
+    <svg width="100%" height="100%" viewBox="0 0 297 210" version="1.1" xmlns="http://www.w3.org/2000/svg">
+
+        <defs>
+            <linearGradient id="linearGradient22" inkscape:collect="always">
+                <stop style="stop-color:#e65309;stop-opacity:0.99;" offset="0" />
+                <stop style="stop-color:#f0f3f5;stop-opacity:0.98;" offset="0.5" />
+                <stop style="stop-color:#e17313;stop-opacity:0.96;" offset="1" />
+            </linearGradient>
+            <linearGradient xlink:href="#linearGradient22" id="linearGradient23" x1="258.2" y1="72.7" x2="258.2" y2="138.8" gradientUnits="userSpaceOnUse" gradientTransform="matrix(1.029,0,0,0.087,-216.8,146.3)" />
+            <linearGradient xlink:href="#linearGradient22" id="linearGradient24" gradientUnits="userSpaceOnUse" gradientTransform="matrix(2.52,0,0,0.087,-456.1,146.5)" x1="258.2" y1="72.7" x2="258.2" y2="138.8" />
+        </defs>
+
+        <g id="layer1">
+
+            <g id="shape" transform="matrix(0.527,0,0,0.514,71.76,148.19)" style="fill:#9d3600;">
+                <path fill="#c78163" d="m 67.676,31.745 -8.292,-0.622 -3.128,-3.128 0.651,-3.817 c 2.004,-0.37 3.408,-1.164 3.408,-2.086 0,-1.108 1.851,-2.141 4.297,-2.495 2.346,0 11.757,0 11.91,0 0.64,0 1.159,-2.118 1.159,-4.732 0,-2.614 -0.519,-4.732 -1.159,-4.732 -0.153,0 -9.563,0 -11.91,0 -2.446,-0.354 -4.298,-1.387 -4.298,-2.495 0,-1.271 -2.655,-2.311 -5.899,-2.311 h -8.259 c -3.245,0 -5.899,1.04 -5.899,2.311 0,1.108 -1.952,2.142 -4.532,2.495 -3.361,0 -11.291,0 -11.428,0 -0.64,0 -1.159,2.118 -1.159,4.732 0,2.614 0.519,4.732 1.159,4.732 0.137,0 8.068,0 11.428,0 2.58,0.354 4.532,1.387 4.532,2.495 0,0.873 1.266,1.627 3.102,2.02 l 0.662,3.882 -3.127,3.128 -8.292,0.622 L 0.277,64.069 10.332,86.722 H 89.945 L 100,64.069 Z M 80.634,71.149 H 19.643 l -1.359,-3.062 25.33,-25.33 0.356,-4.746 3.191,-3.191 c 1.653,-1.653 4.333,-1.653 5.985,0 l 3.159,3.159 0.359,4.778 25.33,25.33 z" />
+            </g>
+
+            <rect style="fill:url(#linearGradient23); stroke:#b9b9b9; stroke-width:0.07;" width="67.8" height="6.9" x="15.1" y="152.1"
+                  :class="{'animacion-flujo': msg.payload.STATUS_BATCH === 'ACTIVO'}" />
+            <rect style="fill:url(#linearGradient24); stroke:#b9b9b9; stroke-width:0.11;" width="166.4" height="6.8" x="113.3" y="152.3"
+                  :class="{'animacion-flujo': msg.payload.STATUS_BATCH === 'ACTIVO'}" />
+
+            <g id="g55" transform="matrix(0.866,0,0,1.229,103.8,-36.4)"
+               :class="{'animacion-girar': msg.payload.STATUS_BATCH === 'ACTIVO'}">
+               <path fill="#fb5700" d="m 138.8,137.1 h 10 v 10 h -10 z" /> </g>
+
+            <g id="PIT_2001_GROUP">
+                <rect x="182.06" y="125.09" width="32.1" height="16.8" fill="#969696" stroke="#050509" ry="0.7" />
+                <rect x="183.14" y="132.43" fill="#20a040" stroke="black" width="29.9" height="8.9" ry="1.5" />
+                <text x="188.46" y="129.59" font-size="5.33" font-family="Arial" fill="black">PIT_2001</text>
+                <rect x="184.38" y="133.90" fill="black" stroke="black" width="27.1" height="6.0" ry="1.7" />
+
+                <text id="PIT_2001_PV" x="187.46" y="137.78" font-size="5.33" font-family="Arial" fill="#00ffff">
+                    {{ msg.payload.PIT_2001_PV || '---' }}
+                </text>
+            </g>
+
+            <g id="TIT_2001_GROUP">
+                <rect x="146.08" y="124.87" width="31.9" height="17.2" fill="#969696" stroke="#050509" ry="0.7" />
+                <rect x="147.15" y="132.22" fill="#20a040" stroke="black" width="29.9" height="8.9" ry="1.5" />
+                <text x="151.18" y="129.41" font-size="5.33" font-family="Arial" fill="black">TIT_2001</text>
+                <rect x="148.57" y="133.56" fill="black" stroke="black" width="27.0" height="6.0" ry="1.6" />
+
+                <text id="TIT_2001_PV" x="151.48" y="137.04" font-size="5.33" font-family="Arial" fill="#00ffff">
+                    {{ msg.payload.TIT_2001_PV || '---' }}
+                </text>
+            </g>
+
+            <g id="UIT_2001_GROUP">
+                <rect x="70.42" y="113.19" width="57.3" height="35.3" fill="#969696" stroke="#050509" ry="1.5" />
+                <text x="88.95" y="117.70" font-size="5.33" font-family="Arial" fill="black">UIT_2001</text>
+
+                <text x="83.01" y="127.73" font-size="5.33" font-family="Arial">Flujo</text>
+                <text x="73.08" y="135.56" font-size="5.33" font-family="Arial">Densidad</text>
+                <text x="80.05" y="142.12" font-size="5.33" font-family="Arial">Bache</text>
+
+                <rect x="96.48" y="123.40" fill="black" width="28.0" height="6.5" ry="1.6" />
+                <text id="UIT_2001_FLOW" x="98.58" y="127.69" font-size="5.33" font-family="Arial" fill="#00ffff">
+                    {{ typeof msg.payload.UIT_2001_FLOW === 'number' ? msg.payload.UIT_2001_FLOW.toFixed(2) : '0.00' }}
+                </text>
+
+                <rect x="96.56" y="131.82" fill="black" width="27.8" height="6.1" ry="1.5" />
+                <text id="UIT_2001_DENS" x="99.12" y="135.52" font-size="5.33" font-family="Arial" fill="#00ffff">
+                    {{ typeof msg.payload.UIT_2001_DENS === 'number' ? msg.payload.UIT_2001_DENS.toFixed(2) : '0.00' }}
+                </text>
+
+                <rect x="96.19" y="138.58" fill="black" width="28.1" height="6.1" ry="1.5" />
+                <text id="UIT_2001_TBATCH" x="98.91" y="141.90" font-size="5.33" font-family="Arial" fill="#00ffff">
+                    {{ typeof msg.payload.UIT_2001_TBATCH === 'number' ? msg.payload.UIT_2001_TBATCH.toFixed(2) : '0.00' }}
+                </text>
+            </g>
+
+            <rect width="123.9" height="71.9" x="117.7" y="18.5" fill="#969696" stroke="black" ry="3.0" />
+            <text x="129.5" y="30.8" font-weight="bold" font-size="6.1" font-family="sans-serif">DATOS DEL BATCH</text>
+
+            <text x="123.8" y="35.8" font-size="5.33" font-family="Arial">TIQUETE No.</text>
+            <rect x="158.8" y="31.4" width="47.8" height="6.2" fill="#cfcfd0" stroke="#303130" />
+            <text id="TIKET_N" x="166.1" y="35.5" font-size="5.33" font-family="Arial" fill="#000080">
+                {{ msg.payload.TIKET_N || '0' }}
+            </text>
+
+            <text x="123.8" y="46.8" font-size="5.33" font-family="Arial">PRODUCTO:</text>
+            <rect x="158.6" y="42.0" width="47.8" height="6.2" fill="#cfcfd0" stroke="#303130" />
+            <text id="PRODUCTO" x="165.8" y="46.2" font-size="5.33" font-family="Arial" fill="#000080">
+                {{ msg.payload.PRODUCTO || '---' }}
+            </text>
+
+            <text x="135.6" y="58.4" font-size="5.33" font-family="Arial">FECHA:</text>
+            <rect x="157.4" y="53.4" width="66.2" height="6.1" fill="#cfcfd0" stroke="#303130" />
+            <text id="Date_Time" x="160.0" y="58.0" font-size="5.33" font-family="Arial" fill="#000080">
+                {{ msg.payload.DATE_STRING }}
+            </text>
+
+            <text x="139.1" y="82.2" font-size="5.33" font-family="Arial">ESTADO DEL BACHE</text>
+            <text id="BATCH_STATUS" x="198.8" y="81.9" font-size="5.33" font-family="Arial" font-weight="bold"
+                  :fill="msg.payload.STATUS_BATCH_COLOR">
+                {{ msg.payload.STATUS_BATCH }}
+            </text>
+
+            <g id="PB_START" transform="translate(-6.35, 4.76)" class="boton-interactivo" @click="enviar('INICIAR')">
+                <rect x="131.4" y="63.0" width="21.7" height="6.2" fill="#cfcfd0" stroke="#303130" rx="0.7" />
+                <text x="136.3" y="67.2" font-size="5.33" font-family="Arial">Iniciar</text>
+            </g>
+
+            <g id="PB_STOP" transform="translate(-8.99, 4.76)" class="boton-interactivo" @click="enviar('PARAR')">
+                <rect x="158.1" y="63.2" width="21.7" height="6.2" fill="#cfcfd0" stroke="#303130" rx="0.7" />
+                <text x="163.3" y="67.5" font-size="5.33" font-family="Arial">Parar</text>
+            </g>
+
+            <g id="PB_CLEAR" transform="translate(-11.11, 4.76)" class="boton-interactivo" @click="enviar('BORRAR')">
+                <rect x="184.7" y="63.3" width="21.7" height="6.2" fill="#cfcfd0" stroke="#303130" rx="0.7" />
+                <text x="190.2" y="67.5" font-size="5.33" font-family="Arial">Borrar</text>
+            </g>
+
+        </g>
+    </svg>
+    </div>
+</template>
+
+<script>
+export default {
+    name: 'HMI_Batch_Loader',
+    methods: {
+        enviar(comando) {
+            // Enviamos el comando al flow de Node-RED
+            this.send({ payload: comando });
+        }
+    }
+}
+</script>

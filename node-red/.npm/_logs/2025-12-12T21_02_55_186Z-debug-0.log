@@ -1,0 +1,97 @@
+0 verbose cli /usr/local/bin/node /usr/local/bin/npm
+1 info using npm@10.8.2
+2 info using node@v20.19.4
+3 silly config load:file:/usr/local/lib/node_modules/npm/npmrc
+4 silly config load:file:/data/.npmrc
+5 silly config load:file:/usr/src/node-red/.npmrc
+6 silly config load:file:/usr/local/etc/npmrc
+7 verbose title npm install node-red-dashboard@3.6.6
+8 verbose argv "install" "--no-audit" "--no-update-notifier" "--no-fund" "--save" "--save-prefix" "~" "--omit" "dev" "--engine-strict" "node-red-dashboard@3.6.6"
+9 verbose logfile logs-max:10 dir:/data/.npm/_logs/2025-12-12T21_02_55_186Z-
+10 verbose logfile /data/.npm/_logs/2025-12-12T21_02_55_186Z-debug-0.log
+11 silly packumentCache heap:2197815296 maxSize:549453824 maxEntrySize:274726912
+12 silly logfile start cleaning logs, removing 1 files
+13 silly logfile done cleaning log files
+14 silly idealTree buildDeps
+15 silly fetch manifest node-red-dashboard@3.6.6
+16 silly packumentCache full:https://registry.npmjs.org/node-red-dashboard cache-miss
+17 http fetch GET 200 https://registry.npmjs.org/node-red-dashboard 665ms (cache updated)
+18 silly packumentCache full:https://registry.npmjs.org/node-red-dashboard set size:undefined disposed:false
+19 silly placeDep ROOT node-red-dashboard@3.6.6 REPLACE for: node-red-project@0.0.1 want: 3.6.6
+20 silly fetch manifest compression@^1.8.1
+21 silly packumentCache full:https://registry.npmjs.org/compression cache-miss
+22 http fetch GET 200 https://registry.npmjs.org/compression 97ms (cache updated)
+23 silly packumentCache full:https://registry.npmjs.org/compression set size:undefined disposed:false
+24 silly placeDep ROOT compression@1.8.1 OK for: node-red-dashboard@3.6.6 want: ^1.8.1
+25 silly fetch manifest bytes@3.1.2
+26 silly packumentCache full:https://registry.npmjs.org/bytes cache-miss
+27 silly fetch manifest compressible@~2.0.18
+28 silly packumentCache full:https://registry.npmjs.org/compressible cache-miss
+29 silly fetch manifest negotiator@~0.6.4
+30 silly packumentCache full:https://registry.npmjs.org/negotiator cache-miss
+31 silly fetch manifest on-headers@~1.1.0
+32 silly packumentCache full:https://registry.npmjs.org/on-headers cache-miss
+33 silly fetch manifest safe-buffer@5.2.1
+34 silly packumentCache full:https://registry.npmjs.org/safe-buffer cache-miss
+35 http fetch GET 200 https://registry.npmjs.org/compressible 128ms (cache updated)
+36 silly packumentCache full:https://registry.npmjs.org/compressible set size:undefined disposed:false
+37 http fetch GET 200 https://registry.npmjs.org/bytes 307ms (cache revalidated)
+38 silly packumentCache full:https://registry.npmjs.org/bytes set size:37018 disposed:false
+39 http fetch GET 200 https://registry.npmjs.org/safe-buffer 308ms (cache revalidated)
+40 silly packumentCache full:https://registry.npmjs.org/safe-buffer set size:41183 disposed:false
+41 http fetch GET 200 https://registry.npmjs.org/on-headers 315ms (cache updated)
+42 silly packumentCache full:https://registry.npmjs.org/on-headers set size:undefined disposed:false
+43 http fetch GET 200 https://registry.npmjs.org/negotiator 328ms (cache updated)
+44 silly packumentCache full:https://registry.npmjs.org/negotiator set size:undefined disposed:false
+45 silly placeDep ROOT bytes@3.1.2 OK for: compression@1.8.1 want: 3.1.2
+46 silly placeDep ROOT compressible@2.0.18 OK for: compression@1.8.1 want: ~2.0.18
+47 silly placeDep node_modules/compression negotiator@0.6.4 OK for: compression@1.8.1 want: ~0.6.4
+48 silly placeDep node_modules/compression on-headers@1.1.0 OK for: compression@1.8.1 want: ~1.1.0
+49 silly placeDep node_modules/compression safe-buffer@5.2.1 OK for: compression@1.8.1 want: 5.2.1
+50 silly fetch manifest mime-db@>= 1.43.0 < 2
+51 silly packumentCache full:https://registry.npmjs.org/mime-db cache-miss
+52 http fetch GET 200 https://registry.npmjs.org/mime-db 102ms (cache updated)
+53 silly packumentCache full:https://registry.npmjs.org/mime-db set size:undefined disposed:false
+54 silly placeDep ROOT mime-db@1.54.0 OK for: compressible@2.0.18 want: >= 1.43.0 < 2
+55 silly reify mark retired [ '/data/node_modules/bytes' ]
+56 silly reify mark retired [ '/data/node_modules/compressible' ]
+57 silly reify mark retired [ '/data/node_modules/compression' ]
+58 silly reify mark retired [ '/data/node_modules/mime-db' ]
+59 silly reify mark retired [ '/data/node_modules/node-red-dashboard' ]
+60 silly reify mark retired [ '/data/node_modules/raw-body/node_modules/bytes' ]
+61 silly reify moves {
+61 silly reify   '/data/node_modules/bytes': '/data/node_modules/.bytes-M6S4GHrH',
+61 silly reify   '/data/node_modules/compressible': '/data/node_modules/.compressible-60RmNxZN',
+61 silly reify   '/data/node_modules/compression': '/data/node_modules/.compression-dOvaEpz8',
+61 silly reify   '/data/node_modules/mime-db': '/data/node_modules/.mime-db-Bc7q22S9',
+61 silly reify   '/data/node_modules/node-red-dashboard': '/data/node_modules/.node-red-dashboard-nLdcNL8A',
+61 silly reify   '/data/node_modules/raw-body/node_modules/bytes': '/data/node_modules/raw-body/node_modules/.bytes-ZsVEaPgA'
+61 silly reify }
+62 silly tarball no local data for node-red-dashboard@https://registry.npmjs.org/node-red-dashboard/-/node-red-dashboard-3.6.6.tgz. Extracting by manifest.
+63 silly tarball no local data for mime-db@https://registry.npmjs.org/mime-db/-/mime-db-1.54.0.tgz. Extracting by manifest.
+64 silly tarball no local data for compression@https://registry.npmjs.org/compression/-/compression-1.8.1.tgz. Extracting by manifest.
+65 silly tarball no local data for negotiator@https://registry.npmjs.org/negotiator/-/negotiator-0.6.4.tgz. Extracting by manifest.
+66 silly tarball no local data for on-headers@https://registry.npmjs.org/on-headers/-/on-headers-1.1.0.tgz. Extracting by manifest.
+67 http fetch GET 200 https://registry.npmjs.org/on-headers/-/on-headers-1.1.0.tgz 122ms (cache miss)
+68 http fetch GET 200 https://registry.npmjs.org/compression/-/compression-1.8.1.tgz 128ms (cache miss)
+69 http fetch GET 200 https://registry.npmjs.org/negotiator/-/negotiator-0.6.4.tgz 129ms (cache miss)
+70 http fetch GET 200 https://registry.npmjs.org/mime-db/-/mime-db-1.54.0.tgz 133ms (cache miss)
+71 http fetch GET 200 https://registry.npmjs.org/node-red-dashboard/-/node-red-dashboard-3.6.6.tgz 416ms (cache miss)
+72 warn deprecated node-red-dashboard@3.6.6: No longer maintained - please look at alternatives such as @flowfuse/node-red-dashboard or node-red-contrib-uibuilder
+73 info run node-red-dashboard@3.6.6 postinstall node_modules/node-red-dashboard node fixgrid.js
+74 info run node-red-dashboard@3.6.6 postinstall { code: 0, signal: null }
+75 silly REMOVE node_modules/raw-body/node_modules/bytes
+76 silly CHANGE node_modules/node-red-dashboard
+77 silly CHANGE node_modules/mime-db
+78 silly CHANGE node_modules/compression
+79 silly ADD node_modules/compression/node_modules/safe-buffer
+80 silly ADD node_modules/compression/node_modules/on-headers
+81 silly ADD node_modules/compression/node_modules/negotiator
+82 silly CHANGE node_modules/compressible
+83 silly CHANGE node_modules/bytes
+84 verbose cwd /data
+85 verbose os Linux 6.12.57+deb13-amd64
+86 verbose node v20.19.4
+87 verbose npm  v10.8.2
+88 verbose exit 0
+89 info ok

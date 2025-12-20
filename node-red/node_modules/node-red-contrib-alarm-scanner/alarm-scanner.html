@@ -1,0 +1,59 @@
+<script type="text/javascript">
+    RED.nodes.registerType('alarm-scanner',{
+        category: 'function',
+        color: '#a6bbcf',
+        defaults: {
+            name: {value:""}
+        },
+        inputs:1,
+        outputs:1,
+        icon: "font-awesome/fa-bell",
+        label: function() {
+            return this.name||"Alarm Scanner";
+        }
+    });
+</script>
+
+<script type="text/html" data-template-name="alarm-scanner">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+</script>
+
+<script type="text/html" data-help-name="alarm-scanner">
+    <p>A node that implements an Alarm Scanner.</p>
+    <h3>Inputs</h3>
+    <dl class="message-properties">
+        <dt>payload <span class="property-type">object</span></dt>
+        <dd>A JSON object containing tag information and the current process variable (PV). The object should include:
+            <ul>
+                <li>TagName: string</li>
+                <li>Descripcion: string</li>
+                <li>und: string (unit)</li>
+                <li>HH: number (High High limit)</li>
+                <li>H: number (High limit)</li>
+                <li>L: number (Low limit)</li>
+                <li>LL: number (Low Low limit)</li>
+                <li>enableHH: boolean</li>
+                <li>enableH: boolean</li>
+                <li>enableL: boolean</li>
+                <li>enableLL: boolean</li>
+                <li>PV: number (current process variable value)</li>
+            </ul>
+        </dd>
+    </dl>
+    <h3>Outputs</h3>
+    <dl class="message-properties">
+        <dt>payload <span class="property-type">object</span></dt>
+        <dd>The input object with additional alarm information.</dd>
+        <dt>alarms <span class="property-type">array</span></dt>
+        <dd>An array of active alarms.</dd>
+        <dt>alarmState <span class="property-type">string</span></dt>
+        <dd>The current alarm state color code.</dd>
+        <dt>fail <span class="property-type">number</span></dt>
+        <dd>1 if in alarm, 0 otherwise.</dd>
+    </dl>
+    <h3>Details</h3>
+    <p>This node scans the input value for alarm conditions based on the provided tag information. It outputs the alarm status and any active alarms.</p>
+</script>

@@ -1,0 +1,49 @@
+0 verbose cli /usr/local/bin/node /usr/local/bin/npm
+1 info using npm@10.8.2
+2 info using node@v20.19.4
+3 silly config load:file:/usr/local/lib/node_modules/npm/npmrc
+4 silly config load:file:/data/.npmrc
+5 silly config load:file:/usr/src/node-red/.npmrc
+6 silly config load:file:/usr/local/etc/npmrc
+7 verbose title npm install node-red-node-sqlite@1.1.1
+8 verbose argv "install" "--no-audit" "--no-update-notifier" "--no-fund" "--save" "--save-prefix" "~" "--omit" "dev" "--engine-strict" "node-red-node-sqlite@1.1.1"
+9 verbose logfile logs-max:10 dir:/data/.npm/_logs/2025-12-09T14_45_46_678Z-
+10 verbose logfile /data/.npm/_logs/2025-12-09T14_45_46_678Z-debug-0.log
+11 silly packumentCache heap:2197815296 maxSize:549453824 maxEntrySize:274726912
+12 silly logfile start cleaning logs, removing 1 files
+13 silly logfile done cleaning log files
+14 silly idealTree buildDeps
+15 silly fetch manifest node-red-node-sqlite@1.1.1
+16 silly packumentCache full:https://registry.npmjs.org/node-red-node-sqlite cache-miss
+17 verbose shrinkwrap failed to load node_modules/.package-lock.json out of date, updated: node_modules
+18 http fetch GET https://registry.npmjs.org/node-red-node-sqlite attempt 1 failed with EAI_AGAIN
+19 http fetch GET https://registry.npmjs.org/node-red-node-sqlite attempt 2 failed with EAI_AGAIN
+20 http fetch GET https://registry.npmjs.org/node-red-node-sqlite attempt 3 failed with EAI_AGAIN
+21 http fetch GET 200 https://registry.npmjs.org/node-red-node-sqlite 85161ms (cache stale)
+22 silly packumentCache full:https://registry.npmjs.org/node-red-node-sqlite set size:65303 disposed:false
+23 silly placeDep ROOT node-red-node-sqlite@ REPLACE for: node-red-project@0.0.1 want: 1.1.1
+24 verbose type version
+25 verbose stack node-red-node-sqlite: No matching version found for node-red-node-sqlite@1.1.1.
+25 verbose stack     at module.exports (/usr/local/lib/node_modules/npm/node_modules/npm-pick-manifest/lib/index.js:215:23)
+25 verbose stack     at RegistryFetcher.manifest (/usr/local/lib/node_modules/npm/node_modules/pacote/lib/registry.js:130:54)
+25 verbose stack     at async #fetchManifest (/usr/local/lib/node_modules/npm/node_modules/@npmcli/arborist/lib/arborist/build-ideal-tree.js:1199:20)
+25 verbose stack     at async #nodeFromEdge (/usr/local/lib/node_modules/npm/node_modules/@npmcli/arborist/lib/arborist/build-ideal-tree.js:1037:19)
+25 verbose stack     at async #buildDepStep (/usr/local/lib/node_modules/npm/node_modules/@npmcli/arborist/lib/arborist/build-ideal-tree.js:901:11)
+25 verbose stack     at async Arborist.buildIdealTree (/usr/local/lib/node_modules/npm/node_modules/@npmcli/arborist/lib/arborist/build-ideal-tree.js:181:7)
+25 verbose stack     at async Promise.all (index 1)
+25 verbose stack     at async Arborist.reify (/usr/local/lib/node_modules/npm/node_modules/@npmcli/arborist/lib/arborist/reify.js:131:5)
+25 verbose stack     at async Install.exec (/usr/local/lib/node_modules/npm/lib/commands/install.js:150:5)
+25 verbose stack     at async Npm.exec (/usr/local/lib/node_modules/npm/lib/npm.js:207:9)
+26 error code ETARGET
+27 error notarget No matching version found for node-red-node-sqlite@1.1.1.
+28 error notarget In most cases you or one of your dependencies are requesting
+28 error notarget a package version that doesn't exist.
+29 silly unfinished npm timer reify 1765291546894
+30 silly unfinished npm timer reify:loadTrees 1765291546897
+31 verbose cwd /data
+32 verbose os Linux 6.12.57+deb13-amd64
+33 verbose node v20.19.4
+34 verbose npm  v10.8.2
+35 verbose exit 1
+36 verbose code 1
+37 error A complete log of this run can be found in: /data/.npm/_logs/2025-12-09T14_45_46_678Z-debug-0.log

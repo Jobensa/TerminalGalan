@@ -1,0 +1,43 @@
+0 verbose cli /usr/local/bin/node /usr/local/bin/npm
+1 info using npm@10.8.2
+2 info using node@v20.19.4
+3 silly config load:file:/usr/local/lib/node_modules/npm/npmrc
+4 silly config load:file:/data/.npmrc
+5 silly config load:file:/usr/src/node-red/.npmrc
+6 silly config load:file:/usr/local/etc/npmrc
+7 verbose title npm install node-red-node-ui-table@0.4.5
+8 verbose argv "install" "--no-audit" "--no-update-notifier" "--no-fund" "--save" "--save-prefix" "~" "--omit" "dev" "--engine-strict" "node-red-node-ui-table@0.4.5"
+9 verbose logfile logs-max:10 dir:/data/.npm/_logs/2025-12-18T21_28_55_674Z-
+10 verbose logfile /data/.npm/_logs/2025-12-18T21_28_55_674Z-debug-0.log
+11 silly packumentCache heap:2197815296 maxSize:549453824 maxEntrySize:274726912
+12 silly logfile start cleaning logs, removing 1 files
+13 silly logfile done cleaning log files
+14 silly idealTree buildDeps
+15 silly fetch manifest node-red-node-ui-table@0.4.5
+16 silly packumentCache full:https://registry.npmjs.org/node-red-node-ui-table cache-miss
+17 verbose shrinkwrap failed to load node_modules/.package-lock.json out of date, updated: node_modules
+18 http fetch GET 200 https://registry.npmjs.org/node-red-node-ui-table 592ms (cache miss)
+19 silly packumentCache full:https://registry.npmjs.org/node-red-node-ui-table set size:undefined disposed:false
+20 silly fetch manifest node-red-dashboard@~3.6.6
+21 silly packumentCache full:https://registry.npmjs.org/node-red-dashboard cache-miss
+22 http fetch GET 200 https://registry.npmjs.org/node-red-dashboard 260ms (cache revalidated)
+23 silly packumentCache full:https://registry.npmjs.org/node-red-dashboard set size:549868 disposed:false
+24 silly placeDep ROOT node-red-node-ui-table@0.4.5 OK for: node-red-project@0.0.1 want: 0.4.5
+25 silly reify mark retired [ '/data/node_modules/node-red-contrib-flujo-estandar' ]
+26 silly reify mark retired [ '/data/node_modules/node-red-contrib-alarm-scanner' ]
+27 silly reify moves {
+27 silly reify   '/data/node_modules/node-red-contrib-flujo-estandar': '/data/node_modules/.node-red-contrib-flujo-estandar-8gFdP7uL',
+27 silly reify   '/data/node_modules/node-red-contrib-alarm-scanner': '/data/node_modules/.node-red-contrib-alarm-scanner-Xn3chPad'
+27 silly reify }
+28 silly tarball no local data for node-red-node-ui-table@https://registry.npmjs.org/node-red-node-ui-table/-/node-red-node-ui-table-0.4.5.tgz. Extracting by manifest.
+29 http fetch GET 200 https://registry.npmjs.org/node-red-node-ui-table/-/node-red-node-ui-table-0.4.5.tgz 301ms (cache miss)
+30 silly ADD node_modules/node-red-node-ui-table
+31 silly REMOVE node_modules/node-red-contrib-alarm-scanner
+32 silly REMOVE node_modules/node-red-contrib-flujo-estandar
+33 silly REMOVE node_modules/node-red-contrib-flujo-estandar/node_modules/csv-parser
+34 verbose cwd /data
+35 verbose os Linux 6.12.57+deb13-amd64
+36 verbose node v20.19.4
+37 verbose npm  v10.8.2
+38 verbose exit 0
+39 info ok

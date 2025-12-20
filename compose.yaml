@@ -1,0 +1,58 @@
+#version: '3.8'
+services:
+  influxdb2:
+    image: influxdb:2.7
+    network_mode: "host"
+
+    volumes:
+      - ./influxdb-data:/var/lib/influxdb2
+    environment:
+      - DOCKER_INFLUXDB_INIT_MODE=setup
+      - DOCKER_INFLUXDB_INIT_USERNAME=admin
+      - DOCKER_INFLUXDB_INIT_PASSWORD=influxdb
+      - DOCKER_INFLUXDB_INIT_ORG=Petrosantander
+      - DOCKER_INFLUXDB_INIT_BUCKET=data
+      - DOCKER_INFLUXDB_INIT_TOKEN=tu_token_secreto_aqui
+    #restart: unless-stopped 
+          
+  grafana:
+    image: grafana/grafana:latest
+    network_mode: "host"
+
+    volumes:
+      - ./grafana-data:/var/lib/grafana
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_SECURITY_ALLOW_EMBEDDING=true
+    #restart: unless-stopped 
+        
+  mosquitto:
+    image: eclipse-mosquitto:latest
+    network_mode: "host"
+
+    container_name: mosquitto
+    environment:
+      - TZ=America/Bogota
+    volumes:   
+      - ./mosquitto/config:/mosquitto/config
+      - ./mosquitto/data:/mosquitto/data
+      - ./mosquitto/log:/mosquitto/log 
+    #restart: unless-stopped    
+  
+  node-red:
+    image: nodered/node-red:latest
+    environment:
+      - TZ=America/Bogota
+    network_mode: "host"
+
+    volumes:
+      - ./node-red:/data
+      - ./tiquetes_pdf:/data/tiquetes_pdf
+    #devices:
+     # - "/dev/ttyUSB0:/dev/ttyUSB0"
+    #privileged: true
+    #user: "root"
+    #restart: unless-stopped
+
+

@@ -1,0 +1,87 @@
+0 verbose cli /usr/local/bin/node /usr/local/bin/npm
+1 info using npm@10.8.2
+2 info using node@v20.19.4
+3 silly config load:file:/usr/local/lib/node_modules/npm/npmrc
+4 silly config load:file:/data/.npmrc
+5 silly config load:file:/usr/src/node-red/.npmrc
+6 silly config load:file:/usr/local/etc/npmrc
+7 verbose title npm remove node-red-contrib-cip-st-ethernet-ip
+8 verbose argv "remove" "--no-audit" "--no-update-notifier" "--no-fund" "--save" "node-red-contrib-cip-st-ethernet-ip"
+9 verbose logfile logs-max:10 dir:/data/.npm/_logs/2025-12-07T17_21_52_736Z-
+10 verbose logfile /data/.npm/_logs/2025-12-07T17_21_52_736Z-debug-0.log
+11 silly packumentCache heap:2197815296 maxSize:549453824 maxEntrySize:274726912
+12 silly logfile start cleaning logs, removing 1 files
+13 silly logfile done cleaning log files
+14 silly idealTree buildDeps
+15 verbose shrinkwrap failed to load node_modules/.package-lock.json out of date, updated: node_modules
+16 silly reify mark retired [ '/data/node_modules/call-bind' ]
+17 silly reify mark retired [ '/data/node_modules/deep-equal' ]
+18 silly reify mark retired [ '/data/node_modules/dateformat' ]
+19 silly reify mark retired [ '/data/node_modules/define-properties' ]
+20 silly reify mark retired [ '/data/node_modules/define-data-property' ]
+21 silly reify mark retired [ '/data/node_modules/functions-have-names' ]
+22 silly reify mark retired [ '/data/node_modules/has-property-descriptors' ]
+23 silly reify mark retired [ '/data/node_modules/int64-buffer' ]
+24 silly reify mark retired [ '/data/node_modules/is-arguments' ]
+25 silly reify mark retired [ '/data/node_modules/is-date-object' ]
+26 silly reify mark retired [ '/data/node_modules/is-regex' ]
+27 silly reify mark retired [ '/data/node_modules/node-red-contrib-alarm-scanner' ]
+28 silly reify mark retired [ '/data/node_modules/node-red-contrib-cip-st-ethernet-ip' ]
+29 silly reify mark retired [ '/data/node_modules/node-red-contrib-flujo-estandar' ]
+30 silly reify mark retired [ '/data/node_modules/object-keys' ]
+31 silly reify mark retired [ '/data/node_modules/object-is' ]
+32 silly reify mark retired [ '/data/node_modules/regexp.prototype.flags' ]
+33 silly reify mark retired [ '/data/node_modules/set-function-length' ]
+34 silly reify mark retired [ '/data/node_modules/set-function-name' ]
+35 silly reify mark retired [ '/data/node_modules/st-ethernet-ip' ]
+36 silly reify mark retired [ '/data/node_modules/task-easy' ]
+37 silly reify moves {
+37 silly reify   '/data/node_modules/call-bind': '/data/node_modules/.call-bind-Yv9jQlrb',
+37 silly reify   '/data/node_modules/deep-equal': '/data/node_modules/.deep-equal-YlDIzd1g',
+37 silly reify   '/data/node_modules/dateformat': '/data/node_modules/.dateformat-xvXTY4QG',
+37 silly reify   '/data/node_modules/define-properties': '/data/node_modules/.define-properties-HxCEOxbB',
+37 silly reify   '/data/node_modules/define-data-property': '/data/node_modules/.define-data-property-VKT18bAJ',
+37 silly reify   '/data/node_modules/functions-have-names': '/data/node_modules/.functions-have-names-DpintfK7',
+37 silly reify   '/data/node_modules/has-property-descriptors': '/data/node_modules/.has-property-descriptors-Zkw8eNQa',
+37 silly reify   '/data/node_modules/int64-buffer': '/data/node_modules/.int64-buffer-bsMPDWHO',
+37 silly reify   '/data/node_modules/is-arguments': '/data/node_modules/.is-arguments-iYSoWRpV',
+37 silly reify   '/data/node_modules/is-date-object': '/data/node_modules/.is-date-object-4yYDbyJf',
+37 silly reify   '/data/node_modules/is-regex': '/data/node_modules/.is-regex-fftmJuyv',
+37 silly reify   '/data/node_modules/node-red-contrib-alarm-scanner': '/data/node_modules/.node-red-contrib-alarm-scanner-Xn3chPad',
+37 silly reify   '/data/node_modules/node-red-contrib-cip-st-ethernet-ip': '/data/node_modules/.node-red-contrib-cip-st-ethernet-ip-FQO0phDT',
+37 silly reify   '/data/node_modules/node-red-contrib-flujo-estandar': '/data/node_modules/.node-red-contrib-flujo-estandar-8gFdP7uL',
+37 silly reify   '/data/node_modules/object-keys': '/data/node_modules/.object-keys-GOrTzMDG',
+37 silly reify   '/data/node_modules/object-is': '/data/node_modules/.object-is-AWHgV93f',
+37 silly reify   '/data/node_modules/regexp.prototype.flags': '/data/node_modules/.regexp.prototype.flags-Zhmjl5Kt',
+37 silly reify   '/data/node_modules/set-function-length': '/data/node_modules/.set-function-length-hVqCwJXi',
+37 silly reify   '/data/node_modules/set-function-name': '/data/node_modules/.set-function-name-Qk08C00T',
+37 silly reify   '/data/node_modules/st-ethernet-ip': '/data/node_modules/.st-ethernet-ip-JuhPlVCz',
+37 silly reify   '/data/node_modules/task-easy': '/data/node_modules/.task-easy-oVK999j4'
+37 silly reify }
+38 silly REMOVE node_modules/task-easy
+39 silly REMOVE node_modules/st-ethernet-ip
+40 silly REMOVE node_modules/set-function-name
+41 silly REMOVE node_modules/set-function-length
+42 silly REMOVE node_modules/regexp.prototype.flags
+43 silly REMOVE node_modules/object-is
+44 silly REMOVE node_modules/object-keys
+45 silly REMOVE node_modules/node-red-contrib-flujo-estandar
+46 silly REMOVE node_modules/node-red-contrib-cip-st-ethernet-ip
+47 silly REMOVE node_modules/node-red-contrib-alarm-scanner
+48 silly REMOVE node_modules/is-regex
+49 silly REMOVE node_modules/is-date-object
+50 silly REMOVE node_modules/is-arguments
+51 silly REMOVE node_modules/int64-buffer
+52 silly REMOVE node_modules/has-property-descriptors
+53 silly REMOVE node_modules/functions-have-names
+54 silly REMOVE node_modules/define-data-property
+55 silly REMOVE node_modules/define-properties
+56 silly REMOVE node_modules/dateformat
+57 silly REMOVE node_modules/deep-equal
+58 silly REMOVE node_modules/call-bind
+59 verbose cwd /data
+60 verbose os Linux 6.12.57+deb13-amd64
+61 verbose node v20.19.4
+62 verbose npm  v10.8.2
+63 verbose exit 0
+64 info ok
