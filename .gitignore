@@ -1,0 +1,87 @@
+# =====================
+# GENERAL DOCKER
+# =====================
+.env
+.env.*
+!.env.example
+docker-compose.override.yml
+
+# =====================
+# NODE-RED
+# =====================
+nodered/data/
+node-red/data/
+
+# Excluir todo excepto archivos de configuración
+nodered/data/*
+!nodered/data/settings.js
+!nodered/data/flows.json
+!nodered/data/flows_cred.json.example
+
+# Módulos instalados
+**/node_modules/
+
+# =====================
+# INFLUXDB
+# =====================
+influxdb/data/
+influxdb/config/
+influxdb/engine/
+influxdb/wal/
+
+# InfluxDB 2.x
+influxdb2/data/
+influxdb2/config/
+**/.influxdbv2/
+
+# Backups de influx
+*.tar.gz
+influxdb/backups/
+
+# =====================
+# GRAFANA
+# =====================
+grafana/data/
+grafana/data/grafana.db
+grafana/data/sessions/
+grafana/data/png/
+grafana/data/plugins/
+grafana/logs/
+
+# Mantener provisioning si lo usas
+!grafana/provisioning/
+
+# =====================
+# LOGS Y TEMPORALES
+# =====================
+*.log
+**/*.log
+logs/
+*.tmp
+*.temp
+
+# =====================
+# BASES DE DATOS LOCALES
+# =====================
+*.db
+*.sqlite
+*.sqlite3
+*.bolt
+
+# =====================
+# SEGURIDAD
+# =====================
+*.pem
+*.key
+*.crt
+certs/
+ssl/
+secrets/
+
+# =====================
+# SISTEMA
+# =====================
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
