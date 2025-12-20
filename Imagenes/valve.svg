@@ -1,0 +1,47 @@
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 100 100" xml:space="preserve"><desc>Copyright Opto 22</desc> 
+<g>
+<g id="shape">
+	<path fill="#e34300" d="M94.488,54.267v9.427H80.995c-4.04-5.264-10.391-8.661-17.539-8.661h-4.672v-4.03h7.406V38.002h18.116V36.5
+		H86.5V33h-2.194v-1.877h1.416c1.833,0,3.334-1.5,3.334-3.334V10.381c0-1.833-1.5-3.333-3.334-3.333h-1.416V5.25H86.5v-3.5h-2.194
+		V0.169h-69V1.75H13v3.5h2.306v1.798h-1.416c-1.833,0-3.334,1.5-3.334,3.333V27.79c0,1.833,1.5,3.334,3.334,3.334h1.416V33H13v3.5
+		h2.306v1.502h18.116v13.002h7.406v4.03h-4.672c-7.148,0-13.5,3.397-17.54,8.661H5.512v-9.427H0v9.427v2.272V88.3v2.272V100h5.512
+		v-9.427h13.104c4.04,5.264,10.391,8.661,17.54,8.661h27.3c7.148,0,13.5-3.397,17.54-8.661h13.492V100H100v-9.427V88.3V65.967
+		v-2.272v-9.427H94.488z M63.69,48.265h-8.573v-6.677h2.333v-3.585h6.239V48.265z M35.922,38.002h6.239v3.585h2.333v6.677h-8.572
+		V38.002z"></path>
+</g>
+<g id="light">
+	<path fill="#ff5600" d="M51,58.3c-0.428,0-2.072,0-2.5,0c-3.452,0-6.25,8.432-6.25,18.833s2.798,18.833,6.25,18.833
+		c0.428,0,2.072,0,2.5,0c3.452,0,6.25-8.432,6.25-18.833S54.452,58.3,51,58.3z"></path>
+	<polygon fill="#ff5600" points="63.69,38.002 63.69,48.265 35.922,48.265 35.922,38.002 33.422,38.002 33.422,51.004 66.19,51.004 
+		66.19,38.002 	"></polygon>
+</g>
+<g id="dark">
+	<rect fill="#8a3400" x="13" y="33" width="2.306" height="3.5"></rect>
+	<rect fill="#8a3400" x="84.306" y="33" width="2.194" height="3.5"></rect>
+	<path fill="#8a3400" d="M15.306,7.048h-1.416c-1.833,0-3.334,1.5-3.334,3.333V27.79c0,1.833,1.5,3.334,3.334,3.334h1.416V7.048z"></path>
+	<path fill="#8a3400" d="M85.722,7.048h-1.416v24.076h1.416c1.833,0,3.334-1.5,3.334-3.334V10.381
+		C89.056,8.548,87.555,7.048,85.722,7.048z"></path>
+	<rect x="13" y="1.75" fill="#8a3400" width="2.306" height="3.5"></rect>
+	<rect x="84.306" y="1.75" fill="#8a3400" width="2.194" height="3.5"></rect>
+</g>
+<g id="linear">
+		<linearGradient class="linear" id="SVGID_1_valve" gradientUnits="userSpaceOnUse" x1="23.924" y1="95.8639" x2="23.924" y2="58.4035">
+			
+			
+		<stop offset="0" stop-color="#ff5600"></stop><stop offset="1" stop-color="#1a0c00"></stop></linearGradient>
+		<path class="linear" fill="url(#SVGID_1_valve)" d="M42.25,77.134c0-9.738,2.453-17.748,5.598-18.73c-5.426,0.547-10.164,3.401-13.239,7.564H0V88.3
+			h34.609c3.075,4.162,7.813,7.016,13.239,7.564C44.703,94.881,42.25,86.872,42.25,77.134z"></path>
+		<linearGradient class="linear" id="SVGID_2_valve" gradientUnits="userSpaceOnUse" x1="75.826" y1="95.8639" x2="75.826" y2="58.4035">
+			
+			
+		<stop offset="0" stop-color="#ff5600"></stop><stop offset="1" stop-color="#1a0c00"></stop></linearGradient>
+		<path class="linear" fill="url(#SVGID_2_valve)" d="M64.891,65.967c-3.075-4.162-7.813-7.016-13.239-7.564c3.145,0.983,5.598,8.992,5.598,18.73
+			s-2.453,17.748-5.598,18.73c5.426-0.547,10.164-3.401,13.239-7.564H100V65.967H64.891z"></path>
+	<linearGradient class="linear" id="SVGID_3_valve" gradientUnits="userSpaceOnUse" x1="42.25" y1="77.1337" x2="54.75" y2="77.1337">
+		
+		
+	<stop offset="0" stop-color="#ff5600"></stop><stop offset="1" stop-color="#1a0c00"></stop></linearGradient>
+	<ellipse class="linear" fill="url(#SVGID_3_valve)" cx="48.5" cy="77.134" rx="6.25" ry="18.833"></ellipse>
+</g>
+</g>
+</svg>

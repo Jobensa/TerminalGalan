@@ -1,0 +1,17 @@
+{
+    "name": "node-red-project",
+    "description": "A Node-RED Project",
+    "version": "0.0.1",
+    "private": true,
+    "dependencies": {
+        "node-red-contrib-html-pdf-converter": "~0.1.2",
+        "node-red-contrib-html-to-pdf": "~1.1.1",
+        "node-red-contrib-influxdb": "~0.7.0",
+        "node-red-contrib-modbus": "~5.45.2",
+        "node-red-contrib-postgresql": "~0.15.4",
+        "node-red-contrib-ui-svg": "~2.3.3",
+        "node-red-dashboard": "~3.6.6",
+        "node-red-node-sqlite": "~1.1.1",
+        "node-red-node-ui-table": "~0.4.5"
+    }
+}
