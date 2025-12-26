@@ -999,7 +999,7 @@
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
-        "initialize": "// El código añadido aquí se ejecutará una vez\n// cuando el nodo es iniciado.\n\nglobal.set(\"PU\", 1);\nglobal.set(\"IS_REPORT\", false);\n\n// let tag = {\n//     \"ID\": 0,\n//     \"TagName\": \"PIT_2001\",\n//     \"Descripcion\": \"Presion de Descarga\",\n//     \"und\": \"PSI\",\n//     \"PV\": 0.0,\n//     \"HH\": 95.0,\n//     \"H\": 90.0,\n//     \"L\": 15.0,\n//     \"LL\": 10,\n//     \"Max\": 560,\n//     \"Min\": 0,\n//     \"enableHH\": 1,\n//     \"enableH\": 1,\n//     \"enableL\": 1,\n//     \"enableLL\": 1,\n//     \"ALARM\": \"#00f800\",\n//     \"FAIL\": 0,\n// }\n// global.set(tag.TagName,tag);\n\n// tag = {\n//     \"ID\": 0,\n//     \"TagName\": \"TIT_2001\",\n//     \"Descripcion\": \"Teperatura de Descarga\",\n//     \"und\": \"°F\",\n//     \"PV\": 0.0,\n//     \"HH\": 95.0,\n//     \"H\": 90.0,\n//     \"L\": 15.0,\n//     \"LL\": 10,\n//     \"Max\": 560,\n//     \"Min\": 0,\n//     \"enableHH\": 1,\n//     \"enableH\": 1,\n//     \"enableL\": 1,\n//     \"enableLL\": 1,\n//     \"ALARM\": \"#00f800\",\n//     \"FAIL\": 0,\n// };\n// global.set(tag.TagName, tag);\n\nlet tag = {\n    \"ID\": 0,\n    \"TagName\": \"DIT_2001\",\n    \"Descripcion\": \"Densidad de gas\",\n    \"und\": \"kg/m3\",\n    \"PV\": 0.0,\n    \"HH\": 750.0,\n    \"H\": 700.0,\n    \"L\": 450.0,\n    \"LL\": 400,\n    \"Max\": 1000,\n    \"Min\": 0,\n    \"enableHH\": 1,\n    \"enableH\": 1,\n    \"enableL\": 1,\n    \"enableLL\": 1,\n    \"ALARM\": \"#00f800\",\n    \"FAIL\": 0,\n};\nglobal.set(tag.TagName, tag);\n\ntag = {\n    \"ID\": 0,\n    \"TagName\": \"PIT_2002\",\n    \"Descripcion\": \"Presion Gasoducto\",\n    \"und\": \"PSIA\",\n    \"PV\": 0.0,\n    \"HH\": 490,\n    \"H\": 480,\n    \"L\": 20,\n    \"LL\": 10,\n    \"Max\": 600,\n    \"Min\": 0,\n    \"enableHH\": 1,\n    \"enableH\": 1,\n    \"enableL\": 1,\n    \"enableLL\": 1,\n    \"ALARM\": \"#00f800\",\n    \"FAIL\": 0,\n};\nglobal.set(tag.TagName, tag);\n\nlet pid = {\n    PV: 0.0,\n    SP: 2.0,\n    CV: 0.0\n}\n\nglobal.set(\"SIC_2002\", pid);\n\nlet uit_2001 = {\n    FLOW: 0.0,\n    DENSITY: 0.450,\n    TOTAL: 0\n}\nglobal.set(\"UIT_2001\", uit_2001);\n\nlet uit = {\n    SPEED: 0.0,\n    TEMPERATURE: 0.0,\n    PRESSURE_IN: 0.0,\n    PRESSURE_OUT: 0.0,\n    FLOW: 0.0\n}\nglobal.set(\"UIT_2002\", uit);\n\nlet uit_2003 = {\n    FLOW: 0.0,\n    DENSITY: 0.450,\n    TOTAL: 0\n}\nglobal.set(\"UIT_2003\", uit_2003);\n\n\nlet segment = {\n    cisterna_id: 1,\n    segmento_id: 1,\n    temperatura: 35.5,\n    presion: 650,\n    densidad: 0.585,\n    flujo_actual: 150,\n    volumen_acumulado: 0\n};\n\n\n\nglobal.set(\"SEGMENT_VALUES1\", segment);\nglobal.set(\"SEGMENT_VALUES2\", segment);\n\nlet segment_display =\n{\n    CLIENTE: \"cliente\",\n    PRODUCTO: \"Propano\",\n    FECHA: \"dd-mm-aaaa hh:mm:ss\",\n    TIQUETE_No: 100,\n    RVP: 120,\n    MASA_CORIOLIS: 560,\n    VOL_INDICADO: 0,\n    MASA_VAPORES: 0,\n}\nglobal.set(\"SEGMENT_DISPLAY\", segment_display);\n\n//STATUS_CISTERNA 0. Vacia, 1. Llenando, 2. Pausada, 3.Cerrada\nglobal.set(\"STATUS_CISTERNA1\", 0);\n\n\n\n\n\nlet cisterna1 = {\n    numero_sisterna: \"PLACA_XXX\",\n    nombre_conductor: \"CONDUCTOR\",\n    empresa_cliente: \"CLIENTE\",\n    producto_principal: \"PROPANO\",\n    galones_objetivo: 14000,\n    observaciones: \"Observaciones\"\n}\n\nglobal.set(\"CISTERNA1\", cisterna1);\n\nlet cisterna2 = {\n    numero_sisterna: \"PLACA_XXX\",\n    nombre_conductor: \"CONDUCTOR\",\n    empresa_cliente: \"CLIENTE\",\n    producto_principal: \"PROPANO\",\n    galones_objetivo: 14000,\n    observaciones: \"Observaciones\"\n}\n\nglobal.set(\"CISTERNA2\", cisterna2);\n\nlet datos_llenado = {\n    presion: 0,\n    flujo: 0,\n    temperatura: 0,\n    densidad: 0,\n    total: 0,\n    last_total: 0\n};\nglobal.set(\"DATOS_LLENADO\", datos_llenado);\n\n\nlet fill_segment1 =\n{\n    \"cliente\": \"ALMAGAS\",\n    \"producto\": \"PROPANO\",\n    \"cisterna\": \"EJD315\", \n    \"tiquete\": 123,\n     \"fecha\": \"12-18-2025, 8:28:25 AM\", \n     \"rvp\": 180, \n     \"Vol_full\": 14000, \n     \"origen\": \"LLENADO\"\n};\n\nlet promedios={\n    \n        llenado_id :0,\n        flujo_promedio:0.0,\n        densidad_promedio :0.0,\n        presion_promedio :0.0,\n        temperatura_promedio :0.0,\n        volumen_total:0\n\n};\nglobal.set(\"PROMEDIOS\",promedios);\n\nglobal.set(\"FILL_SEGMENT1\",fill_segment1);\nglobal.set(\"FILL_SEGMENT2\", fill_segment1);\n\n",
+        "initialize": "// El código añadido aquí se ejecutará una vez\n// cuando el nodo es iniciado.\n\nglobal.set(\"PU\", 1);\nglobal.set(\"IS_REPORT\", false);\n\n// let tag = {\n//     \"ID\": 0,\n//     \"TagName\": \"PIT_2001\",\n//     \"Descripcion\": \"Presion de Descarga\",\n//     \"und\": \"PSI\",\n//     \"PV\": 0.0,\n//     \"HH\": 95.0,\n//     \"H\": 90.0,\n//     \"L\": 15.0,\n//     \"LL\": 10,\n//     \"Max\": 560,\n//     \"Min\": 0,\n//     \"enableHH\": 1,\n//     \"enableH\": 1,\n//     \"enableL\": 1,\n//     \"enableLL\": 1,\n//     \"ALARM\": \"#00f800\",\n//     \"FAIL\": 0,\n// }\n// global.set(tag.TagName,tag);\n\n// tag = {\n//     \"ID\": 0,\n//     \"TagName\": \"TIT_2001\",\n//     \"Descripcion\": \"Teperatura de Descarga\",\n//     \"und\": \"°F\",\n//     \"PV\": 0.0,\n//     \"HH\": 95.0,\n//     \"H\": 90.0,\n//     \"L\": 15.0,\n//     \"LL\": 10,\n//     \"Max\": 560,\n//     \"Min\": 0,\n//     \"enableHH\": 1,\n//     \"enableH\": 1,\n//     \"enableL\": 1,\n//     \"enableLL\": 1,\n//     \"ALARM\": \"#00f800\",\n//     \"FAIL\": 0,\n// };\n// global.set(tag.TagName, tag);\n\nlet tag = {\n    \"ID\": 0,\n    \"TagName\": \"DIT_2001\",\n    \"Descripcion\": \"Densidad de gas\",\n    \"und\": \"kg/m3\",\n    \"PV\": 0.0,\n    \"HH\": 750.0,\n    \"H\": 700.0,\n    \"L\": 450.0,\n    \"LL\": 400,\n    \"Max\": 1000,\n    \"Min\": 0,\n    \"enableHH\": 1,\n    \"enableH\": 1,\n    \"enableL\": 1,\n    \"enableLL\": 1,\n    \"ALARM\": \"#00f800\",\n    \"FAIL\": 0,\n};\nglobal.set(tag.TagName, tag);\n\ntag = {\n    \"ID\": 0,\n    \"TagName\": \"PIT_2002\",\n    \"Descripcion\": \"Presion Gasoducto\",\n    \"und\": \"PSIA\",\n    \"PV\": 0.0,\n    \"HH\": 490,\n    \"H\": 480,\n    \"L\": 20,\n    \"LL\": 10,\n    \"Max\": 600,\n    \"Min\": 0,\n    \"enableHH\": 1,\n    \"enableH\": 1,\n    \"enableL\": 1,\n    \"enableLL\": 1,\n    \"ALARM\": \"#00f800\",\n    \"FAIL\": 0,\n};\nglobal.set(tag.TagName, tag);\n\nlet pid = {\n    PV: 0.0,\n    SP: 2.0,\n    CV: 0.0\n}\n\nglobal.set(\"SIC_2002\", pid);\n\nlet uit_2001 = {\n    FLOW: 0.0,\n    DENSITY: 0.450,\n    TOTAL: 0\n}\nglobal.set(\"UIT_2001\", uit_2001);\n\nlet uit = {\n    SPEED: 0.0,\n    TEMPERATURE: 0.0,\n    PRESSURE_IN: 0.0,\n    PRESSURE_OUT: 0.0,\n    FLOW: 0.0\n}\nglobal.set(\"UIT_2002\", uit);\n\nlet uit_2003 = {\n    FLOW: 0.0,\n    DENSITY: 0.450,\n    TOTAL: 0\n}\nglobal.set(\"UIT_2003\", uit_2003);\n\n\nlet segment = {\n    cisterna_id: 1,\n    segmento_id: 1,\n    temperatura: 35.5,\n    presion: 650,\n    densidad: 0.585,\n    flujo_actual: 150,\n    volumen_acumulado: 0\n};\n\n\n\nglobal.set(\"SEGMENT_VALUES1\", segment);\nglobal.set(\"SEGMENT_VALUES2\", segment);\n\nlet segment_display =\n{\n    CLIENTE: \"cliente\",\n    PRODUCTO: \"Propano\",\n    FECHA: \"dd-mm-aaaa hh:mm:ss\",\n    TIQUETE_No: 100,\n    RVP: 120,\n    MASA_CORIOLIS: 560,\n    VOL_INDICADO: 0,\n    MASA_VAPORES: 0,\n}\nglobal.set(\"SEGMENT_DISPLAY\", segment_display);\n\n//STATUS_CISTERNA 0. Vacia, 1. Llenando, 2. Pausada, 3.Cerrada\nglobal.set(\"STATUS_CISTERNA1\", 0);\nglobal.set(\"STATUS_CISTERNA2\", 0);\nglobal.set(\"CISTERNA1_VISIBLE\", 1);\nglobal.set(\"CISTERNA2_VISIBLE\",1);\n\n\n\n\n\n\nlet cisterna1 = {\n    numero_sisterna: \"PLACA_XXX\",\n    nombre_conductor: \"CONDUCTOR\",\n    empresa_cliente: \"CLIENTE\",\n    producto_principal: \"PROPANO\",\n    galones_objetivo: 14000,\n    observaciones: \"Observaciones\"\n}\n\nglobal.set(\"CISTERNA1\", cisterna1);\n\nlet cisterna2 = {\n    numero_sisterna: \"PLACA_XXX\",\n    nombre_conductor: \"CONDUCTOR\",\n    empresa_cliente: \"CLIENTE\",\n    producto_principal: \"PROPANO\",\n    galones_objetivo: 14000,\n    observaciones: \"Observaciones\"\n}\n\nglobal.set(\"CISTERNA2\", cisterna2);\n\nlet datos_llenado = {\n    presion: 0,\n    flujo: 0,\n    temperatura: 0,\n    densidad: 0,\n    total: 0,\n    last_total: 0\n};\nglobal.set(\"DATOS_LLENADO\", datos_llenado);\n\n\nlet fill_segment1 =\n{\n    \"cliente\": \"ALMAGAS\",\n    \"producto\": \"PROPANO\",\n    \"cisterna\": \"EJD315\", \n    \"tiquete\": 123,\n     \"fecha\": \"12-18-2025, 8:28:25 AM\", \n     \"rvp\": 180, \n     \"Vol_full\": 14000, \n     \"origen\": \"LLENADO\"\n};\n\nlet promedios={\n    \n        llenado_id :0,\n        flujo_promedio:0.0,\n        densidad_promedio :0.0,\n        presion_promedio :0.0,\n        temperatura_promedio :0.0,\n        volumen_total:0\n\n};\nglobal.set(\"PROMEDIOS\",promedios);\n\nglobal.set(\"FILL_SEGMENT1\",fill_segment1);\nglobal.set(\"FILL_SEGMENT2\", fill_segment1);\n\nglobal.set(\"ID_CISTERNA1\",0);\nglobal.set(\"ID_PRODUCTO1\", 0);\nglobal.set(\"ID_LLENADO1\", 0);\n\nglobal.set(\"ID_CISTERNA2\", 0);\nglobal.set(\"ID_PRODUCTO2\", 0);\nglobal.set(\"ID_LLENADO2\", 0);",
         "finalize": "",
         "libs": [],
         "x": 560,
@@ -1534,7 +1534,7 @@
         "type": "function",
         "z": "6910828fa524c0ad",
         "name": "GetDensitiChange",
-        "func": "// Recuperación de variables globales\nlet dit = global.get(\"UIT_2001_DENSITY\");\nif (!dit || !dit.PV) {\n    node.warn(\"No hay datos de densidad en global UIT_2001_DENSITY\");\n    return [null, null]; // No hay datos, no enviamos nada por ninguna salida\n}\n\nlet currentDensity = parseFloat(dit.PV); \nlet producto = 3; // ID por defecto (GLP/Mezcla)\nlet inLineProduct = global.get(\"INLINE_PRODUCT\") || \"Mezcla\"; \nlet IsChangeProduct = false;\n\n// Variables para los mensajes de salida\nlet msgUpdate = null;\nlet msgInsert = null;\nlet msgPause = null;\n\n// --- Lógica de Detección de Producto ---\n\n// BUTANO (Rango 557 - 585)\nif(currentDensity >= 557 && currentDensity <= 585 && inLineProduct !== \"Butano\") \n{\n    producto = 2;  // ID Butano\n    inLineProduct = \"Butano\";\n    global.set(\"INLINE_PRODUCT\", inLineProduct);\n    IsChangeProduct = true;\n}\n// PROPANO (Rango 480 - 500)\nelse if (currentDensity >= 480 && currentDensity <= 500 && inLineProduct !== \"Propano\")\n{\n    producto = 1;  // ID Propano\n    inLineProduct = \"Propano\";\n    global.set(\"INLINE_PRODUCT\", inLineProduct);\n    IsChangeProduct = true;\n}\n// MEZCLA (Rango intermedio 500 - 557)\nelse if (currentDensity > 500 && currentDensity < 557 && inLineProduct !== \"Mezcla\") {\n    producto = 3;  // ID Mezcla\n    inLineProduct = \"Mezcla\";\n    global.set(\"INLINE_PRODUCT\", inLineProduct);\n    IsChangeProduct = true;\n\n    if(global.get(\"STATUS_CISTERNA1\")===2)\n    {\n        global.set(\"STATUS_CISTERNA1\",3);  //Pausar Bache\n        global.set(\"SEND_STATUS_CISTERNA1\",true);\n        msgPause={\n            payload:\"Pause\",\n        }\n    }\n    \n    \n}\n\n\n// --- Generación de Mensajes de Salida ---\n\nif (IsChangeProduct === true)\n{\n    let now = new Date();\n    // Formato de fecha ISO para SQL (YYYY-MM-DD HH:MM:SS)\n    let sqlDate = now.toLocaleString().replaceAll('/','-');\n    sqlDate=sqlDate.replace(',',' ');\n    \n    // 1. CREAR MENSAJE PARA CERRAR EL BACHE ANTERIOR (UPDATE)\n    msgUpdate = {\n        topic: \"UPDATE baches SET fecha_fin = ? WHERE fecha_fin IS NULL\",\n        // Parámetro: [fecha_fin]\n        params: [sqlDate], \n        payload: currentDensity // Puedes mantener la densidad en el payload si la necesitas para algo más\n    };\n\n    // 2. CREAR MENSAJE PARA ABRIR EL NUEVO BACHE (INSERT)\n    msgInsert = {\n        // La consulta de INSERT\n        topic: \"INSERT INTO baches (fecha_inicio, densidad_prom, producto_id) VALUES (?, ?, ?)\",\n        // Parámetros: [fecha_inicio, densidad_prom, producto_id]\n        params: [sqlDate, currentDensity, producto],\n        payload: currentDensity\n    };\n\n    node.warn(`¡Cambio de Producto! Cerrando bache anterior y abriendo nuevo de ${inLineProduct}.`);\n}\n\n// Devuelve un array de mensajes: [Salida 1, Salida 2]\n// Salida 1: Cierre (Update)\n// Salida 2: Apertura (Insert)\nreturn [msgUpdate, msgInsert, msgPause];",
+        "func": "// Recuperación de variables globales\nlet dit = global.get(\"UIT_2001_DENSITY\");\nif (!dit || !dit.PV) {\n    node.warn(\"No hay datos de densidad en global UIT_2001_DENSITY\");\n    return [null, null]; // No hay datos, no enviamos nada por ninguna salida\n}\n\nlet currentDensity = parseFloat(dit.PV);\nlet producto = 3; // ID por defecto (GLP/Mezcla)\nlet inLineProduct = global.get(\"INLINE_PRODUCT\") || \"Mezcla\";\nlet IsChangeProduct = false;\n\n// Variables para los mensajes de salida\nlet msgUpdate = null;\nlet msgInsert = null;\nlet msgPause = null;\n\n// --- Lógica de Detección de Producto ---\n\n// BUTANO (Rango 557 - 585)\nif (currentDensity >= 557 && currentDensity <= 585 && inLineProduct !== \"Butano\") {\n    producto = 2;  // ID Butano\n    inLineProduct = \"Butano\";\n    global.set(\"INLINE_PRODUCT\", inLineProduct);\n    IsChangeProduct = true;\n}\n// PROPANO (Rango 480 - 500)\nelse if (currentDensity >= 480 && currentDensity <= 500 && inLineProduct !== \"Propano\") {\n    producto = 1;  // ID Propano\n    inLineProduct = \"Propano\";\n    global.set(\"INLINE_PRODUCT\", inLineProduct);\n    IsChangeProduct = true;\n}\n// MEZCLA (Rango intermedio 500 - 557)\nelse if (currentDensity > 500 && currentDensity < 557 && inLineProduct !== \"Mezcla\") {\n    producto = 3;  // ID Mezcla\n    inLineProduct = \"Mezcla\";\n    global.set(\"INLINE_PRODUCT\", inLineProduct);\n    IsChangeProduct = true;\n\n    if (global.get(\"SEL_CISTERNA\") === \"CISTERNA1\") {\n        if (global.get(\"STATUS_CISTERNA1\") === 2) {\n            global.set(\"STATUS_CISTERNA1\", 3);  //Pausar Bache\n            global.set(\"SEND_STATUS_CISTERNA1\", true);\n            msgPause = {\n                payload: \"Pause\",\n            }\n        }\n    }\n    else{\n         if (global.get(\"STATUS_CISTERNA2\") === 2) {\n            global.set(\"STATUS_CISTERNA2\", 3);  //Pausar Bache\n            global.set(\"SEND_STATUS_CISTERNA1\", true);\n            msgPause = {\n                payload: \"Pause\",\n            }\n        }\n\n    }\n\n\n}\n\n\n// --- Generación de Mensajes de Salida ---\n\nif (IsChangeProduct === true) {\n    let now = new Date();\n    // Formato de fecha ISO para SQL (YYYY-MM-DD HH:MM:SS)\n    let sqlDate = now.toLocaleString().replaceAll('/', '-');\n    sqlDate = sqlDate.replace(',', ' ');\n\n    // 1. CREAR MENSAJE PARA CERRAR EL BACHE ANTERIOR (UPDATE)\n    msgUpdate = {\n        topic: \"UPDATE baches SET fecha_fin = ? WHERE fecha_fin IS NULL\",\n        // Parámetro: [fecha_fin]\n        params: [sqlDate],\n        payload: currentDensity // Puedes mantener la densidad en el payload si la necesitas para algo más\n    };\n\n    // 2. CREAR MENSAJE PARA ABRIR EL NUEVO BACHE (INSERT)\n    msgInsert = {\n        // La consulta de INSERT\n        topic: \"INSERT INTO baches (fecha_inicio, densidad_prom, producto_id) VALUES (?, ?, ?)\",\n        // Parámetros: [fecha_inicio, densidad_prom, producto_id]\n        params: [sqlDate, currentDensity, producto],\n        payload: currentDensity\n    };\n\n    node.warn(`¡Cambio de Producto! Cerrando bache anterior y abriendo nuevo de ${inLineProduct}.`);\n}\n\n// Devuelve un array de mensajes: [Salida 1, Salida 2]\n// Salida 1: Cierre (Update)\n// Salida 2: Apertura (Insert)\nreturn [msgUpdate, msgInsert, msgPause];",
         "outputs": 3,
         "timeout": 0,
         "noerr": 0,
@@ -3330,7 +3330,7 @@
         "type": "function",
         "z": "8b7a3cc1bad4cf4b",
         "name": "Registrar Medición",
-        "func": "\n// Usamos .toISOString() para generar un formato de fecha/hora estándar y robusto para SQLite\nvar timestamp = new Date().toLocaleString().replaceAll('/',' '); \ntimestamp=timestamp.replace(',' ,' ');\nlet noSisterna=global.get(\"NoSISTERNA\") || 1;\nlet status_cisterna1= global.get(\"STATUS_CISTERNA1\")\n\n\n//INSERT INTO llenado_detalle (llenado_id, timestamp, flujo, densidad, presion, temperatura, volumen_acumulado)\n//VALUES (32, datetime('now'), 831.3, 539.8, 346.4, 84.9, 1200);\n\n\n\n//let status_batch=global.get(\"STATUS_BATCH\");\nlet segment =global.get(\"SEGMENT_VALUES1\");\nlet id_llenado=global.get(\"ID_LLENADO\");\n\n// msg.payload = {\n//   sisterna_id: 1,\n//   segmento_id: 1,\n//   temperatura: 35.5,\n//   presion: 650,\n//   densidad: 0.585,\n//   flujo_actual: 150\n// }\n\nif(status_cisterna1===2)\n{\n     msg.params =  [\n          //segment.sisterna_id,\n          id_llenado,\n          timestamp,\n          segment.flujo_actual,\n          segment.densidad,\n          segment.presion,\n          segment.temperatura,  \n          segment.volumen_acumulado         \n          \n     ]\n     msg.payload=\"OK\"\n\n}\nelse\n{\n     msg.payload=null;\n}\n\nreturn msg;\n\n",
+        "func": "\n// Usamos .toISOString() para generar un formato de fecha/hora estándar y robusto para SQLite\nvar timestamp = new Date().toLocaleString().replaceAll('/',' '); \ntimestamp=timestamp.replace(',' ,' ');\nlet noSisterna=global.get(\"NoSISTERNA\") || 1;\nlet status_cisterna= 0;\nlet segment=null;\nlet id_llenado=1;\n\n//INSERT INTO llenado_detalle (llenado_id, timestamp, flujo, densidad, presion, temperatura, volumen_acumulado)\n//VALUES (32, datetime('now'), 831.3, 539.8, 346.4, 84.9, 1200);\n\nif(global.get(\"SEL_CISTERNA\")===\"CISTERNA1\")\n{\n     segment=global.get(\"SEGMENT_VALUES1\");\n     status_cisterna=global.get(\"STATUS_CISTERNA1\");\n     id_llenado=global.get(\"ID_LLENADO1\");\n}\nelse \n{\n     segment=global.get(\"SEGMENT_VALUES2\");\n     status_cisterna=global.get(\"STATUS_CISTERNA2\");\n     id_llenado=global.get(\"ID_LLENADO2\");\n}\n\n//let status_batch=global.get(\"STATUS_BATCH\");\n \n\n\n// msg.payload = {\n//   sisterna_id: 1,\n//   segmento_id: 1,\n//   temperatura: 35.5,\n//   presion: 650,\n//   densidad: 0.585,\n//   flujo_actual: 150\n// }\n\nif(status_cisterna===2)\n{\n     msg.params =  [\n          //segment.sisterna_id,\n          id_llenado,\n          timestamp,\n          segment.flujo_actual,\n          segment.densidad,\n          segment.presion,\n          segment.temperatura,  \n          segment.volumen_acumulado         \n          \n     ]\n     msg.payload=\"OK\"\n\n}\nelse\n{\n     msg.payload=null;\n}\n\nreturn msg;\n\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -3918,7 +3918,7 @@
         "type": "function",
         "z": "8b7a3cc1bad4cf4b",
         "name": "Udate AVG",
-        "func": "const llenado_id = global.get(\"ID_LLENADO\");\nlet date_string=new Date().toLocaleString('en-US',{hour12: false}).replaceAll('/','-');\ndate_string=date_string.replace(',',' ');\n\nmsg.topic = `\n    INSERT OR REPLACE INTO llenado_promedios \n    (llenado_id, flujo_promedio, densidad_promedio, presion_promedio, temperatura_promedio , volumen_total)\n    SELECT \n        llenado_id,\n        AVG(flujo),\n        AVG(densidad),\n        AVG(presion),\n        AVG(temperatura),\n        MAX(volumen_acumulado)        \n    FROM llenado_detalle\n    WHERE llenado_id = ${llenado_id};\n`;\n\n//msg.params = [llenado_id];\n    \n\n\nreturn msg;",
+        "func": "let llenado_id = 1;\n\nif(global.get(\"SEL_CISTERNA\")===\"CISTERNA1\")\n{\n    llenado_id = global.get(\"ID_LLENADO1\");\n}\nelse\n{\n    llenado_id = global.get(\"ID_LLENADO2\");\n}\n\n\nlet date_string=new Date().toLocaleString('en-US',{hour12: false}).replaceAll('/','-');\ndate_string=date_string.replace(',',' ');\n\nmsg.topic = `\n    INSERT OR REPLACE INTO llenado_promedios \n    (llenado_id, flujo_promedio, densidad_promedio, presion_promedio, temperatura_promedio , volumen_total)\n    SELECT \n        llenado_id,\n        AVG(flujo),\n        AVG(densidad),\n        AVG(presion),\n        AVG(temperatura),\n        MAX(volumen_acumulado)        \n    FROM llenado_detalle\n    WHERE llenado_id = ${llenado_id};\n`;\n\n//msg.params = [llenado_id];\n    \n\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -3929,7 +3929,8 @@
         "y": 660,
         "wires": [
             [
-                "fef95aea31221e8e"
+                "fef95aea31221e8e",
+                "e8a6d821a6b887d2"
             ]
         ]
     },
@@ -3944,9 +3945,7 @@
         "x": 620,
         "y": 660,
         "wires": [
-            [
-                "e8a6d821a6b887d2"
-            ]
+            []
         ]
     },
     {
@@ -3954,15 +3953,16 @@
         "type": "debug",
         "z": "8b7a3cc1bad4cf4b",
         "name": "debug 12",
-        "active": false,
+        "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
-        "complete": "false",
+        "complete": "true",
+        "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 830,
-        "y": 660,
+        "x": 700,
+        "y": 700,
         "wires": []
     },
     {
@@ -3999,7 +3999,7 @@
         "type": "function",
         "z": "619addbf2da107aa",
         "name": "Update Display",
-        "func": "let pit_1001 = global.get(\"PIT_2001\");\nlet tit_1001 = global.get(\"TIT_2001\");\nlet dit_1001 = global.get(\"DIT_2001\");\nlet uit_2001 = global.get(\"UIT_2001\");\nlet uit_2003 = global.get(\"UIT_2003\");\nlet status_cisterna1= global.get(\"STATUS_CISTERNA1\")\nlet status_cisterna2= global.get(\"STATUS_CISTERNA2\")\nlet cisterna1=global.get(\"CISTERNA1\");\nlet cisterna2=global.get(\"CISTERNA2\");\nlet uit_2001_dit=global.get(\"UIT_2001_DENSITY\");\nlet segment_display=global.get(\"SEGMENT_DISPLAY\");\nlet actual_cisterna=global.get(\"ACTUAL_CISTERNA\");\nlet tiket_number = global.get(\"TIKET_N\") || 0;\nlet segment1=global.get(\"SEGMENT_VALUES1\");\nlet segment2=global.get(\"SEGMENT_VALUES2\");\nlet fill_segment1=global.get(\"FILL_SEGMENT1\");\nlet fill_segment2=global.get(\"FILL_SEGMENT2\");\n\n\n\nlet date_string = new Date().toLocaleString('en-US',{hour12: false}).replaceAll('/','-');\ndate_string=date_string.replace(',',' ');\nsegment_display.FECHA=date_string;\n\n// Seleccionar los datos según el producto\nlet str_status_sisterna1=\"\";\nlet cisterna2_visible=1;\n\nswitch (status_cisterna1) {\n    case 0:\n        str_status_sisterna1=\"Vacia\"\n        cisterna2_visible=1;\n        break;\n    case 1:\n        str_status_sisterna1 = \"Lista\"\n        cisterna2_visible=0;\n        break;\n\n    case 2:\n        str_status_sisterna1 = \"LLenando...\"\n        cisterna2_visible=0;\n        break;\n\n    case 3:\n        str_status_sisterna1 = \"Pausada\"\n        cisterna2_visible=1;\n        break;  \n\n    case 4:\n        str_status_sisterna1 = \"Cerrada\"\n        cisterna2_visible=1;\n        break;      \n\n    default:\n        \n}\n\n\nswitch (status_cisterna1) {\n    case 0:\n        str_status_sisterna1=\"Vacia\"\n        cisterna2_visible=1;\n        break;\n    case 1:\n        str_status_sisterna1 = \"Lista\"\n        cisterna2_visible=0;\n        break;\n    case 2:\n        str_status_sisterna1 = \"LLenando...\"\n        cisterna2_visible=0;\n        break;    \n    case 3:\n        str_status_sisterna1 = \"Pausada\"\n        cisterna2_visible=1;\n        break;  \n\n    case 4:\n        str_status_sisterna1 = \"Cerrada\"\n        cisterna2_visible=1;\n        break;      \n\n    default:\n        \n}\n\n// let datos_producto = {};\n\n// if (producto_seleccionado === \"butano\") {\n//     datos_producto = butano;\n// } else if (producto_seleccionado === \"propano\") {\n//     datos_producto = propano;\n// } else if (producto_seleccionado === \"ambos\") {\n//     // Puedes decidir mostrar butano, propano o ambos\n//     datos_producto = butano; // o propano, según prefieras\n// }\n\nmsg.topic = \"databind\";\nmsg.payload = {\n    \"PIT_2001_PV\": pit_1001.PV.toFixed(1) + \" PSI\",\n    \"PIT_2001_ALARM\": pit_1001.ALARM,\n\n    \"TIT_2001_PV\": tit_1001.PV.toFixed(1) + \" °F\",\n    \"TIT_2001_ALARM\": tit_1001.ALARM,\n\n    \"DATE_STRING\": date_string ,\n    \"TIKET_N\": tiket_number,\n    //\"PRODUCTO\": producto_seleccionado.toUpperCase(),\n\n    \"UIT_2001_FLOW\": uit_2001.FLOW,\n    \"UIT_2001_DENS\": uit_2001.DENSITY,\n    \"UIT_2001_TBATCH\": uit_2001.TOTAL,\n    \"STR_STATUS_CISTERNA1\": str_status_sisterna1,\n   \n    \"DIT_2001_PV\"  : dit_1001.PV,\n    \"DIT_2001_ALARM\" : dit_1001.ALARM,\n    \"CLIENTE1\" : fill_segment1.cliente,    \n    \"PRODUCTO1\": fill_segment1.producto, \n    \"FECHA1\": fill_segment1.fecha, \n    \"TIQUETE_No1\": fill_segment1.tiquete, \n    \"RVP1\": fill_segment1.rvp, \n    \"MASA1\": segment_display.MASA_CORIOLIS, \n    \"VOL_INDICADO1\": segment_display.VOL_INDICADO,\n    \"VAPORES1\": segment_display.MASA_VAPORES,\n    \"VOL_FULL1\": fill_segment1.Vol_full,\n    \"VOL_CURRENT1\" : segment1.volumen_acumulado,\n    \"PRESSURE1\" : segment1.presion,\n    \"TEMPERATURE1\" : segment1.temperatura,\n\n    \"CLIENTE2\" : fill_segment2.cliente,   \n    \"PRODUCTO2\": fill_segment2.producto, \n    \"FECHA2\": fill_segment2.fecha, \n    \"TIQUETE_No2\": fill_segment2.tiquete, \n    \"RVP2\": fill_segment2.rvp, \n    \"MASA2\": segment_display.MASA_CORIOLIS, \n    \"VOL_INDICADO2\": segment_display.VOL_INDICADO,\n    \"VAPORES2\": segment_display.MASA_VAPORES,\n    \"VOL_FULL2\": fill_segment2.Vol_full,\n    \"VOL_CURRENT2\" : segment1.volumen_acumulado,\n    \"PRESSURE2\" : segment2.presion,\n    \"TEMPERATURE2\" : segment2.temperatura,\n\n    \"UIT_2003_FLOW\": uit_2003.FLOW,\n    \"UIT_2003_DENSITY\": uit_2003.DENSITY,\n    \"UIT_2003_TOTAL\" : uit_2003.TOTAL,\n    \"CISTERNA2_VISIBLE\" : cisterna2_visible,\n    \"ID_CISTERNA1\" : cisterna1.numero_sisterna,\n    \"ID_CISTERNA2\" : cisterna2.numero_sisterna,\n    \"UIT_2001_DENSITY_COLOR\": uit_2001_dit.ALARM,\n    \"INLINE_PRODUCT\" : global.get(\"INLINE_PRODUCT\")\n\n};\n\nreturn msg;",
+        "func": "let pit_1001 = global.get(\"PIT_2001\");\nlet tit_1001 = global.get(\"TIT_2001\");\nlet dit_1001 = global.get(\"DIT_2001\");\nlet uit_2001 = global.get(\"UIT_2001\");\nlet uit_2003 = global.get(\"UIT_2003\");\nlet status_cisterna1 = global.get(\"STATUS_CISTERNA1\")\nlet status_cisterna2 = global.get(\"STATUS_CISTERNA2\")\nlet cisterna1 = global.get(\"CISTERNA1\");\nlet cisterna2 = global.get(\"CISTERNA2\");\nlet uit_2001_dit = global.get(\"UIT_2001_DENSITY\");\nlet segment_display = global.get(\"SEGMENT_DISPLAY\");\nlet actual_cisterna = global.get(\"ACTUAL_CISTERNA\");\nlet tiket_number = global.get(\"TIKET_N\") || 0;\nlet segment1 = global.get(\"SEGMENT_VALUES1\");\nlet segment2 = global.get(\"SEGMENT_VALUES2\");\nlet fill_segment1 = global.get(\"FILL_SEGMENT1\");\nlet fill_segment2 = global.get(\"FILL_SEGMENT2\");\nlet promedios = global.get(\"PROMEDIOS\");\nlet sel_cisterna = global.get(\"SEL_CISTERNA\");\nlet cisterna2_visible = global.get(\"CISTERNA2_VISIBLE\");\nlet cisterna1_visible = global.get(\"CISTERNA1_VISIBLE\");\nlet str_status_sisterna1 = \"\";\nlet str_status_sisterna2 = \"\";\n\n\n\nswitch (status_cisterna1) {\n    case 0:\n        str_status_sisterna1 = \"Vacia\";\n        break;\n    case 1:\n        str_status_sisterna1 = \"Lista\";\n        break;\n\n    case 2:\n        str_status_sisterna1 = \"LLenando...\";\n        break;\n\n    case 3:\n        str_status_sisterna1 = \"Pausada\";\n        break;\n\n    case 4:\n        str_status_sisterna1 = \"Cerrada\";\n        break;\n\n    default:\n\n}\n\n\nswitch (status_cisterna2) {\n    case 0:\n        str_status_sisterna2 = \"Vacia\";\n        break;\n    case 1:\n        str_status_sisterna2 = \"Lista\";\n        break;\n\n    case 2:\n        str_status_sisterna2 = \"LLenando...\";\n        break;\n\n    case 3:\n        str_status_sisterna2 = \"Pausada\";        \n        break;\n\n    case 4:\n        str_status_sisterna2 = \"Cerrada\";\n        break;\n\n    default:\n\n}\n\n\n\nlet date_string = new Date().toLocaleString('en-US', { hour12: false }).replaceAll('/', '-');\ndate_string = date_string.replace(',', ' ');\nsegment_display.FECHA = date_string;\n\n// Seleccionar los datos según el producto\n\n\n\n\n\n\n// let datos_producto = {};\n\n// if (producto_seleccionado === \"butano\") {\n//     datos_producto = butano;\n// } else if (producto_seleccionado === \"propano\") {\n//     datos_producto = propano;\n// } else if (producto_seleccionado === \"ambos\") {\n//     // Puedes decidir mostrar butano, propano o ambos\n//     datos_producto = butano; // o propano, según prefieras\n// }\n\nmsg.topic = \"databind\";\nmsg.payload = {\n    \"PIT_2001_PV\": pit_1001.PV.toFixed(1) + \" PSI\",\n    \"PIT_2001_ALARM\": pit_1001.ALARM,\n\n    \"TIT_2001_PV\": tit_1001.PV.toFixed(1) + \" °F\",\n    \"TIT_2001_ALARM\": tit_1001.ALARM,\n\n    \"DATE_STRING\": date_string,\n    \"TIKET_N\": tiket_number,\n    //\"PRODUCTO\": producto_seleccionado.toUpperCase(),\n\n    \"UIT_2001_FLOW\": uit_2001.FLOW,\n    \"UIT_2001_DENS\": uit_2001.DENSITY,\n    \"UIT_2001_TBATCH\": uit_2001.TOTAL,\n    \"STR_STATUS_CISTERNA1\": str_status_sisterna1,\n    \"STR_STATUS_CISTERNA2\": str_status_sisterna2,\n\n    \"DIT_2001_PV\": dit_1001.PV,\n    \"DIT_2001_ALARM\": dit_1001.ALARM,\n    \"CLIENTE1\": fill_segment1.cliente,\n    \"PRODUCTO1\": fill_segment1.producto,\n    \"FECHA1\": fill_segment1.fecha,\n    \"TIQUETE_No1\": fill_segment1.tiquete,\n    \"RVP1\": fill_segment1.rvp,\n    \"MASA1\": segment_display.MASA_CORIOLIS,\n    \"VOL_INDICADO1\": segment_display.VOL_INDICADO,\n    \"VAPORES1\": segment_display.MASA_VAPORES,\n    \"VOL_FULL1\": fill_segment1.Vol_full,\n    \"VOL_CURRENT1\": segment1.volumen_acumulado,\n    \"PRESSURE1\": segment1.presion,\n    \"TEMPERATURE1\": segment1.temperatura,\n\n    \"CLIENTE2\": fill_segment2.cliente,\n    \"PRODUCTO2\": fill_segment2.producto,\n    \"FECHA2\": fill_segment2.fecha,\n    \"TIQUETE_No2\": fill_segment2.tiquete,\n    \"RVP2\": fill_segment2.rvp,\n    \"MASA2\": segment_display.MASA_CORIOLIS,\n    \"VOL_INDICADO2\": segment_display.VOL_INDICADO,\n    \"VAPORES2\": segment_display.MASA_VAPORES,\n    \"VOL_FULL2\": fill_segment2.Vol_full,\n    \"VOL_CURRENT2\": segment2.volumen_acumulado,\n    \"PRESSURE2\": segment2.presion,\n    \"TEMPERATURE2\": segment2.temperatura,\n\n    \"UIT_2003_FLOW\": uit_2003.FLOW,\n    \"UIT_2003_DENSITY\": uit_2003.DENSITY,\n    \"UIT_2003_TOTAL\": uit_2003.TOTAL,\n    \"CISTERNA1_VISIBLE\": cisterna1_visible,\n    \"CISTERNA2_VISIBLE\": cisterna2_visible,\n    \"ID_CISTERNA1\": cisterna1.numero_sisterna,\n    \"ID_CISTERNA2\": cisterna2.numero_sisterna,\n    \"UIT_2001_DENSITY_COLOR\": uit_2001_dit.ALARM,\n    \"INLINE_PRODUCT\": global.get(\"INLINE_PRODUCT\")\n\n};\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -4301,7 +4301,7 @@
         "type": "function",
         "z": "619addbf2da107aa",
         "name": "SetTiket",
-        "func": "\nif(msg.payload!=\"Cansel\")\n{\n    let tiket_number=parseInt(msg.payload);\n\n    if(tiket_number>=1 && tiket_number<=100000){\n        global.set(\"TIKET_N\",tiket_number);\n    }\n}\nreturn msg;",
+        "func": "\n\nif(msg.payload!=\"Cansel\")\n{\n    let tiket_number=parseInt(msg.payload);\n\n    if(tiket_number>=1 && tiket_number<=100000){\n        global.set(\"TIKET_N\",tiket_number);\n    }\n}\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -4334,26 +4334,8 @@
         "wires": [
             [
                 "bc13297a3ab23f0a",
-                "d4efe672ca459e72"
+                "a7076b7f9cec7c92"
             ]
-        ]
-    },
-    {
-        "id": "685ecf0080349123",
-        "type": "function",
-        "z": "619addbf2da107aa",
-        "name": "SetsFill1",
-        "func": "\n\nif(msg.payload!=\"Cansel\")\n{\n    global.set(\"STATUS_CISTERNA1\",2);\n    global.set(\"SEND_STATUS_CISTERNA1\",true);\n\n    //msg.params=[id_cisterna, date_string, id_product, fill_segment1.Vol_full]\n    \n}\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 1460,
-        "y": 160,
-        "wires": [
-            []
         ]
     },
     {
@@ -4385,7 +4367,7 @@
         "type": "function",
         "z": "619addbf2da107aa",
         "name": "SetPause1",
-        "func": "\nif(msg.payload!=\"Cansel\")\n{\n    global.set(\"STATUS_CISTERNA1\",3);\n    global.set(\"SEND_STATUS_CISTERNA1\",true);\n    \n}\nreturn msg;",
+        "func": "\nif(msg.payload!=\"Cansel\")\n{\n    global.set(\"STATUS_CISTERNA1\",3);\n    global.set(\"SEND_STATUS_CISTERNA1\",true);\n     global.set(\"CISTERNA2_VISIBLE\",1);\n    \n}\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -4429,7 +4411,7 @@
         "type": "function",
         "z": "619addbf2da107aa",
         "name": "SetClose1",
-        "func": "let status_cisterna1=global.get(\"STATUS_CISTERNA1\");\n\n\n\n\nif(msg.payload!=\"Cansel\" && status_cisterna1===3)\n{\n    global.set(\"STATUS_CISTERNA1\",4);\n    global.set(\"SEND_STATUS_CISTERNA1\",true);\n    msg.topic=\"OK\";\n}\nelse\n{\n    msg.topic=null;\n    msg.payload = \"⚠️ El batch debe estar PAUSADO antes de borrar los totalizadore\";\n}\nreturn msg;",
+        "func": "let status_cisterna1=global.get(\"STATUS_CISTERNA1\");\n\n\n\n\nif(msg.payload!=\"Cansel\" && status_cisterna1===3)\n{\n    global.set(\"STATUS_CISTERNA1\",4);\n    global.set(\"SEND_STATUS_CISTERNA1\",true);\n     global.set(\"CISTERNA2_VISIBLE\",1);\n    msg.topic=\"OK\";\n}\nelse\n{\n    msg.topic=null;\n    msg.payload = \"⚠️ El batch debe estar PAUSADO antes de borrar los totalizadore\";\n}\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -4502,29 +4484,8 @@
         "y": 460,
         "wires": [
             [],
-            [
-                "c61211dcc80df7fa"
-            ]
+            []
         ]
-    },
-    {
-        "id": "c61211dcc80df7fa",
-        "type": "ui_toast",
-        "z": "619addbf2da107aa",
-        "position": "top right",
-        "displayTime": "3",
-        "highlight": "",
-        "sendall": true,
-        "outputs": 0,
-        "ok": "OK",
-        "cancel": "",
-        "raw": false,
-        "className": "",
-        "topic": "",
-        "name": "",
-        "x": 1670,
-        "y": 300,
-        "wires": []
     },
     {
         "id": "bb402655e34c6c09",
@@ -4551,7 +4512,7 @@
                 "db08240ca43407ed"
             ],
             [
-                "c61211dcc80df7fa"
+                "3545a67bf22b282a"
             ]
         ]
     },
@@ -4699,8 +4660,8 @@
         "id": "a91aaf9aca1f6845",
         "type": "function",
         "z": "619addbf2da107aa",
-        "name": "function 5",
-        "func": "msg.topic=\"LLENADO\";\nglobal.set(\"ACTUAL_CISTERNA\",\"CISTERNA1\");\nlet cisterna= global.get(\"CISTERNA1\");\nlet date = new Date().toLocaleString().replaceAll('/','-')\n\n\n\nmsg.payload={\n    cliente: \"ALMAGAS\",\n    producto: \"select\",\n    cisterna: cisterna.numero_sisterna,\n    tiquete: 123,\n    fecha : date,\n    rvp:180,\n    Vol_full: 14000\n}\n\nreturn msg;",
+        "name": "Llenado 1",
+        "func": "msg.topic=\"LLENADO\";\nglobal.set(\"SEL_CISTERNA\",\"CISTERNA1\");\nlet cisterna= global.get(\"CISTERNA1\");\nlet date = new Date().toLocaleString().replaceAll('/','-')\n\n\n\nmsg.payload={\n    cliente: \"ALMAGAS\",\n    producto: \"select\",\n    cisterna: cisterna.numero_sisterna,\n    tiquete: 123,\n    fecha : date,\n    rvp:180,\n    Vol_full: 14000\n}\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -4720,7 +4681,7 @@
         "type": "function",
         "z": "619addbf2da107aa",
         "name": "InserNewSegment",
-        "func": "/*\nCREATE TABLE \"llenados\" (\n\t\"id\"\tINTEGER,\n\t\"cisterna_id\"\tINTEGER NOT NULL,\n\t\"fecha_inicio\"\tDATETIME NOT NULL,\n\t\"fecha_fin\"\tDATETIME,\n\t\"producto_id\"\tINTEGER NOT NULL,\n\t\"volumen_objetivo\"\tREAL,\n\t\"volumen_actual\"\tREAL DEFAULT 0,\n\t\"estado\"\tTEXT NOT NULL DEFAULT 'EN_PROCESO',\n\t\"RVP\"\tREAL NOT NULL DEFAULT 180,\n\tPRIMARY KEY(\"id\" AUTOINCREMENT),\n\tFOREIGN KEY(\"cisterna_id\") REFERENCES \"cisternas\"(\"id\"),\n\tFOREIGN KEY(\"producto_id\") REFERENCES \"productos\"(\"id\")\n)\n*/\n\nlet date_string = new Date().toLocaleString('en-US', { hour12: false }).replaceAll('/', '-');\ndate_string = date_string.replace(',', ' ');\n\nvar datos = global.get(\"FILL_SEGMENT1\");\nlet id_cisterna = msg.payload[0].id;\nlet id_product = datos.producto == \"PROPANO\" ? 1 : 2;\nglobal.set(\"ID_PRODUCTO\", id_product);\nglobal.set(\"ID_CISTERNA\", id_cisterna);\nif (msg.topic === \"OK\" && global.get(\"STATUS_CISTERNA1\") === 0) {\n\tmsg.payload = \"UpdateData\";\n\tlet promedios = {\n\n\t\tllenado_id: 0,\n\t\tflujo_promedio: 0.0,\n\t\tdensidad_promedio: 0.0,\n\t\tpresion_promedio: 0.0,\n\t\ttemperatura_promedio: 0.0,\n\t\tvolumen_total: 0\n\n\t};\n\tglobal.set(\"PROMEDIOS\", promedios);\n\t// Mapeamos los valores a los parámetros del query\n\tmsg.params = [id_cisterna, date_string, id_product, datos.Vol_full, 0, datos.rvp];\n\t\n\tglobal.set(\"STATUS_CISTERNA1\", 1);\n\n\n}\nelse {\n\tmsg.payload = null;\n}\n\n\n\n\n\n\n\nreturn msg;",
+        "func": "/*\nCREATE TABLE \"llenados\" (\n\t\"id\"\tINTEGER,\n\t\"cisterna_id\"\tINTEGER NOT NULL,\n\t\"fecha_inicio\"\tDATETIME NOT NULL,\n\t\"fecha_fin\"\tDATETIME,\n\t\"producto_id\"\tINTEGER NOT NULL,\n\t\"volumen_objetivo\"\tREAL,\n\t\"volumen_actual\"\tREAL DEFAULT 0,\n\t\"estado\"\tTEXT NOT NULL DEFAULT 'EN_PROCESO',\n\t\"RVP\"\tREAL NOT NULL DEFAULT 180,\n\tPRIMARY KEY(\"id\" AUTOINCREMENT),\n\tFOREIGN KEY(\"cisterna_id\") REFERENCES \"cisternas\"(\"id\"),\n\tFOREIGN KEY(\"producto_id\") REFERENCES \"productos\"(\"id\")\n)\n*/\n\nlet date_string = new Date().toLocaleString('en-US', { hour12: false }).replaceAll('/', '-');\ndate_string = date_string.replace(',', ' ');\n\nlet sel_cisterna = global.get(\"SEL_CISTERNA\");\nvar datos={};\nlet id_cisterna = msg.payload[0].id;\nlet id_product = datos.producto == \"PROPANO\" ? 1 : 2;\n\nif(sel_cisterna=== \"CISTERNA1\")\n{\n\tdatos= global.get(\"FILL_SEGMENT1\");\n\n\tglobal.set(\"ID_PRODUCTO1\", id_product);\n\tglobal.set(\"ID_CISTERNA1\", id_cisterna);\n\n}\nelse\n{\n\tdatos = global.get(\"FILL_SEGMENT2\");\n\tglobal.set(\"ID_PRODUCTO2\", id_product);\n\tglobal.set(\"ID_CISTERNA2\", id_cisterna);\n\n}\n\n \n\nif (msg.topic === \"OK\" && global.get(\"STATUS_CISTERNA1\") === 0) {\n\tmsg.payload = \"UpdateData\";\n\tlet promedios = {\n\n\t\tllenado_id: 0,\n\t\tflujo_promedio: 0.0,\n\t\tdensidad_promedio: 0.0,\n\t\tpresion_promedio: 0.0,\n\t\ttemperatura_promedio: 0.0,\n\t\tvolumen_total: 0\n\n\t};\n\tglobal.set(\"PROMEDIOS\", promedios);\n\t// Mapeamos los valores a los parámetros del query\n\tmsg.params = [id_cisterna, date_string, id_product, datos.Vol_full, 0, datos.rvp];\n\tif (sel_cisterna === \"CISTERNA1\") \n\t{\n\t\tglobal.set(\"STATUS_CISTERNA1\", 1);\n\t\tglobal.set(\"CISTERNA2_VISIBLE\",1);\n\t}\n\telse {\n\t\tglobal.set(\"STATUS_CISTERNA2\", 1);\n\t\tglobal.set(\"CISTERNA1_VISIBLE\",1);\n\t}\n\n\n}\nelse {\n\tmsg.payload = null;\n}\n\n\n\n\n\n\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -5146,6 +5107,30 @@
                 "bindSource": "payload.ID_CISTERNA2",
                 "bindType": "text",
                 "attribute": ""
+            },
+            {
+                "selector": "#PB_LLENAR1",
+                "bindSource": "payload.CISTERNA1_VISIBLE",
+                "bindType": "style",
+                "attribute": "opacity"
+            },
+            {
+                "selector": "#PB_PAUSAR1",
+                "bindSource": "payload.CISTERNA1_VISIBLE",
+                "bindType": "style",
+                "attribute": "opacity"
+            },
+            {
+                "selector": "#PB_CERRAR1",
+                "bindSource": "payload.CISTERNA1_VISIBLE",
+                "bindType": "style",
+                "attribute": "opacity"
+            },
+            {
+                "selector": "#CISTERNA2_STATUS",
+                "bindSource": "payload.STR_STATUS_CISTERNA2",
+                "bindType": "text",
+                "attribute": ""
             }
         ],
         "showCoordinates": false,
@@ -5342,7 +5327,7 @@
         "type": "function",
         "z": "619addbf2da107aa",
         "name": "GetCisternaID",
-        "func": "let data=msg.payload;\n\nlet sel_cisterna=global.get(\"SEL_CISTERNA\");\nlet sel_segment=sel_cisterna===\"CISTERNA1\" ? \"FILL_SEGMENT1\":\"FILL_SEGMENT2\";\n\nglobal.set(sel_segment,data);\nlet noPlaca=global.get(\"NoPLACA\");\nif(noPlaca==null)\n{\n    node.warn(\"Seleccione una CISTERNA\");\n}\n\nmsg.params=[noPlaca]\nreturn msg;",
+        "func": "let data=msg.payload;\n\nlet sel_cisterna=global.get(\"SEL_CISTERNA\");\nlet sel_segment=sel_cisterna===\"CISTERNA1\" ? \"FILL_SEGMENT1\":\"FILL_SEGMENT2\";\n\nglobal.set(sel_segment,data);\n\n\nlet noPlaca=global.get(\"NoPLACA\");\nif(noPlaca==null)\n{\n    node.warn(\"Seleccione una CISTERNA\");\n}\n\nmsg.params=[noPlaca]\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -5405,7 +5390,7 @@
         "sql": "",
         "name": "",
         "x": 1340,
-        "y": 780,
+        "y": 760,
         "wires": [
             [
                 "74414f08c72643f4"
@@ -5436,15 +5421,15 @@
         "id": "4fa5802f87cd7479",
         "type": "function",
         "z": "619addbf2da107aa",
-        "name": "function 12",
-        "func": "msg.topic=\"LLENADO\";\nglobal.set(\"ACTUAL_CISTERNA\",\"CISTERNA2\");\nlet cisterna= global.get(\"CISTERNA2\");\nlet date = new Date().toLocaleString().replaceAll('/','-')\n\nmsg.payload={\n    cliente: \"ALMAGAS\",\n    producto: \"select\",\n    cisterna: cisterna.numero_sisterna,\n    tiquete: 123,\n    fecha : date,\n    rvp:180,\n    Vol_full: 14000\n}\n\nreturn msg;",
+        "name": "Llenado 2",
+        "func": "msg.topic=\"LLENADO\";\nglobal.set(\"SEL_CISTERNA\",\"CISTERNA2\");\nlet cisterna= global.get(\"CISTERNA2\");\nlet date = new Date().toLocaleString().replaceAll('/','-')\n\nmsg.payload={\n    cliente: \"ALMAGAS\",\n    producto: \"select\",\n    cisterna: cisterna.numero_sisterna,\n    tiquete: 123,\n    fecha : date,\n    rvp:180,\n    Vol_full: 14000\n}\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1090,
+        "x": 1080,
         "y": 540,
         "wires": [
             [
@@ -5525,18 +5510,21 @@
         "id": "2c298e88651cf372",
         "type": "function",
         "z": "619addbf2da107aa",
-        "name": "SetsFill1",
-        "func": "let date_string=new Date().toLocaleString('en-US',{hour12: false}).replaceAll('/','-');\ndate_string=date_string.replace(',',' ');\nlet id_cisterna=global.get(\"ID_CISTERNA\") || 2; \nlet actual_cisterna=global.get(\"ACTUAL_CISTERNA\");\n\nif(msg.payload!=\"Cansel\")\n{\n    global.set(\"STATUS_CISTERNA2\",2);\n    global.set(\"SEND_STATUS_CISTERNA1\",true);\n\n    msg.params=[1, date_string, 1, 14000]\n    \n}\nreturn msg;",
+        "name": "Is Ready 2",
+        "func": "if (global.get(\"STATUS_CISTERNA2\" )  > 0) {\n    msg.topic=\"OK\";\n    if (msg.payload != \"Cansel\") {\n        global.set(\"STATUS_CISTERNA2\", 2);\n        global.set(\"SEND_STATUS_CISTERNA1\", true);\n        global.set(\"CISTERNA1_VISIBLE\",0);\n\n        //msg.params=[id_cisterna, date_string, id_product, fill_segment1.Vol_full]\n\n    }\n}\nelse {\n    msg.topic=null;\n    msg.payload=\" ⚠️ Seleccione Cisterna y Complete los datos de llenado\";\n}\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1300,
+        "x": 1290,
         "y": 320,
         "wires": [
-            []
+            [
+                "efadf661942c3a59",
+                "41a6f0637e63061d"
+            ]
         ]
     },
     {
@@ -5544,7 +5532,7 @@
         "type": "function",
         "z": "619addbf2da107aa",
         "name": "SetPause1",
-        "func": "\nif(msg.payload!=\"Cansel\")\n{\n    global.set(\"STATUS_CISTERNA2\",3);\n    global.set(\"SEND_STATUS_CISTERNA1\",true);\n    \n}\nreturn msg;",
+        "func": "\nif(msg.payload!=\"Cansel\")\n{\n    global.set(\"STATUS_CISTERNA2\",3);\n    global.set(\"SEND_STATUS_CISTERNA1\",true);\n     global.set(\"CISTERNA1_VISIBLE\",1);\n    \n}\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -5562,7 +5550,7 @@
         "type": "function",
         "z": "619addbf2da107aa",
         "name": "SetClose1",
-        "func": "let status_cisterna=global.get(\"STATUS_CISTERNA2\");\n\n\nif(msg.payload!=\"Cansel\" && status_cisterna===3)\n{\n    global.set(\"STATUS_CISTERNA2\",4);\n    global.set(\"SEND_STATUS_CISTERNA1\",true);\n    msg.topic=\"OK\";\n}\nelse\n{\n    msg.topic=null;\n    msg.payload = \"⚠️ El batch debe estar PAUSADO antes de borrar los totalizadore\";\n}\nreturn msg;",
+        "func": "let status_cisterna=global.get(\"STATUS_CISTERNA2\");\n\n\nif(msg.payload!=\"Cansel\" && status_cisterna===3)\n{\n    global.set(\"STATUS_CISTERNA2\",4);\n    global.set(\"SEND_STATUS_CISTERNA1\",true);\n    global.set(\"CISTERNA1_VISIBLE\",1);\n    msg.topic=\"OK\";\n}\nelse\n{\n    msg.topic=null;\n    msg.payload = \"⚠️ El batch debe estar PAUSADO antes de borrar los totalizadore\";\n}\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -5699,7 +5687,7 @@
         "type": "switch",
         "z": "619addbf2da107aa",
         "name": "",
-        "property": "payload",
+        "property": "topic",
         "propertyType": "msg",
         "rules": [
             {
@@ -5712,14 +5700,12 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 1290,
+        "x": 1450,
         "y": 200,
         "wires": [
+            [],
             [
-                "685ecf0080349123"
-            ],
-            [
-                "49ca4dcaab021e0d"
+                "f2a341058f36cde6"
             ]
         ]
     },
@@ -5738,29 +5724,9 @@
         "className": "",
         "topic": "",
         "name": "",
-        "x": 1670,
-        "y": 200,
+        "x": 1810,
+        "y": 100,
         "wires": []
-    },
-    {
-        "id": "49ca4dcaab021e0d",
-        "type": "function",
-        "z": "619addbf2da107aa",
-        "name": "function 16",
-        "func": "\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 1470,
-        "y": 200,
-        "wires": [
-            [
-                "76b0e2057c9b9e08"
-            ]
-        ]
     },
     {
         "id": "3472d7035568969e",
@@ -5783,7 +5749,7 @@
         "type": "function",
         "z": "619addbf2da107aa",
         "name": "Id Llenado",
-        "func": "global.set(\"ID_LLENADO\",msg.payload[0].id_llenado);\nmsg.payload=msg.payload[0].id_llenado;\nreturn msg;",
+        "func": "if(global.get(\"SEL_CISTERNA\")=== \"CISTERNA1\")\n{\n    global.set(\"ID_LLENADO1\",msg.payload[0].id_llenado);\n\n}\nelse\n{\n    global.set(\"ID_LLENADO2\",msg.payload[0].id_llenado);\n}\n\n\nmsg.payload=msg.payload[0].id_llenado;\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -5793,9 +5759,7 @@
         "x": 2490,
         "y": 580,
         "wires": [
-            [
-                "41a6f0637e63061d"
-            ]
+            []
         ]
     },
     {
@@ -5810,8 +5774,8 @@
         "complete": "false",
         "statusVal": "",
         "statusType": "auto",
-        "x": 2660,
-        "y": 580,
+        "x": 1680,
+        "y": 380,
         "wires": []
     },
     {
@@ -5826,6 +5790,96 @@
         "x": 1425,
         "y": 240,
         "wires": []
+    },
+    {
+        "id": "a7076b7f9cec7c92",
+        "type": "function",
+        "z": "619addbf2da107aa",
+        "name": "Is Ready 1",
+        "func": "\n\n\nif (global.get(\"STATUS_CISTERNA1\") > 0) {\n    msg.topic=\"OK\";\n    if (msg.payload != \"Cansel\") {\n        global.set(\"STATUS_CISTERNA1\", 2);\n        global.set(\"SEND_STATUS_CISTERNA1\", true);\n        global.set(\"CISTERNA2_VISIBLE\",0);\n\n        //msg.params=[id_cisterna, date_string, id_product, fill_segment1.Vol_full]\n\n    }\n}\nelse {\n    msg.topic=null;\n    msg.payload=\" ⚠️ Seleccione Cisterna y Complete los datos de llenado\";\n}\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1290,
+        "y": 200,
+        "wires": [
+            [
+                "d4efe672ca459e72"
+            ]
+        ]
+    },
+    {
+        "id": "70c0084b796140a4",
+        "type": "link in",
+        "z": "619addbf2da107aa",
+        "name": "msgWrning",
+        "links": [
+            "f2a341058f36cde6",
+            "3545a67bf22b282a"
+        ],
+        "x": 1645,
+        "y": 100,
+        "wires": [
+            [
+                "76b0e2057c9b9e08"
+            ]
+        ]
+    },
+    {
+        "id": "f2a341058f36cde6",
+        "type": "link out",
+        "z": "619addbf2da107aa",
+        "name": "link out 2",
+        "mode": "link",
+        "links": [
+            "70c0084b796140a4"
+        ],
+        "x": 1585,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "3545a67bf22b282a",
+        "type": "link out",
+        "z": "619addbf2da107aa",
+        "name": "link out 3",
+        "mode": "link",
+        "links": [
+            "70c0084b796140a4"
+        ],
+        "x": 1595,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "efadf661942c3a59",
+        "type": "switch",
+        "z": "619addbf2da107aa",
+        "name": "",
+        "property": "topic",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "nnull"
+            },
+            {
+                "t": "null"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 1450,
+        "y": 320,
+        "wires": [
+            [],
+            [
+                "3545a67bf22b282a"
+            ]
+        ]
     },
     {
         "id": "83ee44d06bbae547",
@@ -6472,7 +6526,7 @@
         "type": "function",
         "z": "33c28a10b022eebb",
         "name": "SendSTATUS_CISTERNA1",
-        "func": "\nlet cisterna1=global.get(\"STATUS_CISTERNA1\");\nlet send_status_cisterna1=global.get(\"SEND_STATUS_CISTERNA1\") || false;\n\nif(send_status_cisterna1===true)\n{\n    msg.payload=cisterna1;\n    global.set(\"SEND_STATUS_CISTERNA1\",false);\n}\nelse{\n    msg.payload=null;\n}\n\n\n\nreturn msg;",
+        "func": "let cisterna=\"\";\nif(global.get(\"SEL_CISTERNA\")===\"CISTERNA1\")\n{\n    cisterna=global.get(\"STATUS_CISTERNA1\");\n}\nelse\n{\n    cisterna = global.get(\"STATUS_CISTERNA2\");\n}\n\n\n\nlet send_status_cisterna1=global.get(\"SEND_STATUS_CISTERNA1\") || false;\n\nif(send_status_cisterna1===true)\n{\n    msg.payload=cisterna;\n    global.set(\"SEND_STATUS_CISTERNA1\",false);\n}\nelse{\n    msg.payload=null;\n}\n\n\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
