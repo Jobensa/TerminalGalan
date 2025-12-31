@@ -95,6 +95,14 @@
         "info": "Flujo para generar tiquetes de despacho de LPG"
     },
     {
+        "id": "002b5cf35f2cdda5",
+        "type": "tab",
+        "label": "Control_llenado",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
         "id": "c11465eb77fd5a0c",
         "type": "modbus-client",
         "name": "V560",
@@ -999,7 +1007,7 @@
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
-        "initialize": "// El código añadido aquí se ejecutará una vez\n// cuando el nodo es iniciado.\n\nglobal.set(\"PU\", 1);\nglobal.set(\"IS_REPORT\", false);\n\n// let tag = {\n//     \"ID\": 0,\n//     \"TagName\": \"PIT_2001\",\n//     \"Descripcion\": \"Presion de Descarga\",\n//     \"und\": \"PSI\",\n//     \"PV\": 0.0,\n//     \"HH\": 95.0,\n//     \"H\": 90.0,\n//     \"L\": 15.0,\n//     \"LL\": 10,\n//     \"Max\": 560,\n//     \"Min\": 0,\n//     \"enableHH\": 1,\n//     \"enableH\": 1,\n//     \"enableL\": 1,\n//     \"enableLL\": 1,\n//     \"ALARM\": \"#00f800\",\n//     \"FAIL\": 0,\n// }\n// global.set(tag.TagName,tag);\n\n// tag = {\n//     \"ID\": 0,\n//     \"TagName\": \"TIT_2001\",\n//     \"Descripcion\": \"Teperatura de Descarga\",\n//     \"und\": \"°F\",\n//     \"PV\": 0.0,\n//     \"HH\": 95.0,\n//     \"H\": 90.0,\n//     \"L\": 15.0,\n//     \"LL\": 10,\n//     \"Max\": 560,\n//     \"Min\": 0,\n//     \"enableHH\": 1,\n//     \"enableH\": 1,\n//     \"enableL\": 1,\n//     \"enableLL\": 1,\n//     \"ALARM\": \"#00f800\",\n//     \"FAIL\": 0,\n// };\n// global.set(tag.TagName, tag);\n\nlet tag = {\n    \"ID\": 0,\n    \"TagName\": \"DIT_2001\",\n    \"Descripcion\": \"Densidad de gas\",\n    \"und\": \"kg/m3\",\n    \"PV\": 0.0,\n    \"HH\": 750.0,\n    \"H\": 700.0,\n    \"L\": 450.0,\n    \"LL\": 400,\n    \"Max\": 1000,\n    \"Min\": 0,\n    \"enableHH\": 1,\n    \"enableH\": 1,\n    \"enableL\": 1,\n    \"enableLL\": 1,\n    \"ALARM\": \"#00f800\",\n    \"FAIL\": 0,\n};\nglobal.set(tag.TagName, tag);\n\ntag = {\n    \"ID\": 0,\n    \"TagName\": \"PIT_2002\",\n    \"Descripcion\": \"Presion Gasoducto\",\n    \"und\": \"PSIA\",\n    \"PV\": 0.0,\n    \"HH\": 490,\n    \"H\": 480,\n    \"L\": 20,\n    \"LL\": 10,\n    \"Max\": 600,\n    \"Min\": 0,\n    \"enableHH\": 1,\n    \"enableH\": 1,\n    \"enableL\": 1,\n    \"enableLL\": 1,\n    \"ALARM\": \"#00f800\",\n    \"FAIL\": 0,\n};\nglobal.set(tag.TagName, tag);\n\nlet pid = {\n    PV: 0.0,\n    SP: 2.0,\n    CV: 0.0\n}\n\nglobal.set(\"SIC_2002\", pid);\n\nlet uit_2001 = {\n    FLOW: 0.0,\n    DENSITY: 0.450,\n    TOTAL: 0\n}\nglobal.set(\"UIT_2001\", uit_2001);\n\nlet uit = {\n    SPEED: 0.0,\n    TEMPERATURE: 0.0,\n    PRESSURE_IN: 0.0,\n    PRESSURE_OUT: 0.0,\n    FLOW: 0.0\n}\nglobal.set(\"UIT_2002\", uit);\n\nlet uit_2003 = {\n    FLOW: 0.0,\n    DENSITY: 0.450,\n    TOTAL: 0\n}\nglobal.set(\"UIT_2003\", uit_2003);\n\n\nlet segment = {\n    cisterna_id: 1,\n    segmento_id: 1,\n    temperatura: 35.5,\n    presion: 650,\n    densidad: 0.585,\n    flujo_actual: 150,\n    volumen_acumulado: 0\n};\n\n\n\nglobal.set(\"SEGMENT_VALUES1\", segment);\nglobal.set(\"SEGMENT_VALUES2\", segment);\n\nlet segment_display =\n{\n    CLIENTE: \"cliente\",\n    PRODUCTO: \"Propano\",\n    FECHA: \"dd-mm-aaaa hh:mm:ss\",\n    TIQUETE_No: 100,\n    RVP: 120,\n    MASA_CORIOLIS: 560,\n    VOL_INDICADO: 0,\n    MASA_VAPORES: 0,\n}\nglobal.set(\"SEGMENT_DISPLAY\", segment_display);\n\n//STATUS_CISTERNA 0. Vacia, 1. Llenando, 2. Pausada, 3.Cerrada\nglobal.set(\"STATUS_CISTERNA1\", 0);\nglobal.set(\"STATUS_CISTERNA2\", 0);\nglobal.set(\"CISTERNA1_VISIBLE\", 1);\nglobal.set(\"CISTERNA2_VISIBLE\",1);\n\n\n\n\n\n\nlet cisterna1 = {\n    numero_sisterna: \"PLACA_XXX\",\n    nombre_conductor: \"CONDUCTOR\",\n    empresa_cliente: \"CLIENTE\",\n    producto_principal: \"PROPANO\",\n    galones_objetivo: 14000,\n    observaciones: \"Observaciones\"\n}\n\nglobal.set(\"CISTERNA1\", cisterna1);\n\nlet cisterna2 = {\n    numero_sisterna: \"PLACA_XXX\",\n    nombre_conductor: \"CONDUCTOR\",\n    empresa_cliente: \"CLIENTE\",\n    producto_principal: \"PROPANO\",\n    galones_objetivo: 14000,\n    observaciones: \"Observaciones\"\n}\n\nglobal.set(\"CISTERNA2\", cisterna2);\n\nlet datos_llenado = {\n    presion: 0,\n    flujo: 0,\n    temperatura: 0,\n    densidad: 0,\n    total: 0,\n    last_total: 0\n};\nglobal.set(\"DATOS_LLENADO\", datos_llenado);\n\n\nlet fill_segment1 =\n{\n    \"cliente\": \"ALMAGAS\",\n    \"producto\": \"PROPANO\",\n    \"cisterna\": \"EJD315\", \n    \"tiquete\": 123,\n     \"fecha\": \"12-18-2025, 8:28:25 AM\", \n     \"rvp\": 180, \n     \"Vol_full\": 14000, \n     \"origen\": \"LLENADO\"\n};\n\nlet promedios={\n    \n        llenado_id :0,\n        flujo_promedio:0.0,\n        densidad_promedio :0.0,\n        presion_promedio :0.0,\n        temperatura_promedio :0.0,\n        volumen_total:0\n\n};\nglobal.set(\"PROMEDIOS\",promedios);\n\nglobal.set(\"FILL_SEGMENT1\",fill_segment1);\nglobal.set(\"FILL_SEGMENT2\", fill_segment1);\n\nglobal.set(\"ID_CISTERNA1\",0);\nglobal.set(\"ID_PRODUCTO1\", 0);\nglobal.set(\"ID_LLENADO1\", 0);\n\nglobal.set(\"ID_CISTERNA2\", 0);\nglobal.set(\"ID_PRODUCTO2\", 0);\nglobal.set(\"ID_LLENADO2\", 0);",
+        "initialize": "// El código añadido aquí se ejecutará una vez\n// cuando el nodo es iniciado.\n\nglobal.set(\"PU\", 1);\nglobal.set(\"IS_REPORT\", false);\n\n// let tag = {\n//     \"ID\": 0,\n//     \"TagName\": \"PIT_2001\",\n//     \"Descripcion\": \"Presion de Descarga\",\n//     \"und\": \"PSI\",\n//     \"PV\": 0.0,\n//     \"HH\": 95.0,\n//     \"H\": 90.0,\n//     \"L\": 15.0,\n//     \"LL\": 10,\n//     \"Max\": 560,\n//     \"Min\": 0,\n//     \"enableHH\": 1,\n//     \"enableH\": 1,\n//     \"enableL\": 1,\n//     \"enableLL\": 1,\n//     \"ALARM\": \"#00f800\",\n//     \"FAIL\": 0,\n// }\n// global.set(tag.TagName,tag);\n\n// tag = {\n//     \"ID\": 0,\n//     \"TagName\": \"TIT_2001\",\n//     \"Descripcion\": \"Teperatura de Descarga\",\n//     \"und\": \"°F\",\n//     \"PV\": 0.0,\n//     \"HH\": 95.0,\n//     \"H\": 90.0,\n//     \"L\": 15.0,\n//     \"LL\": 10,\n//     \"Max\": 560,\n//     \"Min\": 0,\n//     \"enableHH\": 1,\n//     \"enableH\": 1,\n//     \"enableL\": 1,\n//     \"enableLL\": 1,\n//     \"ALARM\": \"#00f800\",\n//     \"FAIL\": 0,\n// };\n// global.set(tag.TagName, tag);\n\nlet tag = {\n    \"ID\": 0,\n    \"TagName\": \"DIT_2001\",\n    \"Descripcion\": \"Densidad de gas\",\n    \"und\": \"kg/m3\",\n    \"PV\": 0.0,\n    \"HH\": 750.0,\n    \"H\": 700.0,\n    \"L\": 450.0,\n    \"LL\": 400,\n    \"Max\": 1000,\n    \"Min\": 0,\n    \"enableHH\": 1,\n    \"enableH\": 1,\n    \"enableL\": 1,\n    \"enableLL\": 1,\n    \"ALARM\": \"#00f800\",\n    \"FAIL\": 0,\n};\nglobal.set(tag.TagName, tag);\n\ntag = {\n    \"ID\": 0,\n    \"TagName\": \"PIT_2002\",\n    \"Descripcion\": \"Presion Gasoducto\",\n    \"und\": \"PSIA\",\n    \"PV\": 0.0,\n    \"HH\": 490,\n    \"H\": 480,\n    \"L\": 20,\n    \"LL\": 10,\n    \"Max\": 600,\n    \"Min\": 0,\n    \"enableHH\": 1,\n    \"enableH\": 1,\n    \"enableL\": 1,\n    \"enableLL\": 1,\n    \"ALARM\": \"#00f800\",\n    \"FAIL\": 0,\n};\nglobal.set(tag.TagName, tag);\n\nlet pid = {\n    PV: 0.0,\n    SP: 2.0,\n    CV: 0.0\n}\n\nglobal.set(\"SIC_2002\", pid);\n\nlet uit_2001 = {\n    FLOW: 0.0,\n    DENSITY: 0.450,\n    TOTAL: 0\n}\nglobal.set(\"UIT_2001\", uit_2001);\n\nlet uit = {\n    SPEED: 0.0,\n    TEMPERATURE: 0.0,\n    PRESSURE_IN: 0.0,\n    PRESSURE_OUT: 0.0,\n    FLOW: 0.0\n}\nglobal.set(\"UIT_2002\", uit);\n\nlet uit_2003 = {\n    FLOW: 0.0,\n    DENSITY: 0.450,\n    TOTAL: 0\n}\nglobal.set(\"UIT_2003\", uit_2003);\n\n\nlet segment1 = {\n    cisterna_id: 1,\n    segmento_id: 1,\n    temperatura: 35.5,\n    presion: 650,\n    densidad: 0.585,\n    flujo_actual: 150,\n    volumen_acumulado: 0\n};\n\nlet segment2 = {\n    cisterna_id: 1,\n    segmento_id: 1,\n    temperatura: 35.5,\n    presion: 650,\n    densidad: 0.585,\n    flujo_actual: 150,\n    volumen_acumulado: 0\n};\n\n\n\nglobal.set(\"SEGMENT_VALUES1\", segment1);\nglobal.set(\"SEGMENT_VALUES2\", segment2);\n\nlet segment_display =\n{\n    CLIENTE: \"cliente\",\n    PRODUCTO: \"Propano\",\n    FECHA: \"dd-mm-aaaa hh:mm:ss\",\n    TIQUETE_No: 100,\n    RVP: 120,\n    MASA_CORIOLIS: 560,\n    VOL_INDICADO: 0,\n    MASA_VAPORES: 0,\n}\nglobal.set(\"SEGMENT_DISPLAY\", segment_display);\n\n//STATUS_CISTERNA 0. Vacia, 1. Llenando, 2. Pausada, 3.Cerrada\nglobal.set(\"STATUS_CISTERNA1\", 0);\nglobal.set(\"STATUS_CISTERNA2\", 0);\nglobal.set(\"CISTERNA1_VISIBLE\", 1);\nglobal.set(\"CISTERNA2_VISIBLE\",1);\n\n\n\n\n\n\nlet cisterna1 = {\n    numero_sisterna: \"PLACA_XXX\",\n    nombre_conductor: \"CONDUCTOR\",\n    empresa_cliente: \"CLIENTE\",\n    producto_principal: \"PROPANO\",\n    galones_objetivo: 14000,\n    observaciones: \"Observaciones\"\n}\n\nglobal.set(\"CISTERNA1\", cisterna1);\n\nlet cisterna2 = {\n    numero_sisterna: \"PLACA_XXX\",\n    nombre_conductor: \"CONDUCTOR\",\n    empresa_cliente: \"CLIENTE\",\n    producto_principal: \"PROPANO\",\n    galones_objetivo: 14000,\n    observaciones: \"Observaciones\"\n}\n\nglobal.set(\"CISTERNA2\", cisterna2);\n\nlet datos_llenado = {\n    presion: 0,\n    flujo: 0,\n    temperatura: 0,\n    densidad: 0,\n    total: 0,\n    last_total: 0\n};\nglobal.set(\"DATOS_LLENADO\", datos_llenado);\n\n\nlet fill_segment1 =\n{\n    \"cliente\": \"ALMAGAS\",\n    \"producto\": \"PROPANO\",\n    \"cisterna\": \"EJD315\", \n    \"tiquete\": 123,\n     \"fecha\": \"12-18-2025, 8:28:25 AM\", \n     \"rvp\": 180, \n     \"Vol_full\": 14000, \n     \"origen\": \"LLENADO\"\n};\n\nlet promedios={\n    \n        llenado_id :0,\n        flujo_promedio:0.0,\n        densidad_promedio :0.0,\n        presion_promedio :0.0,\n        temperatura_promedio :0.0,\n        volumen_total:0\n\n};\nglobal.set(\"PROMEDIOS\",promedios);\n\nglobal.set(\"FILL_SEGMENT1\",fill_segment1);\nglobal.set(\"FILL_SEGMENT2\", fill_segment1);\n\nglobal.set(\"ID_CISTERNA1\",0);\nglobal.set(\"ID_PRODUCTO1\", 0);\nglobal.set(\"ID_LLENADO1\", 0);\n\nglobal.set(\"ID_CISTERNA2\", 0);\nglobal.set(\"ID_PRODUCTO2\", 0);\nglobal.set(\"ID_LLENADO2\", 0);\n\nglobal.set(\"VOLUMEN_ACTUAL\",0);",
         "finalize": "",
         "libs": [],
         "x": 560,
@@ -1013,7 +1021,7 @@
         "type": "function",
         "z": "ee81cc611986e56f",
         "name": "Get PLC Data",
-        "func": "let uit=global.get(\"UIT_2002\");\nlet pit=global.get(\"PIT_2002\");\nlet pid=global.get(\"SIC_2002\");\nlet segment=global.get(\"SEGMENT_VALUES\");\n\n\nuit.SPEED=msg.payload[6]/1000.0;\nuit.TEMPERATURE=msg.payload[7]/1.0;\n\nif(global.get(\"SendPressureIN\")==false)\n{\n   uit.PRESSURE_IN=msg.payload[2];\n\n}\n\nuit.PRESSURE_OUT=msg.payload[3]/1.0;\nuit.FLOW=msg.payload[11]/10.0;\n\nif(global.get(\"SendSIC_CV\")==false && global.get(\"SendSIC_SP\")==false)\n{\n    pid.SP=msg.payload[5]/1000.0;\n    pid.CV=msg.payload[4]/10;\n}\n\n\npid.PV=uit.SPEED;\n\npit.PV = msg.payload[3] / 1.0;\n\nif(global.get(\"SendHH\")==false && global.get(\"SendH\")==false )\n{\n    pit.HH = msg.payload[8] / 10.0;\n    pit.H = msg.payload[9] / 10.0; \n}\n\n\n\n \n\n\nglobal.set(\"UIT_2002\",uit);\nglobal.set(\"PIT_2002\",pit);\nglobal.set(\"SIC_2002\",pid);\nreturn msg;",
+        "func": "let uit=global.get(\"UIT_2002\");\nlet pit=global.get(\"PIT_2002\");\nlet pid=global.get(\"SIC_2002\");\n\n\n\nuit.SPEED=msg.payload[6]/1000.0;\nuit.TEMPERATURE=msg.payload[7]/1.0;\n\nif(global.get(\"SendPressureIN\")==false)\n{\n   uit.PRESSURE_IN=msg.payload[2];\n\n}\n\nuit.PRESSURE_OUT=msg.payload[3]/1.0;\nuit.FLOW=msg.payload[11]/10.0;\n\nif(global.get(\"SendSIC_CV\")==false && global.get(\"SendSIC_SP\")==false)\n{\n    pid.SP=msg.payload[5]/1000.0;\n    pid.CV=msg.payload[4]/10;\n}\n\n\npid.PV=uit.SPEED;\n\npit.PV = msg.payload[3] / 1.0;\n\nif(global.get(\"SendHH\")==false && global.get(\"SendH\")==false )\n{\n    pit.HH = msg.payload[8] / 10.0;\n    pit.H = msg.payload[9] / 10.0; \n}\n\n\n\n \n\n\nglobal.set(\"UIT_2002\",uit);\nglobal.set(\"PIT_2002\",pit);\nglobal.set(\"SIC_2002\",pid);\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -1047,7 +1055,7 @@
         "type": "function",
         "z": "ee81cc611986e56f",
         "name": "function 2",
-        "func": "\n\n\n// Función para convertir dos registros de 16 bits a un Int32\nfunction registrosAInt32(lowWord, highWord) {\n    return (highWord << 16) | lowWord;\n}\nlet dit=global.get(\"DIT_2001\");\nlet uit_2001_dit=global.get(\"UIT_2001_DENSITY\");\nlet sel_cisterna=global.get(\"SEL_CISTERNA\");\n\nlet sel_segment=sel_cisterna===\"CISTERNA1\" ? \"SEGMENT_VALUES1\":\"SEGMENT_VALUES2\";\n\nlet promedios=global.get(\"PROMEDIOS\");\n\n\n\nlet segment =global.get(sel_segment);\n\n\n\n \n  segment.temperatura= msg.payload[1] / 10;\n  segment.presion= msg.payload[0] / 10;\n  segment.densidad= dit.PV;\n  segment.flujo_actual= msg.payload[12] / 10;\n  segment.volumen_acumulado = promedios.volumen_total+msg.payload[11];\n\n  global.set(sel_segment,segment);\n\n\n\nlet uit_2003={\n    FLOW : msg.payload[14] / 10,\n    DENSITY: dit.PV,\n    TOTAL:msg.payload[13] / 10\n }\n global.set(\"UIT_2003\",uit_2003);\n\n let uit_2001={\n    FLOW : msg.payload[12] / 10,\n    DENSITY: dit.PV,\n    TOTAL:msg.payload[11]\n }\n global.set(\"UIT_2001\",uit_2001);\n\n\n\n// Leer tiquete y estado\nglobal.set(\"TIKET_N\", msg.payload[24]);\nglobal.set(\"ESTADO_BATCH\", msg.payload[23]); // 0=Pausado, 1=Activo\n\n\n\nlet tag=global.get(\"PIT_2001\");\ntag.PV=segment.presion;\n\ntag=global.get(\"TIT_2001\");\ntag.PV=segment.temperatura;\n\ntag=global.get(\"FIT_2001\");\ntag.PV=segment.flujo_actual;\n\ndit.PV=msg.payload[9]/10;\nglobal.set(\"DIT_2001\",dit);\n\nuit_2001_dit.PV=dit.PV \n\n\n\n\nreturn msg;",
+        "func": "\n\n\n// Función para convertir dos registros de 16 bits a un Int32\nfunction registrosAInt32(lowWord, highWord) {\n  return (highWord << 16) | lowWord;\n}\nlet dit = global.get(\"DIT_2001\");\nlet uit_2001_dit = global.get(\"UIT_2001_DENSITY\");\nlet sel_cisterna = global.get(\"SEL_CISTERNA\");\nlet segment = {};\nlet sel_segment = \"\";\nlet sel_status = \"\";\n\nlet promedios = global.get(\"PROMEDIOS\");\n\nif (sel_cisterna === \"CISTERNA1\") {\n  sel_segment = \"SEGMENT_VALUES1\";\n  sel_status=\"STATUS_CISTERNA1\";\n\n}\nelse {\n  sel_segment = \"SEGMENT_VALUES2\";\n  sel_status = \"STATUS_CISTERNA2\";\n}\n\nif (global.get(sel_status)===2) {\n  segment = global.get(sel_segment);\n  segment.temperatura = msg.payload[1] / 10;\n  segment.presion = msg.payload[0] / 10;\n  segment.densidad = dit.PV;\n  segment.flujo_actual = msg.payload[12] / 10;\n  segment.volumen_acumulado = promedios.volumen_total + msg.payload[11]\n\n  global.set(sel_segment, segment);  //Salva los datos de en el segmento correspondiente\n\n\n}\n\n\nlet uit_2003 = {\n  FLOW: msg.payload[14] / 10,\n  DENSITY: dit.PV,\n  TOTAL: msg.payload[13] / 10\n}\nglobal.set(\"UIT_2003\", uit_2003);\n\nlet uit_2001 = {\n  FLOW: msg.payload[12] / 10,\n  DENSITY: dit.PV,\n  TOTAL: msg.payload[11]\n}\nglobal.set(\"UIT_2001\", uit_2001);\n\n// Leer tiquete y estado\nglobal.set(\"TIKET_N\", msg.payload[24]);\nglobal.set(\"ESTADO_BATCH\", msg.payload[23]); // 0=Pausado, 1=Activo\n\nlet tag = global.get(\"PIT_2001\");\ntag.PV = msg.payload[0] / 10;\n\ntag = global.get(\"TIT_2001\");\ntag.PV = msg.payload[1] / 10;\n\ntag = global.get(\"FIT_2001\");\ntag.PV = msg.payload[12] / 10;\n\ndit.PV = msg.payload[9] / 10;\nglobal.set(\"DIT_2001\", dit);\n\nuit_2001_dit.PV = dit.PV;\nmsg.payload = sel_segment;\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -1189,7 +1197,7 @@
         "type": "alarm-scanner",
         "z": "6910828fa524c0ad",
         "name": "",
-        "x": 540,
+        "x": 560,
         "y": 440,
         "wires": [
             [
@@ -1209,7 +1217,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 750,
+        "x": 770,
         "y": 540,
         "wires": [
             [
@@ -1217,18 +1225,6 @@
             ],
             []
         ]
-    },
-    {
-        "id": "446d913f27b17fc4",
-        "type": "debug",
-        "z": "6910828fa524c0ad",
-        "name": "",
-        "active": true,
-        "console": "false",
-        "complete": "false",
-        "x": 970,
-        "y": 840,
-        "wires": []
     },
     {
         "id": "fa2e643d23619183",
@@ -1247,8 +1243,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 1,
-        "x": 930,
-        "y": 460,
+        "x": 950,
+        "y": 520,
         "wires": [
             [
                 "0db00293fc5b18cb"
@@ -1267,8 +1263,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1090,
-        "y": 460,
+        "x": 1130,
+        "y": 520,
         "wires": [
             [
                 "68c5cc74e68f4adf"
@@ -1469,7 +1465,7 @@
         "type": "alarm-scanner",
         "z": "6910828fa524c0ad",
         "name": "",
-        "x": 540,
+        "x": 560,
         "y": 480,
         "wires": [
             [
@@ -1482,7 +1478,7 @@
         "type": "alarm-scanner",
         "z": "6910828fa524c0ad",
         "name": "",
-        "x": 540,
+        "x": 560,
         "y": 520,
         "wires": [
             [
@@ -1495,7 +1491,7 @@
         "type": "alarm-scanner",
         "z": "6910828fa524c0ad",
         "name": "",
-        "x": 540,
+        "x": 560,
         "y": 560,
         "wires": [
             [
@@ -1508,7 +1504,7 @@
         "type": "alarm-scanner",
         "z": "6910828fa524c0ad",
         "name": "",
-        "x": 540,
+        "x": 560,
         "y": 600,
         "wires": [
             [
@@ -1521,7 +1517,7 @@
         "type": "alarm-scanner",
         "z": "6910828fa524c0ad",
         "name": "",
-        "x": 540,
+        "x": 560,
         "y": 640,
         "wires": [
             [
@@ -1635,10 +1631,8 @@
         "z": "6910828fa524c0ad",
         "name": "link out 1",
         "mode": "link",
-        "links": [
-            "bac54a5a69138a3a"
-        ],
-        "x": 735,
+        "links": [],
+        "x": 725,
         "y": 820,
         "wires": []
     },
@@ -3163,14 +3157,15 @@
         "type": "debug",
         "z": "8b7a3cc1bad4cf4b",
         "name": "debug 6",
-        "active": true,
+        "active": false,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
-        "complete": "false",
+        "complete": "true",
+        "targetType": "full",
         "statusVal": "",
         "statusType": "auto",
-        "x": 920,
+        "x": 1180,
         "y": 1040,
         "wires": []
     },
@@ -3271,14 +3266,14 @@
                 "p": "payload"
             }
         ],
-        "repeat": "10",
+        "repeat": "2",
         "crontab": "",
         "once": false,
         "onceDelay": 0.1,
         "topic": "Raspador",
         "payload": "TOTAL_AHORA",
         "payloadType": "global",
-        "x": 170,
+        "x": 130,
         "y": 620,
         "wires": [
             [
@@ -3901,7 +3896,7 @@
         "id": "1226e2b560cba536",
         "type": "link in",
         "z": "8b7a3cc1bad4cf4b",
-        "name": "link in 1",
+        "name": "In_Promedio",
         "links": [
             "44a90acc855ccbfa"
         ],
@@ -3929,8 +3924,7 @@
         "y": 660,
         "wires": [
             [
-                "fef95aea31221e8e",
-                "e8a6d821a6b887d2"
+                "fef95aea31221e8e"
             ]
         ]
     },
@@ -3953,7 +3947,7 @@
         "type": "debug",
         "z": "8b7a3cc1bad4cf4b",
         "name": "debug 12",
-        "active": false,
+        "active": true,
         "tosidebar": true,
         "console": false,
         "tostatus": false,
@@ -3964,6 +3958,143 @@
         "x": 700,
         "y": 700,
         "wires": []
+    },
+    {
+        "id": "13db9ba40a15d60d",
+        "type": "inject",
+        "z": "8b7a3cc1bad4cf4b",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "00 00 * * *",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 140,
+        "y": 1100,
+        "wires": [
+            [
+                "e117da9debd98762"
+            ]
+        ]
+    },
+    {
+        "id": "e117da9debd98762",
+        "type": "function",
+        "z": "8b7a3cc1bad4cf4b",
+        "name": "function 5",
+        "func": "msg.topic = `\n    DELETE FROM llenado_detalle \n    WHERE llenado_id IN (\n        SELECT id FROM llenados \n        WHERE timestamp < datetime('now', '-10 days')\n    )\n`;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 340,
+        "y": 1100,
+        "wires": [
+            [
+                "8440c9eda6dc68cc"
+            ]
+        ]
+    },
+    {
+        "id": "8440c9eda6dc68cc",
+        "type": "sqlite",
+        "z": "8b7a3cc1bad4cf4b",
+        "mydb": "7cfcd0a8167643a7",
+        "sqlquery": "msg.topic",
+        "sql": "",
+        "name": "",
+        "x": 540,
+        "y": 1100,
+        "wires": [
+            [
+                "2a6118c1ff74dc63"
+            ]
+        ]
+    },
+    {
+        "id": "2a6118c1ff74dc63",
+        "type": "function",
+        "z": "8b7a3cc1bad4cf4b",
+        "name": "function 8",
+        "func": "msg.topic = \"VACUUM\";\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 730,
+        "y": 1100,
+        "wires": [
+            [
+                "ee5fd25d0d907484"
+            ]
+        ]
+    },
+    {
+        "id": "ee5fd25d0d907484",
+        "type": "sqlite",
+        "z": "8b7a3cc1bad4cf4b",
+        "mydb": "7cfcd0a8167643a7",
+        "sqlquery": "msg.topic",
+        "sql": "",
+        "name": "",
+        "x": 920,
+        "y": 1100,
+        "wires": [
+            [
+                "13a38f9de199c4f0"
+            ]
+        ]
+    },
+    {
+        "id": "621fc4f5097c62ca",
+        "type": "link in",
+        "z": "8b7a3cc1bad4cf4b",
+        "name": "In_medición",
+        "links": [
+            "84241882125623be"
+        ],
+        "x": 245,
+        "y": 580,
+        "wires": [
+            [
+                "ce4704294b75ce3e"
+            ]
+        ]
+    },
+    {
+        "id": "ce4704294b75ce3e",
+        "type": "function",
+        "z": "8b7a3cc1bad4cf4b",
+        "name": "Medicion Inicial",
+        "func": "\n// Usamos .toISOString() para generar un formato de fecha/hora estándar y robusto para SQLite\nvar timestamp = new Date().toLocaleString().replaceAll('/',' '); \ntimestamp=timestamp.replace(',' ,' ');\nlet noSisterna=global.get(\"NoSISTERNA\") || 1;\nlet status_cisterna= 0;\nlet segment=null;\nlet id_llenado=1;\n\n//INSERT INTO llenado_detalle (llenado_id, timestamp, flujo, densidad, presion, temperatura, volumen_acumulado)\n//VALUES (32, datetime('now'), 831.3, 539.8, 346.4, 84.9, 1200);\n\nif(global.get(\"SEL_CISTERNA\")===\"CISTERNA1\")\n{\n     segment=global.get(\"SEGMENT_VALUES1\");\n     status_cisterna=global.get(\"STATUS_CISTERNA1\");\n     id_llenado=global.get(\"ID_LLENADO1\");\n}\nelse \n{\n     segment=global.get(\"SEGMENT_VALUES2\");\n     status_cisterna=global.get(\"STATUS_CISTERNA2\");\n     id_llenado=global.get(\"ID_LLENADO2\");\n}\n\n//let status_batch=global.get(\"STATUS_BATCH\");\n \n\n\n// msg.payload = {\n//   sisterna_id: 1,\n//   segmento_id: 1,\n//   temperatura: 35.5,\n//   presion: 650,\n//   densidad: 0.585,\n//   flujo_actual: 150\n// }\n\n\nmsg.params =  [\n    //segment.sisterna_id,\n    id_llenado,\n    timestamp,\n    segment.flujo_actual,\n    segment.densidad,\n    segment.presion,\n    segment.temperatura,  \n    segment.volumen_acumulado         \n    \n]\nmsg.payload=\"OK\"\n\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 400,
+        "y": 580,
+        "wires": [
+            [
+                "e42960e3fa1f098c"
+            ]
+        ]
     },
     {
         "id": "d6e1c0a82dd7fc05",
@@ -4328,13 +4459,13 @@
         "raw": false,
         "className": "",
         "topic": "Desea Iniciar Bache?",
-        "name": "Fill1",
-        "x": 1070,
+        "name": "To Fill1",
+        "x": 1080,
         "y": 220,
         "wires": [
             [
-                "bc13297a3ab23f0a",
-                "a7076b7f9cec7c92"
+                "67d8641a5acdcda4",
+                "ade01b10e6df9c59"
             ]
         ]
     },
@@ -4357,28 +4488,7 @@
         "y": 260,
         "wires": [
             [
-                "9d8d6664f2691042",
-                "bc13297a3ab23f0a"
-            ]
-        ]
-    },
-    {
-        "id": "9d8d6664f2691042",
-        "type": "function",
-        "z": "619addbf2da107aa",
-        "name": "SetPause1",
-        "func": "\nif(msg.payload!=\"Cansel\")\n{\n    global.set(\"STATUS_CISTERNA1\",3);\n    global.set(\"SEND_STATUS_CISTERNA1\",true);\n     global.set(\"CISTERNA2_VISIBLE\",1);\n    \n}\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 1290,
-        "y": 240,
-        "wires": [
-            [
-                "b430cb3540249bc6"
+                "9d8d6664f2691042"
             ]
         ]
     },
@@ -4401,46 +4511,9 @@
         "y": 300,
         "wires": [
             [
-                "bc13297a3ab23f0a",
                 "384441782bb7e83d"
             ]
         ]
-    },
-    {
-        "id": "384441782bb7e83d",
-        "type": "function",
-        "z": "619addbf2da107aa",
-        "name": "SetClose1",
-        "func": "let status_cisterna1=global.get(\"STATUS_CISTERNA1\");\n\n\n\n\nif(msg.payload!=\"Cansel\" && status_cisterna1===3)\n{\n    global.set(\"STATUS_CISTERNA1\",4);\n    global.set(\"SEND_STATUS_CISTERNA1\",true);\n     global.set(\"CISTERNA2_VISIBLE\",1);\n    msg.topic=\"OK\";\n}\nelse\n{\n    msg.topic=null;\n    msg.payload = \"⚠️ El batch debe estar PAUSADO antes de borrar los totalizadore\";\n}\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 1290,
-        "y": 280,
-        "wires": [
-            [
-                "bb402655e34c6c09"
-            ]
-        ]
-    },
-    {
-        "id": "bc13297a3ab23f0a",
-        "type": "debug",
-        "z": "619addbf2da107aa",
-        "name": "debug 2",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1280,
-        "y": 80,
-        "wires": []
     },
     {
         "id": "73ed113b1482079c",
@@ -4457,63 +4530,7 @@
         "x": 1090,
         "y": 460,
         "wires": [
-            [
-                "f6f66db1c4cf61c6"
-            ]
-        ]
-    },
-    {
-        "id": "f6f66db1c4cf61c6",
-        "type": "switch",
-        "z": "619addbf2da107aa",
-        "name": "",
-        "property": "topic",
-        "propertyType": "msg",
-        "rules": [
-            {
-                "t": "nnull"
-            },
-            {
-                "t": "null"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 2,
-        "x": 1290,
-        "y": 460,
-        "wires": [
-            [],
             []
-        ]
-    },
-    {
-        "id": "bb402655e34c6c09",
-        "type": "switch",
-        "z": "619addbf2da107aa",
-        "name": "",
-        "property": "topic",
-        "propertyType": "msg",
-        "rules": [
-            {
-                "t": "nnull"
-            },
-            {
-                "t": "null"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 2,
-        "x": 1450,
-        "y": 280,
-        "wires": [
-            [
-                "db08240ca43407ed"
-            ],
-            [
-                "3545a67bf22b282a"
-            ]
         ]
     },
     {
@@ -4652,7 +4669,7 @@
         "y": 520,
         "wires": [
             [
-                "60cb6c66917c7f28"
+                "e513baa3401879b3"
             ]
         ]
     },
@@ -4673,42 +4690,6 @@
         "wires": [
             [
                 "936d82591358bf5b"
-            ]
-        ]
-    },
-    {
-        "id": "61552e5ef6f099b5",
-        "type": "function",
-        "z": "619addbf2da107aa",
-        "name": "InserNewSegment",
-        "func": "/*\nCREATE TABLE \"llenados\" (\n\t\"id\"\tINTEGER,\n\t\"cisterna_id\"\tINTEGER NOT NULL,\n\t\"fecha_inicio\"\tDATETIME NOT NULL,\n\t\"fecha_fin\"\tDATETIME,\n\t\"producto_id\"\tINTEGER NOT NULL,\n\t\"volumen_objetivo\"\tREAL,\n\t\"volumen_actual\"\tREAL DEFAULT 0,\n\t\"estado\"\tTEXT NOT NULL DEFAULT 'EN_PROCESO',\n\t\"RVP\"\tREAL NOT NULL DEFAULT 180,\n\tPRIMARY KEY(\"id\" AUTOINCREMENT),\n\tFOREIGN KEY(\"cisterna_id\") REFERENCES \"cisternas\"(\"id\"),\n\tFOREIGN KEY(\"producto_id\") REFERENCES \"productos\"(\"id\")\n)\n*/\n\nlet date_string = new Date().toLocaleString('en-US', { hour12: false }).replaceAll('/', '-');\ndate_string = date_string.replace(',', ' ');\n\nlet sel_cisterna = global.get(\"SEL_CISTERNA\");\nvar datos={};\nlet id_cisterna = msg.payload[0].id;\nlet id_product = datos.producto == \"PROPANO\" ? 1 : 2;\n\nif(sel_cisterna=== \"CISTERNA1\")\n{\n\tdatos= global.get(\"FILL_SEGMENT1\");\n\n\tglobal.set(\"ID_PRODUCTO1\", id_product);\n\tglobal.set(\"ID_CISTERNA1\", id_cisterna);\n\n}\nelse\n{\n\tdatos = global.get(\"FILL_SEGMENT2\");\n\tglobal.set(\"ID_PRODUCTO2\", id_product);\n\tglobal.set(\"ID_CISTERNA2\", id_cisterna);\n\n}\n\n \n\nif (msg.topic === \"OK\" && global.get(\"STATUS_CISTERNA1\") === 0) {\n\tmsg.payload = \"UpdateData\";\n\tlet promedios = {\n\n\t\tllenado_id: 0,\n\t\tflujo_promedio: 0.0,\n\t\tdensidad_promedio: 0.0,\n\t\tpresion_promedio: 0.0,\n\t\ttemperatura_promedio: 0.0,\n\t\tvolumen_total: 0\n\n\t};\n\tglobal.set(\"PROMEDIOS\", promedios);\n\t// Mapeamos los valores a los parámetros del query\n\tmsg.params = [id_cisterna, date_string, id_product, datos.Vol_full, 0, datos.rvp];\n\tif (sel_cisterna === \"CISTERNA1\") \n\t{\n\t\tglobal.set(\"STATUS_CISTERNA1\", 1);\n\t\tglobal.set(\"CISTERNA2_VISIBLE\",1);\n\t}\n\telse {\n\t\tglobal.set(\"STATUS_CISTERNA2\", 1);\n\t\tglobal.set(\"CISTERNA1_VISIBLE\",1);\n\t}\n\n\n}\nelse {\n\tmsg.payload = null;\n}\n\n\n\n\n\n\n\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 1850,
-        "y": 520,
-        "wires": [
-            [
-                "7abe5b8ecdab4956"
-            ]
-        ]
-    },
-    {
-        "id": "aebb31bc1ff0fa83",
-        "type": "sqlite",
-        "z": "619addbf2da107aa",
-        "mydb": "7cfcd0a8167643a7",
-        "sqlquery": "prepared",
-        "sql": "INSERT INTO llenados (\n    \n\tcisterna_id,\n\tfecha_inicio,\n\tproducto_id\t,\n\tvolumen_objetivo,\n\tvolumen_actual,\t\n\tRVP\t\n    ) \n    VALUES (?,?,?,?,?,?)",
-        "name": "",
-        "x": 2280,
-        "y": 520,
-        "wires": [
-            [
-                "3472d7035568969e"
             ]
         ]
     },
@@ -5175,42 +5156,8 @@
         "y": 740,
         "wires": [
             [
-                "f59c6d604bec2dab"
+                "710f92d1c6fe959e"
             ]
-        ]
-    },
-    {
-        "id": "49958ca9210d0c38",
-        "type": "function",
-        "z": "619addbf2da107aa",
-        "name": "Prepare Query",
-        "func": "// Ejemplo de cómo manejar las acciones\nconst data = msg.payload;\nconst action = msg.topic;\nconst sel_cisterna=global.get(\"SEL_CISTERNA\");\n\nswitch(action) {\n    case \"CISTERNA_SELECCIONADA\":\n        global.set(\"NoPLACA\",data.placa);\n        let dtCisterna=global.get(sel_cisterna);\n        dtCisterna.numero_sisterna=data.placa;\n        dtCisterna.empresa_cliente=data.cliente;\n        dtCisterna.galones_objetivo=data.capacidad;\n        global.set(sel_cisterna,dtCisterna);\n        global.set(\"NoPLACA\",data.placa);\n        msg.payload=null;\n        break;\n    case \"INSERT\":\n        msg.topic = `INSERT INTO cisternas (placa, cliente, capacidad, activa) VALUES ('${data.placa}', '${data.cliente}', ${data.capacidad}, ${data.activa})`;\n        break;\n    case \"UPDATE\":\n        msg.topic = `UPDATE cisternas SET placa='${data.placa}', cliente='${data.cliente}', capacidad=${data.capacidad}, activa=${data.activa} WHERE id=${data.id}`;\n        break;\n    case \"DELETE\":\n        msg.topic = `DELETE FROM cisternas WHERE id=${data.id}`;\n        break;\n    default:\n        msg.payload=null;    \n}\n\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 1540,
-        "y": 840,
-        "wires": [
-            [
-                "cf819ea6b4736158"
-            ]
-        ]
-    },
-    {
-        "id": "a2b56aa8b32f10c7",
-        "type": "sqlite",
-        "z": "619addbf2da107aa",
-        "mydb": "7cfcd0a8167643a7",
-        "sqlquery": "msg.topic",
-        "sql": "INSERT INTO sisternas (\n        placa, \n        cliente, \n        capacidad, \n        \n    ) VALUES (\n        $placa, \n        $cliente, \n        $capacidad, \n        \n    )",
-        "name": "",
-        "x": 1940,
-        "y": 840,
-        "wires": [
-            []
         ]
     },
     {
@@ -5229,7 +5176,7 @@
         "y": 780,
         "wires": [
             [
-                "f59c6d604bec2dab"
+                "710f92d1c6fe959e"
             ]
         ]
     },
@@ -5277,147 +5224,6 @@
         ]
     },
     {
-        "id": "7abe5b8ecdab4956",
-        "type": "switch",
-        "z": "619addbf2da107aa",
-        "name": "",
-        "property": "payload",
-        "propertyType": "msg",
-        "rules": [
-            {
-                "t": "nnull"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 1,
-        "x": 2050,
-        "y": 520,
-        "wires": [
-            [
-                "aebb31bc1ff0fa83"
-            ]
-        ]
-    },
-    {
-        "id": "cf819ea6b4736158",
-        "type": "switch",
-        "z": "619addbf2da107aa",
-        "name": "",
-        "property": "payload",
-        "propertyType": "msg",
-        "rules": [
-            {
-                "t": "nnull"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 1,
-        "x": 1730,
-        "y": 840,
-        "wires": [
-            [
-                "a2b56aa8b32f10c7"
-            ]
-        ]
-    },
-    {
-        "id": "60cb6c66917c7f28",
-        "type": "function",
-        "z": "619addbf2da107aa",
-        "name": "GetCisternaID",
-        "func": "let data=msg.payload;\n\nlet sel_cisterna=global.get(\"SEL_CISTERNA\");\nlet sel_segment=sel_cisterna===\"CISTERNA1\" ? \"FILL_SEGMENT1\":\"FILL_SEGMENT2\";\n\nglobal.set(sel_segment,data);\n\n\nlet noPlaca=global.get(\"NoPLACA\");\nif(noPlaca==null)\n{\n    node.warn(\"Seleccione una CISTERNA\");\n}\n\nmsg.params=[noPlaca]\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 1440,
-        "y": 520,
-        "wires": [
-            [
-                "b7d6c06668454e0d"
-            ]
-        ]
-    },
-    {
-        "id": "b7d6c06668454e0d",
-        "type": "sqlite",
-        "z": "619addbf2da107aa",
-        "mydb": "7cfcd0a8167643a7",
-        "sqlquery": "prepared",
-        "sql": "SELECT ID FROM cisternas WHERE placa=?",
-        "name": "GetCisternaID",
-        "x": 1640,
-        "y": 520,
-        "wires": [
-            [
-                "61552e5ef6f099b5"
-            ]
-        ]
-    },
-    {
-        "id": "afd199cb463bd18a",
-        "type": "ui_template",
-        "z": "619addbf2da107aa",
-        "group": "f5490ef343d6cb98",
-        "name": "",
-        "order": 9,
-        "width": 1,
-        "height": 1,
-        "format": "<style>\n    .my-modal-overlay {\n        position: fixed;\n        z-index: 9999;\n        top: 0;\n        left: 0;\n        width: 100%;\n        height: 100%;\n        background: rgba(0, 0, 0, 0.6);\n        display: flex;\n        justify-content: center;\n        align-items: center;\n    }\n\n    .my-modal {\n        background: #ffffff;\n        padding: 25px;\n        border-radius: 12px;\n        color: #333;\n        font-family: sans-serif;\n        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);\n    }\n\n    .my-modal h3 {\n        margin-top: 0;\n        color: #1a73e8;\n    }\n\n    .modal-form {\n        width: 380px;\n    }\n\n    .modal-lista {\n        width: 600px;\n        max-width: 90vw;\n    }\n\n    .form-group {\n        margin-bottom: 15px;\n        display: flex;\n        flex-direction: column;\n    }\n\n    .form-group label {\n        font-weight: bold;\n        font-size: 0.9em;\n        margin-bottom: 5px;\n    }\n\n    .form-group input {\n        padding: 10px;\n        border: 1px solid #ccc;\n        border-radius: 4px;\n        font-size: 1em;\n    }\n\n    .form-group input:focus {\n        outline: none;\n        border-color: #1a73e8;\n        box-shadow: 0 0 3px rgba(26, 115, 232, 0.3);\n    }\n\n    .row-check {\n        flex-direction: row !important;\n        align-items: center;\n        gap: 10px;\n    }\n\n    .row-check input[type=\"checkbox\"] {\n        width: 18px;\n        height: 18px;\n        cursor: pointer;\n    }\n\n    .button-row {\n        display: flex;\n        justify-content: space-between;\n        gap: 10px;\n        margin-top: 20px;\n    }\n\n    .btn {\n        border: none;\n        padding: 12px 16px;\n        border-radius: 6px;\n        cursor: pointer;\n        font-weight: bold;\n        font-size: 0.95em;\n        transition: all 0.2s ease;\n    }\n\n    .btn-guardar {\n        background: #28a745;\n        color: white;\n        flex: 1;\n    }\n\n    .btn-guardar:hover {\n        background: #218838;\n    }\n\n    .btn-editar {\n        background: #1a73e8;\n        color: white;\n        flex: 1;\n    }\n\n    .btn-editar:hover {\n        background: #1557b0;\n    }\n\n    .btn-borrar {\n        background: #dc3545;\n        color: white;\n    }\n\n    .btn-borrar:hover {\n        background: #c82333;\n    }\n\n    .btn-cancelar {\n        background: #6c757d;\n        color: white;\n    }\n\n    .btn-cancelar:hover {\n        background: #5a6268;\n    }\n\n    .btn-nuevo {\n        background: #17a2b8;\n        color: white;\n    }\n\n    .btn-nuevo:hover {\n        background: #138496;\n    }\n\n    .btn-sm {\n        padding: 6px 12px;\n        font-size: 0.85em;\n    }\n\n    .tabla-container {\n        max-height: 400px;\n        overflow-y: auto;\n        margin: 15px 0;\n        border: 1px solid #dee2e6;\n        border-radius: 8px;\n    }\n\n    .tabla-cisternas {\n        width: 100%;\n        border-collapse: collapse;\n        font-size: 0.9em;\n    }\n\n    .tabla-cisternas thead {\n        background: #1a73e8;\n        color: white;\n        position: sticky;\n        top: 0;\n    }\n\n    .tabla-cisternas th,\n    .tabla-cisternas td {\n        padding: 12px 10px;\n        text-align: left;\n        border-bottom: 1px solid #dee2e6;\n    }\n\n    .tabla-cisternas tbody tr:hover {\n        background: #f1f3f4;\n    }\n\n    .tabla-cisternas tbody tr.seleccionada {\n        background: #e3f2fd;\n    }\n\n    .tabla-cisternas tbody tr {\n        cursor: pointer;\n        transition: background 0.2s;\n        user-select: none;\n    }\n\n    .estado-activo {\n        color: #28a745;\n        font-weight: bold;\n    }\n\n    .estado-inactivo {\n        color: #dc3545;\n        font-weight: bold;\n    }\n\n    .acciones-celda {\n        display: flex;\n        gap: 5px;\n    }\n\n    .sin-datos {\n        text-align: center;\n        padding: 30px;\n        color: #6c757d;\n        font-style: italic;\n    }\n\n    .busqueda {\n        margin-bottom: 15px;\n    }\n\n    .busqueda input {\n        width: 100%;\n        padding: 10px 15px;\n        border: 1px solid #ccc;\n        border-radius: 6px;\n        font-size: 1em;\n    }\n\n    .hint {\n        font-size: 0.8em;\n        color: #6c757d;\n        margin-top: 5px;\n        font-style: italic;\n    }\n</style>\n\n<!-- ================= POPUP LISTA DE CISTERNAS ================= -->\n<div class=\"my-modal-overlay\" ng-show=\"showLista\" ng-click=\"closeOnOverlay($event, 'lista')\">\n    <div class=\"my-modal modal-lista\" ng-click=\"$event.stopPropagation()\">\n        <h3>📋 Lista de Cisternas</h3>\n        <hr>\n\n        <div class=\"busqueda\">\n            <input type=\"text\" ng-model=\"filtro\" placeholder=\"🔍 Buscar por placa o cliente...\">\n            <div class=\"hint\">💡 Doble click para seleccionar cisterna e iniciar llenado</div>\n        </div>\n\n        <div class=\"tabla-container\">\n            <table class=\"tabla-cisternas\">\n                <thead>\n                    <tr>\n                        <th>ID</th>\n                        <th>Placa</th>\n                        <th>Cliente</th>\n                        <th>Capacidad (L)</th>\n                        <th>Estado</th>\n                        <th>Acciones</th>\n                    </tr>\n                </thead>\n                <tbody>\n                    <tr ng-repeat=\"c in cisternas | filter:filtro track by c.id\"\n                        ng-class=\"{'seleccionada': c.id === seleccionada.id}\" ng-click=\"seleccionar(c)\"\n                        ng-dblclick=\"seleccionarParaLlenado(c)\">\n                        <td>{{c.id}}</td>\n                        <td><strong>{{c.placa}}</strong></td>\n                        <td>{{c.cliente}}</td>\n                        <td>{{c.capacidad | number}}</td>\n                        <td>\n                            <span ng-class=\"c.activa == 1 ? 'estado-activo' : 'estado-inactivo'\">\n                                {{c.activa == 1 ? '✔ Activa' : '✖ Inactiva'}}\n                            </span>\n                        </td>\n                        <td class=\"acciones-celda\">\n                            <button class=\"btn btn-editar btn-sm\" ng-click=\"editarCisterna(c); $event.stopPropagation();\" title=\"Editar\">\n                                ✏️\n                            </button>\n                            <button class=\"btn btn-borrar btn-sm\" ng-click=\"eliminarCisterna(c); $event.stopPropagation();\" title=\"Eliminar\">\n                                🗑️\n                            </button>\n                        </td>\n                    </tr>\n                </tbody>\n            </table>\n            <div class=\"sin-datos\" ng-if=\"(cisternas | filter:filtro).length === 0\">\n                No se encontraron cisternas\n            </div>\n        </div>\n\n        <div class=\"button-row\">\n            <button class=\"btn btn-cancelar\" ng-click=\"closeLista()\">Cerrar</button>\n            <button class=\"btn btn-nuevo\" ng-click=\"nuevaCisterna()\">+ Nueva Cisterna</button>\n        </div>\n    </div>\n</div>\n\n<!-- ================= POPUP FORMULARIO CISTERNA ================= -->\n<div class=\"my-modal-overlay\" ng-show=\"showPopup\" ng-click=\"closeOnOverlay($event, 'form')\">\n    <div class=\"my-modal modal-form\" ng-click=\"$event.stopPropagation()\">\n        <h3>{{isNew ? '➕ Nueva Cisterna' : '✏️ Gestionar Cisterna'}}</h3>\n        <hr>\n\n        <div class=\"form-group\">\n            <label>Placa (Única):</label>\n            <input type=\"text\" ng-model=\"cisterna.placa\" placeholder=\"Ej: ABC-123\" ng-disabled=\"!isNew && !editMode\">\n        </div>\n        <div class=\"form-group\">\n            <label>Cliente:</label>\n            <input type=\"text\" ng-model=\"cisterna.cliente\" ng-disabled=\"!isNew && !editMode\">\n        </div>\n        <div class=\"form-group\">\n            <label>Capacidad (GAL):</label>\n            <input type=\"number\" ng-model=\"cisterna.capacidad\" ng-disabled=\"!isNew && !editMode\">\n        </div>\n        <div class=\"form-group row-check\">\n            <input type=\"checkbox\" ng-model=\"cisterna.activa\" ng-true-value=\"1\" ng-false-value=\"0\" ng-disabled=\"!isNew && !editMode\">\n            <label>Cisterna Activa</label>\n        </div>\n\n        <div class=\"button-row\">\n            <button class=\"btn btn-cancelar\" ng-click=\"closePopup()\">Cancelar</button>\n            <button class=\"btn btn-borrar\" ng-if=\"!isNew\" ng-click=\"sendAction('DELETE')\">Borrar</button>\n            <button class=\"btn btn-editar\" ng-if=\"!isNew && !editMode\" ng-click=\"enableEdit()\">Editar</button>\n            <button class=\"btn btn-guardar\" ng-if=\"isNew || editMode\" ng-click=\"sendAction(isNew ? 'INSERT' : 'UPDATE')\">Guardar</button>\n        </div>\n    </div>\n</div>\n\n<script>\n    (function(scope) {\n    // ========== ESTADO INICIAL ==========\n    scope.showPopup = false;\n    scope.showLista = false;\n    scope.isNew = true;\n    scope.editMode = false;\n    scope.filtro = \"\";\n    scope.cisternas = [];\n    scope.seleccionada = {};\n\n    scope.cisterna = {\n        id: null,\n        placa: \"\",\n        cliente: \"\",\n        capacidad: 0,\n        activa: 1\n    };\n\n    scope._originalCisterna = {};\n\n    // ========== FUNCIONES LISTA ==========\n\n    scope.openLista = function(data) {\n        scope.cisternas = Array.isArray(data) ? data : [];\n        scope.filtro = \"\";\n        scope.seleccionada = {};\n        scope.showLista = true;\n    };\n\n    scope.closeLista = function() {\n        scope.showLista = false;\n        scope.filtro = \"\";\n    };\n\n    // Click simple: solo selecciona (resalta la fila)\n    scope.seleccionar = function(c) {\n        scope.seleccionada = c;\n    };\n\n    // ★★★ DOBLE CLICK: Envía la cisterna seleccionada para iniciar llenado ★★★\n    scope.seleccionarParaLlenado = function(c) {\n        scope.send({\n            topic: \"CISTERNA_SELECCIONADA\",\n            payload: angular.copy(c)\n        });\n        scope.closeLista(); // Cierra el popup automáticamente\n    };\n\n    // Botón editar: abre formulario\n    scope.editarCisterna = function(c) {\n        scope.openPopup(c);\n    };\n\n    scope.eliminarCisterna = function(c) {\n        if (confirm(\"¿Está seguro de eliminar la cisterna \" + c.placa + \"?\")) {\n            scope.send({\n                topic: \"DELETE\",\n                payload: angular.copy(c)\n            });\n            var idx = scope.cisternas.findIndex(function(x) { return x.id === c.id; });\n            if (idx > -1) {\n                scope.cisternas.splice(idx, 1);\n            }\n        }\n    };\n\n    scope.nuevaCisterna = function() {\n        scope.openPopup(null);\n    };\n\n    // ========== FUNCIONES FORMULARIO ==========\n\n    scope.openPopup = function(data) {\n        if (data && data.id) {\n            scope.cisterna = angular.copy(data);\n            scope.isNew = false;\n            scope.editMode = false;\n        } else {\n            scope.cisterna = {\n                id: null,\n                placa: \"\",\n                cliente: \"\",\n                capacidad: 0,\n                activa: 1\n            };\n            scope.isNew = true;\n            scope.editMode = false;\n        }\n        scope._originalCisterna = angular.copy(scope.cisterna);\n        scope.showPopup = true;\n    };\n\n    scope.closePopup = function() {\n        scope.cisterna = angular.copy(scope._originalCisterna);\n        scope.showPopup = false;\n        scope.editMode = false;\n    };\n\n    scope.enableEdit = function() {\n        scope.editMode = true;\n    };\n\n    scope.closeOnOverlay = function(e, tipo) {\n        if (e && e.target && e.target.classList.contains('my-modal-overlay')) {\n            if (tipo === 'lista') {\n                scope.closeLista();\n            } else {\n                scope.closePopup();\n            }\n        }\n    };\n\n    // ========== ENVIAR ACCIÓN ==========\n\n    scope.sendAction = function(accion) {\n        if ((accion === 'INSERT' || accion === 'UPDATE') && !scope.cisterna.placa) {\n            alert(\"La placa es obligatoria.\");\n            return;\n        }\n\n        if (accion === 'DELETE') {\n            if (!confirm(\"¿Está seguro de eliminar esta cisterna?\")) {\n                return;\n            }\n        }\n\n        scope.cisterna.capacidad = parseFloat(scope.cisterna.capacidad) || 0;\n        scope.cisterna.activa = (scope.cisterna.activa === 1 || scope.cisterna.activa === true) ? 1 : 0;\n\n        scope.send({\n            topic: accion,\n            payload: angular.copy(scope.cisterna)\n        });\n\n        if (scope.showLista && accion === 'DELETE') {\n            var idx = scope.cisternas.findIndex(function(x) { return x.id === scope.cisterna.id; });\n            if (idx > -1) {\n                scope.cisternas.splice(idx, 1);\n            }\n        }\n\n        scope.showPopup = false;\n        scope.editMode = false;\n    };\n\n    // ========== RECIBIR MENSAJES ==========\n\n    scope.$watch('msg', function(msg) {\n        if (!msg) return;\n\n        if (msg.topic === \"LISTA_CISTERNAS\") {\n            scope.openLista(msg.payload);\n        }\n\n        if (msg.topic === \"EDIT_CISTERNA\" || msg.topic === \"OPEN_POPUP\") {\n            scope.openPopup(msg.payload);\n        }\n\n        if (msg.topic === \"REFRESH_LISTA\" && scope.showLista) {\n            scope.cisternas = Array.isArray(msg.payload) ? msg.payload : scope.cisternas;\n        }\n    });\n\n})(scope);\n</script>",
-        "storeOutMessages": true,
-        "fwdInMessages": true,
-        "resendOnRefresh": true,
-        "templateScope": "local",
-        "className": "",
-        "x": 1720,
-        "y": 780,
-        "wires": [
-            [
-                "49958ca9210d0c38"
-            ]
-        ]
-    },
-    {
-        "id": "f59c6d604bec2dab",
-        "type": "sqlite",
-        "z": "619addbf2da107aa",
-        "mydb": "7cfcd0a8167643a7",
-        "sqlquery": "msg.topic",
-        "sql": "",
-        "name": "",
-        "x": 1340,
-        "y": 760,
-        "wires": [
-            [
-                "74414f08c72643f4"
-            ]
-        ]
-    },
-    {
-        "id": "74414f08c72643f4",
-        "type": "function",
-        "z": "619addbf2da107aa",
-        "name": "Prepare Datos",
-        "func": "msg.topic=\"LISTA_CISTERNAS\";\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 1540,
-        "y": 780,
-        "wires": [
-            [
-                "afd199cb463bd18a"
-            ]
-        ]
-    },
-    {
         "id": "4fa5802f87cd7479",
         "type": "function",
         "z": "619addbf2da107aa",
@@ -5456,7 +5262,7 @@
         "y": 340,
         "wires": [
             [
-                "2c298e88651cf372"
+                "357ee476ac06b123"
             ]
         ]
     },
@@ -5507,150 +5313,22 @@
         ]
     },
     {
-        "id": "2c298e88651cf372",
-        "type": "function",
-        "z": "619addbf2da107aa",
-        "name": "Is Ready 2",
-        "func": "if (global.get(\"STATUS_CISTERNA2\" )  > 0) {\n    msg.topic=\"OK\";\n    if (msg.payload != \"Cansel\") {\n        global.set(\"STATUS_CISTERNA2\", 2);\n        global.set(\"SEND_STATUS_CISTERNA1\", true);\n        global.set(\"CISTERNA1_VISIBLE\",0);\n\n        //msg.params=[id_cisterna, date_string, id_product, fill_segment1.Vol_full]\n\n    }\n}\nelse {\n    msg.topic=null;\n    msg.payload=\" ⚠️ Seleccione Cisterna y Complete los datos de llenado\";\n}\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 1290,
-        "y": 320,
-        "wires": [
-            [
-                "efadf661942c3a59",
-                "41a6f0637e63061d"
-            ]
-        ]
-    },
-    {
-        "id": "41aed4ea1799c110",
-        "type": "function",
-        "z": "619addbf2da107aa",
-        "name": "SetPause1",
-        "func": "\nif(msg.payload!=\"Cansel\")\n{\n    global.set(\"STATUS_CISTERNA2\",3);\n    global.set(\"SEND_STATUS_CISTERNA1\",true);\n     global.set(\"CISTERNA1_VISIBLE\",1);\n    \n}\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 1290,
-        "y": 360,
-        "wires": [
-            []
-        ]
-    },
-    {
         "id": "7e87dcedaac27b98",
         "type": "function",
         "z": "619addbf2da107aa",
-        "name": "SetClose1",
-        "func": "let status_cisterna=global.get(\"STATUS_CISTERNA2\");\n\n\nif(msg.payload!=\"Cansel\" && status_cisterna===3)\n{\n    global.set(\"STATUS_CISTERNA2\",4);\n    global.set(\"SEND_STATUS_CISTERNA1\",true);\n    global.set(\"CISTERNA1_VISIBLE\",1);\n    msg.topic=\"OK\";\n}\nelse\n{\n    msg.topic=null;\n    msg.payload = \"⚠️ El batch debe estar PAUSADO antes de borrar los totalizadore\";\n}\nreturn msg;",
+        "name": "SetClose2",
+        "func": "\n\nlet status_cisterna=global.get(\"STATUS_CISTERNA2\");\n\nif (msg.payload === \"Cancel\") {\n    return null;  // Canceló, no hacer nada\n}\n\nif(status_cisterna===3)\n{\n    global.set(\"STATUS_CISTERNA2\",4);\n    global.set(\"SEND_STATUS_CISTERNA1\",true);\n    global.set(\"CISTERNA1_VISIBLE\",1);\n    msg.topic=\"OK\";\n}\nelse\n{\n    msg.topic=null;\n    msg.payload = \"⚠️ El batch debe estar PAUSADO antes de borrar los totalizadore\";\n}\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1290,
-        "y": 400,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "db08240ca43407ed",
-        "type": "function",
-        "z": "619addbf2da107aa",
-        "name": "function 14",
-        "func": "msg.payload = {\n    \"massFlow\": 22000,\n    \"fluid\": \"propano\",\n    \"observedTempF\": 95,\n    \"observedPressurePSI\": 120,\n    \"observedDensity\": 474.48,\n    \"rvp\": 180,\n    \"mFactor\": 1,\n    \"cliente\": \"RAYOGAS_SAS\",\n    \"numeroTiquete\": \"100\",\n    \"stream\": \"1\",\n    \"bala\": \"BA - 1\",\n    \"pulsosBatch\": \"4315244\",\n    \"kFactor\": \"14000.00\"\n}\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 1650,
-        "y": 260,
+        "x": 1270,
+        "y": 420,
         "wires": [
             [
-                "5fd5af0d0bbd6104",
-                "6e1fd277c82c8121"
-            ]
-        ]
-    },
-    {
-        "id": "e6ca43222d55e088",
-        "type": "ui_ui_control",
-        "z": "619addbf2da107aa",
-        "name": "",
-        "events": "change",
-        "x": 2220,
-        "y": 260,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "7b7ba2f3f91a6f0f",
-        "type": "function",
-        "z": "619addbf2da107aa",
-        "name": "function 15",
-        "func": "msg.payload = { \"tab\": \"TiqueteLPG\" };\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 2070,
-        "y": 280,
-        "wires": [
-            [
-                "e6ca43222d55e088"
-            ]
-        ]
-    },
-    {
-        "id": "5fd5af0d0bbd6104",
-        "type": "link out",
-        "z": "619addbf2da107aa",
-        "name": "FromClose",
-        "mode": "link",
-        "links": [
-            "2e62e22aabdf80a2"
-        ],
-        "x": 1845,
-        "y": 200,
-        "wires": []
-    },
-    {
-        "id": "6e1fd277c82c8121",
-        "type": "delay",
-        "z": "619addbf2da107aa",
-        "name": "",
-        "pauseType": "delay",
-        "timeout": "2",
-        "timeoutUnits": "seconds",
-        "rate": "1",
-        "nbRateUnits": "1",
-        "rateUnits": "second",
-        "randomFirst": "1",
-        "randomLast": "5",
-        "randomUnits": "seconds",
-        "drop": false,
-        "allowrate": false,
-        "outputs": 1,
-        "x": 1880,
-        "y": 280,
-        "wires": [
-            [
-                "7b7ba2f3f91a6f0f"
+                "4f6f35bb05a533a9"
             ]
         ]
     },
@@ -5683,7 +5361,211 @@
         ]
     },
     {
-        "id": "d4efe672ca459e72",
+        "id": "e8b3cd926807a1a8",
+        "type": "link out",
+        "z": "619addbf2da107aa",
+        "name": "To fill1",
+        "mode": "link",
+        "links": [
+            "062ae6719bb1d372"
+        ],
+        "x": 1605,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "b1b4886995d21443",
+        "type": "link out",
+        "z": "619addbf2da107aa",
+        "name": "To pause1",
+        "mode": "link",
+        "links": [
+            "7f3023c904004b6d"
+        ],
+        "x": 1595,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "199bf417fa875596",
+        "type": "link out",
+        "z": "619addbf2da107aa",
+        "name": "To Pause1",
+        "mode": "link",
+        "links": [
+            "a043bf6d7f32292d"
+        ],
+        "x": 1595,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "f55229723eb6305b",
+        "type": "link out",
+        "z": "619addbf2da107aa",
+        "name": "To Fill2",
+        "mode": "link",
+        "links": [
+            "062ae6719bb1d372"
+        ],
+        "x": 1595,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "9d8d6664f2691042",
+        "type": "function",
+        "z": "619addbf2da107aa",
+        "name": "SetPause1",
+        "func": "if (msg.payload === \"Cancel\") {\n    return null;  // Canceló, no hacer nada\n}\n\nglobal.set(\"STATUS_CISTERNA1\", 3);\nglobal.set(\"SEND_STATUS_CISTERNA1\", true);\nglobal.set(\"CISTERNA2_VISIBLE\", 1);\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1270,
+        "y": 260,
+        "wires": [
+            [
+                "ddfd50765882f346"
+            ]
+        ]
+    },
+    {
+        "id": "384441782bb7e83d",
+        "type": "function",
+        "z": "619addbf2da107aa",
+        "name": "SetClose1",
+        "func": "let status_cisterna1=global.get(\"STATUS_CISTERNA1\");\n\nif (msg.payload === \"Cancel\") {\n    return null;  // Canceló, no hacer nada\n}\n\n\n\n\nif(status_cisterna1===3)\n{\n    global.set(\"STATUS_CISTERNA1\",4);\n    global.set(\"SEND_STATUS_CISTERNA1\",true);\n    global.set(\"CISTERNA2_VISIBLE\",1);\n    msg.topic=\"OK\";\n}\nelse\n{\n    msg.topic=null;\n    msg.payload = \"⚠️ El batch debe estar PAUSADO antes de borrar los totalizadore\";\n}\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1270,
+        "y": 300,
+        "wires": [
+            [
+                "fdfdc844ae550cda"
+            ]
+        ]
+    },
+    {
+        "id": "41aed4ea1799c110",
+        "type": "function",
+        "z": "619addbf2da107aa",
+        "name": "SetPause2",
+        "func": "\nif (msg.payload === \"Cancel\") {\n    return null;  // Canceló, no hacer nada\n}\n\n\nglobal.set(\"STATUS_CISTERNA2\", 3);\nglobal.set(\"SEND_STATUS_CISTERNA1\", true);\nglobal.set(\"CISTERNA1_VISIBLE\", 1);\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1270,
+        "y": 380,
+        "wires": [
+            [
+                "d05f7b3a936715a0"
+            ]
+        ]
+    },
+    {
+        "id": "c8fbd872b565ad41",
+        "type": "link out",
+        "z": "619addbf2da107aa",
+        "name": "To Pause2",
+        "mode": "link",
+        "links": [
+            "7f3023c904004b6d"
+        ],
+        "x": 1595,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "8f6d4a15830ead83",
+        "type": "link out",
+        "z": "619addbf2da107aa",
+        "name": "link out 2",
+        "mode": "link",
+        "links": [
+            "a043bf6d7f32292d"
+        ],
+        "x": 1595,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "e513baa3401879b3",
+        "type": "link out",
+        "z": "619addbf2da107aa",
+        "name": "To FormFill",
+        "mode": "link",
+        "links": [
+            "426354a4a0741d5a"
+        ],
+        "x": 1405,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "710f92d1c6fe959e",
+        "type": "link out",
+        "z": "619addbf2da107aa",
+        "name": "To SelectCisterna",
+        "mode": "link",
+        "links": [
+            "359c96fe26e0dbe7"
+        ],
+        "x": 1295,
+        "y": 760,
+        "wires": []
+    },
+    {
+        "id": "67d8641a5acdcda4",
+        "type": "function",
+        "z": "619addbf2da107aa",
+        "name": "function 12",
+        "func": "let status_cisterna1 = global.get(\"STATUS_CISTERNA1\");\n\nif (msg.payload === \"Cancel\") {\n    return null;  // Canceló, no hacer nada\n}\n\nif (status_cisterna1 > 0 && status_cisterna1 < 3) {\n    global.set(\"SEL_CISTERNA\", \"CISTERNA1\");\n\n}else\n{    \n    msg.topic=null;\n    msg.payload = \"⚠️ Seleccione Cisterna y llene el formulario de llenado\";\n}\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1270,
+        "y": 220,
+        "wires": [
+            [
+                "0a330a783cf157c5"
+            ]
+        ]
+    },
+    {
+        "id": "357ee476ac06b123",
+        "type": "function",
+        "z": "619addbf2da107aa",
+        "name": "function 16",
+        "func": "let status_cisterna = global.get(\"STATUS_CISTERNA2\");\n\nif (msg.payload === \"Cancel\") {\n    return null;  // Canceló, no hacer nada\n}\n\nif (status_cisterna > 0 && status_cisterna < 3) {\n    global.set(\"SEL_CISTERNA\", \"CISTERNA2\");\n\n}else\n{    \n    msg.topic=null;\n    msg.payload = \"⚠️ Seleccione Cisterna y llene el formulario de llenado\";\n}\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1270,
+        "y": 340,
+        "wires": [
+            [
+                "f6f66db1c4cf61c6"
+            ]
+        ]
+    },
+    {
+        "id": "f6f66db1c4cf61c6",
         "type": "switch",
         "z": "619addbf2da107aa",
         "name": "",
@@ -5701,20 +5583,171 @@
         "repair": false,
         "outputs": 2,
         "x": 1450,
-        "y": 200,
+        "y": 340,
         "wires": [
-            [],
             [
-                "f2a341058f36cde6"
+                "f55229723eb6305b"
+            ],
+            [
+                "8f9df753abb1b9c2"
             ]
         ]
     },
     {
-        "id": "76b0e2057c9b9e08",
+        "id": "0a330a783cf157c5",
+        "type": "switch",
+        "z": "619addbf2da107aa",
+        "name": "",
+        "property": "topic",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "nnull"
+            },
+            {
+                "t": "null"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 1450,
+        "y": 220,
+        "wires": [
+            [
+                "e8b3cd926807a1a8"
+            ],
+            [
+                "8f9df753abb1b9c2"
+            ]
+        ]
+    },
+    {
+        "id": "ade01b10e6df9c59",
+        "type": "debug",
+        "z": "619addbf2da107aa",
+        "name": "debug 15",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1490,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "ddfd50765882f346",
+        "type": "switch",
+        "z": "619addbf2da107aa",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "nnull"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 1450,
+        "y": 260,
+        "wires": [
+            [
+                "b1b4886995d21443"
+            ]
+        ]
+    },
+    {
+        "id": "fdfdc844ae550cda",
+        "type": "switch",
+        "z": "619addbf2da107aa",
+        "name": "",
+        "property": "topic",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "nnull"
+            },
+            {
+                "t": "null"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 1450,
+        "y": 300,
+        "wires": [
+            [
+                "199bf417fa875596"
+            ],
+            [
+                "8f9df753abb1b9c2"
+            ]
+        ]
+    },
+    {
+        "id": "d05f7b3a936715a0",
+        "type": "switch",
+        "z": "619addbf2da107aa",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "nnull"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 1450,
+        "y": 380,
+        "wires": [
+            [
+                "c8fbd872b565ad41"
+            ]
+        ]
+    },
+    {
+        "id": "4f6f35bb05a533a9",
+        "type": "switch",
+        "z": "619addbf2da107aa",
+        "name": "",
+        "property": "topic",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "nnull"
+            },
+            {
+                "t": "null"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 1450,
+        "y": 420,
+        "wires": [
+            [
+                "8f6d4a15830ead83"
+            ],
+            [
+                "8f9df753abb1b9c2"
+            ]
+        ]
+    },
+    {
+        "id": "8f9df753abb1b9c2",
         "type": "ui_toast",
         "z": "619addbf2da107aa",
         "position": "top right",
-        "displayTime": "3",
+        "displayTime": "10",
         "highlight": "",
         "sendall": true,
         "outputs": 0,
@@ -5724,162 +5757,9 @@
         "className": "",
         "topic": "",
         "name": "",
-        "x": 1810,
-        "y": 100,
-        "wires": []
-    },
-    {
-        "id": "3472d7035568969e",
-        "type": "sqlite",
-        "z": "619addbf2da107aa",
-        "mydb": "7cfcd0a8167643a7",
-        "sqlquery": "fixed",
-        "sql": "SELECT last_insert_rowid() AS id_llenado;",
-        "name": "",
-        "x": 2280,
-        "y": 580,
-        "wires": [
-            [
-                "898546ccddd35730"
-            ]
-        ]
-    },
-    {
-        "id": "898546ccddd35730",
-        "type": "function",
-        "z": "619addbf2da107aa",
-        "name": "Id Llenado",
-        "func": "if(global.get(\"SEL_CISTERNA\")=== \"CISTERNA1\")\n{\n    global.set(\"ID_LLENADO1\",msg.payload[0].id_llenado);\n\n}\nelse\n{\n    global.set(\"ID_LLENADO2\",msg.payload[0].id_llenado);\n}\n\n\nmsg.payload=msg.payload[0].id_llenado;\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 2490,
-        "y": 580,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "41a6f0637e63061d",
-        "type": "debug",
-        "z": "619addbf2da107aa",
-        "name": "debug 10",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1680,
-        "y": 380,
-        "wires": []
-    },
-    {
-        "id": "b430cb3540249bc6",
-        "type": "link out",
-        "z": "619addbf2da107aa",
-        "name": "Pausar1",
-        "mode": "link",
-        "links": [
-            "bac54a5a69138a3a"
-        ],
-        "x": 1425,
-        "y": 240,
-        "wires": []
-    },
-    {
-        "id": "a7076b7f9cec7c92",
-        "type": "function",
-        "z": "619addbf2da107aa",
-        "name": "Is Ready 1",
-        "func": "\n\n\nif (global.get(\"STATUS_CISTERNA1\") > 0) {\n    msg.topic=\"OK\";\n    if (msg.payload != \"Cansel\") {\n        global.set(\"STATUS_CISTERNA1\", 2);\n        global.set(\"SEND_STATUS_CISTERNA1\", true);\n        global.set(\"CISTERNA2_VISIBLE\",0);\n\n        //msg.params=[id_cisterna, date_string, id_product, fill_segment1.Vol_full]\n\n    }\n}\nelse {\n    msg.topic=null;\n    msg.payload=\" ⚠️ Seleccione Cisterna y Complete los datos de llenado\";\n}\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 1290,
-        "y": 200,
-        "wires": [
-            [
-                "d4efe672ca459e72"
-            ]
-        ]
-    },
-    {
-        "id": "70c0084b796140a4",
-        "type": "link in",
-        "z": "619addbf2da107aa",
-        "name": "msgWrning",
-        "links": [
-            "f2a341058f36cde6",
-            "3545a67bf22b282a"
-        ],
-        "x": 1645,
-        "y": 100,
-        "wires": [
-            [
-                "76b0e2057c9b9e08"
-            ]
-        ]
-    },
-    {
-        "id": "f2a341058f36cde6",
-        "type": "link out",
-        "z": "619addbf2da107aa",
-        "name": "link out 2",
-        "mode": "link",
-        "links": [
-            "70c0084b796140a4"
-        ],
-        "x": 1585,
-        "y": 200,
-        "wires": []
-    },
-    {
-        "id": "3545a67bf22b282a",
-        "type": "link out",
-        "z": "619addbf2da107aa",
-        "name": "link out 3",
-        "mode": "link",
-        "links": [
-            "70c0084b796140a4"
-        ],
-        "x": 1595,
+        "x": 1790,
         "y": 300,
         "wires": []
-    },
-    {
-        "id": "efadf661942c3a59",
-        "type": "switch",
-        "z": "619addbf2da107aa",
-        "name": "",
-        "property": "topic",
-        "propertyType": "msg",
-        "rules": [
-            {
-                "t": "nnull"
-            },
-            {
-                "t": "null"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 2,
-        "x": 1450,
-        "y": 320,
-        "wires": [
-            [],
-            [
-                "3545a67bf22b282a"
-            ]
-        ]
     },
     {
         "id": "83ee44d06bbae547",
@@ -6630,7 +6510,7 @@
         "type": "function",
         "z": "flujo-tiquete-lpg",
         "name": "Combinar con datos adicionales",
-        "func": "// Combinar resultado del cálculo con datos adicionales\nif (msg.datosAdicionales) {\n    msg.payload.cliente = msg.datosAdicionales.cliente;\n    msg.payload.numeroTiquete = msg.datosAdicionales.numeroTiquete;\n    msg.payload.stream = msg.datosAdicionales.stream;\n    msg.payload.bala = msg.datosAdicionales.bala;\n    msg.payload.pulsosBatch = msg.datosAdicionales.pulsosBatch;\n    msg.payload.kFactor = msg.datosAdicionales.kFactor;\n    msg.payload.operacion = msg.datosAdicionales.operacion;\n    msg.payload.empresa = msg.datosAdicionales.empresa;\n    msg.payload.origen = msg.datosAdicionales.origen;\n    msg.payload.tipoMedidor = msg.datosAdicionales.tipoMedidor;\n    msg.payload.fechaHora = new Date().toLocaleString('es-CO');\n}\n\nglobal.set(\"STATUS_CISTERNA1\",0);\nglobal.set(\"SEND_STATUS_CISTERNA1\",true);\n\nreturn msg;",
+        "func": "// Combinar resultado del cálculo con datos adicionales\n\n// let sel_cisterna = global.get(\"SEL_CISTERNA\");\n// let llenado_id;\n\n// if (sel_cisterna === \"CISTERNA1\") {\n//     llenado_id = global.get(\"ID_LLENADO1\");\n// } else {\n//     llenado_id = global.get(\"ID_LLENADO2\");\n// }\n\n\nif (msg.datosAdicionales) {\n    msg.payload.cliente = msg.datosAdicionales.cliente;\n    msg.payload.numeroTiquete = msg.datosAdicionales.numeroTiquete;\n    msg.payload.stream = msg.datosAdicionales.stream;\n    msg.payload.bala = msg.datosAdicionales.bala;\n    msg.payload.pulsosBatch = msg.datosAdicionales.pulsosBatch;\n    msg.payload.kFactor = msg.datosAdicionales.kFactor;\n    msg.payload.operacion = msg.datosAdicionales.operacion;\n    msg.payload.empresa = msg.datosAdicionales.empresa;\n    msg.payload.origen = msg.datosAdicionales.origen;\n    msg.payload.tipoMedidor = msg.datosAdicionales.tipoMedidor;\n    msg.payload.fechaHora = new Date().toLocaleString('es-CO');\n}\n\n\n\n// global.set(\"STATUS_CISTERNA1\",0);\n// global.set(\"SEND_STATUS_CISTERNA1\",true);\n\nreturn msg;",
         "outputs": 1,
         "timeout": "",
         "noerr": 0,
@@ -6690,7 +6570,7 @@
         "z": "flujo-tiquete-lpg",
         "name": "ReportePropano",
         "links": [
-            "5fd5af0d0bbd6104"
+            "52fc38c5e78f186b"
         ],
         "x": 185,
         "y": 40,
@@ -6745,7 +6625,7 @@
         "type": "function",
         "z": "flujo-tiquete-lpg",
         "name": "function 17",
-        "func": "\n\nlet llenado_id=global.get(\"ID_LLENADO\");\nmsg.topic=`SELECT * FROM llenado_promedios WHERE llenado_id=${llenado_id};`\nreturn msg;",
+        "func": "let sel_cisterna = global.get(\"SEL_CISTERNA\");\nlet llenado_id;\n\nif (sel_cisterna === \"CISTERNA1\") {\n    llenado_id = global.get(\"ID_LLENADO1\");\n} else {\n    llenado_id = global.get(\"ID_LLENADO2\");\n}\n\n\nmsg.topic=`SELECT * FROM llenado_promedios WHERE llenado_id=${llenado_id};`\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -6797,16 +6677,136 @@
         ]
     },
     {
-        "id": "bac54a5a69138a3a",
-        "type": "link in",
-        "z": "flujo-tiquete-lpg",
-        "name": "FromPause",
-        "links": [
-            "26fbcccf22e5a7b2",
-            "b430cb3540249bc6"
+        "id": "789489fe894cf2e4",
+        "type": "function",
+        "z": "002b5cf35f2cdda5",
+        "name": "Query ABV",
+        "func": "let sel_cisterna = global.get(\"SEL_CISTERNA\");\nlet llenado_id;\n\nif (sel_cisterna === \"CISTERNA1\") {\n    llenado_id = global.get(\"ID_LLENADO1\");\n} else {\n    llenado_id = global.get(\"ID_LLENADO2\");\n}\n\n// Debug para ver qué valores tienes\nnode.warn(\"sel_cisterna: \" + sel_cisterna);\nnode.warn(\"llenado_id: \" + llenado_id);\n\n// Validar que sea un número mayor a 0\nif (llenado_id && llenado_id > 0 ) {\n    msg.topic = `SELECT * FROM llenado_promedios WHERE llenado_id = ${llenado_id}`;\n    msg.payload = llenado_id;\n    return msg;\n}\n\n// Si no hay ID válido, no continuar el flujo\nnode.warn(\"llenado_id no válido: \" + llenado_id);\nreturn null;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 250,
+        "y": 320,
+        "wires": [
+            [
+                "c3e7411f727aad2a",
+                "56d36aecdb6d7e10"
+            ]
+        ]
+    },
+    {
+        "id": "c3e7411f727aad2a",
+        "type": "sqlite",
+        "z": "002b5cf35f2cdda5",
+        "mydb": "7cfcd0a8167643a7",
+        "sqlquery": "msg.topic",
+        "sql": "SELECT ID FROM cisternas WHERE placa=?",
+        "name": "GetPromedios",
+        "x": 440,
+        "y": 320,
+        "wires": [
+            [
+                "a7076b7f9cec7c92"
+            ]
+        ]
+    },
+    {
+        "id": "a7076b7f9cec7c92",
+        "type": "function",
+        "z": "002b5cf35f2cdda5",
+        "name": "Is Ready 1",
+        "func": "global.set(\"PROMEDIOS\", msg.payload[0]);\n\nlet sel_cisterna = global.get(\"SEL_CISTERNA\");\n\n\nif (sel_cisterna === \"CISTERNA1\") {\n    msg.topic = \"OK\";\n    if (msg.payload != \"Cansel\") {\n        global.set(\"STATUS_CISTERNA1\", 2);\n        global.set(\"SEND_STATUS_CISTERNA1\", true);\n        global.set(\"CISTERNA2_VISIBLE\", 0);\n\n        //msg.params=[id_cisterna, date_string, id_product, fill_segment1.Vol_full]\n\n    }\n\n\n}\nelse {\n    msg.topic = \"OK\";\n    if (msg.payload != \"Cansel\") {\n        global.set(\"STATUS_CISTERNA2\", 2);\n        global.set(\"SEND_STATUS_CISTERNA1\", true);\n        global.set(\"CISTERNA1_VISIBLE\", 0);\n\n        //msg.params=[id_cisterna, date_string, id_product, fill_segment1.Vol_full]\n\n    }\n}\n\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 630,
+        "y": 320,
+        "wires": [
+            [
+                "d4efe672ca459e72"
+            ]
+        ]
+    },
+    {
+        "id": "d4efe672ca459e72",
+        "type": "switch",
+        "z": "002b5cf35f2cdda5",
+        "name": "",
+        "property": "topic",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "nnull"
+            },
+            {
+                "t": "null"
+            }
         ],
-        "x": 205,
-        "y": 180,
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 810,
+        "y": 320,
+        "wires": [
+            [],
+            [
+                "76b0e2057c9b9e08"
+            ]
+        ]
+    },
+    {
+        "id": "76b0e2057c9b9e08",
+        "type": "ui_toast",
+        "z": "002b5cf35f2cdda5",
+        "position": "top right",
+        "displayTime": "3",
+        "highlight": "",
+        "sendall": true,
+        "outputs": 0,
+        "ok": "OK",
+        "cancel": "",
+        "raw": false,
+        "className": "",
+        "topic": "",
+        "name": "",
+        "x": 1030,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "062ae6719bb1d372",
+        "type": "link in",
+        "z": "002b5cf35f2cdda5",
+        "name": "IN_LLenar",
+        "links": [
+            "e8b3cd926807a1a8",
+            "f55229723eb6305b"
+        ],
+        "x": 105,
+        "y": 320,
+        "wires": [
+            [
+                "789489fe894cf2e4"
+            ]
+        ]
+    },
+    {
+        "id": "7f3023c904004b6d",
+        "type": "link in",
+        "z": "002b5cf35f2cdda5",
+        "name": "In_Pause",
+        "links": [
+            "b1b4886995d21443",
+            "c8fbd872b565ad41"
+        ],
+        "x": 105,
+        "y": 380,
         "wires": [
             [
                 "635d90edb0325c5f"
@@ -6816,17 +6816,17 @@
     {
         "id": "635d90edb0325c5f",
         "type": "function",
-        "z": "flujo-tiquete-lpg",
+        "z": "002b5cf35f2cdda5",
         "name": "function 19",
-        "func": "let llenado_id=global.get(\"ID_LLENADO\");\nmsg.topic=`SELECT * FROM llenado_promedios WHERE llenado_id=${llenado_id};`\nreturn msg;",
+        "func": "let sel_cisterna = global.get(\"SEL_CISTERNA\");\nlet llenado_id;\n\nif (sel_cisterna === \"CISTERNA1\") {\n    llenado_id = global.get(\"ID_LLENADO1\");\n} else {\n    llenado_id = global.get(\"ID_LLENADO2\");\n}\n\n// Debug para ver qué valores tienes\nnode.warn(\"sel_cisterna: \" + sel_cisterna);\nnode.warn(\"llenado_id: \" + llenado_id);\n\n// Validar que sea un número mayor a 0\nif (llenado_id && llenado_id > 0) {\n    msg.topic = `SELECT * FROM llenado_promedios WHERE llenado_id = ${llenado_id}`;\n    msg.payload = llenado_id;\n    return msg;\n}\n\n// Si no hay ID válido, no continuar el flujo\nnode.warn(\"llenado_id no válido: \" + llenado_id);",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 320,
-        "y": 180,
+        "x": 250,
+        "y": 380,
         "wires": [
             [
                 "74df6a24d78d6e95"
@@ -6836,13 +6836,13 @@
     {
         "id": "74df6a24d78d6e95",
         "type": "sqlite",
-        "z": "flujo-tiquete-lpg",
+        "z": "002b5cf35f2cdda5",
         "mydb": "7cfcd0a8167643a7",
         "sqlquery": "msg.topic",
         "sql": "",
         "name": "",
-        "x": 540,
-        "y": 180,
+        "x": 460,
+        "y": 380,
         "wires": [
             [
                 "b042de480210c434"
@@ -6852,7 +6852,7 @@
     {
         "id": "b042de480210c434",
         "type": "function",
-        "z": "flujo-tiquete-lpg",
+        "z": "002b5cf35f2cdda5",
         "name": "function 23",
         "func": "global.set(\"PROMEDIOS\",msg.payload[0]);\nreturn msg;",
         "outputs": 1,
@@ -6861,10 +6861,537 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 770,
-        "y": 180,
+        "x": 670,
+        "y": 380,
         "wires": [
             []
         ]
+    },
+    {
+        "id": "bb402655e34c6c09",
+        "type": "switch",
+        "z": "002b5cf35f2cdda5",
+        "name": "",
+        "property": "topic",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "nnull"
+            },
+            {
+                "t": "null"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 250,
+        "y": 440,
+        "wires": [
+            [
+                "db08240ca43407ed"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "db08240ca43407ed",
+        "type": "function",
+        "z": "002b5cf35f2cdda5",
+        "name": "function 14",
+        "func": "msg.payload = {\n    \"massFlow\": 22000,\n    \"fluid\": \"propano\",\n    \"observedTempF\": 95,\n    \"observedPressurePSI\": 120,\n    \"observedDensity\": 474.48,\n    \"rvp\": 180,\n    \"mFactor\": 1,\n    \"cliente\": \"RAYOGAS_SAS\",\n    \"numeroTiquete\": \"100\",\n    \"stream\": \"1\",\n    \"bala\": \"BA - 1\",\n    \"pulsosBatch\": \"4315244\",\n    \"kFactor\": \"14000.00\"\n}\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 450,
+        "y": 440,
+        "wires": [
+            [
+                "6e1fd277c82c8121",
+                "52fc38c5e78f186b"
+            ]
+        ]
+    },
+    {
+        "id": "6e1fd277c82c8121",
+        "type": "delay",
+        "z": "002b5cf35f2cdda5",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "2",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 620,
+        "y": 440,
+        "wires": [
+            [
+                "7b7ba2f3f91a6f0f"
+            ]
+        ]
+    },
+    {
+        "id": "7b7ba2f3f91a6f0f",
+        "type": "function",
+        "z": "002b5cf35f2cdda5",
+        "name": "function 15",
+        "func": "msg.payload = { \"tab\": \"TiqueteLPG\" };\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 810,
+        "y": 440,
+        "wires": [
+            [
+                "e6ca43222d55e088"
+            ]
+        ]
+    },
+    {
+        "id": "e6ca43222d55e088",
+        "type": "ui_ui_control",
+        "z": "002b5cf35f2cdda5",
+        "name": "",
+        "events": "change",
+        "x": 1000,
+        "y": 440,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a043bf6d7f32292d",
+        "type": "link in",
+        "z": "002b5cf35f2cdda5",
+        "name": "In_Close",
+        "links": [
+            "199bf417fa875596",
+            "8f6d4a15830ead83"
+        ],
+        "x": 105,
+        "y": 440,
+        "wires": [
+            [
+                "bb402655e34c6c09"
+            ]
+        ]
+    },
+    {
+        "id": "7abe5b8ecdab4956",
+        "type": "switch",
+        "z": "002b5cf35f2cdda5",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "nnull"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 870,
+        "y": 580,
+        "wires": [
+            [
+                "aebb31bc1ff0fa83"
+            ]
+        ]
+    },
+    {
+        "id": "60cb6c66917c7f28",
+        "type": "function",
+        "z": "002b5cf35f2cdda5",
+        "name": "GetCisternaID",
+        "func": "let data=msg.payload;\n\nlet sel_cisterna=global.get(\"SEL_CISTERNA\");\nlet sel_segment=sel_cisterna===\"CISTERNA1\" ? \"FILL_SEGMENT1\":\"FILL_SEGMENT2\";\n\nglobal.set(sel_segment,data);\n\n\nlet noPlaca=global.get(\"NoPLACA\");\nif(noPlaca==null)\n{\n    node.warn(\"Seleccione una CISTERNA\");\n}\n\nmsg.params=[noPlaca]\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 260,
+        "y": 580,
+        "wires": [
+            [
+                "b7d6c06668454e0d"
+            ]
+        ]
+    },
+    {
+        "id": "b7d6c06668454e0d",
+        "type": "sqlite",
+        "z": "002b5cf35f2cdda5",
+        "mydb": "7cfcd0a8167643a7",
+        "sqlquery": "prepared",
+        "sql": "SELECT ID FROM cisternas WHERE placa=?",
+        "name": "GetCisternaID",
+        "x": 460,
+        "y": 580,
+        "wires": [
+            [
+                "61552e5ef6f099b5"
+            ]
+        ]
+    },
+    {
+        "id": "61552e5ef6f099b5",
+        "type": "function",
+        "z": "002b5cf35f2cdda5",
+        "name": "InserNewSegment",
+        "func": "/*\nCREATE TABLE \"llenados\" (\n\t\"id\"\tINTEGER,\n\t\"cisterna_id\"\tINTEGER NOT NULL,\n\t\"fecha_inicio\"\tDATETIME NOT NULL,\n\t\"fecha_fin\"\tDATETIME,\n\t\"producto_id\"\tINTEGER NOT NULL,\n\t\"volumen_objetivo\"\tREAL,\n\t\"volumen_actual\"\tREAL DEFAULT 0,\n\t\"estado\"\tTEXT NOT NULL DEFAULT 'EN_PROCESO',\n\t\"RVP\"\tREAL NOT NULL DEFAULT 180,\n\tPRIMARY KEY(\"id\" AUTOINCREMENT),\n\tFOREIGN KEY(\"cisterna_id\") REFERENCES \"cisternas\"(\"id\"),\n\tFOREIGN KEY(\"producto_id\") REFERENCES \"productos\"(\"id\")\n)\n*/\n\nlet date_string = new Date().toLocaleString('en-US', { hour12: false }).replaceAll('/', '-');\ndate_string = date_string.replace(',', ' ');\n\nlet sel_cisterna = global.get(\"SEL_CISTERNA\");\nvar datos={};\nlet id_cisterna = msg.payload[0].id;\nlet id_product = datos.producto == \"PROPANO\" ? 1 : 2;\nlet status_cisterna=0;\n\nif(sel_cisterna=== \"CISTERNA1\")\n{\n\tdatos= global.get(\"FILL_SEGMENT1\");\n\tglobal.set(\"ID_PRODUCTO1\", id_product);\n\tglobal.set(\"ID_CISTERNA1\", id_cisterna);\n\tstatus_cisterna=global.get(\"STATUS_CISTERNA1\");\n\n}\nelse\n{\n\tdatos = global.get(\"FILL_SEGMENT2\");\n\tglobal.set(\"ID_PRODUCTO2\", id_product);\n\tglobal.set(\"ID_CISTERNA2\", id_cisterna);\n\tstatus_cisterna==global.get(\"STATUS_CISTERNA2\");\n\n}\n\n \n\nif (msg.topic === \"OK\" && (status_cisterna === 0 || status_cisterna === 3)) {\n\tmsg.payload = \"UpdateData\";\n\tlet promedios = {\n\n\t\tllenado_id: 0,\n\t\tflujo_promedio: 0.0,\n\t\tdensidad_promedio: 0.0,\n\t\tpresion_promedio: 0.0,\n\t\ttemperatura_promedio: 0.0,\n\t\tvolumen_total: 0\n\n\t};\n\tglobal.set(\"PROMEDIOS\", promedios);\n\t// Mapeamos los valores a los parámetros del query\n\tmsg.params = [id_cisterna, date_string, id_product, datos.Vol_full, 0, datos.rvp];\n\tif (sel_cisterna === \"CISTERNA1\") \n\t{\n\t\tglobal.set(\"STATUS_CISTERNA1\", 1);\n\t\tglobal.set(\"CISTERNA2_VISIBLE\",1);\n\t}\n\telse {\n\t\tglobal.set(\"STATUS_CISTERNA2\", 1);\n\t\tglobal.set(\"CISTERNA1_VISIBLE\",1);\n\t}\n\n\n}\nelse {\n\tmsg.payload = null;\n}\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 670,
+        "y": 580,
+        "wires": [
+            [
+                "7abe5b8ecdab4956"
+            ]
+        ]
+    },
+    {
+        "id": "aebb31bc1ff0fa83",
+        "type": "sqlite",
+        "z": "002b5cf35f2cdda5",
+        "mydb": "7cfcd0a8167643a7",
+        "sqlquery": "prepared",
+        "sql": "INSERT INTO llenados (\n    \n\tcisterna_id,\n\tfecha_inicio,\n\tproducto_id\t,\n\tvolumen_objetivo,\n\tvolumen_actual,\t\n\tRVP\t\n    ) \n    VALUES (?,?,?,?,?,?)",
+        "name": "",
+        "x": 1100,
+        "y": 580,
+        "wires": [
+            [
+                "3472d7035568969e"
+            ]
+        ]
+    },
+    {
+        "id": "3472d7035568969e",
+        "type": "sqlite",
+        "z": "002b5cf35f2cdda5",
+        "mydb": "7cfcd0a8167643a7",
+        "sqlquery": "fixed",
+        "sql": "SELECT last_insert_rowid() AS id_llenado;",
+        "name": "",
+        "x": 1100,
+        "y": 640,
+        "wires": [
+            [
+                "898546ccddd35730"
+            ]
+        ]
+    },
+    {
+        "id": "898546ccddd35730",
+        "type": "function",
+        "z": "002b5cf35f2cdda5",
+        "name": "Id Llenado",
+        "func": "if(global.get(\"SEL_CISTERNA\")=== \"CISTERNA1\")\n{\n    global.set(\"ID_LLENADO1\",msg.payload[0].id_llenado);\n\n}\nelse\n{\n    global.set(\"ID_LLENADO2\",msg.payload[0].id_llenado);\n}\n\n\nmsg.payload=msg.payload[0].id_llenado;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1310,
+        "y": 640,
+        "wires": [
+            [
+                "84241882125623be",
+                "41a6f0637e63061d"
+            ]
+        ]
+    },
+    {
+        "id": "41a6f0637e63061d",
+        "type": "debug",
+        "z": "002b5cf35f2cdda5",
+        "name": "debug 10",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1560,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "426354a4a0741d5a",
+        "type": "link in",
+        "z": "002b5cf35f2cdda5",
+        "name": "In_FormFill",
+        "links": [
+            "e513baa3401879b3"
+        ],
+        "x": 105,
+        "y": 580,
+        "wires": [
+            [
+                "60cb6c66917c7f28"
+            ]
+        ]
+    },
+    {
+        "id": "49958ca9210d0c38",
+        "type": "function",
+        "z": "002b5cf35f2cdda5",
+        "name": "Prepare Query",
+        "func": "// Ejemplo de cómo manejar las acciones\nconst data = msg.payload;\nconst action = msg.topic;\nconst sel_cisterna=global.get(\"SEL_CISTERNA\");\n\nswitch(action) {\n    case \"CISTERNA_SELECCIONADA\":\n        global.set(\"NoPLACA\",data.placa);\n        let dtCisterna=global.get(sel_cisterna);\n        dtCisterna.numero_sisterna=data.placa;\n        dtCisterna.empresa_cliente=data.cliente;\n        dtCisterna.galones_objetivo=data.capacidad;\n        global.set(sel_cisterna,dtCisterna);\n        global.set(\"NoPLACA\",data.placa);\n        msg.payload=null;\n        break;\n    case \"INSERT\":\n        msg.topic = `INSERT INTO cisternas (placa, cliente, capacidad, activa) VALUES ('${data.placa}', '${data.cliente}', ${data.capacidad}, ${data.activa})`;\n        break;\n    case \"UPDATE\":\n        msg.topic = `UPDATE cisternas SET placa='${data.placa}', cliente='${data.cliente}', capacidad=${data.capacidad}, activa=${data.activa} WHERE id=${data.id}`;\n        break;\n    case \"DELETE\":\n        msg.topic = `DELETE FROM cisternas WHERE id=${data.id}`;\n        break;\n    default:\n        msg.payload=null;    \n}\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 480,
+        "y": 700,
+        "wires": [
+            [
+                "cf819ea6b4736158"
+            ]
+        ]
+    },
+    {
+        "id": "a2b56aa8b32f10c7",
+        "type": "sqlite",
+        "z": "002b5cf35f2cdda5",
+        "mydb": "7cfcd0a8167643a7",
+        "sqlquery": "msg.topic",
+        "sql": "INSERT INTO sisternas (\n        placa, \n        cliente, \n        capacidad, \n        \n    ) VALUES (\n        $placa, \n        $cliente, \n        $capacidad, \n        \n    )",
+        "name": "",
+        "x": 880,
+        "y": 700,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "cf819ea6b4736158",
+        "type": "switch",
+        "z": "002b5cf35f2cdda5",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "nnull"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 670,
+        "y": 700,
+        "wires": [
+            [
+                "a2b56aa8b32f10c7"
+            ]
+        ]
+    },
+    {
+        "id": "afd199cb463bd18a",
+        "type": "ui_template",
+        "z": "002b5cf35f2cdda5",
+        "group": "f5490ef343d6cb98",
+        "name": "",
+        "order": 9,
+        "width": 1,
+        "height": 1,
+        "format": "<style>\n    .my-modal-overlay {\n        position: fixed;\n        z-index: 9999;\n        top: 0;\n        left: 0;\n        width: 100%;\n        height: 100%;\n        background: rgba(0, 0, 0, 0.6);\n        display: flex;\n        justify-content: center;\n        align-items: center;\n    }\n\n    .my-modal {\n        background: #ffffff;\n        padding: 25px;\n        border-radius: 12px;\n        color: #333;\n        font-family: sans-serif;\n        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);\n    }\n\n    .my-modal h3 {\n        margin-top: 0;\n        color: #1a73e8;\n    }\n\n    .modal-form {\n        width: 380px;\n    }\n\n    .modal-lista {\n        width: 600px;\n        max-width: 90vw;\n    }\n\n    .form-group {\n        margin-bottom: 15px;\n        display: flex;\n        flex-direction: column;\n    }\n\n    .form-group label {\n        font-weight: bold;\n        font-size: 0.9em;\n        margin-bottom: 5px;\n    }\n\n    .form-group input {\n        padding: 10px;\n        border: 1px solid #ccc;\n        border-radius: 4px;\n        font-size: 1em;\n    }\n\n    .form-group input:focus {\n        outline: none;\n        border-color: #1a73e8;\n        box-shadow: 0 0 3px rgba(26, 115, 232, 0.3);\n    }\n\n    .row-check {\n        flex-direction: row !important;\n        align-items: center;\n        gap: 10px;\n    }\n\n    .row-check input[type=\"checkbox\"] {\n        width: 18px;\n        height: 18px;\n        cursor: pointer;\n    }\n\n    .button-row {\n        display: flex;\n        justify-content: space-between;\n        gap: 10px;\n        margin-top: 20px;\n    }\n\n    .btn {\n        border: none;\n        padding: 12px 16px;\n        border-radius: 6px;\n        cursor: pointer;\n        font-weight: bold;\n        font-size: 0.95em;\n        transition: all 0.2s ease;\n    }\n\n    .btn-guardar {\n        background: #28a745;\n        color: white;\n        flex: 1;\n    }\n\n    .btn-guardar:hover {\n        background: #218838;\n    }\n\n    .btn-editar {\n        background: #1a73e8;\n        color: white;\n        flex: 1;\n    }\n\n    .btn-editar:hover {\n        background: #1557b0;\n    }\n\n    .btn-borrar {\n        background: #dc3545;\n        color: white;\n    }\n\n    .btn-borrar:hover {\n        background: #c82333;\n    }\n\n    .btn-cancelar {\n        background: #6c757d;\n        color: white;\n    }\n\n    .btn-cancelar:hover {\n        background: #5a6268;\n    }\n\n    .btn-nuevo {\n        background: #17a2b8;\n        color: white;\n    }\n\n    .btn-nuevo:hover {\n        background: #138496;\n    }\n\n    .btn-sm {\n        padding: 6px 12px;\n        font-size: 0.85em;\n    }\n\n    .tabla-container {\n        max-height: 400px;\n        overflow-y: auto;\n        margin: 15px 0;\n        border: 1px solid #dee2e6;\n        border-radius: 8px;\n    }\n\n    .tabla-cisternas {\n        width: 100%;\n        border-collapse: collapse;\n        font-size: 0.9em;\n    }\n\n    .tabla-cisternas thead {\n        background: #1a73e8;\n        color: white;\n        position: sticky;\n        top: 0;\n    }\n\n    .tabla-cisternas th,\n    .tabla-cisternas td {\n        padding: 12px 10px;\n        text-align: left;\n        border-bottom: 1px solid #dee2e6;\n    }\n\n    .tabla-cisternas tbody tr:hover {\n        background: #f1f3f4;\n    }\n\n    .tabla-cisternas tbody tr.seleccionada {\n        background: #e3f2fd;\n    }\n\n    .tabla-cisternas tbody tr {\n        cursor: pointer;\n        transition: background 0.2s;\n        user-select: none;\n    }\n\n    .estado-activo {\n        color: #28a745;\n        font-weight: bold;\n    }\n\n    .estado-inactivo {\n        color: #dc3545;\n        font-weight: bold;\n    }\n\n    .acciones-celda {\n        display: flex;\n        gap: 5px;\n    }\n\n    .sin-datos {\n        text-align: center;\n        padding: 30px;\n        color: #6c757d;\n        font-style: italic;\n    }\n\n    .busqueda {\n        margin-bottom: 15px;\n    }\n\n    .busqueda input {\n        width: 100%;\n        padding: 10px 15px;\n        border: 1px solid #ccc;\n        border-radius: 6px;\n        font-size: 1em;\n    }\n\n    .hint {\n        font-size: 0.8em;\n        color: #6c757d;\n        margin-top: 5px;\n        font-style: italic;\n    }\n</style>\n\n<!-- ================= POPUP LISTA DE CISTERNAS ================= -->\n<div class=\"my-modal-overlay\" ng-show=\"showLista\" ng-click=\"closeOnOverlay($event, 'lista')\">\n    <div class=\"my-modal modal-lista\" ng-click=\"$event.stopPropagation()\">\n        <h3>📋 Lista de Cisternas</h3>\n        <hr>\n\n        <div class=\"busqueda\">\n            <input type=\"text\" ng-model=\"filtro\" placeholder=\"🔍 Buscar por placa o cliente...\">\n            <div class=\"hint\">💡 Doble click para seleccionar cisterna e iniciar llenado</div>\n        </div>\n\n        <div class=\"tabla-container\">\n            <table class=\"tabla-cisternas\">\n                <thead>\n                    <tr>\n                        <th>ID</th>\n                        <th>Placa</th>\n                        <th>Cliente</th>\n                        <th>Capacidad (L)</th>\n                        <th>Estado</th>\n                        <th>Acciones</th>\n                    </tr>\n                </thead>\n                <tbody>\n                    <tr ng-repeat=\"c in cisternas | filter:filtro track by c.id\"\n                        ng-class=\"{'seleccionada': c.id === seleccionada.id}\" ng-click=\"seleccionar(c)\"\n                        ng-dblclick=\"seleccionarParaLlenado(c)\">\n                        <td>{{c.id}}</td>\n                        <td><strong>{{c.placa}}</strong></td>\n                        <td>{{c.cliente}}</td>\n                        <td>{{c.capacidad | number}}</td>\n                        <td>\n                            <span ng-class=\"c.activa == 1 ? 'estado-activo' : 'estado-inactivo'\">\n                                {{c.activa == 1 ? '✔ Activa' : '✖ Inactiva'}}\n                            </span>\n                        </td>\n                        <td class=\"acciones-celda\">\n                            <button class=\"btn btn-editar btn-sm\" ng-click=\"editarCisterna(c); $event.stopPropagation();\" title=\"Editar\">\n                                ✏️\n                            </button>\n                            <button class=\"btn btn-borrar btn-sm\" ng-click=\"eliminarCisterna(c); $event.stopPropagation();\" title=\"Eliminar\">\n                                🗑️\n                            </button>\n                        </td>\n                    </tr>\n                </tbody>\n            </table>\n            <div class=\"sin-datos\" ng-if=\"(cisternas | filter:filtro).length === 0\">\n                No se encontraron cisternas\n            </div>\n        </div>\n\n        <div class=\"button-row\">\n            <button class=\"btn btn-cancelar\" ng-click=\"closeLista()\">Cerrar</button>\n            <button class=\"btn btn-nuevo\" ng-click=\"nuevaCisterna()\">+ Nueva Cisterna</button>\n        </div>\n    </div>\n</div>\n\n<!-- ================= POPUP FORMULARIO CISTERNA ================= -->\n<div class=\"my-modal-overlay\" ng-show=\"showPopup\" ng-click=\"closeOnOverlay($event, 'form')\">\n    <div class=\"my-modal modal-form\" ng-click=\"$event.stopPropagation()\">\n        <h3>{{isNew ? '➕ Nueva Cisterna' : '✏️ Gestionar Cisterna'}}</h3>\n        <hr>\n\n        <div class=\"form-group\">\n            <label>Placa (Única):</label>\n            <input type=\"text\" ng-model=\"cisterna.placa\" placeholder=\"Ej: ABC-123\" ng-disabled=\"!isNew && !editMode\">\n        </div>\n        <div class=\"form-group\">\n            <label>Cliente:</label>\n            <input type=\"text\" ng-model=\"cisterna.cliente\" ng-disabled=\"!isNew && !editMode\">\n        </div>\n        <div class=\"form-group\">\n            <label>Capacidad (GAL):</label>\n            <input type=\"number\" ng-model=\"cisterna.capacidad\" ng-disabled=\"!isNew && !editMode\">\n        </div>\n        <div class=\"form-group row-check\">\n            <input type=\"checkbox\" ng-model=\"cisterna.activa\" ng-true-value=\"1\" ng-false-value=\"0\" ng-disabled=\"!isNew && !editMode\">\n            <label>Cisterna Activa</label>\n        </div>\n\n        <div class=\"button-row\">\n            <button class=\"btn btn-cancelar\" ng-click=\"closePopup()\">Cancelar</button>\n            <button class=\"btn btn-borrar\" ng-if=\"!isNew\" ng-click=\"sendAction('DELETE')\">Borrar</button>\n            <button class=\"btn btn-editar\" ng-if=\"!isNew && !editMode\" ng-click=\"enableEdit()\">Editar</button>\n            <button class=\"btn btn-guardar\" ng-if=\"isNew || editMode\" ng-click=\"sendAction(isNew ? 'INSERT' : 'UPDATE')\">Guardar</button>\n        </div>\n    </div>\n</div>\n\n<script>\n    (function(scope) {\n    // ========== ESTADO INICIAL ==========\n    scope.showPopup = false;\n    scope.showLista = false;\n    scope.isNew = true;\n    scope.editMode = false;\n    scope.filtro = \"\";\n    scope.cisternas = [];\n    scope.seleccionada = {};\n\n    scope.cisterna = {\n        id: null,\n        placa: \"\",\n        cliente: \"\",\n        capacidad: 0,\n        activa: 1\n    };\n\n    scope._originalCisterna = {};\n\n    // ========== FUNCIONES LISTA ==========\n\n    scope.openLista = function(data) {\n        scope.cisternas = Array.isArray(data) ? data : [];\n        scope.filtro = \"\";\n        scope.seleccionada = {};\n        scope.showLista = true;\n    };\n\n    scope.closeLista = function() {\n        scope.showLista = false;\n        scope.filtro = \"\";\n    };\n\n    // Click simple: solo selecciona (resalta la fila)\n    scope.seleccionar = function(c) {\n        scope.seleccionada = c;\n    };\n\n    // ★★★ DOBLE CLICK: Envía la cisterna seleccionada para iniciar llenado ★★★\n    scope.seleccionarParaLlenado = function(c) {\n        scope.send({\n            topic: \"CISTERNA_SELECCIONADA\",\n            payload: angular.copy(c)\n        });\n        scope.closeLista(); // Cierra el popup automáticamente\n    };\n\n    // Botón editar: abre formulario\n    scope.editarCisterna = function(c) {\n        scope.openPopup(c);\n    };\n\n    scope.eliminarCisterna = function(c) {\n        if (confirm(\"¿Está seguro de eliminar la cisterna \" + c.placa + \"?\")) {\n            scope.send({\n                topic: \"DELETE\",\n                payload: angular.copy(c)\n            });\n            var idx = scope.cisternas.findIndex(function(x) { return x.id === c.id; });\n            if (idx > -1) {\n                scope.cisternas.splice(idx, 1);\n            }\n        }\n    };\n\n    scope.nuevaCisterna = function() {\n        scope.openPopup(null);\n    };\n\n    // ========== FUNCIONES FORMULARIO ==========\n\n    scope.openPopup = function(data) {\n        if (data && data.id) {\n            scope.cisterna = angular.copy(data);\n            scope.isNew = false;\n            scope.editMode = false;\n        } else {\n            scope.cisterna = {\n                id: null,\n                placa: \"\",\n                cliente: \"\",\n                capacidad: 0,\n                activa: 1\n            };\n            scope.isNew = true;\n            scope.editMode = false;\n        }\n        scope._originalCisterna = angular.copy(scope.cisterna);\n        scope.showPopup = true;\n    };\n\n    scope.closePopup = function() {\n        scope.cisterna = angular.copy(scope._originalCisterna);\n        scope.showPopup = false;\n        scope.editMode = false;\n    };\n\n    scope.enableEdit = function() {\n        scope.editMode = true;\n    };\n\n    scope.closeOnOverlay = function(e, tipo) {\n        if (e && e.target && e.target.classList.contains('my-modal-overlay')) {\n            if (tipo === 'lista') {\n                scope.closeLista();\n            } else {\n                scope.closePopup();\n            }\n        }\n    };\n\n    // ========== ENVIAR ACCIÓN ==========\n\n    scope.sendAction = function(accion) {\n        if ((accion === 'INSERT' || accion === 'UPDATE') && !scope.cisterna.placa) {\n            alert(\"La placa es obligatoria.\");\n            return;\n        }\n\n        if (accion === 'DELETE') {\n            if (!confirm(\"¿Está seguro de eliminar esta cisterna?\")) {\n                return;\n            }\n        }\n\n        scope.cisterna.capacidad = parseFloat(scope.cisterna.capacidad) || 0;\n        scope.cisterna.activa = (scope.cisterna.activa === 1 || scope.cisterna.activa === true) ? 1 : 0;\n\n        scope.send({\n            topic: accion,\n            payload: angular.copy(scope.cisterna)\n        });\n\n        if (scope.showLista && accion === 'DELETE') {\n            var idx = scope.cisternas.findIndex(function(x) { return x.id === scope.cisterna.id; });\n            if (idx > -1) {\n                scope.cisternas.splice(idx, 1);\n            }\n        }\n\n        scope.showPopup = false;\n        scope.editMode = false;\n    };\n\n    // ========== RECIBIR MENSAJES ==========\n\n    scope.$watch('msg', function(msg) {\n        if (!msg) return;\n\n        if (msg.topic === \"LISTA_CISTERNAS\") {\n            scope.openLista(msg.payload);\n        }\n\n        if (msg.topic === \"EDIT_CISTERNA\" || msg.topic === \"OPEN_POPUP\") {\n            scope.openPopup(msg.payload);\n        }\n\n        if (msg.topic === \"REFRESH_LISTA\" && scope.showLista) {\n            scope.cisternas = Array.isArray(msg.payload) ? msg.payload : scope.cisternas;\n        }\n    });\n\n})(scope);\n</script>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": true,
+        "templateScope": "local",
+        "className": "",
+        "x": 660,
+        "y": 640,
+        "wires": [
+            [
+                "49958ca9210d0c38"
+            ]
+        ]
+    },
+    {
+        "id": "f59c6d604bec2dab",
+        "type": "sqlite",
+        "z": "002b5cf35f2cdda5",
+        "mydb": "7cfcd0a8167643a7",
+        "sqlquery": "msg.topic",
+        "sql": "",
+        "name": "",
+        "x": 280,
+        "y": 640,
+        "wires": [
+            [
+                "74414f08c72643f4"
+            ]
+        ]
+    },
+    {
+        "id": "74414f08c72643f4",
+        "type": "function",
+        "z": "002b5cf35f2cdda5",
+        "name": "Prepare Datos",
+        "func": "msg.topic=\"LISTA_CISTERNAS\";\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 480,
+        "y": 640,
+        "wires": [
+            [
+                "afd199cb463bd18a"
+            ]
+        ]
+    },
+    {
+        "id": "359c96fe26e0dbe7",
+        "type": "link in",
+        "z": "002b5cf35f2cdda5",
+        "name": "In_SelectCisterna",
+        "links": [
+            "710f92d1c6fe959e"
+        ],
+        "x": 105,
+        "y": 640,
+        "wires": [
+            [
+                "f59c6d604bec2dab"
+            ]
+        ]
+    },
+    {
+        "id": "56d36aecdb6d7e10",
+        "type": "debug",
+        "z": "002b5cf35f2cdda5",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 580,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "2d68130744b085c4",
+        "type": "inject",
+        "z": "002b5cf35f2cdda5",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 200,
+        "y": 140,
+        "wires": [
+            [
+                "90a7374c5afcc857"
+            ]
+        ]
+    },
+    {
+        "id": "90a7374c5afcc857",
+        "type": "function",
+        "z": "002b5cf35f2cdda5",
+        "name": "function 11",
+        "func": "node.warn(\"SEL_CISTERNA: \" + global.get(\"SEL_CISTERNA\"));\nnode.warn(\"ID_LLENADO1: \" + global.get(\"ID_LLENADO1\"));\nnode.warn(\"ID_LLENADO2: \" + global.get(\"ID_LLENADO2\"));\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 400,
+        "y": 160,
+        "wires": [
+            [
+                "6e91b2acd708e60a"
+            ]
+        ]
+    },
+    {
+        "id": "6e91b2acd708e60a",
+        "type": "debug",
+        "z": "002b5cf35f2cdda5",
+        "name": "debug 14",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 710,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "84241882125623be",
+        "type": "link out",
+        "z": "002b5cf35f2cdda5",
+        "name": "link out 3",
+        "mode": "link",
+        "links": [
+            "621fc4f5097c62ca"
+        ],
+        "x": 1485,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "52fc38c5e78f186b",
+        "type": "link out",
+        "z": "002b5cf35f2cdda5",
+        "name": "link out 4",
+        "mode": "link",
+        "links": [
+            "2e62e22aabdf80a2"
+        ],
+        "x": 505,
+        "y": 500,
+        "wires": []
     }
 ]
