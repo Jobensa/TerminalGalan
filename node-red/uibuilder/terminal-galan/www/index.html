@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Terminal Galán - UIBUILDER</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <script src="/uibuilder/uibuilder.iife.min.js"></script>
+</head>
+<body>
+    <!-- Navegación lateral colapsable (estándar SCADA). -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sb-logo" title="Terminal Galán">
+            <span class="sb-logo-mark">TG</span>
+            <span class="sb-logo-text">Terminal Galán</span>
+        </div>
+        <nav class="sb-nav" id="app-nav">
+            <button type="button" class="sb-btn active" data-view="main">
+                <span class="sb-icon">&#9889;</span><span>Principal</span>
+            </button>
+            <button type="button" class="sb-btn" data-view="raspador">
+                <span class="sb-icon">&#128202;</span><span>Raspador</span>
+            </button>
+        </nav>
+        <div class="sb-divider"></div>
+        <div class="sb-status">
+            <div class="sb-srow">
+                <div class="sb-dot" id="connection-dot"></div>
+                <span class="sb-sl" id="connection-status">Conectando...</span>
+            </div>
+        </div>
+        <div class="sb-clock" id="clock">--:--:--</div>
+    </aside>
+
+    <main class="content" id="svg-container" aria-live="polite">
+        <section class="svg-view active" id="view-main"><p class="empty-state">Cargando display principal…</p></section>
+        <section class="svg-view" id="view-raspador" hidden></section>
+    </main>
+
+    <div id="tg-toasts" aria-live="assertive"></div>
+    <script src="./js/main.js"></script>
+</body>
+</html>

@@ -9,54 +9,55 @@ docker-compose.override.yml
 # =====================
 # NODE-RED
 # =====================
-nodered/data/
 node-red/data/
-
-# Excluir todo excepto archivos de configuración
-nodered/data/*
-!nodered/data/settings.js
-!nodered/data/flows.json
-!nodered/data/flows_cred.json.example
-
-# Módulos instalados
+node-red/db/
+node-red/.npm/
 **/node_modules/
+
+# Estado de runtime de Node-RED
+node-red/.config.*.json
+node-red/.config.*.backup
+node-red/.config*.backup
+
+# Credenciales y backups de flujos
+node-red/flows_cred.json
+node-red/.flows_cred.json.backup
+node-red/flows.json.backup
+node-red/.flows.json.backup
+node-red/flows.json.pre-*
+node-red/*.backup
+*.bak
 
 # =====================
 # INFLUXDB
 # =====================
+influxdb-data/
 influxdb/data/
 influxdb/config/
 influxdb/engine/
 influxdb/wal/
-
-# InfluxDB 2.x
-influxdb2/data/
-influxdb2/config/
 **/.influxdbv2/
-
-# Backups de influx
 *.tar.gz
-influxdb/backups/
 
 # =====================
 # GRAFANA
 # =====================
-grafana/data/
-grafana/data/grafana.db
-grafana/data/sessions/
-grafana/data/png/
-grafana/data/plugins/
-grafana/logs/
-
-# Mantener provisioning si lo usas
-!grafana/provisioning/
+grafana-data/
 
 # =====================
-# LOGS Y TEMPORALES
+# MOSQUITTO
 # =====================
+mosquitto/data/
+mosquitto/log/
+
+# =====================
+# DATOS DE RUNTIME
+# =====================
+nodered-data/
+backups/
+tiquetes_pdf/
 *.log
 **/*.log
-logs/
 *.tmp
 *.temp
 
@@ -77,6 +78,13 @@ logs/
 certs/
 ssl/
 secrets/
+
+# Credenciales / tokens locales (no publicar)
+tokenID.txt
+.telegram-*
+
+# Restos de Dashboard 2 (migrado a UIBUILDER)
+node-red/template_*_dashboard2.html
 
 # =====================
 # SISTEMA

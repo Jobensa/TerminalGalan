@@ -1,0 +1,116 @@
+
+================================================================================
+MIGRACIÓN NODO SVG SCADA PRINCIPAL - Dashboard 1 a Dashboard 2
+================================================================================
+Fecha: 2026-01-20 11:05:02
+Archivo: /media/jose/Datos/Data/Proyectos/PetroSantander/TerminalGalan/docker2/node-red/flows.json
+
+NODO ORIGINAL (Dashboard 1):
+----------------------------
+ID:          ef7e2ca45160d518
+Tipo:        ui_svg_graphics
+Grupo:       f5490ef343d6cb98
+Estado:      PRESERVADO (no eliminado)
+
+NODO NUEVO (Dashboard 2):
+-------------------------
+ID:          b41e18e54f104bc2
+Tipo:        ui-svg
+Nombre:      SCADA Display Main
+Grupo:       7c72297410240a07 (Gmain)
+Página:      d5d73333a8f2cdc7 (Main)
+Orden:       5 (después de los 4 botones)
+Dimensiones: 16 x 15
+
+CONTENIDO MIGRADO:
+-----------------
+✓ SVG completo:        88,401 caracteres
+✓ Bindings:            49/49 (100%)
+  - Text bindings:     40
+  - Style bindings:    9
+✓ Clickable shapes:    16/16 (100%)
+✓ SMIL animations:     0
+✓ JS handlers:         0
+✓ Wires:               [['89cf21ba1acbaf97']]
+
+ADAPTACIONES REALIZADAS:
+-----------------------
+1. Tipo de nodo:      ui_svg_graphics -> ui-svg
+2. Campo SVG:         svgString -> svg
+3. Width/Height:      convertidos a strings
+4. Grupo:             migrado a Dashboard 2
+5. Orden:             ajustado a orden 5
+
+BINDINGS MIGRADOS (49 total):
+----------------------------
+Variables de instrumentos:
+  - PIT_2001_PV, PIT_2001_ALARM
+  - TIT_2001_PV, TIT_2001_ALARM
+  - DIT_2001_PV
+  - UIT_2001_FLOW, UIT_2001_DENS, UIT_2001_TBATCH, UIT_2001_DENSITY_COLOR
+  - UIT_2003_FLOW, UIT_2003_DENSITY, UIT_2003_TOTAL
+
+Variables de Cisterna 1:
+  - CLIENTE1, PRODUCTO1, TIQUETE_No1, RVP1, FECHA1
+  - MASA1, VAPORES1, VOL_INDICADO1, VOL_FULL1, VOL_CURRENT1
+  - PRESSURE1, TEMPERATURE1, ID_CISTERNA1
+  - STR_STATUS_CISTERNA1, CISTERNA1_VISIBLE
+
+Variables de Cisterna 2:
+  - CLIENTE2, PRODUCTO2, TIQUETE_No2, RVP2, FECHA2
+  - MASA2, VAPORES2, VOL_INDICADO2, VOL_FULL2, VOL_CURRENT2
+  - PRESSURE2, TEMPERATURE2, ID_CISTERNA2
+  - STR_STATUS_CISTERNA2, CISTERNA2_VISIBLE
+
+Otras variables:
+  - DATE_STRING, TIKET_N, INLINE_PRODUCT
+
+Controles visuales:
+  - PB_LLENAR1, PB_PAUSAR1, PB_CERRAR1 (opacity)
+  - PB_LLENAR2, PB_PAUSAR2, PB_CERRAR2 (opacity)
+
+FORMAS CLICKEABLES (16 total):
+------------------------------
+Botones de control:
+  - PB_LLENAR1, PB_PAUSAR1, PB_CERRAR1
+  - PB_LLENAR2, PB_PAUSAR2, PB_CERRAR2
+  - PB_CISTERNA1, PB_CISTERNA2
+  - PB_CREATE_CISTERNA1, PB_CREATE_CISTERNA2
+
+Botones de instrumentos:
+  - PB_PIT_2001, PB_TIT_2001, PB_FIT_2001
+  - PB_UIT_2001_DENSITY
+
+Otros:
+  - TIKET_N, GenerarTiquete
+
+ARCHIVOS MODIFICADOS:
+--------------------
+✓ flows.json                    (actualizado con nuevo nodo)
+✓ flows.json.backup             (backup del archivo original)
+
+ARCHIVOS TEMPORALES CREADOS:
+----------------------------
+- /tmp/svg_node_original.json   (nodo original completo)
+- /tmp/svg_node_new.json        (nodo nuevo completo)
+- /tmp/svg_content.txt          (contenido SVG)
+- /tmp/svg_bindings.json        (49 bindings)
+- /tmp/svg_clickable.json       (16 formas clickeables)
+
+PRÓXIMOS PASOS:
+--------------
+1. Reiniciar Node-RED para cargar el nuevo nodo
+2. Verificar que el Dashboard 2 muestre correctamente el SCADA
+3. Probar todos los 49 bindings con datos reales
+4. Probar las 16 formas clickeables
+5. Una vez verificado, se puede desactivar el nodo de Dashboard 1 si se desea
+
+NOTAS IMPORTANTES:
+-----------------
+- El nodo original de Dashboard 1 NO fue eliminado
+- Ambos nodos pueden coexistir sin problemas
+- El nuevo nodo usa @bartbutenaers/node-red-dashboard-2-ui-svg
+- La dependencia ya existe en package.json
+- No se requieren instalaciones adicionales
+
+================================================================================

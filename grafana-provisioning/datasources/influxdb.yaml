@@ -1,0 +1,23 @@
+apiVersion: 1
+
+# Elimina la fuente obsoleta de InfluxDB 3 (Flight SQL), retirada del stack.
+deleteDatasources:
+  - name: influxdata-flightsql-datasource
+    orgId: 1
+
+datasources:
+  - name: InfluxDB
+    uid: influxdb
+    type: influxdb
+    access: proxy
+    url: http://localhost:8086
+    isDefault: true
+    editable: true
+    jsonData:
+      version: Flux
+      httpMode: POST
+      organization: Petrosantander
+      defaultBucket: TGalanDB
+      tlsSkipVerify: true
+    secureJsonData:
+      token: ${INFLUXDB_INIT_ADMIN_TOKEN}

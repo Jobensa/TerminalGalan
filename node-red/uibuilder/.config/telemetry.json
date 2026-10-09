@@ -1,0 +1,17 @@
+{
+  "uib_version": "7.7.4",
+  "node_version": "v24.18.0",
+  "os_platform": "linux",
+  "nr_version": "5.0.1",
+  "uib_count": 1,
+  "markweb_count": 0,
+  "uuid": "33bc13b5-c3d1-43af-b284-a2d513ccf9bc",
+  "lastSent": 1791494902,
+  "browsers": [
+    {
+      "family": "Chrome",
+      "version": "155",
+      "count": 149
+    }
+  ]
+}

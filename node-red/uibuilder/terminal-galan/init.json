@@ -1,0 +1,10 @@
+{
+    "name": "terminalGalan",
+    "version": "1.0.0",
+    "description": "SCADA terminalGalan - uibuilder dashboard",
+    "uibuilder": {
+        "folders": {
+            "source": "www"
+        }
+    }
+}
