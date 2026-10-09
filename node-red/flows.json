@@ -1056,7 +1056,7 @@
         "type": "function",
         "z": "8389501e8b369815",
         "name": "Set SIC_2002.SP",
-        "func": "let sic_2002 = global.get(\"SIC_2002\");\n\nif (String(msg.payload).toLowerCase() === \"cancel\") return null;\n\nlet value = parseFloat(msg.payload);\nif (isNaN(value)) return null;\nif (value >= 3.0) value = 3.0;\nif (value <= 0) value = 0;\nsic_2002.SP = value;\nglobal.set(\"SIC_2002\", sic_2002);\nmsg.payload = value;\nreturn msg;\n",
+        "func": "let sic_2002 = global.get(\"SIC_2002\");\n\nif (String(msg.payload).toLowerCase() === \"cancel\") return null;\n\nlet value = parseFloat(msg.payload);\nif (isNaN(value)) return null;\nif (value >= 3.0) value = 3.0;\nif (value <= 0) value = 0;\nsic_2002.SP = value;\nglobal.set(\"SIC_2002\", sic_2002);\nglobal.set(\"SendSIC_SP\", true);\nmsg.payload = value;\nreturn msg;\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -1242,7 +1242,9 @@
         "x": 1260,
         "y": 120,
         "wires": [
-            []
+            [
+                "uib-terminal-galan-v2"
+            ]
         ]
     },
     {
@@ -1260,7 +1262,9 @@
         "x": 940,
         "y": 120,
         "wires": [
-            []
+            [
+                "uib-terminal-galan-v2"
+            ]
         ]
     },
     {
@@ -1278,7 +1282,9 @@
         "x": 940,
         "y": 180,
         "wires": [
-            []
+            [
+                "uib-terminal-galan-v2"
+            ]
         ]
     },
     {
@@ -3270,7 +3276,8 @@
         "wires": [
             [
                 "89cf21ba1acbaf97",
-                "uib-router"
+                "uib-router",
+                "50ba8e0e315ffe7f"
             ],
             []
         ]
@@ -3440,9 +3447,15 @@
         "x": 1380,
         "y": 620,
         "wires": [
-            [],
-            [],
-            []
+            [
+                "33b3c0bdfd051811"
+            ],
+            [
+                "9841da6483ff1063"
+            ],
+            [
+                "8ef2ad2f794bc3d2"
+            ]
         ]
     },
     {
