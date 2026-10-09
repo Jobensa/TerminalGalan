@@ -101,6 +101,19 @@ En `node-red/flows.json` (id de nodos nuevos `aa000000000000xx`):
     (evita errores de undefined con datos reales).
 - `function 48` (historial alarmas): guardas para `msg.alarms`/`TagName`
   (errores "Invalid context key" preexistentes, ahora visibles con datos).
+- **Arreglo uibuilder 2026-10-09** (nodo `uib-terminal-galan-v2` salía "en
+  falla", rutas File/Libraries/Advanced deshabilitadas):
+  - Causa: el nodo estaba con `"okToGo": false` → uibuilder lo rechazaba con
+    "deployed with invalid URL" y NO configuraba la instancia (URL `/terminal-galan/`
+    daba 404; el nodo además rompía el arranque del flow: `padEnd`/`Node.close`).
+  - Fix: `"okToGo": true`. Con eso la instancia se registra, sirve la página y
+    abre las pestañas del editor.
+  - Además `Commands_svg` (vista Raspador) no tenía wire al nodo uibuilder
+    (`wires: [[]]`) → la vista Raspador nunca recibía comandos; se cableó
+    `Commands_svg → uib-terminal-galan-v2`.
+  - Verificado end-to-end: simulador TCP + gateway dev → MQTT → flow →
+    InfluxDB (`TGalanDB/analogas7`, pit_2001 en vivo) y en navegador real
+    (CDP): `PIT_2001_PV`/`SIC_2002_PV` se actualizan, `ioConnected=true`.
 
 ## 7. Pendientes
 
