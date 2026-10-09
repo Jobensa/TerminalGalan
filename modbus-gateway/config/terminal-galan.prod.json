@@ -1,0 +1,71 @@
+{
+  "mqtt_host": "localhost",
+  "mqtt_port": 1883,
+  "client_id": "terminalgalan_modbus_gateway",
+  "read_topic_prefix": "plant/read",
+  "raw_topic_prefix": "planta_modbus",
+  "write_topic_prefix": "plant/write",
+  "status_topic": "planta_gateway",
+  "poll_interval_ms": 1000,
+  "publish_registers_only": true,
+  "devices": [
+    {
+      "name": "v560",
+      "serial_port": "/dev/ttyUSB0",
+      "baudrate": 57600,
+      "data_bits": 8,
+      "parity": "none",
+      "stop_bits": 1,
+      "unit_id": 1,
+      "reads": [
+        {
+          "name": "coriolis",
+          "function": 3,
+          "address": 100,
+          "quantity": 25,
+          "format": "registers",
+          "enabled": true,
+          "fields": [
+            { "tag": "PIT_2001_PV", "register_offset": 0, "scale": 0.1 },
+            { "tag": "TIT_2001_PV", "register_offset": 1, "scale": 0.1 },
+            { "tag": "DIT_2001_PV", "register_offset": 9, "scale": 0.1 },
+            { "tag": "UIT_2001_TOTAL", "register_offset": 11 },
+            { "tag": "UIT_2001_FLOW", "register_offset": 12, "scale": 0.1 },
+            { "tag": "UIT_2003_TOTAL", "register_offset": 13, "scale": 0.1 },
+            { "tag": "UIT_2003_FLOW", "register_offset": 14, "scale": 0.1 }
+          ]
+        },
+        {
+          "name": "compresor",
+          "function": 3,
+          "address": 71,
+          "quantity": 40,
+          "format": "registers",
+          "enabled": false,
+          "fields": [
+            { "tag": "UIT_2002_SPEED",       "register_offset": 0, "scale": 0.001 },
+            { "tag": "UIT_2002_TEMPERATURE", "register_offset": 1, "scale": 0.1 },
+            { "tag": "UIT_2002_PRESSURE_IN", "register_offset": 2, "scale": 0.1 },
+            { "tag": "UIT_2002_PRESSURE_OUT", "register_offset": 3, "scale": 0.1 },
+            { "tag": "UIT_2002_FLOW",        "register_offset": 4, "scale": 0.1 },
+            { "tag": "UIT_2002_SP",          "register_offset": 5, "scale": 0.001 },
+            { "tag": "UIT_2002_CV",          "register_offset": 6, "scale": 0.1 },
+            { "tag": "UIT_2002_HH",          "register_offset": 7, "scale": 0.1 },
+            { "tag": "UIT_2002_H",           "register_offset": 8, "scale": 0.1 },
+            { "tag": "PIT_2002_PV",          "register_offset": 9, "scale": 0.1 }
+          ]
+        }
+      ],
+      "writes": [
+        { "tag": "SIC_SP", "address": 76 },
+        { "tag": "SIC_CV", "address": 75 },
+        { "tag": "PRESSURE_IN", "address": 73 },
+        { "tag": "HH", "address": 79 },
+        { "tag": "H", "address": 80 },
+        { "tag": "START_BATCH", "address": 0, "coil": true },
+        { "tag": "STOP_BATCH", "address": 1, "coil": true },
+        { "tag": "CLEAR_BATCH", "address": 2, "coil": true }
+      ]
+    }
+  ]
+}

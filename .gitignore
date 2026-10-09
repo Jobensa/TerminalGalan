@@ -87,6 +87,11 @@ tokenID.txt
 node-red/template_*_dashboard2.html
 
 # =====================
+# GATEWAY MODBUS (RUST)
+# =====================
+modbus-gateway/target/
+
+# =====================
 # SISTEMA
 # =====================
 .DS_Store

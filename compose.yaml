@@ -54,3 +54,22 @@ services:
       - ./node-red:/data
       - ./tiquetes_pdf:/data/tiquetes_pdf
     #restart: unless-stopped
+
+  # Gateway Modbus RTU/TCP -> MQTT (Rust) que reemplaza los nodos Modbus
+  # de Node-RED (ver docker2/modbus-gateway/README.md).
+  # En desarrollo NO se inicia (no hay /dev/ttyUSB0): se prueba con el binario
+  # en el host contra el simulador TCP (config/terminal-galan.dev.json).
+  modbus-gateway:
+    build: ./modbus-gateway
+    image: terminalgalan-modbus-gateway:latest
+    container_name: terminalgalan-modbus-gateway
+    network_mode: "host"
+    restart: unless-stopped
+    environment:
+      - TZ=America/Bogota
+    volumes:
+      - ./modbus-gateway/config:/etc/terminalgalan:ro
+    # Producción: puerto serie real del V560.
+    devices:
+      - /dev/ttyUSB0:/dev/ttyUSB0
+    command: ["/etc/terminalgalan/terminal-galan.prod.json"]

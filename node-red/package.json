@@ -7,7 +7,6 @@
         "node-red-contrib-html-pdf-converter": "~0.1.2",
         "node-red-contrib-html-to-pdf": "~1.1.1",
         "node-red-contrib-influxdb": "^0.7.0",
-        "node-red-contrib-modbus": "~5.45.2",
         "node-red-contrib-postgresql": "~0.15.4",
         "node-red-contrib-uibuilder": "^7.7.4",
         "node-red-node-sqlite": "~1.1.1",
