@@ -114,6 +114,21 @@ En `node-red/flows.json` (id de nodos nuevos `aa000000000000xx`):
   - Verificado end-to-end: simulador TCP + gateway dev → MQTT → flow →
     InfluxDB (`TGalanDB/analogas7`, pit_2001 en vivo) y en navegador real
     (CDP): `PIT_2001_PV`/`SIC_2002_PV` se actualizan, `ioConnected=true`.
+- **Arreglo aviso de Deploy del editor uibuilder 2026-10-09** (el editor avisaba
+  "El espacio de trabajo contiene algunos nodos que no están configurados
+  correctamente: ... (uibuilder) ¿Estás seguro de que quieres instanciar?"):
+  - Causa: bug de `validateUrl()` en `resources/uibuilder.js` de uibuilder 7.7.4
+    (también en `master`). Para subflows hace `fId.split('-')[1]`; al aplicarlo a
+    un nodo normal cuyo **id lleva guiones** (`uib-terminal-galan-v2`) lo trunca a
+    `terminal` y lo marca como URL duplicada (`urlDeployedDup`/`urlEditorDup` =
+    `true` → `node.valid=false`). El runtime no se veía afectado, solo el editor.
+  - Fix: aplicar el split de subflow solo si `fId !== this.id` (parche idempotente
+    `node-red/uibuilder/terminal-galan/patch-uibuilder-7.7.4/apply-editor-url-dup-fix.sh`,
+    documentado en el README de esa carpeta). Vive en `node_modules` (gitignored),
+    reaplicar tras reinstalar el paquete.
+  - Verificado con Chrome headless + CDP sobre el editor:
+    `RED.nodes.node('uib-terminal-galan-v2').valid === true` y barrido de los 224
+    nodos → `invalidCount: 0`.
 
 ## 7. Pendientes
 

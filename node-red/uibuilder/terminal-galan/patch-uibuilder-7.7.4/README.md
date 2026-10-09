@@ -84,3 +84,90 @@ referencia.
 
 Referencia cruzada: el proyecto SCADA usa el mismo parche en
 `SCADA/docker/node-red/uibuilder/cromatografia/patch-uibuilder-7.7.4/`.
+
+---
+
+# Parche uibuilder 7.7.4 — validación de URL del editor (falso duplicado)
+
+## Problema que corrige
+
+Al pulsar **Deploy**, el editor avisaba:
+
+```
+El espacio de trabajo contiene algunos nodos que no están configurados correctamente:
+[MainDisplay] UIB Terminal Galán (reconstruido) <terminal-galan> (uibuilder)
+¿Estás seguro de que quieres instanciar?
+```
+
+aunque la instancia funcionaba perfectamente. El editor marcaba el nodo uibuilder como
+inválido (`valid: false`, `validationErrors: ["url"]`) con:
+
+```json
+"urlErrors": { "dup": "Cannot be a URL already in use even if not yet deployed" },
+"urlDeployedDup": true, "urlEditorDup": true
+```
+
+**Causa raíz:** en `validateUrl()` (editor, `resources/uibuilder.js`) uibuilder traduce
+los ids de los nodos que viven dentro de subflows con `fId.split('-')[1]`, porque el
+runtime de Node-RED mangla esos ids como `<subflowInstanceId>-<nodeId>`
+(`@node-red/runtime/.../Subflow.js`). Ese split se aplicaba **también** a nodos normales
+cuyo id contiene guiones: el nuestro es `uib-terminal-galan-v2`, así que
+`'uib-terminal-galan-v2'.split('-')[1]` = `'terminal'` ≠ `this.id` → se reportaba como
+duplicado. Los ids autogenerados por Node-RED no llevan guiones, por eso el bug de
+uibuilder (presente en v7.7.4 y en `master`) solo aparece con ids personalizados.
+
+## El parche
+
+En las dos comprobaciones (instancias *deployed* y *editor*) se aplica el split de
+subflow **solo si el id mapeado no es ya el del propio nodo**:
+
+```js
+// antes
+if ( fId.indexOf('-') !== -1 ) {
+    fId = fId.split('-')[1]
+}
+
+// después
+if ( fId !== this.id && fId.indexOf('-') !== -1 ) {
+    fId = fId.split('-')[1]
+}
+```
+
+Así, para un nodo normal (incluido uno con guiones en el id) `fId === this.id`, no se
+trunca y `urlDeployedDup`/`urlEditorDup` quedan en `false`. Para subflows, el id
+mangado sí es distinto de `this.id`, por lo que el comportamiento original se conserva.
+
+## Cómo se aplica
+
+Script idempotente incluido (hace backup `.bak-<fecha>` la primera vez):
+
+```bash
+# desde docker2/ (o cualquier ruta)
+./node-red/uibuilder/terminal-galan/patch-uibuilder-7.7.4/apply-editor-url-dup-fix.sh
+
+# opcional: para recargar el registro del editor
+docker compose restart node-red
+# y recargar el editor en el navegador con Ctrl+F5
+```
+
+Archivo afectado (bind mount `/data` = host `docker2/node-red`):
+
+```
+docker2/node-red/node_modules/node-red-contrib-uibuilder/resources/uibuilder.js
+```
+
+## Verificación
+
+Con Chrome headless + CDP sobre el editor (`http://localhost:1880/`):
+
+```js
+RED.nodes.node('uib-terminal-galan-v2').valid   // antes: false → ahora: true
+```
+
+Y un barrido de todos los nodos del flujo no debe reportar ninguno inválido
+(`invalidCount: 0`).
+
+## ⚠️ Importante
+
+Como vive en `node_modules` (ignorado por git), el parche **se pierde al reinstalar o
+actualizar `node-red-contrib-uibuilder`**. Reaplicarlo con el script de arriba.
