@@ -56,12 +56,10 @@ Dev: `STATUS_CISTERNA`→115 (simula el comando de batch), coils `START/STOP/CLE
 > **PENDIENTE en producción:** el bloque `compresor` (`UIT_2002_*` y `PIT_2002_PV`)
 > está deshabilitado (`"enabled": false`) porque el mapa real de registros del V560
 > aún no está confirmado. Cuando se tenga, completar `register_offset`/`scale` de
-> cada etiqueta y poner `"enabled": true`. La producción mantiene
-> `"publish_registers_only": true` para que el Coriolis tenga un solo origen: el
-> bloque crudo `planta_modbus/...`, interpretado por `function 2` como `int16`.
-> Activar la publicación individual (`false`) solo cuando el flujo Node-RED en planta
-> esté actualizado; el bloque crudo se filtra por `/coriolis` para no interpretar
-> registros de otros equipos con offsets incorrectos.
+> cada etiqueta y poner `"enabled": true`. La publicación por etiquetas
+> (`plant/read/#`) es la fuente única de los globals de instrumentos; el bloque crudo
+> `/coriolis` solo actualiza batch/segmentos. `function 2` decodifica sus registros
+> como `int16` para esos cálculos, pero no sobrescribe los tags compartidos.
 
 ## Compilar / probar en desarrollo (host)
 

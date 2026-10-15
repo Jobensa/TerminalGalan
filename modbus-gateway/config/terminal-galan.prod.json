@@ -7,7 +7,7 @@
   "write_topic_prefix": "plant/write",
   "status_topic": "planta_gateway",
   "poll_interval_ms": 1000,
-  "publish_registers_only": true,
+  "publish_registers_only": false,
   "devices": [
     {
       "name": "v560",
