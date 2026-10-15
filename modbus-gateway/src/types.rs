@@ -145,6 +145,9 @@ pub struct Field {
     pub scale: f32,
     #[serde(default)]
     pub offset: f32,
+    /// Interpret a register as signed 16-bit two's-complement before scaling.
+    #[serde(default)]
+    pub signed: bool,
 }
 
 #[derive(Debug, Clone, Deserialize)]

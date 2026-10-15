@@ -212,7 +212,7 @@
         "type": "function",
         "z": "ee81cc611986e56f",
         "name": "function 2",
-        "func": "\n\n\n// Función para convertir dos registros de 16 bits a un Int32\nfunction registrosAInt32(lowWord, highWord) {\n  return (highWord << 16) | lowWord;\n}\nlet dit = global.get(\"DIT_2001\");\nlet uit_2001_dit = global.get(\"UIT_2001_DENSITY\");\nlet sel_cisterna = global.get(\"SEL_CISTERNA\");\nlet segment = {};\nlet sel_segment = \"\";\nlet sel_status = \"\";\n\nlet promedios = global.get(\"PROMEDIOS\");\n\nif (sel_cisterna === \"CISTERNA1\") {\n  sel_segment = \"SEGMENT_VALUES1\";\n  sel_status=\"STATUS_CISTERNA1\";\n\n}\nelse {\n  sel_segment = \"SEGMENT_VALUES2\";\n  sel_status = \"STATUS_CISTERNA2\";\n}\n\nif (global.get(sel_status)===2) {\n  segment = global.get(sel_segment);\n  segment.temperatura = msg.payload[1] / 10;\n  segment.presion = msg.payload[0] / 10;\n  segment.densidad = dit.PV;\n  segment.flujo_actual = msg.payload[12] / 10;\n  segment.volumen_acumulado = promedios.volumen_total + msg.payload[11]\n\n  global.set(sel_segment, segment);  //Salva los datos de en el segmento correspondiente\n\n\n}\n\n\nlet uit_2003 = {\n  FLOW: msg.payload[14] / 10,\n  DENSITY: dit.PV,\n  TOTAL: msg.payload[13] / 10\n}\nglobal.set(\"UIT_2003\", uit_2003);\n\nlet uit_2001 = {\n  FLOW: msg.payload[12] / 10,\n  DENSITY: dit.PV,\n  TOTAL: msg.payload[11]\n}\nglobal.set(\"UIT_2001\", uit_2001);\n\n// Leer tiquete y estado\nglobal.set(\"TIKET_N\", msg.payload[24]);\nglobal.set(\"ESTADO_BATCH\", msg.payload[23]); // 0=Pausado, 1=Activo\n\nlet tag = global.get(\"PIT_2001\");\ntag.PV = msg.payload[0] / 10;\n\ntag = global.get(\"TIT_2001\");\ntag.PV = msg.payload[1] / 10;\n\ntag = global.get(\"FIT_2001\");\ntag.PV = msg.payload[12] / 10;\n\ndit.PV = msg.payload[9] / 10;\nglobal.set(\"DIT_2001\", dit);\n\nuit_2001_dit.PV = dit.PV;\nmsg.payload = sel_segment;\n\nreturn msg;",
+        "func": "// Los registros configurados como signed en terminal-galan.prod.json\n// llegan como u16 en el bloque crudo; convertirlos a int16 antes de escalar.\nfunction int16(offset) {\n  const raw = Number(msg.payload[offset]) || 0;\n  return raw > 0x7FFF ? raw - 0x10000 : raw;\n}\n\nconst dit = global.get(\"DIT_2001\");\nconst uit_2001_dit = global.get(\"UIT_2001_DENSITY\");\nconst sel_cisterna = global.get(\"SEL_CISTERNA\");\nconst sel_segment = sel_cisterna === \"CISTERNA1\" ? \"SEGMENT_VALUES1\" : \"SEGMENT_VALUES2\";\nconst sel_status = sel_cisterna === \"CISTERNA1\" ? \"STATUS_CISTERNA1\" : \"STATUS_CISTERNA2\";\nconst promedios = global.get(\"PROMEDIOS\");\nconst presion = int16(0) / 10;\nconst temperatura = int16(1) / 10;\nconst densidad = int16(9) / 10;\nconst flujo2001 = int16(12) / 10;\nconst flujo2003 = int16(14) / 10;\n\nif (global.get(sel_status) === 2) {\n  const segment = global.get(sel_segment);\n  segment.temperatura = temperatura;\n  segment.presion = presion;\n  segment.densidad = densidad;\n  segment.flujo_actual = flujo2001;\n  segment.volumen_acumulado = promedios.volumen_total + msg.payload[11];\n  global.set(sel_segment, segment);\n}\n\nglobal.set(\"UIT_2003\", { FLOW: flujo2003, DENSITY: densidad, TOTAL: msg.payload[13] / 10 });\nglobal.set(\"UIT_2001\", { FLOW: flujo2001, DENSITY: densidad, TOTAL: msg.payload[11] });\nglobal.set(\"TIKET_N\", msg.payload[24]);\nglobal.set(\"ESTADO_BATCH\", msg.payload[23]); // 0=Pausado, 1=Activo\n\nconst pit = global.get(\"PIT_2001\");\npit.PV = presion;\nconst tit = global.get(\"TIT_2001\");\ntit.PV = temperatura;\nconst fit = global.get(\"FIT_2001\");\nfit.PV = flujo2001;\ndit.PV = densidad;\nglobal.set(\"DIT_2001\", dit);\nuit_2001_dit.PV = densidad;\nmsg.payload = sel_segment;\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -267,7 +267,7 @@
         "type": "function",
         "z": "ee81cc611986e56f",
         "name": "Get PLC Data",
-        "func": "\nlet tags = global.get(\"PLC\") || {};  // {} objeto, no []\nlet uit=global.get(\"UIT_2002\");\nlet pit=global.get(\"PIT_2002\");\nlet pid=global.get(\"SIC_2002\");\n\ntags[msg.payload.tag] = msg.payload;\nglobal.set(\"PLC\", tags);\n\nmsg.payload = msg.payload.tag;\n\n\n\n\n\n\nuit.SPEED=tags[\"UIT_2002_SPEED\"].value;\nuit.TEMPERATURE=tags[\"UIT_2002_TEMPERATURE\"].value;\n\nif(global.get(\"SendPressureIN\")==false)\n{\n   uit.PRESSURE_IN=tags[\"UIT_2002_PRESSURE_IN\"].value;\n\n}\n\nuit.PRESSURE_OUT=tags[\"UIT_2002_PRESSURE_OUT\"].value;;\nuit.FLOW=tags[\"UIT_2002_FLOW\"].value;\n\nif(global.get(\"SendSIC_CV\")==false && global.get(\"SendSIC_SP\")==false)\n{\n    pid.SP=tags[\"UIT_2002_SP\"].value;\n    pid.CV=tags[\"UIT_2002_CV\"].value;\n}\n\n\npid.PV=uit.SPEED;\n\npit.PV = tags[\"PIT_2002_PV\"].value;\n\nif(global.get(\"SendHH\")==false && global.get(\"SendH\")==false )\n{\n    pit.HH = tags[\"UIT_2002_HH\"].value;\n    pit.H = tags[\"UIT_2002_H\"].value;\n}\n\n\nglobal.set(\"UIT_2002\",uit);\nglobal.set(\"PIT_2002\",pit);\nglobal.set(\"SIC_2002\",pid);\nreturn msg;",
+        "func": "const p = msg.payload || {};\nif (typeof p.tag !== \"string\" || !Number.isFinite(Number(p.value))) return null;\n\nconst value = Number(p.value);\nconst tags = global.get(\"PLC\") || {};\ntags[p.tag] = p;\nglobal.set(\"PLC\", tags);\n\n// PIT/TIT/DIT/UIT del Coriolis son propiedad del bloque crudo (function 2).\n// Esta ruta por etiqueta solo actualiza globals del compresor para evitar que\n// dos publicaciones del mismo ciclo se sobrescriban entre sí.\nconst destinations = {\n    UIT_2002_SPEED: [[\"UIT_2002\", \"SPEED\"], [\"SIC_2002\", \"PV\"]],\n    UIT_2002_TEMPERATURE: [[\"UIT_2002\", \"TEMPERATURE\"]],\n    UIT_2002_PRESSURE_IN: [[\"UIT_2002\", \"PRESSURE_IN\"]],\n    UIT_2002_PRESSURE_OUT: [[\"UIT_2002\", \"PRESSURE_OUT\"]],\n    UIT_2002_FLOW: [[\"UIT_2002\", \"FLOW\"]],\n    UIT_2002_SP: [[\"UIT_2002\", \"SP\"], [\"SIC_2002\", \"SP\"]],\n    UIT_2002_CV: [[\"UIT_2002\", \"CV\"], [\"SIC_2002\", \"CV\"]],\n    UIT_2002_HH: [[\"PIT_2002\", \"HH\"]],\n    UIT_2002_H: [[\"PIT_2002\", \"H\"]],\n    PIT_2002_PV: [[\"PIT_2002\", \"PV\"]]\n};\n\nconst commandLocks = {\n    UIT_2002_PRESSURE_IN: global.get(\"SendPressureIN\") !== false,\n    UIT_2002_SP: global.get(\"SendSIC_SP\") !== false || global.get(\"SendSIC_CV\") !== false,\n    UIT_2002_CV: global.get(\"SendSIC_SP\") !== false || global.get(\"SendSIC_CV\") !== false,\n    UIT_2002_HH: global.get(\"SendHH\") !== false || global.get(\"SendH\") !== false,\n    UIT_2002_H: global.get(\"SendHH\") !== false || global.get(\"SendH\") !== false\n};\n\nif (!commandLocks[p.tag]) {\n    for (const [objectName, property] of destinations[p.tag] || []) {\n        const object = global.get(objectName) || {};\n        object[property] = value;\n        global.set(objectName, object);\n    }\n}\n\nmsg.payload = p.tag;\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -308,7 +308,7 @@
         "type": "function",
         "z": "ee81cc611986e56f",
         "name": "ExtractRegisters",
-        "func": "if (msg.payload && Array.isArray(msg.payload.registers)) {\n    msg.payload = msg.payload.registers;\n    return msg;\n}\nreturn null;",
+        "func": "// function 2 interpreta el bloque fijo del Coriolis; no procesar otros\n// bloques Modbus (por ejemplo, el del compresor) con esos mismos offsets.\nif (msg.topic && msg.topic.endsWith(\"/coriolis\") && msg.payload && Array.isArray(msg.payload.registers)) {\n    msg.payload = msg.payload.registers;\n    return msg;\n}\nreturn null;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -340,6 +340,27 @@
         "x": 880,
         "y": 220,
         "wires": []
+    },
+    {
+        "id": "bb00000000000001",
+        "type": "mqtt in",
+        "z": "619addbf2da107aa",
+        "name": "Tiquete GLP calculado (Coriolis masa)",
+        "topic": "TIQUETE_LPG",
+        "qos": "1",
+        "datatype": "auto-detect",
+        "broker": "b7cd64c1a1262f26",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 320,
+        "y": 180,
+        "wires": [
+            [
+                "uib-terminal-galan-v2"
+            ]
+        ]
     },
     {
         "id": "aa00000000000010",
@@ -2452,7 +2473,7 @@
         "y": 520,
         "wires": [
             [
-                "uib-terminal-galan-v2"
+                "main-ui-updates-out"
             ]
         ]
     },
@@ -2473,7 +2494,7 @@
         "wires": [
             [
                 "aa70f261690fc769",
-                "uib-terminal-galan-v2"
+                "main-ui-updates-out"
             ]
         ]
     },
@@ -2493,7 +2514,7 @@
         "y": 640,
         "wires": [
             [
-                "uib-terminal-galan-v2"
+                "main-ui-updates-out"
             ]
         ]
     },
@@ -2547,7 +2568,7 @@
         "y": 440,
         "wires": [
             [
-                "uib-terminal-galan-v2"
+                "main-ui-updates-out"
             ]
         ]
     },
@@ -2607,7 +2628,7 @@
         "y": 600,
         "wires": [
             [
-                "uib-terminal-galan-v2"
+                "main-ui-updates-out"
             ]
         ]
     },
@@ -2650,7 +2671,7 @@
         "y": 480,
         "wires": [
             [
-                "uib-terminal-galan-v2"
+                "main-ui-updates-out"
             ]
         ]
     },
@@ -3092,7 +3113,7 @@
         "y": 160,
         "wires": [
             [
-                "uib-terminal-galan-v2"
+                "main-ui-updates-out"
             ]
         ]
     },
@@ -3112,7 +3133,7 @@
         "y": 200,
         "wires": [
             [
-                "uib-terminal-galan-v2"
+                "main-ui-updates-out"
             ]
         ]
     },
@@ -3132,7 +3153,7 @@
         "y": 240,
         "wires": [
             [
-                "uib-terminal-galan-v2"
+                "main-ui-updates-out"
             ]
         ]
     },
@@ -3189,7 +3210,7 @@
         "y": 280,
         "wires": [
             [
-                "uib-terminal-galan-v2"
+                "main-ui-updates-out"
             ]
         ]
     },
@@ -3209,7 +3230,7 @@
         "y": 320,
         "wires": [
             [
-                "uib-terminal-galan-v2"
+                "main-ui-updates-out"
             ]
         ]
     },
@@ -3229,7 +3250,7 @@
         "y": 360,
         "wires": [
             [
-                "uib-terminal-galan-v2"
+                "main-ui-updates-out"
             ]
         ]
     },
@@ -3254,7 +3275,7 @@
         "id": "uib-terminal-galan-v2",
         "type": "uibuilder",
         "z": "619addbf2da107aa",
-        "name": "UIB Terminal Galán (reconstruido)",
+        "name": "UIB Main",
         "topic": "",
         "url": "terminal-galan",
         "okToGo": true,
@@ -3275,11 +3296,69 @@
         "y": 100,
         "wires": [
             [
-                "89cf21ba1acbaf97",
-                "uib-router",
+                "main-ui-input-out",
                 "50ba8e0e315ffe7f"
             ],
             []
+        ]
+    },
+    {
+        "id": "main-ui-input-out",
+        "type": "link out",
+        "z": "619addbf2da107aa",
+        "name": "UIB → MainDisplay",
+        "mode": "link",
+        "links": [
+            "main-ui-input-in"
+        ],
+        "x": 830,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "main-ui-input-in",
+        "type": "link in",
+        "z": "619addbf2da107aa",
+        "name": "Eventos UIB",
+        "links": [
+            "main-ui-input-out"
+        ],
+        "x": 950,
+        "y": 420,
+        "wires": [
+            [
+                "89cf21ba1acbaf97",
+                "uib-router"
+            ]
+        ]
+    },
+    {
+        "id": "main-ui-updates-out",
+        "type": "link out",
+        "z": "619addbf2da107aa",
+        "name": "UIB ← MainDisplay",
+        "mode": "link",
+        "links": [
+            "main-ui-updates-in"
+        ],
+        "x": 1910,
+        "y": 760,
+        "wires": []
+    },
+    {
+        "id": "main-ui-updates-in",
+        "type": "link in",
+        "z": "619addbf2da107aa",
+        "name": "Mensajes UIB",
+        "links": [
+            "main-ui-updates-out"
+        ],
+        "x": 800,
+        "y": 120,
+        "wires": [
+            [
+                "uib-terminal-galan-v2"
+            ]
         ]
     },
     {
@@ -3474,7 +3553,7 @@
         "y": 400,
         "wires": [
             [
-                "uib-terminal-galan-v2"
+                "main-ui-updates-out"
             ]
         ]
     },

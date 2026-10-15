@@ -57,8 +57,11 @@ Dev: `STATUS_CISTERNA`→115 (simula el comando de batch), coils `START/STOP/CLE
 > está deshabilitado (`"enabled": false`) porque el mapa real de registros del V560
 > aún no está confirmado. Cuando se tenga, completar `register_offset`/`scale` de
 > cada etiqueta y poner `"enabled": true` y `"publish_registers_only": false`.
-> Con `publish_registers_only: true` el gateway sólo publica el bloque crudo
-> (`planta_modbus/...`) y Node-RED sigue funcionando con `function 2`.
+> La ruta `plant/read/#` solo actualiza globals del compresor; las variables
+> compartidas del Coriolis las actualiza `function 2` desde `planta_modbus/...`.
+> Este último filtra el bloque `/coriolis` y decodifica como `int16` los registros
+> con signo, evitando tanto las escrituras duplicadas como interpretar otro bloque
+> con offsets incorrectos.
 
 ## Compilar / probar en desarrollo (host)
 

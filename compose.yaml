@@ -55,6 +55,20 @@ services:
       - ./tiquetes_pdf:/data/tiquetes_pdf
     #restart: unless-stopped
 
+  glp-mass-calculator:
+    build: ./glp-mass-calculator
+    image: terminalgalan-glp-mass-calculator:latest
+    container_name: terminalgalan-glp-mass-calculator
+    network_mode: "host"
+    restart: unless-stopped
+    environment:
+      - TZ=America/Bogota
+      - MQTT_HOST=${MQTT_HOST:-127.0.0.1}
+      - MQTT_PORT=${MQTT_PORT:-1883}
+      - MQTT_REQUEST_TOPIC=${GLP_CALC_REQUEST_TOPIC:-TIQUETE_LPG/CALCULAR}
+      - MQTT_RESULT_TOPIC=${GLP_CALC_RESULT_TOPIC:-TIQUETE_LPG}
+      - MQTT_CLIENT_ID=${GLP_CALC_CLIENT_ID:-terminalgalan-glp-calculator}
+
   # Gateway Modbus RTU/TCP -> MQTT (Rust) que reemplaza los nodos Modbus
   # de Node-RED (ver docker2/modbus-gateway/README.md).
   # En desarrollo NO se inicia (no hay /dev/ttyUSB0): se prueba con el binario
@@ -65,6 +79,8 @@ services:
     container_name: terminalgalan-modbus-gateway
     network_mode: "host"
     restart: unless-stopped
+    group_add:
+      - "20"
     environment:
       - TZ=America/Bogota
     volumes:

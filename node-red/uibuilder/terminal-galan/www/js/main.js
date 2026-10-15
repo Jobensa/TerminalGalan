@@ -355,6 +355,64 @@ function tiqueteRow(label, value, unit) {
 }
 
 function buildTiquete(datos) {
+    if (datos.calculation === 'coriolis_mass_pulses_to_glp_standard_volume') {
+        const metadata = datos.ticket || {};
+        const empresa = esc(datos.empresa || 'PETROSANTANDER COLOMBIA INC');
+        return `
+        <div class="tiquete-container">
+          <div class="tiquete-header">
+            <h1>${empresa}</h1>
+            <h2>PLANTA DE PRODUCTOS BLANCOS</h2>
+            <h2>TIQUETE DE LIQUIDACIÓN GLP POR MASA</h2>
+          </div>
+          <div class="tiquete-info">
+            <div>
+              <div>PLANTA DE GAS</div>
+              <div>Cliente: <b>${esc(datos.cliente || metadata.cliente || 'N/A')}</b></div>
+              <div>Origen: ${esc(datos.origen || 'PETROSANTANDER')}</div>
+            </div>
+            <div style="text-align: right;">
+              <div>Numero de Tiquete: <b>${esc(datos.numeroTiquete || '---')}</b></div>
+              <div>Fecha: <b>${esc(datos.fechaHora || datos.timestamp || '---')}</b></div>
+              <div>Operación: ${esc(datos.operacion || 'Ventas')}</div>
+              <div>Bala: ${esc(datos.bala || 'BA - 1')}</div>
+            </div>
+          </div>
+          <div class="tiquete-stream">STREAM ${esc(datos.stream || '1')} - MEDIDOR ${esc(datos.tipoMedidor || 'CORIOLIS')}</div>
+          <div class="tiquete-section">
+            <div class="tiquete-section-title">DATOS DEL PRODUCTO</div>
+            ${tiqueteRow('Producto', esc((datos.fluid || '').toUpperCase()), '')}
+            ${tiqueteRow('Densidad Relativa @ 60°F', fmt(datos.relative_density_60f, 4), 'SG')}
+            ${tiqueteRow('Temperatura observada', fmt(datos.observedTempF ?? metadata.temperatura_promedio_f, 2), '°F')}
+            ${tiqueteRow('Presión observada', fmt(datos.observedPressurePSI ?? metadata.presion_promedio_psig, 2), 'psig')}
+          </div>
+          <div class="tiquete-section">
+            <div class="tiquete-section-title">DATOS DEL MEDIDOR</div>
+            ${tiqueteRow('Pulsos de masa del batch', fmt(datos.mass_pulses, 0), 'pulsos')}
+            ${tiqueteRow('K-Factor', fmt(datos.k_factor_pulses_per_kg, 2), 'pulsos/kg')}
+            ${tiqueteRow('M-Factor', fmt(datos.meter_factor, 5), '')}
+            ${tiqueteRow('CTL / CPL', 'No requeridos: medición directa de masa', '')}
+          </div>
+          <div class="tiquete-section tiquete-totales">
+            <div class="tiquete-section-title">TOTALES A 60°F</div>
+            ${tiqueteRow('Masa bruta corregida', fmt(datos.mass_gross_kg, 3), 'kg')}
+            ${tiqueteRow('Volumen bruto estándar (GSV)', fmt(datos.gsv_us_gal, 2), 'U.S. gal')}
+            ${tiqueteRow('Masa neta', fmt(datos.mass_net_kg, 3), 'kg')}
+            ${tiqueteRow('Volumen neto estándar (NSV)', fmt(datos.nsv_us_gal, 2), 'U.S. gal')}
+          </div>
+          <div class="tiquete-separator"></div>
+          <div class="tiquete-footer">
+            <div class="tiquete-firmas">
+              <div class="tiquete-firma"><div class="tiquete-firma-linea">OPERADOR</div></div>
+              <div class="tiquete-firma">
+                <div class="tiquete-logo">${empresa}<br><span class="tiquete-despachado">DESPACHADO</span></div>
+                <div class="tiquete-firma-linea">SUPERVISOR</div>
+              </div>
+            </div>
+          </div>
+        </div>`;
+    }
+
     const input = datos.input || {};
     const corrections = datos.corrections || {};
     const volumes = datos.volumes || {};

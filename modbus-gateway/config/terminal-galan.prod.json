@@ -7,7 +7,7 @@
   "write_topic_prefix": "plant/write",
   "status_topic": "planta_gateway",
   "poll_interval_ms": 1000,
-  "publish_registers_only": true,
+  "publish_registers_only": false,
   "devices": [
     {
       "name": "v560",
@@ -26,13 +26,13 @@
           "format": "registers",
           "enabled": true,
           "fields": [
-            { "tag": "PIT_2001_PV", "register_offset": 0, "scale": 0.1 },
-            { "tag": "TIT_2001_PV", "register_offset": 1, "scale": 0.1 },
-            { "tag": "DIT_2001_PV", "register_offset": 9, "scale": 0.1 },
+            { "tag": "PIT_2001_PV", "register_offset": 0, "scale": 0.1, "signed": true },
+            { "tag": "TIT_2001_PV", "register_offset": 1, "scale": 0.1, "signed": true },
+            { "tag": "DIT_2001_PV", "register_offset": 9, "scale": 0.1, "signed": true },
             { "tag": "UIT_2001_TOTAL", "register_offset": 11 },
-            { "tag": "UIT_2001_FLOW", "register_offset": 12, "scale": 0.1 },
+            { "tag": "UIT_2001_FLOW", "register_offset": 12, "scale": 0.1, "signed": true },
             { "tag": "UIT_2003_TOTAL", "register_offset": 13, "scale": 0.1 },
-            { "tag": "UIT_2003_FLOW", "register_offset": 14, "scale": 0.1 }
+            { "tag": "UIT_2003_FLOW", "register_offset": 14, "scale": 0.1, "signed": true }
           ]
         },
         {

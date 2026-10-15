@@ -35,12 +35,38 @@ fn float32_or_raw(registers: &[u16], field: &types::Field, format: &RegisterForm
             .map(|f| f * field.scale + field.offset)
             .unwrap_or(f32::NAN),
         RegisterFormat::Registers => {
-            let raw = registers
+            let register = registers
                 .get(field.register_offset)
                 .copied()
-                .unwrap_or(0) as f32;
+                .unwrap_or(0);
+            let raw = if field.signed {
+                register as i16 as f32
+            } else {
+                register as f32
+            };
             raw * field.scale + field.offset
         }
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn signed_register_is_decoded_before_scaling() {
+        let field = types::Field {
+            tag: "PIT_2001_PV".into(),
+            register_offset: 0,
+            scale: 0.1,
+            offset: 0.0,
+            signed: true,
+        };
+
+        assert_eq!(
+            float32_or_raw(&[63036], &field, &RegisterFormat::Registers),
+            -250.0
+        );
     }
 }
 
