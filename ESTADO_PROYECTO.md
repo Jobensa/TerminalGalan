@@ -135,24 +135,24 @@ En `node-red/flows.json` (id de nodos nuevos `aa000000000000xx`):
     ruta de respuesta apuntaba a `main-ui-updates-out`, nodo ausente en el flujo
     de producción. Se corrigió el Link In para enviar directamente a
     `uib-terminal-galan-v2`.
-  - En `modbus-gateway/config/terminal-galan.{dev,prod}.json`, el caudal másico
-    principal se lee de MI104 (offset 4, Q8.8, escala 1/256) y la masa acumulada
-    de MI111 (offset 11, factor 1). El raw 19998 (`0x4E1E`) equivale a 78.117 kg/h.
-    Mapa documentado en `modbus-gateway/README.md`.
+  - Confirmación operativa posterior: el flujo másico está en ML13 (registro
+    28688, offset 6, factor 1), no en MI104. Se retiró el mapeo anterior y se
+    amplió la lectura ML10 de seis a ocho palabras. La masa acumulada continúa
+    en MI111 (offset 11, factor 1). Mapa documentado en `modbus-gateway/README.md`.
   - Validación local: JSON de Node-RED/configuraciones, `node --check` de
     `main.js` y `git diff --check` correctos.
   - **Desplegado en producción** en la VM Debian 13 `192.168.12.251` (SSH:
     `administrador`) el 2026-10-22. El checkout de la VM estaba en `70fd43d`
     con modificaciones locales; para no pisarlas, se aplicaron solo los cambios
-    de `flows.json` y `terminal-galan.prod.json`, con respaldos `.before-c50aa82-20261022`.
+    de `flows.json` y `terminal-galan.prod.json`, con respaldos `.before-c50aa82-20261022`
+    y `.before-ml13-20261022` (gateway config).
   - Se reiniciaron `node-red` y `modbus-gateway`. Node-RED quedó saludable; una
     prueba Chrome headless hizo clic en Crear Cisterna y confirmó el popup con
     las tres filas de la base de datos. La interfaz respondió HTTP 200 en
     `http://192.168.12.251:1880/terminal-galan/`.
-  - Diagnóstico del flujo: MI104 entrega raw 19998 (`0x4E1E`); aplicando escala
-    Q8.8 `1/256`, MQTT publica 78.117 kg/h y Chrome muestra 78.1. MI111 conserva
-    factor 1. El gateway mantiene algunos timeouts RTU intermitentes; verificar
-    estabilidad de lectura del V560 en operación.
+  - Producción validada tras el cambio: el bloque crudo publicó ML13=87 y MQTT
+    `UIT_2001_FLOW=87.0`; una lectura posterior en Chrome mostró 78.0 kg/h. Ambas
+    muestras están en el rango esperado. Persisten timeouts RTU intermitentes.
 
 ## 7. Pendientes
 

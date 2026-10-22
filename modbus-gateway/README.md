@@ -44,11 +44,16 @@ Campos de un `Field`: `tag`, `register_offset` (índice dentro del bloque leído
 |---|---|---|---|
 | 100 (0) | `PIT_2001_PV` | /10 | presión, bar |
 | 101 (1) | `TIT_2001_PV` | /10 | temperatura, °C |
-| 109 (9) | `DIT_2001_PV` | /10 | densidad, kg/m³ |
-| 104 (4) | `UIT_2001_FLOW` | 1/256 | flujo másico principal Q8.8 (MI104) |
+| 103 (3) | `DIT_2001_PV` | /10 | densidad, kg/m³ (MI103) |
 | 111 (11) | `UIT_2001_TOTAL` | 1 | masa acumulada (MI111) |
 | 113 (13) | `UIT_2003_TOTAL` | /10 | |
 | 114 (14) | `UIT_2003_FLOW` | /10 | |
+
+**ML Unitronics del V560 (FC 3):** ML13 inicia en `0x7010` (28688), offset 6
+respecto al bloque que comienza en ML10 (`0x700A` / 28682). Cada ML ocupa dos
+palabras de 16 bits, palabra baja primero; la lectura abarca ocho palabras.
+`UIT_2001_FLOW` se obtiene de ML13 como `uint32`, escala 1. ML10/ML11 alimentan
+los contadores de pulsos; ML12 se conserva como `V560_ML12_RAW`.
 
 **Escrituras (V560):** `SIC_SP`→76, `SIC_CV`→75, `PRESSURE_IN`→73, `HH`→79, `H`→80.
 Dev: `STATUS_CISTERNA`→115 (simula el comando de batch), coils `START/STOP/CLEAR_BATCH`→0/1/2.

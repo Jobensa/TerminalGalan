@@ -25,11 +25,26 @@
           "fields": [
             { "tag": "PIT_2001_PV", "register_offset": 0, "scale": 0.1 },
             { "tag": "TIT_2001_PV", "register_offset": 1, "scale": 0.1 },
-            { "tag": "DIT_2001_PV", "register_offset": 9, "scale": 0.1 },
-            { "tag": "UIT_2001_FLOW", "register_offset": 4, "scale": 0.00390625 },
+            { "tag": "DIT_2001_PV", "register_offset": 3, "scale": 0.1 },
             { "tag": "UIT_2001_TOTAL", "register_offset": 11, "scale": 1 },
             { "tag": "UIT_2003_TOTAL", "register_offset": 13, "scale": 0.1 },
             { "tag": "UIT_2003_FLOW", "register_offset": 14, "scale": 0.1 }
+          ]
+        },
+        {
+          "name": "coriolis_pulses",
+          "function": 3,
+          "address": 28682,
+          "quantity": 8,
+          "format": "uint32",
+          "enabled": true,
+          "fields": [
+            { "tag": "UIT_2001_PULSES", "register_offset": 0 },
+            { "tag": "UIT_2001_TOTAL_MASS_KG", "register_offset": 0, "scale": 0.05 },
+            { "tag": "UIT_2003_PULSES", "register_offset": 2 },
+            { "tag": "UIT_2003_TOTAL_MASS_KG", "register_offset": 2, "scale": 0.05 },
+            { "tag": "V560_ML12_RAW", "register_offset": 4 },
+            { "tag": "UIT_2001_FLOW", "register_offset": 6, "scale": 1 }
           ]
         }
       ],
