@@ -42,8 +42,8 @@ Campos de un `Field`: `tag`, `register_offset` (índice dentro del bloque leído
 **Bloque coriolis (regs 100+):**
 | Reg (offset) | Etiqueta | Escala | Nota |
 |---|---|---|---|
-| 100 (0) | `PIT_2001_PV` | /10 | presión, bar |
-| 101 (1) | `TIT_2001_PV` | /10 | temperatura, °C |
+| 100 (0) | `PIT_2001_PV` | /10 | presión, PSI |
+| 101 (1) | `TIT_2001_PV` | /10 | temperatura, °F |
 | 103 (3) | `DIT_2001_PV` | /10 | densidad, kg/m³ (MI103) |
 | 111 (11) | `UIT_2001_TOTAL` | 1 | masa acumulada (MI111) |
 | 113 (13) | `UIT_2003_TOTAL` | /10 | |

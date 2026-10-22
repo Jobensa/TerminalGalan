@@ -163,6 +163,10 @@ En `node-red/flows.json` (id de nodos nuevos `aa000000000000xx`):
     el formulario de despacho; los diálogos de llenar/pausar/cerrar aparecieron y se
     cancelaron. No se guardó un despacho ni se confirmó un comando físico.
 
+- **Unidades PIT/TIT**: `tblTags` identifica `PIT_2001` en PSI y `TIT_2001` en °F.
+  Se actualizaron los sufijos del indicador principal y del panel Coriolis; los
+  valores numéricos permanecen sin conversión. Verificado en producción: PSI y °F.
+
 ## 7. Pendientes
 
 1. **Mapa de registros del compresor (producción)**: completar bloque `compresor`
