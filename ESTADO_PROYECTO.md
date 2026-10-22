@@ -3,7 +3,7 @@
 > **Para continuar en una sesión nueva**: leer este documento y
 > `modbus-gateway/README.md`. Si se retoma el trabajo, empezar por la sección
 > "Pendientes" y "Cómo continuar".
-> Actualizado: 2026-10-09.
+> Actualizado: 2026-10-22.
 
 ## 1. Qué es
 
@@ -129,6 +129,22 @@ En `node-red/flows.json` (id de nodos nuevos `aa000000000000xx`):
   - Verificado con Chrome headless + CDP sobre el editor:
     `RED.nodes.node('uib-terminal-galan-v2').valid === true` y barrido de los 224
     nodos → `invalidCount: 0`.
+
+- **Popup de cisternas y mapa Coriolis (2026-10-22)**:
+  - La consulta `SELECT * FROM cisternas` sí se ejecutaba, pero `Prepare Datos`
+    tenía su salida desconectada. Se añadió un par Link Out/Link In entre la pestaña
+    de base de datos y `UIB Main`, para enviar `LISTA_CISTERNAS` de regreso al cliente.
+  - En `modbus-gateway/config/terminal-galan.{dev,prod}.json`, el caudal másico
+    principal se lee de MI104 (offset 4, factor 1) y la masa acumulada de MI111
+    (offset 11, factor 1). Mapa documentado en `modbus-gateway/README.md`.
+  - Validación local: JSON de Node-RED/configuraciones, `node --check` de
+    `main.js` y `git diff --check` correctos.
+  - Desplegado en el host Docker el 2026-10-22. Node-RED y el gateway iniciaron;
+    `http://127.0.0.1:1880/terminal-galan/` respondió HTTP 200.
+  - **Pendiente de comunicación PLC**: el gateway registra timeout RTU al leer
+    MI100 y ML10 (MI28682) en `/dev/ttyUSB0`; el servicio está arriba, pero aún
+    no se verifican lecturas reales del V560. Revisar COMPipe/puerto serie y
+    confirmar el equipo conectado antes de considerar completa la puesta en marcha.
 
 ## 7. Pendientes
 

@@ -4776,7 +4776,38 @@
         "x": 480,
         "y": 640,
         "wires": [
-            []
+            [
+                "aa000000000000e1"
+            ]
+        ]
+    },
+    {
+        "id": "aa000000000000e1",
+        "type": "link out",
+        "z": "002b5cf35f2cdda5",
+        "name": "Enviar lista cisternas a UIB",
+        "mode": "link",
+        "links": [
+            "aa000000000000e2"
+        ],
+        "x": 680,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "aa000000000000e2",
+        "type": "link in",
+        "z": "619addbf2da107aa",
+        "name": "Recibir lista cisternas",
+        "links": [
+            "aa000000000000e1"
+        ],
+        "x": 800,
+        "y": 160,
+        "wires": [
+            [
+                "main-ui-updates-out"
+            ]
         ]
     },
     {
