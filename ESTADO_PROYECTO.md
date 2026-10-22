@@ -139,11 +139,16 @@ En `node-red/flows.json` (id de nodos nuevos `aa000000000000xx`):
     (offset 11, factor 1). Mapa documentado en `modbus-gateway/README.md`.
   - Validación local: JSON de Node-RED/configuraciones, `node --check` de
     `main.js` y `git diff --check` correctos.
-  - Verificación en el host local `deb-jobensa`: Node-RED y gateway iniciaron y
-    la interfaz respondió HTTP 200. Se detuvo ese stack al confirmar que no es
-    producción; no se considera despliegue de producción.
-  - El gateway local registró timeout RTU en MI100 y MI28682 por `/dev/ttyUSB0`;
-    estas pruebas no confirman comunicación con el PLC de producción.
+  - **Desplegado en producción** en la VM Debian 13 `192.168.12.251` (SSH:
+    `administrador`) el 2026-10-22. El checkout de la VM estaba en `70fd43d`
+    con modificaciones locales; para no pisarlas, se aplicaron solo los cambios
+    de `flows.json` y `terminal-galan.prod.json`, con respaldos `.before-c50aa82-20261022`.
+  - Se reiniciaron `node-red` y `modbus-gateway`. Node-RED quedó saludable y la
+    interfaz de producción respondió HTTP 200 en
+    `http://192.168.12.251:1880/terminal-galan/`.
+  - El gateway sigue activo, pero aún reporta timeouts RTU en MI100 y MI28682.
+    El host tiene `/dev/ttyS0`, mapeado al contenedor como `/dev/ttyUSB0`; no
+    están verificadas lecturas reales del V560.
 
 ## 7. Pendientes
 
@@ -151,28 +156,24 @@ En `node-red/flows.json` (id de nodos nuevos `aa000000000000xx`):
    en `config/terminal-galan.prod.json` (etiquetas `UIT_2002_SPEED/TEMPERATURE/
    PRESSURE_IN/PRESSURE_OUT/FLOW/SP/CV/HH/H` y `PIT_2002_PV`) con las direcciones
    reales del V560 y poner `"enabled": true` + `"publish_registers_only": false`.
-2. **Despliegue en producción** (VM Debian 13, `192.168.12.251`):
-   - Pendiente: el acceso SSH al puerto 22 desde el entorno actual expiró; falta
-     conectividad/ruta y usuario SSH de la VM para completar el despliegue.
-   - Cuando sea accesible, ejecutar `git pull origin main` (commit actual
-     `c50aa82`) y desplegar los servicios indicados abajo.
-   - `docker compose up -d influxdb2 grafana mosquitto node-red modbus-gateway`
-     (revisar que `/dev/ttyUSB0` exista y permisos; el servicio monta el device).
-   - **Reemplaza el gateway físico RTU→TCP**: el Rust lee el serial RTU directo
-     y publica MQTT; Node-RED ya no usa nodos Modbus.
-   - Copiar `.env` con el token de InfluxDB (no está en git).
-3. **Acciones manuales del usuario**:
+2. **Comunicación Modbus en producción**: investigar los timeouts RTU del gateway
+   a MI100 y MI28682 por `/dev/ttyUSB0`; validar COMPipe, puerto serial, baudrate,
+   paridad y que el V560 esté conectado/respondiendo. No confirmar lecturas de proceso
+   hasta ver respuestas válidas en los logs.
+3. **Sincronización del checkout de producción**: la VM conserva cambios locales
+   sin commit y está en `70fd43d`. No hacer `git pull` a ciegas; respaldar/revisar
+   primero esas modificaciones y luego sincronizar con `origin/main`.
+4. **Acciones manuales del usuario**:
    - **Telegram**: revocar/rotar el token en @BotFather (estuvo público en el
      historial viejo hasta el purge). Manual desde la app.
-   - mosquitto debe estar arriba para que el gateway y Node-RED se conecten
-     (`docker compose up -d mosquitto`).
 
 ## 8. Cómo continuar en una sesión nueva
 
 1. Nueva sesión → apuntar al working dir `TerminalGalan/docker2` y leer
    `ESTADO_PROYECTO.md` + `modbus-gateway/README.md`.
-2. Tareas típicas: completar mapa del compresor (PENDIENTE 1), adaptar tópicos
-   del dashboard si cambian nombres de etiquetas, desplegar (PENDIENTE 2).
+2. Tareas típicas: resolver comunicación serial (PENDIENTE 2), preservar y
+   sincronizar las modificaciones locales de producción (PENDIENTE 3), completar
+   mapa del compresor (PENDIENTE 1).
 3. Referencia rápida de comandos:
    - Build gateway: `cd modbus-gateway && cargo build --release`
    - Dev con simulador: `Python/modbus_tcp/env/bin/python Python/modbus_tcp/modbus_simulator.py`
