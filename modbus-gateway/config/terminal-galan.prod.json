@@ -29,7 +29,7 @@
             { "tag": "PIT_2001_PV", "register_offset": 0, "scale": 0.1, "signed": true },
             { "tag": "TIT_2001_PV", "register_offset": 1, "scale": 0.1, "signed": true },
             { "tag": "DIT_2001_PV", "register_offset": 9, "scale": 0.1, "signed": true },
-            { "tag": "UIT_2001_FLOW", "register_offset": 4, "scale": 1, "signed": true },
+            { "tag": "UIT_2001_FLOW", "register_offset": 4, "scale": 0.00390625, "signed": true },
             { "tag": "UIT_2001_TOTAL", "register_offset": 11, "scale": 1 },
             { "tag": "UIT_2003_TOTAL", "register_offset": 13, "scale": 0.1 },
             { "tag": "UIT_2003_FLOW", "register_offset": 14, "scale": 0.1, "signed": true }

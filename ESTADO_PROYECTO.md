@@ -136,8 +136,9 @@ En `node-red/flows.json` (id de nodos nuevos `aa000000000000xx`):
     de producción. Se corrigió el Link In para enviar directamente a
     `uib-terminal-galan-v2`.
   - En `modbus-gateway/config/terminal-galan.{dev,prod}.json`, el caudal másico
-    principal se lee de MI104 (offset 4, factor 1) y la masa acumulada de MI111
-    (offset 11, factor 1). Mapa documentado en `modbus-gateway/README.md`.
+    principal se lee de MI104 (offset 4, Q8.8, escala 1/256) y la masa acumulada
+    de MI111 (offset 11, factor 1). El raw 19998 (`0x4E1E`) equivale a 78.117 kg/h.
+    Mapa documentado en `modbus-gateway/README.md`.
   - Validación local: JSON de Node-RED/configuraciones, `node --check` de
     `main.js` y `git diff --check` correctos.
   - **Desplegado en producción** en la VM Debian 13 `192.168.12.251` (SSH:
@@ -148,10 +149,10 @@ En `node-red/flows.json` (id de nodos nuevos `aa000000000000xx`):
     prueba Chrome headless hizo clic en Crear Cisterna y confirmó el popup con
     las tres filas de la base de datos. La interfaz respondió HTTP 200 en
     `http://192.168.12.251:1880/terminal-galan/`.
-  - El gateway sigue activo, pero aún reporta timeouts RTU en MI100 y MI28682.
-    El host tiene `/dev/ttyS0`, mapeado al contenedor como `/dev/ttyUSB0`; no
-    llegaron mensajes MQTT nuevos de `plant/read/PIT_2001_PV` durante la prueba,
-    así que los datos de instrumentos continúan sin actualización desde el V560.
+  - Diagnóstico del flujo: MI104 entrega raw 19998 (`0x4E1E`); aplicando escala
+    Q8.8 `1/256`, MQTT publica 78.117 kg/h y Chrome muestra 78.1. MI111 conserva
+    factor 1. El gateway mantiene algunos timeouts RTU intermitentes; verificar
+    estabilidad de lectura del V560 en operación.
 
 ## 7. Pendientes
 
@@ -159,10 +160,9 @@ En `node-red/flows.json` (id de nodos nuevos `aa000000000000xx`):
    en `config/terminal-galan.prod.json` (etiquetas `UIT_2002_SPEED/TEMPERATURE/
    PRESSURE_IN/PRESSURE_OUT/FLOW/SP/CV/HH/H` y `PIT_2002_PV`) con las direcciones
    reales del V560 y poner `"enabled": true` + `"publish_registers_only": false`.
-2. **Comunicación Modbus en producción**: investigar los timeouts RTU del gateway
-   a MI100 y MI28682 por `/dev/ttyUSB0`; validar COMPipe, puerto serial, baudrate,
-   paridad y que el V560 esté conectado/respondiendo. No confirmar lecturas de proceso
-   hasta ver respuestas válidas en los logs.
+2. **Estabilidad de comunicación Modbus en producción**: seguir los timeouts RTU
+   intermitentes del gateway al leer el bloque Coriolis por `/dev/ttyUSB0`; validar
+   COMPipe, puerto serial, baudrate, paridad y respuestas completas del V560.
 3. **Sincronización del checkout de producción**: la VM conserva cambios locales
    sin commit y está en `70fd43d`. No hacer `git pull` a ciegas; respaldar/revisar
    primero esas modificaciones y luego sincronizar con `origin/main`.
