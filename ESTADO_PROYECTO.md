@@ -131,9 +131,10 @@ En `node-red/flows.json` (id de nodos nuevos `aa000000000000xx`):
     nodos → `invalidCount: 0`.
 
 - **Popup de cisternas y mapa Coriolis (2026-10-22)**:
-  - La consulta `SELECT * FROM cisternas` sí se ejecutaba, pero `Prepare Datos`
-    tenía su salida desconectada. Se añadió un par Link Out/Link In entre la pestaña
-    de base de datos y `UIB Main`, para enviar `LISTA_CISTERNAS` de regreso al cliente.
+  - La consulta `SELECT * FROM cisternas` y `Prepare Datos` sí se ejecutaban. La
+    ruta de respuesta apuntaba a `main-ui-updates-out`, nodo ausente en el flujo
+    de producción. Se corrigió el Link In para enviar directamente a
+    `uib-terminal-galan-v2`.
   - En `modbus-gateway/config/terminal-galan.{dev,prod}.json`, el caudal másico
     principal se lee de MI104 (offset 4, factor 1) y la masa acumulada de MI111
     (offset 11, factor 1). Mapa documentado en `modbus-gateway/README.md`.
@@ -143,12 +144,14 @@ En `node-red/flows.json` (id de nodos nuevos `aa000000000000xx`):
     `administrador`) el 2026-10-22. El checkout de la VM estaba en `70fd43d`
     con modificaciones locales; para no pisarlas, se aplicaron solo los cambios
     de `flows.json` y `terminal-galan.prod.json`, con respaldos `.before-c50aa82-20261022`.
-  - Se reiniciaron `node-red` y `modbus-gateway`. Node-RED quedó saludable y la
-    interfaz de producción respondió HTTP 200 en
+  - Se reiniciaron `node-red` y `modbus-gateway`. Node-RED quedó saludable; una
+    prueba Chrome headless hizo clic en Crear Cisterna y confirmó el popup con
+    las tres filas de la base de datos. La interfaz respondió HTTP 200 en
     `http://192.168.12.251:1880/terminal-galan/`.
   - El gateway sigue activo, pero aún reporta timeouts RTU en MI100 y MI28682.
     El host tiene `/dev/ttyS0`, mapeado al contenedor como `/dev/ttyUSB0`; no
-    están verificadas lecturas reales del V560.
+    llegaron mensajes MQTT nuevos de `plant/read/PIT_2001_PV` durante la prueba,
+    así que los datos de instrumentos continúan sin actualización desde el V560.
 
 ## 7. Pendientes
 

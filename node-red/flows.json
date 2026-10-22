@@ -4806,7 +4806,7 @@
         "y": 160,
         "wires": [
             [
-                "main-ui-updates-out"
+                "uib-terminal-galan-v2"
             ]
         ]
     },
