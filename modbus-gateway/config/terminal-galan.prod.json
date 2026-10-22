@@ -77,6 +77,7 @@
         { "tag": "PRESSURE_IN", "address": 73 },
         { "tag": "HH", "address": 79 },
         { "tag": "H", "address": 80 },
+        { "tag": "STATUS_CISTERNA", "address": 115 },
         { "tag": "START_BATCH", "address": 0, "coil": true },
         { "tag": "STOP_BATCH", "address": 1, "coil": true },
         { "tag": "CLEAR_BATCH", "address": 2, "coil": true }

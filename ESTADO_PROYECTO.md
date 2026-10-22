@@ -144,8 +144,9 @@ En `node-red/flows.json` (id de nodos nuevos `aa000000000000xx`):
   - **Desplegado en producción** en la VM Debian 13 `192.168.12.251` (SSH:
     `administrador`) el 2026-10-22. El checkout de la VM estaba en `70fd43d`
     con modificaciones locales; para no pisarlas, se aplicaron solo los cambios
-    de `flows.json` y `terminal-galan.prod.json`, con respaldos `.before-c50aa82-20261022`
-    y `.before-ml13-20261022` (gateway config).
+    de `flows.json` y `terminal-galan.prod.json`, con respaldos `.before-c50aa82-20261022`,
+    `.before-ml13-20261022`, `.before-process-workflow-20261022` y
+    `.before-status-115-20261022`.
   - Se reiniciaron `node-red` y `modbus-gateway`. Node-RED quedó saludable; una
     prueba Chrome headless hizo clic en Crear Cisterna y confirmó el popup con
     las tres filas de la base de datos. La interfaz respondió HTTP 200 en
@@ -153,6 +154,14 @@ En `node-red/flows.json` (id de nodos nuevos `aa000000000000xx`):
   - Producción validada tras el cambio: el bloque crudo publicó ML13=87 y MQTT
     `UIT_2001_FLOW=87.0`; una lectura posterior en Chrome mostró 78.0 kg/h. Ambas
     muestras están en el rango esperado. Persisten timeouts RTU intermitentes.
+  - **Proceso de despacho UIBUILDER**: se conectó la salida de gestión de cisternas
+    del `UIB Router` con `Prepare Query`; crear/editar/borrar refresca la lista.
+    Se corrigió el mapeo de producto (PROPANO=1, BUTANO=2, MEZCLA=3), la asignación
+    del estado de CISTERNA 2 y el manejo de promedios vacíos al iniciar. Los detalles
+    de despacho usan el flujo ML13; `STATUS_CISTERNA` se escribe en MI115.
+  - Prueba no actuante en producción: doble clic en una cisterna pobló su placa en
+    el formulario de despacho; los diálogos de llenar/pausar/cerrar aparecieron y se
+    cancelaron. No se guardó un despacho ni se confirmó un comando físico.
 
 ## 7. Pendientes
 
@@ -166,7 +175,10 @@ En `node-red/flows.json` (id de nodos nuevos `aa000000000000xx`):
 3. **Sincronización del checkout de producción**: la VM conserva cambios locales
    sin commit y está en `70fd43d`. No hacer `git pull` a ciegas; respaldar/revisar
    primero esas modificaciones y luego sincronizar con `origin/main`.
-4. **Acciones manuales del usuario**:
+4. **Validación operativa supervisada**: completar un ciclo real de despacho
+   (guardar datos, llenar, pausar y cerrar) y confirmar los registros de `llenados`
+   y las transiciones MI115; en esta sesión no se accionó el equipo.
+5. **Acciones manuales del usuario**:
    - **Telegram**: revocar/rotar el token en @BotFather (estuvo público en el
      historial viejo hasta el purge). Manual desde la app.
 

@@ -55,8 +55,8 @@ palabras de 16 bits, palabra baja primero; la lectura abarca ocho palabras.
 `UIT_2001_FLOW` se obtiene de ML13 como `uint32`, escala 1. ML10/ML11 alimentan
 los contadores de pulsos; ML12 se conserva como `V560_ML12_RAW`.
 
-**Escrituras (V560):** `SIC_SP`→76, `SIC_CV`→75, `PRESSURE_IN`→73, `HH`→79, `H`→80.
-Dev: `STATUS_CISTERNA`→115 (simula el comando de batch), coils `START/STOP/CLEAR_BATCH`→0/1/2.
+**Escrituras (V560):** `SIC_SP`→76, `SIC_CV`→75, `PRESSURE_IN`→73, `HH`→79, `H`→80,
+`STATUS_CISTERNA`→115 (estados del bache); coils `START/STOP/CLEAR_BATCH`→0/1/2.
 
 > **PENDIENTE en producción:** el bloque `compresor` (`UIT_2002_*` y `PIT_2002_PV`)
 > está deshabilitado (`"enabled": false`) porque el mapa real de registros del V560
