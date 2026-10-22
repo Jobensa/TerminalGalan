@@ -139,12 +139,11 @@ En `node-red/flows.json` (id de nodos nuevos `aa000000000000xx`):
     (offset 11, factor 1). Mapa documentado en `modbus-gateway/README.md`.
   - Validación local: JSON de Node-RED/configuraciones, `node --check` de
     `main.js` y `git diff --check` correctos.
-  - Desplegado en el host Docker el 2026-10-22. Node-RED y el gateway iniciaron;
-    `http://127.0.0.1:1880/terminal-galan/` respondió HTTP 200.
-  - **Pendiente de comunicación PLC**: el gateway registra timeout RTU al leer
-    MI100 y ML10 (MI28682) en `/dev/ttyUSB0`; el servicio está arriba, pero aún
-    no se verifican lecturas reales del V560. Revisar COMPipe/puerto serie y
-    confirmar el equipo conectado antes de considerar completa la puesta en marcha.
+  - Verificación en el host local `deb-jobensa`: Node-RED y gateway iniciaron y
+    la interfaz respondió HTTP 200. Se detuvo ese stack al confirmar que no es
+    producción; no se considera despliegue de producción.
+  - El gateway local registró timeout RTU en MI100 y MI28682 por `/dev/ttyUSB0`;
+    estas pruebas no confirman comunicación con el PLC de producción.
 
 ## 7. Pendientes
 
@@ -152,8 +151,11 @@ En `node-red/flows.json` (id de nodos nuevos `aa000000000000xx`):
    en `config/terminal-galan.prod.json` (etiquetas `UIT_2002_SPEED/TEMPERATURE/
    PRESSURE_IN/PRESSURE_OUT/FLOW/SP/CV/HH/H` y `PIT_2002_PV`) con las direcciones
    reales del V560 y poner `"enabled": true` + `"publish_registers_only": false`.
-2. **Despliegue en producción** (Windows Server + Debian + Docker):
-   - `git pull` / clonar en la máquina de producción.
+2. **Despliegue en producción** (VM Debian 13, `192.168.12.251`):
+   - Pendiente: el acceso SSH al puerto 22 desde el entorno actual expiró; falta
+     conectividad/ruta y usuario SSH de la VM para completar el despliegue.
+   - Cuando sea accesible, ejecutar `git pull origin main` (commit actual
+     `c50aa82`) y desplegar los servicios indicados abajo.
    - `docker compose up -d influxdb2 grafana mosquitto node-red modbus-gateway`
      (revisar que `/dev/ttyUSB0` exista y permisos; el servicio monta el device).
    - **Reemplaza el gateway físico RTU→TCP**: el Rust lee el serial RTU directo
