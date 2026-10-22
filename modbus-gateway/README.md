@@ -32,7 +32,9 @@ Node-RED:
 ## Configuración
 
 - `config/terminal-galan.dev.json` → contra el simulador TCP (`Python/modbus_tcp/modbus_simulator.py`, puerto 5502).
-- `config/terminal-galan.prod.json` → RTU serial `/dev/ttyUSB0` 57600 (V560).
+- `config/terminal-galan.prod.json` → RTU serial `/dev/ttyUSB0` 57600 (V560,
+  ruta interna del contenedor). Compose mapea el COM1 de Windows/COMPipe desde
+  `/dev/ttyS0` del host hacia esa ruta interna.
 
 Campos de un `Field`: `tag`, `register_offset` (índice dentro del bloque leído),
 `scale` y `offset`; el valor publicado es `raw * scale + offset`.
@@ -49,14 +51,16 @@ Campos de un `Field`: `tag`, `register_offset` (índice dentro del bloque leído
 | 113 (13) | `UIT_2003_TOTAL` | /10 | |
 | 114 (14) | `UIT_2003_FLOW` | /10 | |
 
-**ML Unitronics del V560 (FC 3):** ML13 inicia en `0x7010` (28688), offset 6
-respecto al bloque que comienza en ML10 (`0x700A` / 28682). Cada ML ocupa dos
-palabras de 16 bits, palabra baja primero; la lectura abarca ocho palabras.
-`UIT_2001_FLOW` se obtiene de ML13 como `uint32`, escala 1. ML10/ML11 alimentan
-los contadores de pulsos; ML12 se conserva como `V560_ML12_RAW`.
+**Registros ML Unitronics del V560 Enhanced (FC 3 / holding registers):** ML0
+comienza en `0x7000` (28672). ML10 inicia en `0x700A` (28682), ML11 en `0x700C`
+(28684), ML12 en `0x700E` (28686) y ML13 en `0x7010` (28688). Cada ML ocupa dos
+palabras de 16 bits, palabra baja primero; el gateway lee ocho palabras desde ML10.
+ML10 y ML11 se decodifican como `uint32` y publican los pulsos/masa por pulsos
+(`20 pulsos/kg`, `pulsos × 0.05`); ML12 queda como `V560_ML12_RAW`; el flujo másico
+principal `UIT_2001_FLOW` proviene de ML13 con factor 1.
 
 **Escrituras (V560):** `SIC_SP`→76, `SIC_CV`→75, `PRESSURE_IN`→73, `HH`→79, `H`→80,
-`STATUS_CISTERNA`→115 (estados del bache); coils `START/STOP/CLEAR_BATCH`→0/1/2.
+`STATUS_CISTERNA`→115 (estados de batch); coils `START/STOP/CLEAR_BATCH`→0/1/2.
 
 > **PENDIENTE en producción:** el bloque `compresor` (`UIT_2002_*` y `PIT_2002_PV`)
 > está deshabilitado (`"enabled": false`) porque el mapa real de registros del V560
@@ -85,7 +89,7 @@ docker exec mosquitto mosquitto_pub -t 'plant/write/SIC_SP' -m '765'
 
 ## Docker
 
-Servicio en `compose.yaml` (`modbus-gateway`). En producción habilitar el puerto
-serie (`devices: - /dev/ttyUSB0:/dev/ttyUSB0`, ya declarado) y montar el config
-como `terminal-galan.json` (ver `command`). No iniciarlo en desarrollo (no hay
-`/dev/ttyUSB0`): se prueba con el binario en el host contra el simulador TCP.
+Servicio en `compose.yaml` (`modbus-gateway`). En producción el puerto del host
+se publica como `/dev/ttyS0` por COMPipe y se monta dentro del contenedor como
+`/dev/ttyUSB0`. No iniciarlo en desarrollo (no hay el puerto serial): se prueba
+con el binario en el host contra el simulador TCP.

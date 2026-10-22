@@ -180,7 +180,7 @@
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
-        "initialize": "// El código añadido aquí se ejecutará una vez\n// cuando el nodo es iniciado.\n\nglobal.set(\"PU\", 1);\nglobal.set(\"IS_REPORT\", false);\n\n// let tag = {\n//     \"ID\": 0,\n//     \"TagName\": \"PIT_2001\",\n//     \"Descripcion\": \"Presion de Descarga\",\n//     \"und\": \"PSI\",\n//     \"PV\": 0.0,\n//     \"HH\": 95.0,\n//     \"H\": 90.0,\n//     \"L\": 15.0,\n//     \"LL\": 10,\n//     \"Max\": 560,\n//     \"Min\": 0,\n//     \"enableHH\": 1,\n//     \"enableH\": 1,\n//     \"enableL\": 1,\n//     \"enableLL\": 1,\n//     \"ALARM\": \"#00f800\",\n//     \"FAIL\": 0,\n// }\n// global.set(tag.TagName,tag);\n\n// tag = {\n//     \"ID\": 0,\n//     \"TagName\": \"TIT_2001\",\n//     \"Descripcion\": \"Teperatura de Descarga\",\n//     \"und\": \"°F\",\n//     \"PV\": 0.0,\n//     \"HH\": 95.0,\n//     \"H\": 90.0,\n//     \"L\": 15.0,\n//     \"LL\": 10,\n//     \"Max\": 560,\n//     \"Min\": 0,\n//     \"enableHH\": 1,\n//     \"enableH\": 1,\n//     \"enableL\": 1,\n//     \"enableLL\": 1,\n//     \"ALARM\": \"#00f800\",\n//     \"FAIL\": 0,\n// };\n// global.set(tag.TagName, tag);\n\nlet tag = {\n    \"ID\": 0,\n    \"TagName\": \"DIT_2001\",\n    \"Descripcion\": \"Densidad de gas\",\n    \"und\": \"kg/m3\",\n    \"PV\": 0.0,\n    \"HH\": 750.0,\n    \"H\": 700.0,\n    \"L\": 450.0,\n    \"LL\": 400,\n    \"Max\": 1000,\n    \"Min\": 0,\n    \"enableHH\": 1,\n    \"enableH\": 1,\n    \"enableL\": 1,\n    \"enableLL\": 1,\n    \"ALARM\": \"#00f800\",\n    \"FAIL\": 0,\n};\nglobal.set(tag.TagName, tag);\n\ntag = {\n    \"ID\": 0,\n    \"TagName\": \"PIT_2002\",\n    \"Descripcion\": \"Presion Gasoducto\",\n    \"und\": \"PSIA\",\n    \"PV\": 0.0,\n    \"HH\": 490,\n    \"H\": 480,\n    \"L\": 20,\n    \"LL\": 10,\n    \"Max\": 600,\n    \"Min\": 0,\n    \"enableHH\": 1,\n    \"enableH\": 1,\n    \"enableL\": 1,\n    \"enableLL\": 1,\n    \"ALARM\": \"#00f800\",\n    \"FAIL\": 0,\n};\nglobal.set(tag.TagName, tag);\n\nlet pid = {\n    PV: 0.0,\n    SP: 2.0,\n    CV: 0.0\n}\n\nglobal.set(\"SIC_2002\", pid);\n\nlet uit_2001 = {\n    FLOW: 0.0,\n    DENSITY: 0.450,\n    TOTAL: 0\n}\nglobal.set(\"UIT_2001\", uit_2001);\n\nlet uit = {\n    SPEED: 0.0,\n    TEMPERATURE: 0.0,\n    PRESSURE_IN: 0.0,\n    PRESSURE_OUT: 0.0,\n    FLOW: 0.0\n}\nglobal.set(\"UIT_2002\", uit);\n\nlet uit_2003 = {\n    FLOW: 0.0,\n    DENSITY: 0.450,\n    TOTAL: 0\n}\nglobal.set(\"UIT_2003\", uit_2003);\n\n\nlet segment1 = {\n    cisterna_id: 1,\n    segmento_id: 1,\n    temperatura: 35.5,\n    presion: 650,\n    densidad: 0.585,\n    flujo_actual: 150,\n    volumen_acumulado: 0\n};\n\nlet segment2 = {\n    cisterna_id: 1,\n    segmento_id: 1,\n    temperatura: 35.5,\n    presion: 650,\n    densidad: 0.585,\n    flujo_actual: 150,\n    volumen_acumulado: 0\n};\n\n\n\nglobal.set(\"SEGMENT_VALUES1\", segment1);\nglobal.set(\"SEGMENT_VALUES2\", segment2);\n\nlet segment_display =\n{\n    CLIENTE: \"cliente\",\n    PRODUCTO: \"Propano\",\n    FECHA: \"dd-mm-aaaa hh:mm:ss\",\n    TIQUETE_No: 100,\n    RVP: 120,\n    MASA_CORIOLIS: 560,\n    VOL_INDICADO: 0,\n    MASA_VAPORES: 0,\n}\nglobal.set(\"SEGMENT_DISPLAY\", segment_display);\n\n//STATUS_CISTERNA 0. Vacia, 1. Llenando, 2. Pausada, 3.Cerrada\nglobal.set(\"STATUS_CISTERNA1\", 0);\nglobal.set(\"STATUS_CISTERNA2\", 0);\nglobal.set(\"CISTERNA1_VISIBLE\", 1);\nglobal.set(\"CISTERNA2_VISIBLE\",1);\n\n\n\n\n\n\nlet cisterna1 = {\n    numero_sisterna: \"PLACA_XXX\",\n    nombre_conductor: \"CONDUCTOR\",\n    empresa_cliente: \"CLIENTE\",\n    producto_principal: \"PROPANO\",\n    galones_objetivo: 14000,\n    observaciones: \"Observaciones\"\n}\n\nglobal.set(\"CISTERNA1\", cisterna1);\n\nlet cisterna2 = {\n    numero_sisterna: \"PLACA_XXX\",\n    nombre_conductor: \"CONDUCTOR\",\n    empresa_cliente: \"CLIENTE\",\n    producto_principal: \"PROPANO\",\n    galones_objetivo: 14000,\n    observaciones: \"Observaciones\"\n}\n\nglobal.set(\"CISTERNA2\", cisterna2);\n\nlet datos_llenado = {\n    presion: 0,\n    flujo: 0,\n    temperatura: 0,\n    densidad: 0,\n    total: 0,\n    last_total: 0\n};\nglobal.set(\"DATOS_LLENADO\", datos_llenado);\n\n\nlet fill_segment1 =\n{\n    \"cliente\": \"ALMAGAS\",\n    \"producto\": \"PROPANO\",\n    \"cisterna\": \"EJD315\", \n    \"tiquete\": 123,\n     \"fecha\": \"12-18-2025, 8:28:25 AM\", \n     \"rvp\": 180, \n     \"Vol_full\": 14000, \n     \"origen\": \"LLENADO\"\n};\n\nlet promedios={\n    \n        llenado_id :0,\n        flujo_promedio:0.0,\n        densidad_promedio :0.0,\n        presion_promedio :0.0,\n        temperatura_promedio :0.0,\n        volumen_total:0\n\n};\nglobal.set(\"PROMEDIOS\",promedios);\n\nglobal.set(\"FILL_SEGMENT1\",fill_segment1);\nglobal.set(\"FILL_SEGMENT2\", fill_segment1);\n\nglobal.set(\"ID_CISTERNA1\",0);\nglobal.set(\"ID_PRODUCTO1\", 0);\nglobal.set(\"ID_LLENADO1\", 0);\n\nglobal.set(\"ID_CISTERNA2\", 0);\nglobal.set(\"ID_PRODUCTO2\", 0);\nglobal.set(\"ID_LLENADO2\", 0);\n\nglobal.set(\"VOLUMEN_ACTUAL\",0);\nglobal.set(\"INLINE_PRODUCT\",\"Propano\");",
+        "initialize": "// El c\u00f3digo a\u00f1adido aqu\u00ed se ejecutar\u00e1 una vez\n// cuando el nodo es iniciado.\n\nglobal.set(\"PU\", 1);\nglobal.set(\"IS_REPORT\", false);\n\n// let tag = {\n//     \"ID\": 0,\n//     \"TagName\": \"PIT_2001\",\n//     \"Descripcion\": \"Presion de Descarga\",\n//     \"und\": \"PSI\",\n//     \"PV\": 0.0,\n//     \"HH\": 95.0,\n//     \"H\": 90.0,\n//     \"L\": 15.0,\n//     \"LL\": 10,\n//     \"Max\": 560,\n//     \"Min\": 0,\n//     \"enableHH\": 1,\n//     \"enableH\": 1,\n//     \"enableL\": 1,\n//     \"enableLL\": 1,\n//     \"ALARM\": \"#00f800\",\n//     \"FAIL\": 0,\n// }\n// global.set(tag.TagName,tag);\n\n// tag = {\n//     \"ID\": 0,\n//     \"TagName\": \"TIT_2001\",\n//     \"Descripcion\": \"Teperatura de Descarga\",\n//     \"und\": \"\u00b0F\",\n//     \"PV\": 0.0,\n//     \"HH\": 95.0,\n//     \"H\": 90.0,\n//     \"L\": 15.0,\n//     \"LL\": 10,\n//     \"Max\": 560,\n//     \"Min\": 0,\n//     \"enableHH\": 1,\n//     \"enableH\": 1,\n//     \"enableL\": 1,\n//     \"enableLL\": 1,\n//     \"ALARM\": \"#00f800\",\n//     \"FAIL\": 0,\n// };\n// global.set(tag.TagName, tag);\n\nlet tag = {\n    \"ID\": 0,\n    \"TagName\": \"DIT_2001\",\n    \"Descripcion\": \"Densidad de gas\",\n    \"und\": \"kg/m3\",\n    \"PV\": 0.0,\n    \"HH\": 750.0,\n    \"H\": 700.0,\n    \"L\": 450.0,\n    \"LL\": 400,\n    \"Max\": 1000,\n    \"Min\": 0,\n    \"enableHH\": 1,\n    \"enableH\": 1,\n    \"enableL\": 1,\n    \"enableLL\": 1,\n    \"ALARM\": \"#00f800\",\n    \"FAIL\": 0,\n};\nglobal.set(tag.TagName, tag);\n\ntag = {\n    \"ID\": 0,\n    \"TagName\": \"PIT_2002\",\n    \"Descripcion\": \"Presion Gasoducto\",\n    \"und\": \"PSIA\",\n    \"PV\": 0.0,\n    \"HH\": 490,\n    \"H\": 480,\n    \"L\": 20,\n    \"LL\": 10,\n    \"Max\": 600,\n    \"Min\": 0,\n    \"enableHH\": 1,\n    \"enableH\": 1,\n    \"enableL\": 1,\n    \"enableLL\": 1,\n    \"ALARM\": \"#00f800\",\n    \"FAIL\": 0,\n};\nglobal.set(tag.TagName, tag);\n\nlet pid = {\n    PV: 0.0,\n    SP: 2.0,\n    CV: 0.0\n}\n\nglobal.set(\"SIC_2002\", pid);\n\nlet uit_2001 = {\n    FLOW: 0.0,\n    DENSITY: 0.450,\n    TOTAL: 0\n}\nglobal.set(\"UIT_2001\", uit_2001);\n\nlet uit = {\n    SPEED: 0.0,\n    TEMPERATURE: 0.0,\n    PRESSURE_IN: 0.0,\n    PRESSURE_OUT: 0.0,\n    FLOW: 0.0\n}\nglobal.set(\"UIT_2002\", uit);\n\nlet uit_2003 = {\n    FLOW: 0.0,\n    DENSITY: 0.450,\n    TOTAL: 0\n}\nglobal.set(\"UIT_2003\", uit_2003);\n\n\nlet segment1 = {\n    cisterna_id: 1,\n    segmento_id: 1,\n    temperatura: 35.5,\n    presion: 650,\n    densidad: 0.585,\n    flujo_actual: 150,\n    volumen_acumulado: 0\n};\n\nlet segment2 = {\n    cisterna_id: 1,\n    segmento_id: 1,\n    temperatura: 35.5,\n    presion: 650,\n    densidad: 0.585,\n    flujo_actual: 150,\n    volumen_acumulado: 0\n};\n\n\n\nglobal.set(\"SEGMENT_VALUES1\", segment1);\nglobal.set(\"SEGMENT_VALUES2\", segment2);\n\nlet segment_display =\n{\n    CLIENTE: \"cliente\",\n    PRODUCTO: \"Propano\",\n    FECHA: \"dd-mm-aaaa hh:mm:ss\",\n    TIQUETE_No: 100,\n    RVP: 120,\n    MASA_CORIOLIS: 560,\n    VOL_INDICADO: 0,\n    MASA_VAPORES: 0,\n}\nglobal.set(\"SEGMENT_DISPLAY\", segment_display);\n\n//STATUS_CISTERNA 0. Vacia, 1. Llenando, 2. Pausada, 3.Cerrada\nglobal.set(\"STATUS_CISTERNA1\", 0);\nglobal.set(\"STATUS_CISTERNA2\", 0);\nglobal.set(\"CISTERNA1_VISIBLE\", 1);\nglobal.set(\"CISTERNA2_VISIBLE\",1);\n\n\n\n\n\n\nlet cisterna1 = {\n    numero_sisterna: \"PLACA_XXX\",\n    nombre_conductor: \"CONDUCTOR\",\n    empresa_cliente: \"CLIENTE\",\n    producto_principal: \"PROPANO\",\n    galones_objetivo: 14000,\n    observaciones: \"Observaciones\"\n}\n\nglobal.set(\"CISTERNA1\", cisterna1);\n\nlet cisterna2 = {\n    numero_sisterna: \"PLACA_XXX\",\n    nombre_conductor: \"CONDUCTOR\",\n    empresa_cliente: \"CLIENTE\",\n    producto_principal: \"PROPANO\",\n    galones_objetivo: 14000,\n    observaciones: \"Observaciones\"\n}\n\nglobal.set(\"CISTERNA2\", cisterna2);\n\nlet datos_llenado = {\n    presion: 0,\n    flujo: 0,\n    temperatura: 0,\n    densidad: 0,\n    total: 0,\n    last_total: 0\n};\nglobal.set(\"DATOS_LLENADO\", datos_llenado);\n\n\nlet fill_segment1 =\n{\n    \"cliente\": \"ALMAGAS\",\n    \"producto\": \"PROPANO\",\n    \"cisterna\": \"EJD315\", \n    \"tiquete\": 123,\n     \"fecha\": \"12-18-2025, 8:28:25 AM\", \n     \"rvp\": 180, \n     \"Vol_full\": 14000, \n     \"origen\": \"LLENADO\"\n};\n\nlet promedios={\n    \n        llenado_id :0,\n        flujo_promedio:0.0,\n        densidad_promedio :0.0,\n        presion_promedio :0.0,\n        temperatura_promedio :0.0,\n        volumen_total:0\n\n};\nglobal.set(\"PROMEDIOS\",promedios);\n\nglobal.set(\"FILL_SEGMENT1\",fill_segment1);\nglobal.set(\"FILL_SEGMENT2\", fill_segment1);\n\nglobal.set(\"ID_CISTERNA1\",0);\nglobal.set(\"ID_PRODUCTO1\", 0);\nglobal.set(\"ID_LLENADO1\", 0);\n\nglobal.set(\"ID_CISTERNA2\", 0);\nglobal.set(\"ID_PRODUCTO2\", 0);\nglobal.set(\"ID_LLENADO2\", 0);\n\nglobal.set(\"VOLUMEN_ACTUAL\",0);\nglobal.set(\"INLINE_PRODUCT\",\"Propano\");",
         "finalize": "",
         "libs": [],
         "x": 300,
@@ -212,7 +212,7 @@
         "type": "function",
         "z": "ee81cc611986e56f",
         "name": "function 2",
-        "func": "// Los tags publicados por plant/read son la unica fuente para valores de instrumentos.\n// El bloque crudo solo alimenta calculos de segmento y estado/tiquete del batch.\nfunction int16(offset) {\n  const raw = Number(msg.payload[offset]) || 0;\n  return raw > 0x7FFF ? raw - 0x10000 : raw;\n}\n\nconst sel_cisterna = global.get(\"SEL_CISTERNA\");\nconst sel_segment = sel_cisterna === \"CISTERNA1\" ? \"SEGMENT_VALUES1\" : \"SEGMENT_VALUES2\";\nconst sel_status = sel_cisterna === \"CISTERNA1\" ? \"STATUS_CISTERNA1\" : \"STATUS_CISTERNA2\";\nconst promedios = global.get(\"PROMEDIOS\");\nconst presion = int16(0) / 10;\nconst temperatura = int16(1) / 10;\nconst densidad = int16(9) / 10;\nconst flujo2001 = Number((global.get(\"UIT_2001\") || {}).FLOW) || 0;\n\nif (global.get(sel_status) === 2) {\n  const segment = global.get(sel_segment);\n  segment.temperatura = temperatura;\n  segment.presion = presion;\n  segment.densidad = densidad;\n  segment.flujo_actual = flujo2001;\n  segment.volumen_acumulado = promedios.volumen_total + msg.payload[11];\n  global.set(sel_segment, segment);\n}\n\nglobal.set(\"TIKET_N\", msg.payload[24]);\nglobal.set(\"ESTADO_BATCH\", msg.payload[23]); // 0=Pausado, 1=Activo\nmsg.payload = sel_segment;\nreturn msg;",
+        "func": "// Los tags publicados por plant/read son la unica fuente para valores de instrumentos.\n// El bloque crudo solo alimenta calculos de segmento y estado/tiquete del batch.\nfunction int16(offset) {\n  const raw = Number(msg.payload[offset]) || 0;\n  return raw > 0x7FFF ? raw - 0x10000 : raw;\n}\n\nconst sel_cisterna = global.get(\"SEL_CISTERNA\");\nconst sel_segment = sel_cisterna === \"CISTERNA1\" ? \"SEGMENT_VALUES1\" : \"SEGMENT_VALUES2\";\nconst sel_status = sel_cisterna === \"CISTERNA1\" ? \"STATUS_CISTERNA1\" : \"STATUS_CISTERNA2\";\nconst promedios = global.get(\"PROMEDIOS\");\nconst presion = int16(0) / 10;\nconst temperatura = int16(1) / 10;\nconst densidad = int16(3) / 10;\nconst flujo2001 = Number((global.get(\"UIT_2001\") || {}).FLOW) || 0;\n\nif (global.get(sel_status) === 2) {\n  const segment = global.get(sel_segment);\n  segment.temperatura = temperatura;\n  segment.presion = presion;\n  segment.densidad = densidad;\n  segment.flujo_actual = flujo2001;\n  segment.volumen_acumulado = promedios.volumen_total + msg.payload[11];\n  global.set(sel_segment, segment);\n}\n\nglobal.set(\"TIKET_N\", msg.payload[24]);\nglobal.set(\"ESTADO_BATCH\", msg.payload[23]); // 0=Pausado, 1=Activo\nmsg.payload = sel_segment;\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -267,7 +267,7 @@
         "type": "function",
         "z": "ee81cc611986e56f",
         "name": "Get PLC Data",
-        "func": "const p = msg.payload || {};\nif (typeof p.tag !== \"string\" || !Number.isFinite(Number(p.value))) return null;\n\nconst value = Number(p.value);\nconst tags = global.get(\"PLC\") || {};\ntags[p.tag] = p;\nglobal.set(\"PLC\", tags);\n\n// plant/read es la fuente unica para los globals de instrumentos.\nconst destinations = {\n    PIT_2001_PV: [[\"PIT_2001\", \"PV\"]],\n    TIT_2001_PV: [[\"TIT_2001\", \"PV\"]],\n    DIT_2001_PV: [[\"DIT_2001\", \"PV\"], [\"UIT_2001_DENSITY\", \"PV\"], [\"UIT_2001\", \"DENSITY\"], [\"UIT_2003\", \"DENSITY\"]],\n    UIT_2001_FLOW: [[\"UIT_2001\", \"FLOW\"], [\"FIT_2001\", \"PV\"]],\n    UIT_2001_TOTAL: [[\"UIT_2001\", \"TOTAL\"]],\n    UIT_2003_FLOW: [[\"UIT_2003\", \"FLOW\"]],\n    UIT_2003_TOTAL: [[\"UIT_2003\", \"TOTAL\"]],\n    UIT_2002_SPEED: [[\"UIT_2002\", \"SPEED\"], [\"SIC_2002\", \"PV\"]],\n    UIT_2002_TEMPERATURE: [[\"UIT_2002\", \"TEMPERATURE\"]],\n    UIT_2002_PRESSURE_IN: [[\"UIT_2002\", \"PRESSURE_IN\"]],\n    UIT_2002_PRESSURE_OUT: [[\"UIT_2002\", \"PRESSURE_OUT\"]],\n    UIT_2002_FLOW: [[\"UIT_2002\", \"FLOW\"]],\n    UIT_2002_SP: [[\"UIT_2002\", \"SP\"], [\"SIC_2002\", \"SP\"]],\n    UIT_2002_CV: [[\"UIT_2002\", \"CV\"], [\"SIC_2002\", \"CV\"]],\n    UIT_2002_HH: [[\"PIT_2002\", \"HH\"]],\n    UIT_2002_H: [[\"PIT_2002\", \"H\"]],\n    PIT_2002_PV: [[\"PIT_2002\", \"PV\"]]\n};\n\nconst commandLocks = {\n    UIT_2002_PRESSURE_IN: global.get(\"SendPressureIN\") !== false,\n    UIT_2002_SP: global.get(\"SendSIC_SP\") !== false || global.get(\"SendSIC_CV\") !== false,\n    UIT_2002_CV: global.get(\"SendSIC_SP\") !== false || global.get(\"SendSIC_CV\") !== false,\n    UIT_2002_HH: global.get(\"SendHH\") !== false || global.get(\"SendH\") !== false,\n    UIT_2002_H: global.get(\"SendHH\") !== false || global.get(\"SendH\") !== false\n};\n\nif (!commandLocks[p.tag]) {\n    for (const [objectName, property] of destinations[p.tag] || []) {\n        const object = global.get(objectName) || {};\n        object[property] = value;\n        global.set(objectName, object);\n    }\n}\n\nmsg.payload = p.tag;\nreturn msg;",
+        "func": "const p = msg.payload || {};\nif (typeof p.tag !== \"string\" || !Number.isFinite(Number(p.value))) return null;\n\nconst value = Number(p.value);\nconst tags = global.get(\"PLC\") || {};\ntags[p.tag] = p;\nglobal.set(\"PLC\", tags);\n\n// plant/read es la fuente unica para los globals de instrumentos.\nconst destinations = {\n    PIT_2001_PV: [[\"PIT_2001\", \"PV\"]],\n    TIT_2001_PV: [[\"TIT_2001\", \"PV\"]],\n    DIT_2001_PV: [[\"DIT_2001\", \"PV\"], [\"UIT_2001_DENSITY\", \"PV\"], [\"UIT_2001\", \"DENSITY\"], [\"UIT_2003\", \"DENSITY\"]],\n    UIT_2001_FLOW: [[\"UIT_2001\", \"FLOW\"], [\"FIT_2001\", \"PV\"]],\n    UIT_2001_TOTAL: [[\"UIT_2001\", \"TOTAL\"]],\n    UIT_2001_PULSES: [[\"UIT_2001\", \"PULSES\"]],\n    UIT_2001_TOTAL_MASS_KG: [[\"UIT_2001\", \"TOTAL_MASS_KG\"]],\n    UIT_2003_PULSES: [[\"UIT_2003\", \"PULSES\"]],\n    UIT_2003_TOTAL_MASS_KG: [[\"UIT_2003\", \"TOTAL_MASS_KG\"]],\n    UIT_2003_FLOW: [[\"UIT_2003\", \"FLOW\"]],\n    UIT_2003_TOTAL: [[\"UIT_2003\", \"TOTAL\"]],\n    UIT_2002_SPEED: [[\"UIT_2002\", \"SPEED\"], [\"SIC_2002\", \"PV\"]],\n    UIT_2002_TEMPERATURE: [[\"UIT_2002\", \"TEMPERATURE\"]],\n    UIT_2002_PRESSURE_IN: [[\"UIT_2002\", \"PRESSURE_IN\"]],\n    UIT_2002_PRESSURE_OUT: [[\"UIT_2002\", \"PRESSURE_OUT\"]],\n    UIT_2002_FLOW: [[\"UIT_2002\", \"FLOW\"]],\n    UIT_2002_SP: [[\"UIT_2002\", \"SP\"], [\"SIC_2002\", \"SP\"]],\n    UIT_2002_CV: [[\"UIT_2002\", \"CV\"], [\"SIC_2002\", \"CV\"]],\n    UIT_2002_HH: [[\"PIT_2002\", \"HH\"]],\n    UIT_2002_H: [[\"PIT_2002\", \"H\"]],\n    PIT_2002_PV: [[\"PIT_2002\", \"PV\"]]\n};\n\nconst commandLocks = {\n    UIT_2002_PRESSURE_IN: global.get(\"SendPressureIN\") !== false,\n    UIT_2002_SP: global.get(\"SendSIC_SP\") !== false || global.get(\"SendSIC_CV\") !== false,\n    UIT_2002_CV: global.get(\"SendSIC_SP\") !== false || global.get(\"SendSIC_CV\") !== false,\n    UIT_2002_HH: global.get(\"SendHH\") !== false || global.get(\"SendH\") !== false,\n    UIT_2002_H: global.get(\"SendHH\") !== false || global.get(\"SendH\") !== false\n};\n\nif (!commandLocks[p.tag]) {\n    for (const [objectName, property] of destinations[p.tag] || []) {\n        const object = global.get(objectName) || {};\n        object[property] = value;\n        global.set(objectName, object);\n    }\n}\n\nmsg.payload = p.tag;\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -540,7 +540,7 @@
         "type": "function",
         "z": "ee81cc611986e56f",
         "name": "InitGlobals",
-        "func": "// Inicializa las variables globales que el resto del flujo espera.\n// Se ejecuta una sola vez al arrancar (inject once).\nfunction ensure(key, value) {\n    if (global.get(key) === undefined || global.get(key) === null) {\n        global.set(key, value);\n    }\n}\nensure(\"PIT_2001\",            {PV: 0});\nensure(\"TIT_2001\",            {PV: 0});\nensure(\"FIT_2001\",            {PV: 0});\nensure(\"DIT_2001\",            {PV: 0});\nensure(\"UIT_2001_DENSITY\",    {PV: 0});\nensure(\"UIT_2001\",            {FLOW:0, DENSITY:0, TOTAL:0});\nensure(\"UIT_2003\",            {FLOW:0, DENSITY:0, TOTAL:0});\nensure(\"UIT_2002\",            {SPEED:0, TEMPERATURE:0, PRESSURE_IN:0, PRESSURE_OUT:0, FLOW:0, SP:0, CV:0, HH:0, H:0});\nensure(\"PIT_2002\",            {PV:0, HH:0, H:0});\nensure(\"SIC_2002\",            {PV:0, SP:0, CV:0});\nensure(\"PROMEDIOS\",           {volumen_total: 0});\nensure(\"SEL_CISTERNA\",        \"CISTERNA1\");\nensure(\"STATUS_CISTERNA1\",    0);\nensure(\"STATUS_CISTERNA2\",    0);\nensure(\"SEGMENT_VALUES1\",     {temperatura:0, presion:0, densidad:0, flujo_actual:0, volumen_acumulado:0});\nensure(\"SEGMENT_VALUES2\",     {temperatura:0, presion:0, densidad:0, flujo_actual:0, volumen_acumulado:0});\nreturn null;",
+        "func": "// Inicializa las variables globales que el resto del flujo espera.\n// Se ejecuta una sola vez al arrancar (inject once).\nfunction ensure(key, value) {\n    if (global.get(key) === undefined || global.get(key) === null) {\n        global.set(key, value);\n    }\n}\nensure(\"PIT_2001\",            {PV: 0});\nensure(\"TIT_2001\",            {PV: 0});\nensure(\"FIT_2001\",            {PV: 0});\nensure(\"DIT_2001\",            {PV: 0});\nensure(\"UIT_2001_DENSITY\",    {PV: 0});\nensure(\"UIT_2001\",            {FLOW:0, DENSITY:0, TOTAL:0, PULSES:0, TOTAL_MASS_KG:0});\nensure(\"UIT_2003\",            {FLOW:0, DENSITY:0, TOTAL:0, PULSES:0, TOTAL_MASS_KG:0});\nensure(\"UIT_2002\",            {SPEED:0, TEMPERATURE:0, PRESSURE_IN:0, PRESSURE_OUT:0, FLOW:0, SP:0, CV:0, HH:0, H:0});\nensure(\"PIT_2002\",            {PV:0, HH:0, H:0});\nensure(\"SIC_2002\",            {PV:0, SP:0, CV:0});\nensure(\"PROMEDIOS\",           {volumen_total: 0});\nensure(\"SEL_CISTERNA\",        \"CISTERNA1\");\nensure(\"STATUS_CISTERNA1\",    0);\nensure(\"STATUS_CISTERNA2\",    0);\nensure(\"SEGMENT_VALUES1\",     {temperatura:0, presion:0, densidad:0, flujo_actual:0, volumen_acumulado:0});\nensure(\"SEGMENT_VALUES2\",     {temperatura:0, presion:0, densidad:0, flujo_actual:0, volumen_acumulado:0});\nreturn null;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -582,7 +582,7 @@
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
-        "initialize": "// El código añadido aquí se ejecutará una vez\n// cuando el nodo es iniciado.\nflow.set(\"PV_SIM\",0);",
+        "initialize": "// El c\u00f3digo a\u00f1adido aqu\u00ed se ejecutar\u00e1 una vez\n// cuando el nodo es iniciado.\nflow.set(\"PV_SIM\",0);",
         "finalize": "",
         "libs": [],
         "x": 300,
@@ -687,7 +687,7 @@
         "type": "function",
         "z": "6910828fa524c0ad",
         "name": "function 49",
-        "func": "// Asumimos que msg.payload contiene el array de objetos de alarma\nmsg.payload = msg.payload.map(alarm => {\n    let severity, icon;\n    \n    // Determinar la severidad y el icono basado en el texto de la Alerta\n    if (alarm.Alerta.includes('Muy Alta') || alarm.Alerta.includes('Muy Baja')) {\n        severity = 'high';\n        icon = '⚠️';\n    } else if (alarm.Alerta.includes('Alta') || alarm.Alerta.includes('Baja')) {\n        severity = 'medium';\n        icon = '⚠';\n    } else {\n        severity = 'low';\n        icon = 'ℹ️';\n    }\n    \n    // Determinar el color basado en AlarmColor\n    let textColor;\n    switch (alarm.AlarmColor) {\n        case '#8E0000':\n            textColor = '#ff6b6b'; // Rojo más brillante para tema oscuro\n            break;\n        case '#FFFF00':\n            textColor = '#feca57'; // Amarillo más oscuro para mejor contraste\n            break;\n        default:\n            textColor = '#48dbfb'; // Azul claro por defecto\n    }\n    \n    // Retornar el objeto de alarma con las nuevas propiedades\n    return {\n        ...alarm,\n        severity,\n        icon,\n        textColor\n    };\n});\n\nreturn msg;\n",
+        "func": "// Asumimos que msg.payload contiene el array de objetos de alarma\nmsg.payload = msg.payload.map(alarm => {\n    let severity, icon;\n    \n    // Determinar la severidad y el icono basado en el texto de la Alerta\n    if (alarm.Alerta.includes('Muy Alta') || alarm.Alerta.includes('Muy Baja')) {\n        severity = 'high';\n        icon = '\u26a0\ufe0f';\n    } else if (alarm.Alerta.includes('Alta') || alarm.Alerta.includes('Baja')) {\n        severity = 'medium';\n        icon = '\u26a0';\n    } else {\n        severity = 'low';\n        icon = '\u2139\ufe0f';\n    }\n    \n    // Determinar el color basado en AlarmColor\n    let textColor;\n    switch (alarm.AlarmColor) {\n        case '#8E0000':\n            textColor = '#ff6b6b'; // Rojo m\u00e1s brillante para tema oscuro\n            break;\n        case '#FFFF00':\n            textColor = '#feca57'; // Amarillo m\u00e1s oscuro para mejor contraste\n            break;\n        default:\n            textColor = '#48dbfb'; // Azul claro por defecto\n    }\n    \n    // Retornar el objeto de alarma con las nuevas propiedades\n    return {\n        ...alarm,\n        severity,\n        icon,\n        textColor\n    };\n});\n\nreturn msg;\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -711,7 +711,7 @@
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
-        "initialize": "// El código añadido aquí se ejecutará una vez\n// cuando el nodo es iniciado.\nflow.set(\"PV_SIM\",0);",
+        "initialize": "// El c\u00f3digo a\u00f1adido aqu\u00ed se ejecutar\u00e1 una vez\n// cuando el nodo es iniciado.\nflow.set(\"PV_SIM\",0);",
         "finalize": "",
         "libs": [],
         "x": 300,
@@ -731,7 +731,7 @@
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
-        "initialize": "// El código añadido aquí se ejecutará una vez\n// cuando el nodo es iniciado.\nflow.set(\"PV_SIM\",0);",
+        "initialize": "// El c\u00f3digo a\u00f1adido aqu\u00ed se ejecutar\u00e1 una vez\n// cuando el nodo es iniciado.\nflow.set(\"PV_SIM\",0);",
         "finalize": "",
         "libs": [],
         "x": 300,
@@ -751,7 +751,7 @@
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
-        "initialize": "// El código añadido aquí se ejecutará una vez\n// cuando el nodo es iniciado.\nflow.set(\"PV_SIM\",0);",
+        "initialize": "// El c\u00f3digo a\u00f1adido aqu\u00ed se ejecutar\u00e1 una vez\n// cuando el nodo es iniciado.\nflow.set(\"PV_SIM\",0);",
         "finalize": "",
         "libs": [],
         "x": 290,
@@ -771,7 +771,7 @@
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
-        "initialize": "// El código añadido aquí se ejecutará una vez\n// cuando el nodo es iniciado.\nflow.set(\"PV_SIM\",0);",
+        "initialize": "// El c\u00f3digo a\u00f1adido aqu\u00ed se ejecutar\u00e1 una vez\n// cuando el nodo es iniciado.\nflow.set(\"PV_SIM\",0);",
         "finalize": "",
         "libs": [],
         "x": 300,
@@ -791,7 +791,7 @@
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
-        "initialize": "// El código añadido aquí se ejecutará una vez\n// cuando el nodo es iniciado.\nflow.set(\"PV_SIM\",0);",
+        "initialize": "// El c\u00f3digo a\u00f1adido aqu\u00ed se ejecutar\u00e1 una vez\n// cuando el nodo es iniciado.\nflow.set(\"PV_SIM\",0);",
         "finalize": "",
         "libs": [],
         "x": 330,
@@ -872,7 +872,7 @@
         "type": "function",
         "z": "6910828fa524c0ad",
         "name": "GetDensitiChange",
-        "func": "// Recuperación de variables globales\n                      \nlet dit = global.get(\"UIT_2001_DENSITY\");\nif (dit===null || dit.PV===null) {\n    node.warn(\"No hay datos de densidad en global UIT_2001_DENSITY\");\n    return [null, null]; // No hay datos, no enviamos nada por ninguna salida\n}\n\nlet currentDensity = parseFloat(dit.PV);\nlet producto = 3; // ID por defecto (GLP/Mezcla)\nlet inLineProduct = global.get(\"INLINE_PRODUCT\") || \"Mezcla\";\nlet IsChangeProduct = false;\n\n// Variables para los mensajes de salida\nlet msgUpdate = null;\nlet msgInsert = null;\nlet msgPause = null;\n\n// --- Lógica de Detección de Producto ---\n\n// BUTANO (Rango 557 - 585)\nif (currentDensity >= 557 && currentDensity <= 585 && inLineProduct !== \"Butano\") {\n    producto = 2;  // ID Butano\n    inLineProduct = \"Butano\";\n    global.set(\"INLINE_PRODUCT\", inLineProduct);\n    IsChangeProduct = true;\n}\n// PROPANO (Rango 480 - 500)\nelse if (currentDensity >= 480 && currentDensity <= 500 && inLineProduct !== \"Propano\") {\n    producto = 1;  // ID Propano\n    inLineProduct = \"Propano\";\n    global.set(\"INLINE_PRODUCT\", inLineProduct);\n    IsChangeProduct = true;\n}\n// MEZCLA (Rango intermedio 500 - 557)\nelse if (currentDensity > 500 && currentDensity < 557 && inLineProduct !== \"Mezcla\") {\n    producto = 3;  // ID Mezcla\n    inLineProduct = \"Mezcla\";\n    global.set(\"INLINE_PRODUCT\", inLineProduct);\n    IsChangeProduct = true;\n\n    if (global.get(\"SEL_CISTERNA\") === \"CISTERNA1\") {\n        if (global.get(\"STATUS_CISTERNA1\") === 2) {\n            global.set(\"STATUS_CISTERNA1\", 3);  //Pausar Bache\n            global.set(\"SEND_STATUS_CISTERNA1\", true);\n            msgPause = {\n                payload: \"Pause\",\n            }\n        }\n    }\n    else{\n         if (global.get(\"STATUS_CISTERNA2\") === 2) {\n            global.set(\"STATUS_CISTERNA2\", 3);  //Pausar Bache\n            global.set(\"SEND_STATUS_CISTERNA1\", true);\n            msgPause = {\n                payload: \"Pause\",\n            }\n        }\n\n    }\n\n\n}\n\n\n// --- Generación de Mensajes de Salida ---\n\nif (IsChangeProduct === true) {\n    let now = new Date();\n    // Formato de fecha ISO para SQL (YYYY-MM-DD HH:MM:SS)\n    let sqlDate = now.toLocaleString().replaceAll('/', '-');\n    sqlDate = sqlDate.replace(',', ' ');\n\n    // 1. CREAR MENSAJE PARA CERRAR EL BACHE ANTERIOR (UPDATE)\n    msgUpdate = {\n        topic: \"UPDATE baches SET fecha_fin = ? WHERE fecha_fin IS NULL\",\n        // Parámetro: [fecha_fin]\n        params: [sqlDate],\n        payload: currentDensity // Puedes mantener la densidad en el payload si la necesitas para algo más\n    };\n\n    // 2. CREAR MENSAJE PARA ABRIR EL NUEVO BACHE (INSERT)\n    msgInsert = {\n        // La consulta de INSERT\n        topic: \"INSERT INTO baches (fecha_inicio, densidad_prom, producto_id) VALUES (?, ?, ?)\",\n        // Parámetros: [fecha_inicio, densidad_prom, producto_id]\n        params: [sqlDate, currentDensity, producto],\n        payload: currentDensity\n    };\n\n    node.warn(`¡Cambio de Producto! Cerrando bache anterior y abriendo nuevo de ${inLineProduct}.`);\n}\n\n// Devuelve un array de mensajes: [Salida 1, Salida 2]\n// Salida 1: Cierre (Update)\n// Salida 2: Apertura (Insert)\nreturn [msgUpdate, msgInsert, msgPause];",
+        "func": "// Recuperaci\u00f3n de variables globales\n                      \nlet dit = global.get(\"UIT_2001_DENSITY\");\nif (dit===null || dit.PV===null) {\n    node.warn(\"No hay datos de densidad en global UIT_2001_DENSITY\");\n    return [null, null]; // No hay datos, no enviamos nada por ninguna salida\n}\n\nlet currentDensity = parseFloat(dit.PV);\nlet producto = 3; // ID por defecto (GLP/Mezcla)\nlet inLineProduct = global.get(\"INLINE_PRODUCT\") || \"Mezcla\";\nlet IsChangeProduct = false;\n\n// Variables para los mensajes de salida\nlet msgUpdate = null;\nlet msgInsert = null;\nlet msgPause = null;\n\n// --- L\u00f3gica de Detecci\u00f3n de Producto ---\n\n// BUTANO (Rango 557 - 585)\nif (currentDensity >= 557 && currentDensity <= 585 && inLineProduct !== \"Butano\") {\n    producto = 2;  // ID Butano\n    inLineProduct = \"Butano\";\n    global.set(\"INLINE_PRODUCT\", inLineProduct);\n    IsChangeProduct = true;\n}\n// PROPANO (Rango 480 - 500)\nelse if (currentDensity >= 480 && currentDensity <= 500 && inLineProduct !== \"Propano\") {\n    producto = 1;  // ID Propano\n    inLineProduct = \"Propano\";\n    global.set(\"INLINE_PRODUCT\", inLineProduct);\n    IsChangeProduct = true;\n}\n// MEZCLA (Rango intermedio 500 - 557)\nelse if (currentDensity > 500 && currentDensity < 557 && inLineProduct !== \"Mezcla\") {\n    producto = 3;  // ID Mezcla\n    inLineProduct = \"Mezcla\";\n    global.set(\"INLINE_PRODUCT\", inLineProduct);\n    IsChangeProduct = true;\n\n    if (global.get(\"SEL_CISTERNA\") === \"CISTERNA1\") {\n        if (global.get(\"STATUS_CISTERNA1\") === 2) {\n            global.set(\"STATUS_CISTERNA1\", 3);  //Pausar Bache\n            global.set(\"SEND_STATUS_CISTERNA1\", true);\n            msgPause = {\n                payload: \"Pause\",\n            }\n        }\n    }\n    else{\n         if (global.get(\"STATUS_CISTERNA2\") === 2) {\n            global.set(\"STATUS_CISTERNA2\", 3);  //Pausar Bache\n            global.set(\"SEND_STATUS_CISTERNA1\", true);\n            msgPause = {\n                payload: \"Pause\",\n            }\n        }\n\n    }\n\n\n}\n\n\n// --- Generaci\u00f3n de Mensajes de Salida ---\n\nif (IsChangeProduct === true) {\n    let now = new Date();\n    // Formato de fecha ISO para SQL (YYYY-MM-DD HH:MM:SS)\n    let sqlDate = now.toLocaleString().replaceAll('/', '-');\n    sqlDate = sqlDate.replace(',', ' ');\n\n    // 1. CREAR MENSAJE PARA CERRAR EL BACHE ANTERIOR (UPDATE)\n    msgUpdate = {\n        topic: \"UPDATE baches SET fecha_fin = ? WHERE fecha_fin IS NULL\",\n        // Par\u00e1metro: [fecha_fin]\n        params: [sqlDate],\n        payload: currentDensity // Puedes mantener la densidad en el payload si la necesitas para algo m\u00e1s\n    };\n\n    // 2. CREAR MENSAJE PARA ABRIR EL NUEVO BACHE (INSERT)\n    msgInsert = {\n        // La consulta de INSERT\n        topic: \"INSERT INTO baches (fecha_inicio, densidad_prom, producto_id) VALUES (?, ?, ?)\",\n        // Par\u00e1metros: [fecha_inicio, densidad_prom, producto_id]\n        params: [sqlDate, currentDensity, producto],\n        payload: currentDensity\n    };\n\n    node.warn(`\u00a1Cambio de Producto! Cerrando bache anterior y abriendo nuevo de ${inLineProduct}.`);\n}\n\n// Devuelve un array de mensajes: [Salida 1, Salida 2]\n// Salida 1: Cierre (Update)\n// Salida 2: Apertura (Insert)\nreturn [msgUpdate, msgInsert, msgPause];",
         "outputs": 3,
         "timeout": 0,
         "noerr": 0,
@@ -1006,7 +1006,7 @@
         "type": "function",
         "z": "6910828fa524c0ad",
         "name": "function 24",
-        "func": "// Suponiendo que msg.payload es el array de alarmas original\nlet alarmas = msg.payload;\n\n// Si necesitas transformar/agregar colores e iconos:\nmsg.payload = alarmas.map(function (item) {\n    // Lógica para determinar color e icono según tipo de alerta\n    let bgColor = \"#ff5722\";  // default naranja\n    let textColor = \"#ffffff\";\n    let icon = \"⚠️\";\n\n    if (item.Alerta === \"HIGH\" || item.Alerta === \"HH\") {\n        bgColor = \"#f44336\";  // rojo\n        icon = \"🔺\";\n    } else if (item.Alerta === \"LOW\" || item.Alerta === \"LL\") {\n        bgColor = \"#2196f3\";  // azul\n        icon = \"🔻\";\n    } else if (item.Alerta === \"OK\" || item.Alerta === \"NORMAL\") {\n        bgColor = \"#4caf50\";  // verde\n        icon = \"✔️\";\n    }\n\n    return {\n        DATE: item.DATE,\n        TAG: item.TAG,\n        Valor: item.Valor,\n        Descripcion: item.Descripcion,\n        Alerta: item.Alerta,\n        Unidad: item.Unidad,\n        bgColor: bgColor,\n        textColor: textColor,\n        icon: icon\n    };\n});\n\nreturn msg;\n",
+        "func": "// Suponiendo que msg.payload es el array de alarmas original\nlet alarmas = msg.payload;\n\n// Si necesitas transformar/agregar colores e iconos:\nmsg.payload = alarmas.map(function (item) {\n    // L\u00f3gica para determinar color e icono seg\u00fan tipo de alerta\n    let bgColor = \"#ff5722\";  // default naranja\n    let textColor = \"#ffffff\";\n    let icon = \"\u26a0\ufe0f\";\n\n    if (item.Alerta === \"HIGH\" || item.Alerta === \"HH\") {\n        bgColor = \"#f44336\";  // rojo\n        icon = \"\ud83d\udd3a\";\n    } else if (item.Alerta === \"LOW\" || item.Alerta === \"LL\") {\n        bgColor = \"#2196f3\";  // azul\n        icon = \"\ud83d\udd3b\";\n    } else if (item.Alerta === \"OK\" || item.Alerta === \"NORMAL\") {\n        bgColor = \"#4caf50\";  // verde\n        icon = \"\u2714\ufe0f\";\n    }\n\n    return {\n        DATE: item.DATE,\n        TAG: item.TAG,\n        Valor: item.Valor,\n        Descripcion: item.Descripcion,\n        Alerta: item.Alerta,\n        Unidad: item.Unidad,\n        bgColor: bgColor,\n        textColor: textColor,\n        icon: icon\n    };\n});\n\nreturn msg;\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -1184,7 +1184,7 @@
         "type": "function",
         "z": "8389501e8b369815",
         "name": "UpdateDisplay",
-        "func": "let pid=global.get(\"SIC_2002\");\nlet uit=global.get(\"UIT_2002\");\nlet pit=global.get(\"PIT_2002\");\n\nmsg.topic = \"databind\";\nmsg.payload = {\n    SIC_2002_PV: pid.PV + \" m/S\",\n    SIC_2002_SP: pid.SP + \" m/S\",\n    SIC_2002_CV: (pid.CV) + \" %\",\n    UIT_2002_TEMPERATURE: uit.TEMPERATURE + \" °F\",\n    UIT_2002_PRESSURE_IN: uit.PRESSURE_IN + \" PSI\",\n    UIT_2002_PRESSURE_OUT: uit.PRESSURE_OUT + \" PSI\",\n    UIT_2002_SPEED: uit.SPEED + \" m/S\",\n    UIT_2002_FLOW: uit.FLOW+ \" MSCFD\",\n\n    PIT_2002_PV: pit.PV + \" PSI\",\n    PIT_2002_HH: pit.HH + \" PSI\",\n    PIT_2002_H: pit.H + \" PSI\",\n    PIT_2002_BACK: pit.ALARM,\n\n}\nreturn msg;",
+        "func": "let pid=global.get(\"SIC_2002\");\nlet uit=global.get(\"UIT_2002\");\nlet pit=global.get(\"PIT_2002\");\n\nmsg.topic = \"databind\";\nmsg.payload = {\n    SIC_2002_PV: pid.PV + \" m/S\",\n    SIC_2002_SP: pid.SP + \" m/S\",\n    SIC_2002_CV: (pid.CV) + \" %\",\n    UIT_2002_TEMPERATURE: uit.TEMPERATURE + \" \u00b0F\",\n    UIT_2002_PRESSURE_IN: uit.PRESSURE_IN + \" PSI\",\n    UIT_2002_PRESSURE_OUT: uit.PRESSURE_OUT + \" PSI\",\n    UIT_2002_SPEED: uit.SPEED + \" m/S\",\n    UIT_2002_FLOW: uit.FLOW+ \" MSCFD\",\n\n    PIT_2002_PV: pit.PV + \" PSI\",\n    PIT_2002_HH: pit.HH + \" PSI\",\n    PIT_2002_H: pit.H + \" PSI\",\n    PIT_2002_BACK: pit.ALARM,\n\n}\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -1515,7 +1515,7 @@
         "type": "function",
         "z": "8b7a3cc1bad4cf4b",
         "name": "function 3",
-        "func": "// Obtener datos\nvar producto = flow.get(\"producto_seleccionado\") || \"butano\";\nvar tiket_number = global.get(\"TIKET_N\") || 0;\nvar estado_batch = global.get(\"ESTADO_BATCH\") || 0;\n\n// Verificar que el batch esté pausado\nif (estado_batch === 1) {\n    node.warn(\"⚠️ El batch debe estar PAUSADO antes de generar el tiquete\");\n    node.status({fill: \"red\", shape: \"ring\", text: \"Batch activo\"});\n    return null;\n}\n\n// Verificar que haya datos en el batch\nvar butano = global.get(\"BUTANO\") || {};\nvar propano = global.get(\"PROPANO\") || {};\n\nvar datos_producto = producto === \"butano\" ? butano : propano;\n\nif (!datos_producto.batch || datos_producto.batch === 0) {\n    node.warn(\"⚠️ No hay datos en el batch para generar tiquete\");\n    node.status({fill: \"yellow\", shape: \"ring\", text: \"Batch vacío\"});\n    return null;\n}\n\nvar pit_2001 = global.get(\"PIT_2001\") || {PV: 0};\nvar tit_2001 = global.get(\"TIT_2001\") || {PV: 0};\n\n// Calcular datos\nvar volumen_litros = datos_producto.batch || 0;\nvar densidad = datos_producto.densidad || 0;\nvar peso_kg = (volumen_litros * densidad / 1000).toFixed(2);\nvar volumen_m3 = (volumen_litros / 1000).toFixed(3);\n\n// Fecha\nvar fecha = new Date();\nvar year = fecha.getFullYear();\nvar mes = String(fecha.getMonth() + 1).padStart(2, '0');\nvar dia = String(fecha.getDate()).padStart(2, '0');\nvar horas = String(fecha.getHours()).padStart(2, '0');\nvar minutos = String(fecha.getMinutes()).padStart(2, '0');\nvar segundos = String(fecha.getSeconds()).padStart(2, '0');\nvar fecha_string = dia + \"-\" + mes + \"-\" + year + \" \" + horas + \":\" + minutos + \":\" + segundos;\nvar fecha_iso = fecha.toISOString();\n\n// Preparar objeto tiquete\nvar tiquete = {\n    numero: tiket_number,\n    fecha: fecha_string,\n    producto: producto.toUpperCase(),\n    operador: \"Sistema Automatizado\",\n    observaciones: \"Recepción automatizada - Sin observaciones\",\n    datos: {\n        volumen_litros: volumen_litros,\n        volumen_m3: volumen_m3,\n        densidad: densidad,\n        peso_kg: peso_kg,\n        temperatura: datos_producto.temperatura || tit_2001.PV || 0,\n        presion: datos_producto.presion || pit_2001.PV || 0,\n        flujo_promedio: datos_producto.flujo || 0\n    }\n};\n\n// Guardar en flow para otros nodos\nflow.set(\"ultimo_tiquete\", tiquete);\nflow.set(\"ultimo_tiquete_fecha_iso\", fecha_iso);\n\n// Preparar mensaje para SQLite\nmsg.topic = `\n    INSERT INTO tiquetes (\n        numero_tiquete, fecha_hora, producto,\n        volumen_litros, volumen_m3, densidad, peso_kg,\n        temperatura, presion, flujo_promedio,\n        operador, observaciones\n    ) VALUES (\n        ${tiket_number},\n        '${fecha_iso}',\n        '${producto.toUpperCase()}',\n        ${volumen_litros},\n        ${volumen_m3},\n        ${densidad},\n        ${peso_kg},\n        ${datos_producto.temperatura || tit_2001.PV || 0},\n        ${datos_producto.presion || pit_2001.PV || 0},\n        ${datos_producto.flujo || 0},\n        'Sistema Automatizado',\n        'Recepción automatizada'\n    )\n`;\n\nmsg.payload = tiquete;\n\nnode.status({fill: \"blue\", shape: \"dot\", text: `Preparando #${tiket_number}`});\n\nreturn msg;",
+        "func": "// Obtener datos\nvar producto = flow.get(\"producto_seleccionado\") || \"butano\";\nvar tiket_number = global.get(\"TIKET_N\") || 0;\nvar estado_batch = global.get(\"ESTADO_BATCH\") || 0;\n\n// Verificar que el batch est\u00e9 pausado\nif (estado_batch === 1) {\n    node.warn(\"\u26a0\ufe0f El batch debe estar PAUSADO antes de generar el tiquete\");\n    node.status({fill: \"red\", shape: \"ring\", text: \"Batch activo\"});\n    return null;\n}\n\n// Verificar que haya datos en el batch\nvar butano = global.get(\"BUTANO\") || {};\nvar propano = global.get(\"PROPANO\") || {};\n\nvar datos_producto = producto === \"butano\" ? butano : propano;\n\nif (!datos_producto.batch || datos_producto.batch === 0) {\n    node.warn(\"\u26a0\ufe0f No hay datos en el batch para generar tiquete\");\n    node.status({fill: \"yellow\", shape: \"ring\", text: \"Batch vac\u00edo\"});\n    return null;\n}\n\nvar pit_2001 = global.get(\"PIT_2001\") || {PV: 0};\nvar tit_2001 = global.get(\"TIT_2001\") || {PV: 0};\n\n// Calcular datos\nvar volumen_litros = datos_producto.batch || 0;\nvar densidad = datos_producto.densidad || 0;\nvar peso_kg = (volumen_litros * densidad / 1000).toFixed(2);\nvar volumen_m3 = (volumen_litros / 1000).toFixed(3);\n\n// Fecha\nvar fecha = new Date();\nvar year = fecha.getFullYear();\nvar mes = String(fecha.getMonth() + 1).padStart(2, '0');\nvar dia = String(fecha.getDate()).padStart(2, '0');\nvar horas = String(fecha.getHours()).padStart(2, '0');\nvar minutos = String(fecha.getMinutes()).padStart(2, '0');\nvar segundos = String(fecha.getSeconds()).padStart(2, '0');\nvar fecha_string = dia + \"-\" + mes + \"-\" + year + \" \" + horas + \":\" + minutos + \":\" + segundos;\nvar fecha_iso = fecha.toISOString();\n\n// Preparar objeto tiquete\nvar tiquete = {\n    numero: tiket_number,\n    fecha: fecha_string,\n    producto: producto.toUpperCase(),\n    operador: \"Sistema Automatizado\",\n    observaciones: \"Recepci\u00f3n automatizada - Sin observaciones\",\n    datos: {\n        volumen_litros: volumen_litros,\n        volumen_m3: volumen_m3,\n        densidad: densidad,\n        peso_kg: peso_kg,\n        temperatura: datos_producto.temperatura || tit_2001.PV || 0,\n        presion: datos_producto.presion || pit_2001.PV || 0,\n        flujo_promedio: datos_producto.flujo || 0\n    }\n};\n\n// Guardar en flow para otros nodos\nflow.set(\"ultimo_tiquete\", tiquete);\nflow.set(\"ultimo_tiquete_fecha_iso\", fecha_iso);\n\n// Preparar mensaje para SQLite\nmsg.topic = `\n    INSERT INTO tiquetes (\n        numero_tiquete, fecha_hora, producto,\n        volumen_litros, volumen_m3, densidad, peso_kg,\n        temperatura, presion, flujo_promedio,\n        operador, observaciones\n    ) VALUES (\n        ${tiket_number},\n        '${fecha_iso}',\n        '${producto.toUpperCase()}',\n        ${volumen_litros},\n        ${volumen_m3},\n        ${densidad},\n        ${peso_kg},\n        ${datos_producto.temperatura || tit_2001.PV || 0},\n        ${datos_producto.presion || pit_2001.PV || 0},\n        ${datos_producto.flujo || 0},\n        'Sistema Automatizado',\n        'Recepci\u00f3n automatizada'\n    )\n`;\n\nmsg.payload = tiquete;\n\nnode.status({fill: \"blue\", shape: \"dot\", text: `Preparando #${tiket_number}`});\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -1555,7 +1555,7 @@
         "type": "function",
         "z": "8b7a3cc1bad4cf4b",
         "name": "Preparar HTTP Request",
-        "func": "// El tiquete viene del flow\nvar tiquete = flow.get(\"ultimo_tiquete\");\n\nif (!tiquete) {\n    node.error(\"No hay tiquete para generar PDF\");\n    return null;\n}\n\n// Preparar petición HTTP\nmsg.url = \"http://modbus-simulator:8080/generar_pdf\";\nmsg.method = \"POST\";\nmsg.headers = {\n    \"Content-Type\": \"application/json\"\n};\nmsg.payload = tiquete;\n\nnode.status({fill: \"blue\", shape: \"ring\", text: \"Generando PDF...\"});\n\nreturn msg;\n",
+        "func": "// El tiquete viene del flow\nvar tiquete = flow.get(\"ultimo_tiquete\");\n\nif (!tiquete) {\n    node.error(\"No hay tiquete para generar PDF\");\n    return null;\n}\n\n// Preparar petici\u00f3n HTTP\nmsg.url = \"http://modbus-simulator:8080/generar_pdf\";\nmsg.method = \"POST\";\nmsg.headers = {\n    \"Content-Type\": \"application/json\"\n};\nmsg.payload = tiquete;\n\nnode.status({fill: \"blue\", shape: \"ring\", text: \"Generando PDF...\"});\n\nreturn msg;\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -1575,7 +1575,7 @@
         "type": "function",
         "z": "8b7a3cc1bad4cf4b",
         "name": "Get Request",
-        "func": "// msg.payload contiene la respuesta del servidor\nif (msg.payload && msg.payload.success) {\n    node.status({ fill: \"green\", shape: \"dot\", text: \"PDF generado\" });\n\n    var tiquete = flow.get(\"ultimo_tiquete\");\n    var tiket_number = tiquete.numero;\n\n    // Preparar mensaje para actualizar SQLite con la ruta del PDF\n    var msgUpdate = {\n        topic: `UPDATE tiquetes SET archivo_pdf = '${msg.payload.filepath}' WHERE numero_tiquete = ${tiket_number}`\n    };\n\n    // Mensaje para mostrar el tiquete en la UI\n    var msgDisplay = {\n        topic: \"tiquete_generado\",\n        payload: tiquete\n    };\n\n    // Mensaje de confirmación para debug\n    var msgDebug = {\n        payload: {\n            mensaje: `Tiquete #${tiket_number} generado exitosamente`,\n            pdf: msg.payload.filename,\n            ruta: msg.payload.filepath\n        }\n    };\n\n    return [msgUpdate, msgDisplay, msgDebug];\n} else {\n    var error = msg.payload && msg.payload.error ? msg.payload.error : \"Error desconocido\";\n    node.error(\"Error generando PDF: \" + error);\n    node.status({ fill: \"red\", shape: \"ring\", text: \"Error PDF\" });\n\n    // Enviar mensaje de error para mostrar al usuario\n    var msgError = {\n        topic: \"error_tiquete\",\n        payload: {\n            error: true,\n            mensaje: \"Error generando PDF: \" + error\n        }\n    };\n\n    return [null, null, msgError];\n}",
+        "func": "// msg.payload contiene la respuesta del servidor\nif (msg.payload && msg.payload.success) {\n    node.status({ fill: \"green\", shape: \"dot\", text: \"PDF generado\" });\n\n    var tiquete = flow.get(\"ultimo_tiquete\");\n    var tiket_number = tiquete.numero;\n\n    // Preparar mensaje para actualizar SQLite con la ruta del PDF\n    var msgUpdate = {\n        topic: `UPDATE tiquetes SET archivo_pdf = '${msg.payload.filepath}' WHERE numero_tiquete = ${tiket_number}`\n    };\n\n    // Mensaje para mostrar el tiquete en la UI\n    var msgDisplay = {\n        topic: \"tiquete_generado\",\n        payload: tiquete\n    };\n\n    // Mensaje de confirmaci\u00f3n para debug\n    var msgDebug = {\n        payload: {\n            mensaje: `Tiquete #${tiket_number} generado exitosamente`,\n            pdf: msg.payload.filename,\n            ruta: msg.payload.filepath\n        }\n    };\n\n    return [msgUpdate, msgDisplay, msgDebug];\n} else {\n    var error = msg.payload && msg.payload.error ? msg.payload.error : \"Error desconocido\";\n    node.error(\"Error generando PDF: \" + error);\n    node.status({ fill: \"red\", shape: \"ring\", text: \"Error PDF\" });\n\n    // Enviar mensaje de error para mostrar al usuario\n    var msgError = {\n        topic: \"error_tiquete\",\n        payload: {\n            error: true,\n            mensaje: \"Error generando PDF: \" + error\n        }\n    };\n\n    return [null, null, msgError];\n}",
         "outputs": 3,
         "timeout": 0,
         "noerr": 0,
@@ -1856,8 +1856,8 @@
         "id": "e58a8a843ee03d6b",
         "type": "function",
         "z": "8b7a3cc1bad4cf4b",
-        "name": "Registrar Medición",
-        "func": "\n// Usamos .toISOString() para generar un formato de fecha/hora estándar y robusto para SQLite\nvar timestamp = new Date().toLocaleString().replaceAll('/',' '); \ntimestamp=timestamp.replace(',' ,' ');\nlet noSisterna=global.get(\"NoSISTERNA\") || 1;\nlet status_cisterna= 0;\nlet segment=null;\nlet id_llenado=1;\n\n//INSERT INTO llenado_detalle (llenado_id, timestamp, flujo, densidad, presion, temperatura, volumen_acumulado)\n//VALUES (32, datetime('now'), 831.3, 539.8, 346.4, 84.9, 1200);\n\nif(global.get(\"SEL_CISTERNA\")===\"CISTERNA1\")\n{\n     segment=global.get(\"SEGMENT_VALUES1\");\n     status_cisterna=global.get(\"STATUS_CISTERNA1\");\n     id_llenado=global.get(\"ID_LLENADO1\");\n}\nelse \n{\n     segment=global.get(\"SEGMENT_VALUES2\");\n     status_cisterna=global.get(\"STATUS_CISTERNA2\");\n     id_llenado=global.get(\"ID_LLENADO2\");\n}\n\n//let status_batch=global.get(\"STATUS_BATCH\");\n \n\n\n// msg.payload = {\n//   sisterna_id: 1,\n//   segmento_id: 1,\n//   temperatura: 35.5,\n//   presion: 650,\n//   densidad: 0.585,\n//   flujo_actual: 150\n// }\n\nif(status_cisterna===2)\n{\n     msg.params =  [\n          //segment.sisterna_id,\n          id_llenado,\n          timestamp,\n          segment.flujo_actual,\n          segment.densidad,\n          segment.presion,\n          segment.temperatura,  \n          segment.volumen_acumulado         \n          \n     ]\n     msg.payload=\"OK\"\n\n}\nelse\n{\n     msg.payload=null;\n}\n\nreturn msg;\n\n",
+        "name": "Registrar Medici\u00f3n",
+        "func": "\n// Usamos .toISOString() para generar un formato de fecha/hora est\u00e1ndar y robusto para SQLite\nvar timestamp = new Date().toLocaleString().replaceAll('/',' '); \ntimestamp=timestamp.replace(',' ,' ');\nlet noSisterna=global.get(\"NoSISTERNA\") || 1;\nlet status_cisterna= 0;\nlet segment=null;\nlet id_llenado=1;\n\n//INSERT INTO llenado_detalle (llenado_id, timestamp, flujo, densidad, presion, temperatura, volumen_acumulado)\n//VALUES (32, datetime('now'), 831.3, 539.8, 346.4, 84.9, 1200);\n\nif(global.get(\"SEL_CISTERNA\")===\"CISTERNA1\")\n{\n     segment=global.get(\"SEGMENT_VALUES1\");\n     status_cisterna=global.get(\"STATUS_CISTERNA1\");\n     id_llenado=global.get(\"ID_LLENADO1\");\n}\nelse \n{\n     segment=global.get(\"SEGMENT_VALUES2\");\n     status_cisterna=global.get(\"STATUS_CISTERNA2\");\n     id_llenado=global.get(\"ID_LLENADO2\");\n}\n\n//let status_batch=global.get(\"STATUS_BATCH\");\n \n\n\n// msg.payload = {\n//   sisterna_id: 1,\n//   segmento_id: 1,\n//   temperatura: 35.5,\n//   presion: 650,\n//   densidad: 0.585,\n//   flujo_actual: 150\n// }\n\nif(status_cisterna===2)\n{\n     msg.params =  [\n          //segment.sisterna_id,\n          id_llenado,\n          timestamp,\n          segment.flujo_actual,\n          segment.densidad,\n          segment.presion,\n          segment.temperatura,  \n          segment.volumen_acumulado         \n          \n     ]\n     msg.payload=\"OK\"\n\n}\nelse\n{\n     msg.payload=null;\n}\n\nreturn msg;\n\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -2161,7 +2161,7 @@
         "id": "621fc4f5097c62ca",
         "type": "link in",
         "z": "8b7a3cc1bad4cf4b",
-        "name": "In_medición",
+        "name": "In_medici\u00f3n",
         "links": [
             "84241882125623be"
         ],
@@ -2178,7 +2178,7 @@
         "type": "function",
         "z": "8b7a3cc1bad4cf4b",
         "name": "Medicion Inicial",
-        "func": "\n// Usamos .toISOString() para generar un formato de fecha/hora estándar y robusto para SQLite\nvar timestamp = new Date().toLocaleString().replaceAll('/',' '); \ntimestamp=timestamp.replace(',' ,' ');\nlet noSisterna=global.get(\"NoSISTERNA\") || 1;\nlet status_cisterna= 0;\nlet segment=null;\nlet id_llenado=1;\n\n//INSERT INTO llenado_detalle (llenado_id, timestamp, flujo, densidad, presion, temperatura, volumen_acumulado)\n//VALUES (32, datetime('now'), 831.3, 539.8, 346.4, 84.9, 1200);\n\nif(global.get(\"SEL_CISTERNA\")===\"CISTERNA1\")\n{\n     segment=global.get(\"SEGMENT_VALUES1\");\n     status_cisterna=global.get(\"STATUS_CISTERNA1\");\n     id_llenado=global.get(\"ID_LLENADO1\");\n}\nelse \n{\n     segment=global.get(\"SEGMENT_VALUES2\");\n     status_cisterna=global.get(\"STATUS_CISTERNA2\");\n     id_llenado=global.get(\"ID_LLENADO2\");\n}\n\n//let status_batch=global.get(\"STATUS_BATCH\");\n \n\n\n// msg.payload = {\n//   sisterna_id: 1,\n//   segmento_id: 1,\n//   temperatura: 35.5,\n//   presion: 650,\n//   densidad: 0.585,\n//   flujo_actual: 150\n// }\n\n\nmsg.params =  [\n    //segment.sisterna_id,\n    id_llenado,\n    timestamp,\n    segment.flujo_actual,\n    segment.densidad,\n    segment.presion,\n    segment.temperatura,  \n    segment.volumen_acumulado         \n    \n]\nmsg.payload=\"OK\"\n\n\nreturn msg;",
+        "func": "\n// Usamos .toISOString() para generar un formato de fecha/hora est\u00e1ndar y robusto para SQLite\nvar timestamp = new Date().toLocaleString().replaceAll('/',' '); \ntimestamp=timestamp.replace(',' ,' ');\nlet noSisterna=global.get(\"NoSISTERNA\") || 1;\nlet status_cisterna= 0;\nlet segment=null;\nlet id_llenado=1;\n\n//INSERT INTO llenado_detalle (llenado_id, timestamp, flujo, densidad, presion, temperatura, volumen_acumulado)\n//VALUES (32, datetime('now'), 831.3, 539.8, 346.4, 84.9, 1200);\n\nif(global.get(\"SEL_CISTERNA\")===\"CISTERNA1\")\n{\n     segment=global.get(\"SEGMENT_VALUES1\");\n     status_cisterna=global.get(\"STATUS_CISTERNA1\");\n     id_llenado=global.get(\"ID_LLENADO1\");\n}\nelse \n{\n     segment=global.get(\"SEGMENT_VALUES2\");\n     status_cisterna=global.get(\"STATUS_CISTERNA2\");\n     id_llenado=global.get(\"ID_LLENADO2\");\n}\n\n//let status_batch=global.get(\"STATUS_BATCH\");\n \n\n\n// msg.payload = {\n//   sisterna_id: 1,\n//   segmento_id: 1,\n//   temperatura: 35.5,\n//   presion: 650,\n//   densidad: 0.585,\n//   flujo_actual: 150\n// }\n\n\nmsg.params =  [\n    //segment.sisterna_id,\n    id_llenado,\n    timestamp,\n    segment.flujo_actual,\n    segment.densidad,\n    segment.presion,\n    segment.temperatura,  \n    segment.volumen_acumulado         \n    \n]\nmsg.payload=\"OK\"\n\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -2444,7 +2444,7 @@
         "type": "function",
         "z": "619addbf2da107aa",
         "name": "Create Tiket",
-        "func": "let status_cisterna1=global.get(\"STATUS_CISTERNA1\");\n\nif(status_cisterna1===2)\n{\n    global.set(\"IS_REPORT\",true);\n    msg.topic=\"OK\";\n}\nelse{\n    msg.topic=null;\n    msg.payload = \"⚠️ El batch debe estar PAUSADO antes de Generar el tiquete\";\n\n}\n\n\n\nreturn msg;",
+        "func": "let status_cisterna1=global.get(\"STATUS_CISTERNA1\");\n\nif(status_cisterna1===2)\n{\n    global.set(\"IS_REPORT\",true);\n    msg.topic=\"OK\";\n}\nelse{\n    msg.topic=null;\n    msg.payload = \"\u26a0\ufe0f El batch debe estar PAUSADO antes de Generar el tiquete\";\n\n}\n\n\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -2680,8 +2680,8 @@
         "type": "function",
         "z": "619addbf2da107aa",
         "name": "SetClose2",
-        "func": "\n\nlet status_cisterna=global.get(\"STATUS_CISTERNA2\");\n\nif (String(msg.payload).toLowerCase() === \"cancel\") {\n    return null;  // Canceló, no hacer nada\n}\n\nif(status_cisterna===3)\n{\n    global.set(\"STATUS_CISTERNA2\",4);\n    global.set(\"SEND_STATUS_CISTERNA1\",true);\n    global.set(\"CISTERNA1_VISIBLE\",1);\n    msg.topic=\"OK\";\n}\nelse\n{\n    msg.topic=null;\n    msg.payload = \"⚠️ El batch debe estar PAUSADO antes de borrar los totalizadore\";\n}\nreturn msg;",
-        "outputs": 1,
+        "func": "let status_cisterna=global.get(\"STATUS_CISTERNA2\");\n\nif (String(msg.payload).toLowerCase() === \"cancel\") {\n    return null;\n}\n\nif(status_cisterna===3)\n{\n    global.set(\"SEL_CISTERNA\",\"CISTERNA2\");\n    global.set(\"STATUS_CISTERNA2\",4);\n    global.set(\"SEND_STATUS_CISTERNA1\",true);\n    global.set(\"CISTERNA1_VISIBLE\",1);\n    msg.topic=\"OK\";\n    node.send([msg, {topic:'TRIGGER_TICKET', payload:{cisterna:'CISTERNA2'}}]);\n    return null;\n}\nelse\n{\n    msg.topic=null;\n    msg.payload = \"\u26a0\ufe0f El batch debe estar PAUSADO antes de borrar los totalizadore\";\n}\nreturn msg;\n",
+        "outputs": 2,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
@@ -2691,7 +2691,11 @@
         "y": 360,
         "wires": [
             [
-                "4f6f35bb05a533a9"
+                "fdfdc844ae550cda"
+            ],
+            [
+                "52fc38c5e78f186b",
+                "force-tiquete-uib-direct"
             ]
         ]
     },
@@ -2752,7 +2756,7 @@
         "type": "function",
         "z": "619addbf2da107aa",
         "name": "SetPause1",
-        "func": "if (String(msg.payload).toLowerCase() === \"cancel\") {\n    return null;  // Canceló, no hacer nada\n}\n\nglobal.set(\"STATUS_CISTERNA1\", 3);\nglobal.set(\"SEND_STATUS_CISTERNA1\", true);\nglobal.set(\"CISTERNA2_VISIBLE\", 1);\n\nreturn msg;",
+        "func": "if (String(msg.payload).toLowerCase() === \"cancel\") {\n    return null;  // Cancel\u00f3, no hacer nada\n}\n\nglobal.set(\"STATUS_CISTERNA1\", 3);\nglobal.set(\"SEND_STATUS_CISTERNA1\", true);\nglobal.set(\"CISTERNA2_VISIBLE\", 1);\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -2772,8 +2776,8 @@
         "type": "function",
         "z": "619addbf2da107aa",
         "name": "SetClose1",
-        "func": "let status_cisterna1=global.get(\"STATUS_CISTERNA1\");\n\nif (String(msg.payload).toLowerCase() === \"cancel\") {\n    return null;  // Canceló, no hacer nada\n}\n\nif(status_cisterna1===3)\n{\n    global.set(\"STATUS_CISTERNA1\",4);\n    global.set(\"SEND_STATUS_CISTERNA1\",true);\n    global.set(\"CISTERNA2_VISIBLE\",1);\n    msg.topic=\"OK\";\n}\nelse\n{\n    msg.topic=null;\n    msg.payload = \"⚠️ El batch debe estar PAUSADO antes de borrar los totalizadore\";\n}\nreturn msg;",
-        "outputs": 1,
+        "func": "let status_cisterna1=global.get(\"STATUS_CISTERNA1\");\n\nif (String(msg.payload).toLowerCase() === \"cancel\") {\n    return null;\n}\n\nif(status_cisterna1===3)\n{\n    global.set(\"SEL_CISTERNA\",\"CISTERNA1\");\n    global.set(\"STATUS_CISTERNA1\",4);\n    global.set(\"SEND_STATUS_CISTERNA1\",true);\n    global.set(\"CISTERNA2_VISIBLE\",1);\n    msg.topic=\"OK\";\n    // Also trigger tiquete generation\n    node.send([msg, {topic:'TRIGGER_TICKET', payload:{cisterna:'CISTERNA1'}}]);\n    return null;\n}\nelse\n{\n    msg.topic=null;\n    msg.payload = \"\u26a0\ufe0f El batch debe estar PAUSADO antes de borrar los totalizadore\";\n}\nreturn msg;\n",
+        "outputs": 2,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
@@ -2784,6 +2788,10 @@
         "wires": [
             [
                 "fdfdc844ae550cda"
+            ],
+            [
+                "52fc38c5e78f186b",
+                "force-tiquete-uib-direct"
             ]
         ]
     },
@@ -2792,7 +2800,7 @@
         "type": "function",
         "z": "619addbf2da107aa",
         "name": "SetPause2",
-        "func": "\nif (String(msg.payload).toLowerCase() === \"cancel\") {\n    return null;  // Canceló, no hacer nada\n}\n\n\nglobal.set(\"STATUS_CISTERNA2\", 3);\nglobal.set(\"SEND_STATUS_CISTERNA1\", true);\nglobal.set(\"CISTERNA1_VISIBLE\", 1);\n\nreturn msg;",
+        "func": "\nif (String(msg.payload).toLowerCase() === \"cancel\") {\n    return null;  // Cancel\u00f3, no hacer nada\n}\n\n\nglobal.set(\"STATUS_CISTERNA2\", 3);\nglobal.set(\"SEND_STATUS_CISTERNA1\", true);\nglobal.set(\"CISTERNA1_VISIBLE\", 1);\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -2864,7 +2872,7 @@
         "type": "function",
         "z": "619addbf2da107aa",
         "name": "function 12",
-        "func": "let status_cisterna1 = global.get(\"STATUS_CISTERNA1\");\nmsg.topic=null;\n\nif (msg.payload === \"cancel\") {\n    return null;  // Canceló, no hacer nada\n}\n\nif (status_cisterna1 > 0 && status_cisterna1 < 3) {\n    msg.topic=\"OK\";\n    global.set(\"SEL_CISTERNA\", \"CISTERNA1\");\n\n}else\n{    \n    msg.topic=null;\n    msg.payload = \"⚠️ Seleccione Cisterna y llene el formulario de llenado\";\n}\n\nreturn msg;",
+        "func": "let status_cisterna1 = global.get(\"STATUS_CISTERNA1\");\nmsg.topic=null;\n\nif (msg.payload === \"cancel\") {\n    return null;  // Cancel\u00f3, no hacer nada\n}\n\nif (status_cisterna1 > 0 && status_cisterna1 < 3) {\n    msg.topic=\"OK\";\n    global.set(\"SEL_CISTERNA\", \"CISTERNA1\");\n\n}else\n{    \n    msg.topic=null;\n    msg.payload = \"\u26a0\ufe0f Seleccione Cisterna y llene el formulario de llenado\";\n}\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -2884,7 +2892,7 @@
         "type": "function",
         "z": "619addbf2da107aa",
         "name": "function 16",
-        "func": "let status_cisterna = global.get(\"STATUS_CISTERNA2\");\n\nif (String(msg.payload).toLowerCase() === \"cancel\") {\n    return null;  // Canceló, no hacer nada\n}\n\nif (status_cisterna > 0 && status_cisterna < 3) {\n    global.set(\"SEL_CISTERNA\", \"CISTERNA2\");\n\n}else\n{    \n    msg.topic=null;\n    msg.payload = \"⚠️ Seleccione Cisterna y llene el formulario de llenado\";\n}\nreturn msg;",
+        "func": "let status_cisterna = global.get(\"STATUS_CISTERNA2\");\n\nif (String(msg.payload).toLowerCase() === \"cancel\") {\n    return null;  // Cancel\u00f3, no hacer nada\n}\n\nif (status_cisterna > 0 && status_cisterna < 3) {\n    global.set(\"SEL_CISTERNA\", \"CISTERNA2\");\n\n}else\n{    \n    msg.topic=null;\n    msg.payload = \"\u26a0\ufe0f Seleccione Cisterna y llene el formulario de llenado\";\n}\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -3002,7 +3010,8 @@
         "y": 240,
         "wires": [
             [
-                "199bf417fa875596"
+                "199bf417fa875596",
+                "trigger-ticket-close"
             ],
             [
                 "uib-notify"
@@ -3066,7 +3075,7 @@
         "type": "function",
         "z": "619addbf2da107aa",
         "name": "Update Data",
-        "func": "let pit_2001 = global.get(\"PIT_2001\");\nlet tit_2001 = global.get(\"TIT_2001\");\nlet dit_2001 = global.get(\"DIT_2001\");\nlet uit_2001 = global.get(\"UIT_2001\");\nlet uit_2003 = global.get(\"UIT_2003\");\nlet status_cisterna1 = global.get(\"STATUS_CISTERNA1\")\nlet status_cisterna2 = global.get(\"STATUS_CISTERNA2\")\nlet cisterna1 = global.get(\"CISTERNA1\");\nlet cisterna2 = global.get(\"CISTERNA2\");\nlet uit_2001_dit = global.get(\"UIT_2001_DENSITY\");\nlet segment_display = global.get(\"SEGMENT_DISPLAY\");\nlet actual_cisterna = global.get(\"ACTUAL_CISTERNA\");\nlet tiket_number = global.get(\"TIKET_N\") || 0;\nlet segment1 = global.get(\"SEGMENTS1\");\nlet segment2 = global.get(\"SEGMENTS2\");\nlet fill_segment1 = global.get(\"FILL_SEGMENT1\");\nlet fill_segment2 = global.get(\"FILL_SEGMENT2\");\nlet promedios = global.get(\"PROMEDIOS\");\nlet sel_cisterna = global.get(\"SEL_CISTERNA\");\nlet cisterna2_visible = global.get(\"CISTERNA2_VISIBLE\");\nlet cisterna1_visible = global.get(\"CISTERNA1_VISIBLE\");\nlet str_status_sisterna1 = \"\";\nlet str_status_sisterna2 = \"\";\nlet inLineProduct = global.get(\"INLINE_PRODUCT\");\n\n\n\nswitch (status_cisterna1) {\n    case 0:\n        str_status_sisterna1 = \"Vacia\";\n        break;\n    case 1:\n        str_status_sisterna1 = \"Lista\";\n        break;\n\n    case 2:\n        str_status_sisterna1 = \"LLenando...\";\n        break;\n\n    case 3:\n        str_status_sisterna1 = \"Pausada\";\n        break;\n\n    case 4:\n        str_status_sisterna1 = \"Cerrada\";\n        break;\n\n    default:\n\n}\n\n\nswitch (status_cisterna2) {\n    case 0:\n        str_status_sisterna2 = \"Vacia\";\n        break;\n    case 1:\n        str_status_sisterna2 = \"Lista\";\n        break;\n\n    case 2:\n        str_status_sisterna2 = \"LLenando...\";\n        break;\n\n    case 3:\n        str_status_sisterna2 = \"Pausada\";\n        break;\n\n    case 4:\n        str_status_sisterna2 = \"Cerrada\";\n        break;\n\n    default:\n}\n\nlet date_string = new Date().toLocaleString('en-US', { hour12: false }).replaceAll('/', '-');\ndate_string = date_string.replace(',', ' ');\nsegment_display.FECHA = date_string;\n\n\n\nmsg.payload = {\n    \"PIT_2001_PV\": pit_2001.PV.toFixed(1) + \" PSI\",\n    \"PIT_2001_BACK\": \"#00FF00\",\n    \"TIT_2001_PV\": tit_2001.PV.toFixed(1) + \" °F\",\n    \"TIT_2001_BACK\": \"#00FF00\",\n    \"UIT_2001_FLOW\": uit_2001.FLOW.toFixed(1),\n    \"DIT_2001_PV\": dit_2001.PV.toFixed(1),\n    \"DIT_2001_BACK\": \"#00FF00\",\n    \"UIT_2001_DENS\": uit_2001.DENSITY.toFixed(2),\n    \"UIT_2001_DENSITY_BACK\": \"#00FF00\",\n    \"UIT_2001_TBATCH\": uit_2001.TOTAL,\n    \"CISTERNA1_STATUS\": str_status_sisterna1,\n    \"CISTERNA2_STATUS\": str_status_sisterna2,\n    \"CLIENTE1\": fill_segment1.cliente,\n    \"PRODUCTO1\": fill_segment1.producto,\n    \"FECHA1\": fill_segment1.fecha,\n    \"TIQUETE1\": fill_segment1.tiquete,\n    \"RVP1\": fill_segment1.rvp,\n    \"MASA1\": segment_display.MASA_CORIOLIS,\n    \"VOL_INDICADO1\": segment_display.VOL_INDICADO,\n    \"VAPORES1\": segment_display.MASA_VAPORES,\n    \"VOL_FULL1\": fill_segment1.Vol_full,\n    \"VOL_CURRENT1\": promedios.volumen_total,\n    \"PRESSURE1\": promedios.presion_promedio,\n    \"TEMPERATURE1\": promedios.temperatura_promedio,\n    \"CLIENTE2\": fill_segment2.cliente,\n    \"PRODUCTO2\": fill_segment2.producto,\n    \"FECHA2\": fill_segment2.fecha,\n    \"TIQUETE2\": fill_segment2.tiquete,\n    \"RVP2\": fill_segment2.rvp,\n    \"MASA2\": segment_display.MASA_CORIOLIS,\n    \"VOL_INDICADO2\": segment_display.VOL_INDICADO,\n    \"VAPORES2\": segment_display.MASA_VAPORES,\n    \"VOL_FULL2\": fill_segment2.Vol_full,\n    \"VOL_CURRENT2\": promedios.volumen_total,\n    \"PRESSURE2\": promedios.presion_promedio,\n    \"TEMPERATURE2\": promedios.temperatura_promedio,\n    \"UIT_2003_FLOW\": uit_2003.FLOW.toFixed(1),\n    \"UIT_2003_DENSITY\": uit_2003.DENSITY.toFixed(1),\n    \"UIT_2003_TOTAL\": uit_2003.TOTAL.toFixed(1),\n    \"ID_CISTERNA1\": cisterna1.numero_sisterna,\n    \"ID_CISTERNA2\": cisterna2.numero_sisterna,\n    \"ProductInLine\": inLineProduct\n};\n\nreturn msg;",
+        "func": "let pit_2001 = global.get(\"PIT_2001\");\nlet tit_2001 = global.get(\"TIT_2001\");\nlet dit_2001 = global.get(\"DIT_2001\");\nlet uit_2001 = global.get(\"UIT_2001\");\nlet uit_2003 = global.get(\"UIT_2003\");\nlet status_cisterna1 = global.get(\"STATUS_CISTERNA1\")\nlet status_cisterna2 = global.get(\"STATUS_CISTERNA2\")\nlet cisterna1 = global.get(\"CISTERNA1\");\nlet cisterna2 = global.get(\"CISTERNA2\");\nlet uit_2001_dit = global.get(\"UIT_2001_DENSITY\");\nlet segment_display = global.get(\"SEGMENT_DISPLAY\");\nlet actual_cisterna = global.get(\"ACTUAL_CISTERNA\");\nlet tiket_number = global.get(\"TIKET_N\") || 0;\nlet segment1 = global.get(\"SEGMENTS1\");\nlet segment2 = global.get(\"SEGMENTS2\");\nlet fill_segment1 = global.get(\"FILL_SEGMENT1\");\nlet fill_segment2 = global.get(\"FILL_SEGMENT2\");\nlet promedios = global.get(\"PROMEDIOS\");\nlet sel_cisterna = global.get(\"SEL_CISTERNA\");\nlet cisterna2_visible = global.get(\"CISTERNA2_VISIBLE\");\nlet cisterna1_visible = global.get(\"CISTERNA1_VISIBLE\");\nlet str_status_sisterna1 = \"\";\nlet str_status_sisterna2 = \"\";\nlet inLineProduct = global.get(\"INLINE_PRODUCT\");\n\n\n\nswitch (status_cisterna1) {\n    case 0:\n        str_status_sisterna1 = \"Vacia\";\n        break;\n    case 1:\n        str_status_sisterna1 = \"Lista\";\n        break;\n\n    case 2:\n        str_status_sisterna1 = \"LLenando...\";\n        break;\n\n    case 3:\n        str_status_sisterna1 = \"Pausada\";\n        break;\n\n    case 4:\n        str_status_sisterna1 = \"Cerrada\";\n        break;\n\n    default:\n\n}\n\n\nswitch (status_cisterna2) {\n    case 0:\n        str_status_sisterna2 = \"Vacia\";\n        break;\n    case 1:\n        str_status_sisterna2 = \"Lista\";\n        break;\n\n    case 2:\n        str_status_sisterna2 = \"LLenando...\";\n        break;\n\n    case 3:\n        str_status_sisterna2 = \"Pausada\";\n        break;\n\n    case 4:\n        str_status_sisterna2 = \"Cerrada\";\n        break;\n\n    default:\n}\n\nlet date_string = new Date().toLocaleString('en-US', { hour12: false }).replaceAll('/', '-');\ndate_string = date_string.replace(',', ' ');\nsegment_display.FECHA = date_string;\n\n\n\nmsg.payload = {\n    \"PIT_2001_PV\": pit_2001.PV.toFixed(1) + \" PSI\",\n    \"PIT_2001_BACK\": \"#00FF00\",\n    \"TIT_2001_PV\": tit_2001.PV.toFixed(1) + \" \u00b0F\",\n    \"TIT_2001_BACK\": \"#00FF00\",\n    \"UIT_2001_FLOW\": uit_2001.FLOW.toFixed(1),\n    \"CORIOLIS_PRODUCT\": inLineProduct || fill_segment1.producto || \"---\",\n    \"CORIOLIS_FLOW\": uit_2001.FLOW.toFixed(1),\n    \"CORIOLIS_DENSITY\": dit_2001.PV.toFixed(1) + \" kg/m\u00b3\",\n    \"CORIOLIS_PRESSURE\": pit_2001.PV.toFixed(1) + \" PSI\",\n    \"CORIOLIS_TEMPERATURE\": tit_2001.PV.toFixed(1) + \" \u00b0F\",\n    \"PRODUCT_TOTAL_MASS\": Number(uit_2001.TOTAL_MASS_KG || 0).toFixed(2) + \" kg\",\n    \"PRODUCT_PULSES\": Number(uit_2001.PULSES || 0).toLocaleString(\"es-CO\"),\n    \"VAPOR_TOTAL_MASS\": Number(uit_2003.TOTAL_MASS_KG || 0).toFixed(2) + \" kg\",\n    \"LIQUID_NET_MASS\": (Number(uit_2001.TOTAL_MASS_KG || 0) - Number(uit_2003.TOTAL_MASS_KG || 0)).toFixed(2) + \" kg\",\n    \"VAPOR_PULSES\": Number(uit_2003.PULSES || 0).toLocaleString(\"es-CO\"),\n    \"DIT_2001_PV\": dit_2001.PV.toFixed(1),\n    \"DIT_2001_BACK\": \"#00FF00\",\n    \"UIT_2001_DENS\": uit_2001.DENSITY.toFixed(2),\n    \"UIT_2001_DENSITY_BACK\": \"#00FF00\",\n    \"UIT_2001_TBATCH\": uit_2001.TOTAL,\n    \"CISTERNA1_STATUS\": str_status_sisterna1,\n    \"CISTERNA2_STATUS\": str_status_sisterna2,\n    \"CLIENTE1\": fill_segment1.cliente,\n    \"PRODUCTO1\": fill_segment1.producto,\n    \"FECHA1\": fill_segment1.fecha,\n    \"TIQUETE1\": fill_segment1.tiquete,\n    \"RVP1\": fill_segment1.rvp,\n    \"MASA1\": segment_display.MASA_CORIOLIS,\n    \"VOL_INDICADO1\": segment_display.VOL_INDICADO,\n    \"VAPORES1\": segment_display.MASA_VAPORES,\n    \"VOL_FULL1\": fill_segment1.Vol_full,\n    \"VOL_CURRENT1\": promedios.volumen_total,\n    \"PRESSURE1\": promedios.presion_promedio,\n    \"TEMPERATURE1\": promedios.temperatura_promedio,\n    \"CLIENTE2\": fill_segment2.cliente,\n    \"PRODUCTO2\": fill_segment2.producto,\n    \"FECHA2\": fill_segment2.fecha,\n    \"TIQUETE2\": fill_segment2.tiquete,\n    \"RVP2\": fill_segment2.rvp,\n    \"MASA2\": segment_display.MASA_CORIOLIS,\n    \"VOL_INDICADO2\": segment_display.VOL_INDICADO,\n    \"VAPORES2\": segment_display.MASA_VAPORES,\n    \"VOL_FULL2\": fill_segment2.Vol_full,\n    \"VOL_CURRENT2\": promedios.volumen_total,\n    \"PRESSURE2\": promedios.presion_promedio,\n    \"TEMPERATURE2\": promedios.temperatura_promedio,\n    \"UIT_2003_FLOW\": uit_2003.FLOW.toFixed(1),\n    \"UIT_2003_DENSITY\": uit_2003.DENSITY.toFixed(1),\n    \"UIT_2003_TOTAL\": uit_2003.TOTAL.toFixed(1),\n    \"ID_CISTERNA1\": cisterna1.numero_sisterna,\n    \"ID_CISTERNA2\": cisterna2.numero_sisterna,\n    \"ProductInLine\": inLineProduct\n};\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -3102,7 +3111,7 @@
         "type": "function",
         "z": "619addbf2da107aa",
         "name": "Message",
-        "func": "msg.topic = \"ui_confirm\";\nmsg.payload = {\n    text: \"¿Desea Llenar la Sisterna 1?\",\n    context: \"llenar1\"\n};\nreturn msg;\n",
+        "func": "msg.topic = \"ui_confirm\";\nmsg.payload = {\n    text: \"\u00bfDesea Llenar la Sisterna 1?\",\n    context: \"llenar1\"\n};\nreturn msg;\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -3113,7 +3122,7 @@
         "y": 160,
         "wires": [
             [
-                "main-ui-updates-out"
+                "uib-terminal-galan-v2"
             ]
         ]
     },
@@ -3122,7 +3131,7 @@
         "type": "function",
         "z": "619addbf2da107aa",
         "name": "Message",
-        "func": "msg.topic = \"ui_confirm\";\nmsg.payload = {\n    text: \"¿Desea Pausar el Llenado?\",\n    context: \"pause1\"\n};\nreturn msg;\n",
+        "func": "msg.topic = \"ui_confirm\";\nmsg.payload = {\n    text: \"\u00bfDesea Pausar el Llenado?\",\n    context: \"pause1\"\n};\nreturn msg;\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -3142,7 +3151,7 @@
         "type": "function",
         "z": "619addbf2da107aa",
         "name": "Message",
-        "func": "msg.topic = \"ui_confirm\";\nmsg.payload = {\n    text: \"¿Desea Terminar el Llenado?\",\n    context: \"close1\"\n};\nreturn msg;\n",
+        "func": "msg.topic = \"ui_confirm\";\nmsg.payload = {\n    text: \"\u00bfDesea Terminar el Llenado?\",\n    context: \"close1\"\n};\nreturn msg;\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -3179,7 +3188,7 @@
         "type": "function",
         "z": "619addbf2da107aa",
         "name": "function 20",
-        "func": "// 1. Objeto de configuración de enlaces (Bindings)\nconst bindings = {\n    // ---- TAGS TIPO TEXT (Valores de Instrumentos) ----\n    \"PIT_2001_PV\": { type: \"text\" },\n    \"TIT_2001_PV\": { type: \"text\" },\n    \"DIT_2001_PV\": { type: \"text\" },\n    \"UIT_2001_FLOW\": { type: \"text\" },\n    \"UIT_2001_TBATCH\": { type: \"text\" },\n    \"UIT_2001_DENS\": { type: \"text\" },\n    \"UIT_2003_FLOW\": { type: \"text\" },\n    \"UIT_2003_DENSITY\": { type: \"text\" },\n    \"UIT_2003_TOTAL\": { type: \"text\" },\n\n    // ---- TAGS TIPO TEXT (Variables de Cisterna/Brazo 1) ----\n    \"ID_CISTERNA1\": { type: \"text\" },\n    \"PRODUCTO1\": { type: \"text\" },\n    \"FECHA1\": { type: \"text\" },\n    \"CLIENTE1\": { type: \"text\" },\n    \"TIQUETE1\": { type: \"text\" },\n    \"RVP1\": { type: \"text\" },\n    \"MASA1\": { type: \"text\" },\n    \"VOL_INDICADO1\": { type: \"text\" },\n    \"VAPORES1\": { type: \"text\" },\n    \"VOL_FULL1\": { type: \"text\" },\n    \"VOL_CURRENT1\": { type: \"text\" },\n    \"TEMPERATURE1\": { type: \"text\" },\n    \"PRESSURE1\": { type: \"text\" },\n    \"CISTERNA1_STATUS\": { type: \"text\" },\n    \"CISTERNA2_STATUS\": { type: \"text\" },\n    \"ProductInLine\": { type: \"text\" },\n\n    // ---- TAGS TIPO TEXT (Variables de Cisterna/Brazo 2) ----\n    \"ID_CISTERNA2\": { type: \"text\" },\n    \"PRODUCTO2\": { type: \"text\" },\n    \"FECHA2\": { type: \"text\" },\n    \"CLIENTE2\": { type: \"text\" },\n    \"TIQUETE2\": { type: \"text\" },\n    \"RVP2\": { type: \"text\" },\n    \"MASA2\": { type: \"text\" },\n    \"VOL_INDICADO2\": { type: \"text\" },\n    \"VAPORES2\": { type: \"text\" },\n    \"VOL_FULL2\": { type: \"text\" },\n    \"VOL_CURRENT2\": { type: \"text\" },\n    \"TEMPERATURE2\": { type: \"text\" },\n    \"PRESSURE2\": { type: \"text\" },\n\n    // ---- TAGS TIPO FILL (Rectángulos de fondo/Alarma) ----\n    \"PIT_2001_BACK\": { type: \"fill\" },\n    \"TIT_2001_BACK\": { type: \"fill\" },\n    \"DIT_2001_BACK\": { type: \"fill\" },\n    \"FIT_2001_FLOW_BACK\": { type: \"fill\" },\n    \"UIT_2001_DENSITY_BACK\": { type: \"fill\" }\n};\n\n// 2. Inicializamos el arreglo de comandos para Node-RED Dashboard 2 (ui-svg)\nconst commands = [];\n\n// payload p - Asumimos que los datos del proceso vienen en msg.payload\nconst p = msg.payload || {};\n\n// 3. Iteramos las configuraciones y los valores en el payload\nfor (const [tag, config] of Object.entries(bindings)) {\n    const value = p[tag];\n\n    // Si el valor no viene en este paquete, lo saltamos para no sobreescribir con blancos\n    if (value === undefined || value === null) continue;\n\n    if (config.type === \"text\") {\n        commands.push({\n            view: \"main\",\n            command: \"set_text\",   // En ui-svg puede ser set_text o update_text dependiendo de la versión\n            selector: `#${tag}`,\n            text: String(value)\n        });\n    }\n\n    if (config.type === \"fill\") {\n        commands.push({\n            view: \"main\",\n            command: \"set_style_attribute\", // Usado para inyectar colores en los _BACK\n            selector: `#${tag}`,\n            attribute: \"fill\",\n            value: String(value)  // Ej: \"#FF0000\" (Rojo) o \"#20A040\" (Verde normal)\n        });\n    }\n}\n\n// 4. Si se generaron actualizaciones, lo enviamos en msg.payload\nif (commands.length > 0) {\n    msg.payload = commands;\n    return msg;\n} else {\n    // Si no hay datos relevantes, detenemos el nodo para economizar mensajes\n    return null;\n}\n\nreturn msg;",
+        "func": "// 1. Objeto de configuraci\u00f3n de enlaces (Bindings)\nconst bindings = {\n    // ---- TAGS TIPO TEXT (Valores de Instrumentos) ----\n    \"PIT_2001_PV\": { type: \"text\" },\n    \"TIT_2001_PV\": { type: \"text\" },\n    \"DIT_2001_PV\": { type: \"text\" },\n    \"UIT_2001_FLOW\": { type: \"text\" },\n    \"CORIOLIS_PRODUCT\": { type: \"text\" },\n    \"CORIOLIS_FLOW\": { type: \"text\" },\n    \"CORIOLIS_DENSITY\": { type: \"text\" },\n    \"CORIOLIS_PRESSURE\": { type: \"text\" },\n    \"CORIOLIS_TEMPERATURE\": { type: \"text\" },\n    \"PRODUCT_TOTAL_MASS\": { type: \"text\" },\n    \"PRODUCT_PULSES\": { type: \"text\" },\n    \"VAPOR_TOTAL_MASS\": { type: \"text\" },\n    \"LIQUID_NET_MASS\": { type: \"text\" },\n    \"VAPOR_PULSES\": { type: \"text\" },\n    \"UIT_2001_TBATCH\": { type: \"text\" },\n    \"UIT_2001_DENS\": { type: \"text\" },\n    \"UIT_2003_FLOW\": { type: \"text\" },\n    \"UIT_2003_DENSITY\": { type: \"text\" },\n    \"UIT_2003_TOTAL\": { type: \"text\" },\n\n    // ---- TAGS TIPO TEXT (Variables de Cisterna/Brazo 1) ----\n    \"ID_CISTERNA1\": { type: \"text\" },\n    \"PRODUCTO1\": { type: \"text\" },\n    \"FECHA1\": { type: \"text\" },\n    \"CLIENTE1\": { type: \"text\" },\n    \"TIQUETE1\": { type: \"text\" },\n    \"RVP1\": { type: \"text\" },\n    \"MASA1\": { type: \"text\" },\n    \"VOL_INDICADO1\": { type: \"text\" },\n    \"VAPORES1\": { type: \"text\" },\n    \"VOL_FULL1\": { type: \"text\" },\n    \"VOL_CURRENT1\": { type: \"text\" },\n    \"TEMPERATURE1\": { type: \"text\" },\n    \"PRESSURE1\": { type: \"text\" },\n    \"CISTERNA1_STATUS\": { type: \"text\" },\n    \"CISTERNA2_STATUS\": { type: \"text\" },\n    \"ProductInLine\": { type: \"text\" },\n\n    // ---- TAGS TIPO TEXT (Variables de Cisterna/Brazo 2) ----\n    \"ID_CISTERNA2\": { type: \"text\" },\n    \"PRODUCTO2\": { type: \"text\" },\n    \"FECHA2\": { type: \"text\" },\n    \"CLIENTE2\": { type: \"text\" },\n    \"TIQUETE2\": { type: \"text\" },\n    \"RVP2\": { type: \"text\" },\n    \"MASA2\": { type: \"text\" },\n    \"VOL_INDICADO2\": { type: \"text\" },\n    \"VAPORES2\": { type: \"text\" },\n    \"VOL_FULL2\": { type: \"text\" },\n    \"VOL_CURRENT2\": { type: \"text\" },\n    \"TEMPERATURE2\": { type: \"text\" },\n    \"PRESSURE2\": { type: \"text\" },\n\n    // ---- TAGS TIPO FILL (Rect\u00e1ngulos de fondo/Alarma) ----\n    \"PIT_2001_BACK\": { type: \"fill\" },\n    \"TIT_2001_BACK\": { type: \"fill\" },\n    \"DIT_2001_BACK\": { type: \"fill\" },\n    \"FIT_2001_FLOW_BACK\": { type: \"fill\" },\n    \"UIT_2001_DENSITY_BACK\": { type: \"fill\" }\n};\n\n// 2. Inicializamos el arreglo de comandos para Node-RED Dashboard 2 (ui-svg)\nconst commands = [];\n\n// payload p - Asumimos que los datos del proceso vienen en msg.payload\nconst p = msg.payload || {};\n\n// 3. Iteramos las configuraciones y los valores en el payload\nfor (const [tag, config] of Object.entries(bindings)) {\n    const value = p[tag];\n\n    // Si el valor no viene en este paquete, lo saltamos para no sobreescribir con blancos\n    if (value === undefined || value === null) continue;\n\n    if (config.type === \"text\") {\n        commands.push({\n            view: \"main\",\n            command: \"set_text\",   // En ui-svg puede ser set_text o update_text dependiendo de la versi\u00f3n\n            selector: `#${tag}`,\n            text: String(value)\n        });\n    }\n\n    if (config.type === \"fill\") {\n        commands.push({\n            view: \"main\",\n            command: \"set_style_attribute\", // Usado para inyectar colores en los _BACK\n            selector: `#${tag}`,\n            attribute: \"fill\",\n            value: String(value)  // Ej: \"#FF0000\" (Rojo) o \"#20A040\" (Verde normal)\n        });\n    }\n}\n\n// 4. Si se generaron actualizaciones, lo enviamos en msg.payload\nif (commands.length > 0) {\n    msg.payload = commands;\n    return msg;\n} else {\n    // Si no hay datos relevantes, detenemos el nodo para economizar mensajes\n    return null;\n}\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -3199,7 +3208,7 @@
         "type": "function",
         "z": "619addbf2da107aa",
         "name": "Message",
-        "func": "msg.topic = \"ui_confirm\";\nmsg.payload = {\n    text: \"¿Desea LLenar La otra Sisterna?\",\n    context: \"llenar2\"\n};\nreturn msg;\n",
+        "func": "msg.topic = \"ui_confirm\";\nmsg.payload = {\n    text: \"\u00bfDesea LLenar La otra Sisterna?\",\n    context: \"llenar2\"\n};\nreturn msg;\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -3219,7 +3228,7 @@
         "type": "function",
         "z": "619addbf2da107aa",
         "name": "Message",
-        "func": "msg.topic = \"ui_confirm\";\nmsg.payload = {\n    text: \"¿Desea Pausar el LLenado De la Sisterna2?\",\n    context: \"pause2\"\n};\nreturn msg;\n",
+        "func": "msg.topic = \"ui_confirm\";\nmsg.payload = {\n    text: \"\u00bfDesea Pausar el LLenado De la Sisterna2?\",\n    context: \"pause2\"\n};\nreturn msg;\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -3239,7 +3248,7 @@
         "type": "function",
         "z": "619addbf2da107aa",
         "name": "Message",
-        "func": "msg.topic = \"ui_confirm\";\nmsg.payload = {\n    text: \"¿Desea Terminar el LLenado Sisterna 2?\",\n    context: \"close2\"\n};\nreturn msg;\n",
+        "func": "msg.topic = \"ui_confirm\";\nmsg.payload = {\n    text: \"\u00bfDesea Terminar el LLenado Sisterna 2?\",\n    context: \"close2\"\n};\nreturn msg;\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -3289,8 +3298,8 @@
         "sourceFolder": "www",
         "deployedVersion": "7.7.4",
         "showMsgUib": false,
-        "title": "Terminal Galán",
-        "descr": "Instancia reconstruida de la migración principal a UIBUILDER",
+        "title": "Terminal Gal\u00e1n",
+        "descr": "Instancia reconstruida de la migraci\u00f3n principal a UIBUILDER",
         "editurl": "vscode://file/data/uibuilder/terminal-galan/?windowId=_blank",
         "x": 670,
         "y": 100,
@@ -3306,7 +3315,7 @@
         "id": "main-ui-input-out",
         "type": "link out",
         "z": "619addbf2da107aa",
-        "name": "UIB → MainDisplay",
+        "name": "UIB \u2192 MainDisplay",
         "mode": "link",
         "links": [
             "main-ui-input-in"
@@ -3336,7 +3345,7 @@
         "id": "main-ui-updates-out",
         "type": "link out",
         "z": "619addbf2da107aa",
-        "name": "UIB ← MainDisplay",
+        "name": "UIB \u2190 MainDisplay",
         "mode": "link",
         "links": [
             "main-ui-updates-in"
@@ -3564,7 +3573,7 @@
         "type": "function",
         "z": "b29ed1d9bf2c7ea9",
         "name": "Flow Calc",
-        "func": "const PI = Math.PI;\n    \n    // Parámetros de la tubería y placa de orificio\nconst D = 3; // Diámetro de la tubería en pulgadas\nconst d = 1.75; // Diámetro del orificio en pulgadas\nconst beta = d / D; // Relación de diámetros\n\n// Datos del transmisor multivariable\nconst P = msg.payload.presionEstatica; // Presión estática en psia\nconst dP = msg.payload.presionDiferencial; // Presión diferencial en inH2O\nconst T = msg.payload.temperatura; // Temperatura en °F\n\n// Datos actualizados de la cromatografía\nconst cromatografia = {\n    C1: 0.6631,  // Metano\n    C2: 0.1169,  // Etano\n    C3: 0.0470,  // Propano\n    iC4: 0.0077, // i-Butano\n    nC4: 0.0122, // n-Butano\n    iC5: 0.0040, // i-Pentano\n    nC5: 0.0037, // n-Pentano\n    C6: 0.0013,  // n-Hexano\n    C7: 0.0009,  // n-Heptano\n    C8: 0.0005,  // n-Octano\n    C9: 0.0003,  // n-Nonano\n    H2O: 0.0025, // Agua\n    CO2: 0.0849, // Dióxido de carbono\n    N2: 0.0547,  // Nitrógeno\n    H2S: 0.0002  // Sulfuro de hidrógeno\n};\n\n// Cálculo del peso molecular\nfunction calcularPesoMolecular(cromatografia) {\n    const pesosMoleculares = {\n        C1: 16.043, C2: 30.070, C3: 44.097,\n        iC4: 58.123, nC4: 58.123,\n        iC5: 72.150, nC5: 72.150,\n        C6: 86.177, C7: 100.204, C8: 114.231, C9: 128.258,\n        H2O: 18.015, CO2: 44.010, N2: 28.013, H2S: 34.082\n    };\n    return Object.keys(cromatografia).reduce((sum, componente) =>\n        sum + cromatografia[componente] * pesosMoleculares[componente], 0);\n}\n\nconst MW = calcularPesoMolecular(cromatografia);\n\n// Cálculo del factor de compresibilidad (Z)\n// Nota: Este es un cálculo simplificado. Para mayor precisión, se recomienda\n// usar métodos más avanzados como la ecuación de estado AGA8 o GERG-2008\nfunction calcularFactorCompresibilidad(P, T, MW) {\n    const Pc = 667 + 15 * MW - 0.05 * Math.pow(MW, 2); // Presión crítica estimada\n    const Tc = 343 + 7 * MW - 0.01 * Math.pow(MW, 2); // Temperatura crítica estimada\n    const Tr = (T + 460) / Tc; // Temperatura reducida\n    const Pr = P / Pc; // Presión reducida\n    return 1 - (0.06 + 0.01 * Pr) / Tr;\n}\n\n// Implementación simplificada del método AGA8-DC92\nfunction calcularFactorCompresibilidadAGA8(P, T, composicion) {\n    // Constantes para los componentes (orden: C1, C2, C3, iC4, nC4, iC5, nC5, N2, CO2)\n    const Tc = [190.56, 305.32, 369.83, 407.8, 425.12, 460.4, 469.7, 126.2, 304.12]; // K\n    const Pc = [45.99, 48.72, 42.48, 36.4, 37.96, 33.8, 33.7, 33.98, 73.74]; // bar\n    const omega = [0.0115, 0.0995, 0.1523, 0.1852, 0.2010, 0.2275, 0.2510, 0.0377, 0.2239];\n    \n    // Convertir temperatura a Kelvin y presión a bar\n    const Tk = (T + 459.67) * 5/9;\n    const Pbar = P * 0.0689476;\n    \n    // Calcular parámetros de mezcla\n    let Tcm = 0, Pcm = 0, omega_m = 0;\n    const componentes = ['C1', 'C2', 'C3', 'iC4', 'nC4', 'iC5', 'nC5', 'N2', 'CO2'];\n    componentes.forEach((comp, i) => {\n        const xi = composicion[comp];\n        Tcm += xi * Tc[i];\n        Pcm += xi * Pc[i];\n        omega_m += xi * omega[i];\n    });\n    \n    // Calcular factor acéntrico de mezcla\n    const omega_m_adj = 0.3796 + 1.5226 * omega_m - 0.2967 * Math.pow(omega_m, 2);\n    \n    // Calcular Z usando la ecuación de estado de Peng-Robinson\n    const R = 8.3145; // Constante de gas universal en J/(mol·K)\n    const a = 0.45724 * Math.pow(R * Tcm, 2) / Pcm * Math.pow(1 + (0.37464 + 1.54226 * omega_m_adj - 0.26992 * Math.pow(omega_m_adj, 2)) * (1 - Math.sqrt(Tk / Tcm)), 2);\n    const b = 0.0778 * R * Tcm / Pcm;\n    \n    const A = a * Pbar / Math.pow(R * Tk, 2);\n    const B = b * Pbar / (R * Tk);\n    \n    const coef = [1, -(1-B), A-3*Math.pow(B,2)-2*B, -(A*B-Math.pow(B,2)-Math.pow(B,3))];\n    \n    // Resolver la ecuación cúbica para Z\n    const roots = solveCubic(coef);\n    const Z = Math.max(...roots); // Tomar la raíz más grande\n    \n    return Z;\n}\n\n// Función auxiliar para resolver ecuaciones cúbicas\nfunction solveCubic(coef) {\n    const [a, b, c, d] = coef;\n    const p = (3*a*c - Math.pow(b,2)) / (3*Math.pow(a,2));\n    const q = (2*Math.pow(b,3) - 9*a*b*c + 27*Math.pow(a,2)*d) / (27*Math.pow(a,3));\n    const D = Math.pow(q/2,2) + Math.pow(p/3,3);\n    \n    if (D > 0) {\n        const u = Math.cbrt(-q/2 + Math.sqrt(D));\n        const v = Math.cbrt(-q/2 - Math.sqrt(D));\n        return [u + v - b/(3*a)];\n    } else if (D === 0) {\n        const u = Math.cbrt(-q/2);\n        return [2*u - b/(3*a), -u - b/(3*a)];\n    } else {\n        const phi = Math.acos(-q / (2*Math.sqrt(Math.pow(-p/3,3))));\n        const r = 2 * Math.sqrt(-p/3);\n        return [\n            r * Math.cos(phi/3) - b/(3*a),\n            r * Math.cos((phi + 2*Math.PI)/3) - b/(3*a),\n            r * Math.cos((phi + 4*Math.PI)/3) - b/(3*a)\n        ];\n    }\n}\n\n// Usar el nuevo método AGA8 para calcular Z\nconst Z = calcularFactorCompresibilidadAGA8(P, T, cromatografia);\n\n// Función actualizada para calcular Cd usando el número de Reynolds\nfunction calcularCd(beta, D, P, dP, Re) {\n    // Esta es una versión simplificada. La ecuación completa es más compleja.\n    const L1 = 0.0254 / D; // Asumiendo una toma de presión en la esquina\n    const L2 = 0.0254 / D;\n    const A = Math.pow(19000 * beta / Re, 0.8);\n    \n    return 0.5961 + 0.0261 * Math.pow(beta, 2) - 0.216 * Math.pow(beta, 8) +\n           0.000521 * Math.pow(1e6 * beta / Re, 0.7) +\n           (0.0188 + 0.0063 * A) * Math.pow(beta, 3.5) * Math.pow(1e6 / Re, 0.3) +\n           (0.043 + 0.080 * Math.exp(-10 * L1) - 0.123 * Math.exp(-7 * L1)) * \n           (1 - 0.11 * A) * Math.pow(beta, 4) / (1 - Math.pow(beta, 4)) -\n           0.031 * (L2 - 0.8 * Math.pow(L2, 1.1)) * Math.pow(beta, 1.3);\n}\n\n\n// Función para calcular el número de Reynolds\nfunction Reynolds(D, P, T, MW, dP, Z) {\n    const mu = 1.8e-5; // Viscosidad dinámica estimada en Pa·s\n    const rho = P * MW / (Z * 10.73 * (T + 460)); // Densidad del gas en lb/ft³\n    const velocidad = 0.0119 * Math.sqrt(dP * P / (MW * (T + 460))); // Velocidad en ft/s\n    return 7000 * rho * velocidad * D / mu; // Reynolds (adimensional)\n}\n\n\n\nconst Re = Reynolds(D, P, T, MW, dP, Z);\nconst Cd = calcularCd(beta, D, P, dP, Re);\n\n// Cálculo del factor de expansión\nconst Y = 1 - (0.41 + 0.35 * Math.pow(beta, 4)) * (dP / (P * 27.7076));\n\n// Cálculo del flujo másico\nconst Qm = 359 * Cd * Y * Math.pow(d, 2) * Math.sqrt(dP * P * MW / ((T + 460) * Z));\n\n// Cálculo del flujo volumétrico a condiciones de proceso\nconst Qv = Qm * (Z * 10.73 * (T + 460)) / (MW * P);\n\n// Asignamos el resultado al payload\nmsg.payload = {\n    flujoMasico: Qm, // en lb/h\n    flujoVolumetrico: Qv, // en ft³/h a condiciones de proceso\n    pesoMolecular: MW,\n    factorCompresibilidad: Z,\n    coeficienteDescarga: Cd\n};\n    \nreturn msg;",
+        "func": "const PI = Math.PI;\n    \n    // Par\u00e1metros de la tuber\u00eda y placa de orificio\nconst D = 3; // Di\u00e1metro de la tuber\u00eda en pulgadas\nconst d = 1.75; // Di\u00e1metro del orificio en pulgadas\nconst beta = d / D; // Relaci\u00f3n de di\u00e1metros\n\n// Datos del transmisor multivariable\nconst P = msg.payload.presionEstatica; // Presi\u00f3n est\u00e1tica en psia\nconst dP = msg.payload.presionDiferencial; // Presi\u00f3n diferencial en inH2O\nconst T = msg.payload.temperatura; // Temperatura en \u00b0F\n\n// Datos actualizados de la cromatograf\u00eda\nconst cromatografia = {\n    C1: 0.6631,  // Metano\n    C2: 0.1169,  // Etano\n    C3: 0.0470,  // Propano\n    iC4: 0.0077, // i-Butano\n    nC4: 0.0122, // n-Butano\n    iC5: 0.0040, // i-Pentano\n    nC5: 0.0037, // n-Pentano\n    C6: 0.0013,  // n-Hexano\n    C7: 0.0009,  // n-Heptano\n    C8: 0.0005,  // n-Octano\n    C9: 0.0003,  // n-Nonano\n    H2O: 0.0025, // Agua\n    CO2: 0.0849, // Di\u00f3xido de carbono\n    N2: 0.0547,  // Nitr\u00f3geno\n    H2S: 0.0002  // Sulfuro de hidr\u00f3geno\n};\n\n// C\u00e1lculo del peso molecular\nfunction calcularPesoMolecular(cromatografia) {\n    const pesosMoleculares = {\n        C1: 16.043, C2: 30.070, C3: 44.097,\n        iC4: 58.123, nC4: 58.123,\n        iC5: 72.150, nC5: 72.150,\n        C6: 86.177, C7: 100.204, C8: 114.231, C9: 128.258,\n        H2O: 18.015, CO2: 44.010, N2: 28.013, H2S: 34.082\n    };\n    return Object.keys(cromatografia).reduce((sum, componente) =>\n        sum + cromatografia[componente] * pesosMoleculares[componente], 0);\n}\n\nconst MW = calcularPesoMolecular(cromatografia);\n\n// C\u00e1lculo del factor de compresibilidad (Z)\n// Nota: Este es un c\u00e1lculo simplificado. Para mayor precisi\u00f3n, se recomienda\n// usar m\u00e9todos m\u00e1s avanzados como la ecuaci\u00f3n de estado AGA8 o GERG-2008\nfunction calcularFactorCompresibilidad(P, T, MW) {\n    const Pc = 667 + 15 * MW - 0.05 * Math.pow(MW, 2); // Presi\u00f3n cr\u00edtica estimada\n    const Tc = 343 + 7 * MW - 0.01 * Math.pow(MW, 2); // Temperatura cr\u00edtica estimada\n    const Tr = (T + 460) / Tc; // Temperatura reducida\n    const Pr = P / Pc; // Presi\u00f3n reducida\n    return 1 - (0.06 + 0.01 * Pr) / Tr;\n}\n\n// Implementaci\u00f3n simplificada del m\u00e9todo AGA8-DC92\nfunction calcularFactorCompresibilidadAGA8(P, T, composicion) {\n    // Constantes para los componentes (orden: C1, C2, C3, iC4, nC4, iC5, nC5, N2, CO2)\n    const Tc = [190.56, 305.32, 369.83, 407.8, 425.12, 460.4, 469.7, 126.2, 304.12]; // K\n    const Pc = [45.99, 48.72, 42.48, 36.4, 37.96, 33.8, 33.7, 33.98, 73.74]; // bar\n    const omega = [0.0115, 0.0995, 0.1523, 0.1852, 0.2010, 0.2275, 0.2510, 0.0377, 0.2239];\n    \n    // Convertir temperatura a Kelvin y presi\u00f3n a bar\n    const Tk = (T + 459.67) * 5/9;\n    const Pbar = P * 0.0689476;\n    \n    // Calcular par\u00e1metros de mezcla\n    let Tcm = 0, Pcm = 0, omega_m = 0;\n    const componentes = ['C1', 'C2', 'C3', 'iC4', 'nC4', 'iC5', 'nC5', 'N2', 'CO2'];\n    componentes.forEach((comp, i) => {\n        const xi = composicion[comp];\n        Tcm += xi * Tc[i];\n        Pcm += xi * Pc[i];\n        omega_m += xi * omega[i];\n    });\n    \n    // Calcular factor ac\u00e9ntrico de mezcla\n    const omega_m_adj = 0.3796 + 1.5226 * omega_m - 0.2967 * Math.pow(omega_m, 2);\n    \n    // Calcular Z usando la ecuaci\u00f3n de estado de Peng-Robinson\n    const R = 8.3145; // Constante de gas universal en J/(mol\u00b7K)\n    const a = 0.45724 * Math.pow(R * Tcm, 2) / Pcm * Math.pow(1 + (0.37464 + 1.54226 * omega_m_adj - 0.26992 * Math.pow(omega_m_adj, 2)) * (1 - Math.sqrt(Tk / Tcm)), 2);\n    const b = 0.0778 * R * Tcm / Pcm;\n    \n    const A = a * Pbar / Math.pow(R * Tk, 2);\n    const B = b * Pbar / (R * Tk);\n    \n    const coef = [1, -(1-B), A-3*Math.pow(B,2)-2*B, -(A*B-Math.pow(B,2)-Math.pow(B,3))];\n    \n    // Resolver la ecuaci\u00f3n c\u00fabica para Z\n    const roots = solveCubic(coef);\n    const Z = Math.max(...roots); // Tomar la ra\u00edz m\u00e1s grande\n    \n    return Z;\n}\n\n// Funci\u00f3n auxiliar para resolver ecuaciones c\u00fabicas\nfunction solveCubic(coef) {\n    const [a, b, c, d] = coef;\n    const p = (3*a*c - Math.pow(b,2)) / (3*Math.pow(a,2));\n    const q = (2*Math.pow(b,3) - 9*a*b*c + 27*Math.pow(a,2)*d) / (27*Math.pow(a,3));\n    const D = Math.pow(q/2,2) + Math.pow(p/3,3);\n    \n    if (D > 0) {\n        const u = Math.cbrt(-q/2 + Math.sqrt(D));\n        const v = Math.cbrt(-q/2 - Math.sqrt(D));\n        return [u + v - b/(3*a)];\n    } else if (D === 0) {\n        const u = Math.cbrt(-q/2);\n        return [2*u - b/(3*a), -u - b/(3*a)];\n    } else {\n        const phi = Math.acos(-q / (2*Math.sqrt(Math.pow(-p/3,3))));\n        const r = 2 * Math.sqrt(-p/3);\n        return [\n            r * Math.cos(phi/3) - b/(3*a),\n            r * Math.cos((phi + 2*Math.PI)/3) - b/(3*a),\n            r * Math.cos((phi + 4*Math.PI)/3) - b/(3*a)\n        ];\n    }\n}\n\n// Usar el nuevo m\u00e9todo AGA8 para calcular Z\nconst Z = calcularFactorCompresibilidadAGA8(P, T, cromatografia);\n\n// Funci\u00f3n actualizada para calcular Cd usando el n\u00famero de Reynolds\nfunction calcularCd(beta, D, P, dP, Re) {\n    // Esta es una versi\u00f3n simplificada. La ecuaci\u00f3n completa es m\u00e1s compleja.\n    const L1 = 0.0254 / D; // Asumiendo una toma de presi\u00f3n en la esquina\n    const L2 = 0.0254 / D;\n    const A = Math.pow(19000 * beta / Re, 0.8);\n    \n    return 0.5961 + 0.0261 * Math.pow(beta, 2) - 0.216 * Math.pow(beta, 8) +\n           0.000521 * Math.pow(1e6 * beta / Re, 0.7) +\n           (0.0188 + 0.0063 * A) * Math.pow(beta, 3.5) * Math.pow(1e6 / Re, 0.3) +\n           (0.043 + 0.080 * Math.exp(-10 * L1) - 0.123 * Math.exp(-7 * L1)) * \n           (1 - 0.11 * A) * Math.pow(beta, 4) / (1 - Math.pow(beta, 4)) -\n           0.031 * (L2 - 0.8 * Math.pow(L2, 1.1)) * Math.pow(beta, 1.3);\n}\n\n\n// Funci\u00f3n para calcular el n\u00famero de Reynolds\nfunction Reynolds(D, P, T, MW, dP, Z) {\n    const mu = 1.8e-5; // Viscosidad din\u00e1mica estimada en Pa\u00b7s\n    const rho = P * MW / (Z * 10.73 * (T + 460)); // Densidad del gas en lb/ft\u00b3\n    const velocidad = 0.0119 * Math.sqrt(dP * P / (MW * (T + 460))); // Velocidad en ft/s\n    return 7000 * rho * velocidad * D / mu; // Reynolds (adimensional)\n}\n\n\n\nconst Re = Reynolds(D, P, T, MW, dP, Z);\nconst Cd = calcularCd(beta, D, P, dP, Re);\n\n// C\u00e1lculo del factor de expansi\u00f3n\nconst Y = 1 - (0.41 + 0.35 * Math.pow(beta, 4)) * (dP / (P * 27.7076));\n\n// C\u00e1lculo del flujo m\u00e1sico\nconst Qm = 359 * Cd * Y * Math.pow(d, 2) * Math.sqrt(dP * P * MW / ((T + 460) * Z));\n\n// C\u00e1lculo del flujo volum\u00e9trico a condiciones de proceso\nconst Qv = Qm * (Z * 10.73 * (T + 460)) / (MW * P);\n\n// Asignamos el resultado al payload\nmsg.payload = {\n    flujoMasico: Qm, // en lb/h\n    flujoVolumetrico: Qv, // en ft\u00b3/h a condiciones de proceso\n    pesoMolecular: MW,\n    factorCompresibilidad: Z,\n    coeficienteDescarga: Cd\n};\n    \nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -3709,7 +3718,7 @@
         "type": "function",
         "z": "b29ed1d9bf2c7ea9",
         "name": "function 13",
-        "func": "// msg.payload = {\n//     massFlow: 18580.72,         // kg/h (masa del Coriolis)\n//     fluid: 'propano',\n//     observedTempF: 84.75,       // °F\n//     observedPressurePSI: 195.54, // PSIG\n//     observedDensity: 481.8,     // kg/m³ (densidad observada del Coriolis)\n//     rvp: 180,                   // PSI @ 100°F (del laboratorio)\n//     mFactor: 1.0010             // Factor del medidor (opcional)\n// };\n\n// msg.payload = {\n//     massFlow: 12200.92,         // kg/h (masa del Coriolis)\n//     fluid: 'butano',\n//     observedTempF: 82.61,       // °F\n//     observedPressurePSI: 58.05, // PSIG\n//     observedDensity: 560.1,     // kg/m³ (densidad observada del Coriolis)\n//     rvp: 40,                   // PSI @ 100°F (del laboratorio)\n//     mFactor: 1.0010            // Factor del medidor (opcional)\n// };\n\nmsg.payload = {\n    massFlow: 23561.23,         // kg/h (masa del Coriolis)\n    fluid: 'propano',\n    observedTempF: 95,       // °F\n    observedPressurePSI: 120, // PSIG\n    observedDensity: 475.2,     // kg/m³ (densidad observada del Coriolis)\n    rvp: 180,                   // PSI @ 100°F (del laboratorio)\n    mFactor: 0.9839338          // Factor del medidor (opcional)\n};\nreturn msg;\n\n",
+        "func": "// msg.payload = {\n//     massFlow: 18580.72,         // kg/h (masa del Coriolis)\n//     fluid: 'propano',\n//     observedTempF: 84.75,       // \u00b0F\n//     observedPressurePSI: 195.54, // PSIG\n//     observedDensity: 481.8,     // kg/m\u00b3 (densidad observada del Coriolis)\n//     rvp: 180,                   // PSI @ 100\u00b0F (del laboratorio)\n//     mFactor: 1.0010             // Factor del medidor (opcional)\n// };\n\n// msg.payload = {\n//     massFlow: 12200.92,         // kg/h (masa del Coriolis)\n//     fluid: 'butano',\n//     observedTempF: 82.61,       // \u00b0F\n//     observedPressurePSI: 58.05, // PSIG\n//     observedDensity: 560.1,     // kg/m\u00b3 (densidad observada del Coriolis)\n//     rvp: 40,                   // PSI @ 100\u00b0F (del laboratorio)\n//     mFactor: 1.0010            // Factor del medidor (opcional)\n// };\n\nmsg.payload = {\n    massFlow: 23561.23,         // kg/h (masa del Coriolis)\n    fluid: 'propano',\n    observedTempF: 95,       // \u00b0F\n    observedPressurePSI: 120, // PSIG\n    observedDensity: 475.2,     // kg/m\u00b3 (densidad observada del Coriolis)\n    rvp: 180,                   // PSI @ 100\u00b0F (del laboratorio)\n    mFactor: 0.9839338          // Factor del medidor (opcional)\n};\nreturn msg;\n\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -4109,7 +4118,7 @@
         "type": "function",
         "z": "flujo-tiquete-lpg",
         "name": "Preparar datos adicionales",
-        "func": "// Guardar datos adicionales antes del cálculo\nmsg.datosAdicionales = {\n    cliente: msg.payload.cliente,\n    numeroTiquete: msg.payload.numeroTiquete,\n    stream: msg.payload.stream,\n    bala: msg.payload.bala,\n    pulsosBatch: msg.payload.pulsosBatch,\n    kFactor: msg.payload.kFactor,\n    operacion: msg.payload.operacion || 'Ventas',\n    empresa: msg.payload.empresa || 'PETROSANTANDER COLOMBIA INC',\n    origen: msg.payload.origen || 'PETROSANTANDER',\n    tipoMedidor: msg.payload.tipoMedidor || 'CORIOLIS'\n};\n\nreturn msg;",
+        "func": "// Guardar datos adicionales antes del c\u00e1lculo\nmsg.datosAdicionales = {\n    cliente: msg.payload.cliente,\n    numeroTiquete: msg.payload.numeroTiquete,\n    stream: msg.payload.stream,\n    bala: msg.payload.bala,\n    pulsosBatch: msg.payload.pulsosBatch,\n    kFactor: msg.payload.kFactor,\n    operacion: msg.payload.operacion || 'Ventas',\n    empresa: msg.payload.empresa || 'PETROSANTANDER COLOMBIA INC',\n    origen: msg.payload.origen || 'PETROSANTANDER',\n    tipoMedidor: msg.payload.tipoMedidor || 'CORIOLIS'\n};\n\nreturn msg;",
         "outputs": 1,
         "timeout": "",
         "noerr": 0,
@@ -4128,7 +4137,7 @@
         "id": "flujo-estandar",
         "type": "flujo-estandar",
         "z": "flujo-tiquete-lpg",
-        "name": "Calcular Flujo Estándar",
+        "name": "Calcular Flujo Est\u00e1ndar",
         "x": 650,
         "y": 100,
         "wires": [
@@ -4142,7 +4151,7 @@
         "type": "function",
         "z": "flujo-tiquete-lpg",
         "name": "Combinar con datos adicionales",
-        "func": "// Combinar resultado del cálculo con datos adicionales\n\n// let sel_cisterna = global.get(\"SEL_CISTERNA\");\n// let llenado_id;\n\n// if (sel_cisterna === \"CISTERNA1\") {\n//     llenado_id = global.get(\"ID_LLENADO1\");\n// } else {\n//     llenado_id = global.get(\"ID_LLENADO2\");\n// }\n\n\nif (msg.datosAdicionales) {\n    msg.payload.cliente = msg.datosAdicionales.cliente;\n    msg.payload.numeroTiquete = msg.datosAdicionales.numeroTiquete;\n    msg.payload.stream = msg.datosAdicionales.stream;\n    msg.payload.bala = msg.datosAdicionales.bala;\n    msg.payload.pulsosBatch = msg.datosAdicionales.pulsosBatch;\n    msg.payload.kFactor = msg.datosAdicionales.kFactor;\n    msg.payload.operacion = msg.datosAdicionales.operacion;\n    msg.payload.empresa = msg.datosAdicionales.empresa;\n    msg.payload.origen = msg.datosAdicionales.origen;\n    msg.payload.tipoMedidor = msg.datosAdicionales.tipoMedidor;\n    msg.payload.fechaHora = new Date().toLocaleString('es-CO');\n}\n\n\n\nmsg.topic = \"TIQUETE_LPG\";\n\n// global.set(\"STATUS_CISTERNA1\",0);\n// global.set(\"SEND_STATUS_CISTERNA1\",true);\n\nreturn msg;",
+        "func": "// Combinar resultado del c\u00e1lculo con datos adicionales\n\nif (msg.datosAdicionales) {\n    msg.payload.cliente = msg.datosAdicionales.cliente;\n    msg.payload.numeroTiquete = msg.datosAdicionales.numeroTiquete;\n    msg.payload.stream = msg.datosAdicionales.stream;\n    msg.payload.bala = msg.datosAdicionales.bala;\n    msg.payload.pulsosBatch = msg.datosAdicionales.pulsosBatch;\n    msg.payload.kFactor = msg.datosAdicionales.kFactor;\n    msg.payload.operacion = msg.datosAdicionales.operacion;\n    msg.payload.empresa = msg.datosAdicionales.empresa;\n    msg.payload.origen = msg.datosAdicionales.origen;\n    msg.payload.tipoMedidor = msg.datosAdicionales.tipoMedidor;\n    msg.payload.fechaHora = new Date().toLocaleString('es-CO');\n}\n\nmsg.topic = \"TIQUETE_LPG\";\nmsg.payload._force_show = true;\nreturn msg;\n",
         "outputs": 1,
         "timeout": "",
         "noerr": 0,
@@ -4153,7 +4162,8 @@
         "y": 100,
         "wires": [
             [
-                "debug-output"
+                "debug-output",
+                "uib-terminal-galan-v2"
             ]
         ]
     },
@@ -4251,7 +4261,7 @@
         "type": "function",
         "z": "002b5cf35f2cdda5",
         "name": "Query ABV",
-        "func": "let sel_cisterna = global.get(\"SEL_CISTERNA\");\nlet llenado_id;\n\nif (sel_cisterna === \"CISTERNA1\") {\n    llenado_id = global.get(\"ID_LLENADO1\");\n} else {\n    llenado_id = global.get(\"ID_LLENADO2\");\n}\n\n// Debug para ver qué valores tienes\nnode.warn(\"sel_cisterna: \" + sel_cisterna);\nnode.warn(\"llenado_id: \" + llenado_id);\n\n// Validar que sea un número mayor a 0\nif (llenado_id && llenado_id > 0 ) {\n    msg.topic = `SELECT * FROM llenado_promedios WHERE llenado_id = ${llenado_id}`;\n    msg.payload = llenado_id;\n    return msg;\n}\n\n// Si no hay ID válido, no continuar el flujo\nnode.warn(\"llenado_id no válido: \" + llenado_id);\nreturn null;",
+        "func": "let sel_cisterna = global.get(\"SEL_CISTERNA\");\nlet llenado_id;\n\nif (sel_cisterna === \"CISTERNA1\") {\n    llenado_id = global.get(\"ID_LLENADO1\");\n} else {\n    llenado_id = global.get(\"ID_LLENADO2\");\n}\n\n// Debug para ver qu\u00e9 valores tienes\nnode.warn(\"sel_cisterna: \" + sel_cisterna);\nnode.warn(\"llenado_id: \" + llenado_id);\n\n// Validar que sea un n\u00famero mayor a 0\nif (llenado_id && llenado_id > 0 ) {\n    msg.topic = `SELECT * FROM llenado_promedios WHERE llenado_id = ${llenado_id}`;\n    msg.payload = llenado_id;\n    return msg;\n}\n\n// Si no hay ID v\u00e1lido, no continuar el flujo\nnode.warn(\"llenado_id no v\u00e1lido: \" + llenado_id);\nreturn null;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -4288,7 +4298,7 @@
         "type": "function",
         "z": "002b5cf35f2cdda5",
         "name": "Is Ready 1",
-        "func": "const selected = global.get(\"SEL_CISTERNA\");\nif (selected !== \"CISTERNA1\" && selected !== \"CISTERNA2\") return null;\nconst isCisterna1 = selected === \"CISTERNA1\";\nconst statusKey = isCisterna1 ? \"STATUS_CISTERNA1\" : \"STATUS_CISTERNA2\";\nconst visibleKey = isCisterna1 ? \"CISTERNA2_VISIBLE\" : \"CISTERNA1_VISIBLE\";\nconst loadId = isCisterna1 ? global.get(\"ID_LLENADO1\") : global.get(\"ID_LLENADO2\");\nconst row = Array.isArray(msg.payload) ? msg.payload[0] : null;\nconst current = global.get(\"PROMEDIOS\") || {};\nconst defaults = { llenado_id: Number(loadId) || 0, flujo_promedio: 0, densidad_promedio: 0, presion_promedio: 0, temperatura_promedio: 0, volumen_total: 0 };\nconst averages = { ...defaults, ...current, ...(row || {}) };\naverages.llenado_id = Number(loadId) || Number(averages.llenado_id) || 0;\nglobal.set(\"PROMEDIOS\", averages);\nglobal.set(statusKey, 2);\nglobal.set(\"SEND_STATUS_CISTERNA1\", true);\nglobal.set(visibleKey, 0);\nmsg.topic = \"OK\";\nmsg.payload = \"OK\";\nreturn msg;",
+        "func": "const selected = global.get(\"SEL_CISTERNA\");\nconst isCisterna1 = selected === \"CISTERNA1\";\nconst statusKey = isCisterna1 ? \"STATUS_CISTERNA1\" : \"STATUS_CISTERNA2\";\nconst visibleKey = isCisterna1 ? \"CISTERNA2_VISIBLE\" : \"CISTERNA1_VISIBLE\";\nconst loadId = isCisterna1 ? global.get(\"ID_LLENADO1\") : global.get(\"ID_LLENADO2\");\nconst row = Array.isArray(msg.payload) ? msg.payload[0] : null;\nconst current = global.get(\"PROMEDIOS\") || {};\nconst defaults = {\n    llenado_id: Number(loadId) || 0,\n    flujo_promedio: 0,\n    densidad_promedio: 0,\n    presion_promedio: 0,\n    temperatura_promedio: 0,\n    volumen_total: 0\n};\n// La consulta puede estar vac\u00eda en una corrida nueva: conserva los promedios\n// iniciales en cero para que el primer registro de proceso no falle.\nglobal.set(\"PROMEDIOS\", { ...defaults, ...current, ...(row || {}) });\nglobal.set(statusKey, 2);\nglobal.set(\"SEND_STATUS_CISTERNA1\", true);\nglobal.set(visibleKey, 0);\nmsg.topic = \"OK\";\nmsg.payload = \"OK\";\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -4367,7 +4377,7 @@
         "type": "function",
         "z": "002b5cf35f2cdda5",
         "name": "function 19",
-        "func": "let sel_cisterna = global.get(\"SEL_CISTERNA\");\nlet llenado_id;\n\nif (sel_cisterna === \"CISTERNA1\") {\n    llenado_id = global.get(\"ID_LLENADO1\");\n} else {\n    llenado_id = global.get(\"ID_LLENADO2\");\n}\n\n// Debug para ver qué valores tienes\nnode.warn(\"sel_cisterna: \" + sel_cisterna);\nnode.warn(\"llenado_id: \" + llenado_id);\n\n// Validar que sea un número mayor a 0\nif (llenado_id && llenado_id > 0) {\n    msg.topic = `SELECT * FROM llenado_promedios WHERE llenado_id = ${llenado_id}`;\n    msg.payload = llenado_id;\n    return msg;\n}\n\n// Si no hay ID válido, no continuar el flujo\nnode.warn(\"llenado_id no válido: \" + llenado_id);",
+        "func": "let sel_cisterna = global.get(\"SEL_CISTERNA\");\nlet llenado_id;\n\nif (sel_cisterna === \"CISTERNA1\") {\n    llenado_id = global.get(\"ID_LLENADO1\");\n} else {\n    llenado_id = global.get(\"ID_LLENADO2\");\n}\n\n// Debug para ver qu\u00e9 valores tienes\nnode.warn(\"sel_cisterna: \" + sel_cisterna);\nnode.warn(\"llenado_id: \" + llenado_id);\n\n// Validar que sea un n\u00famero mayor a 0\nif (llenado_id && llenado_id > 0) {\n    msg.topic = `SELECT * FROM llenado_promedios WHERE llenado_id = ${llenado_id}`;\n    msg.payload = llenado_id;\n    return msg;\n}\n\n// Si no hay ID v\u00e1lido, no continuar el flujo\nnode.warn(\"llenado_id no v\u00e1lido: \" + llenado_id);",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -4403,7 +4413,7 @@
         "type": "function",
         "z": "002b5cf35f2cdda5",
         "name": "function 23",
-        "func": "const row = Array.isArray(msg.payload) ? msg.payload[0] : null;\nconst current = global.get(\"PROMEDIOS\") || { llenado_id: 0, flujo_promedio: 0, densidad_promedio: 0, presion_promedio: 0, temperatura_promedio: 0, volumen_total: 0 };\nif (row) global.set(\"PROMEDIOS\", { ...current, ...row });\nelse global.set(\"PROMEDIOS\", current);\nreturn msg;",
+        "func": "const row = Array.isArray(msg.payload) ? msg.payload[0] : null;\nconst current = global.get(\"PROMEDIOS\") || {\n    llenado_id: 0,\n    flujo_promedio: 0,\n    densidad_promedio: 0,\n    presion_promedio: 0,\n    temperatura_promedio: 0,\n    volumen_total: 0\n};\nif (row) global.set(\"PROMEDIOS\", { ...current, ...row });\nelse global.set(\"PROMEDIOS\", current);\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -4589,7 +4599,7 @@
         "type": "function",
         "z": "002b5cf35f2cdda5",
         "name": "InserNewSegment",
-        "func": "const row = Array.isArray(msg.payload) ? msg.payload[0] : null;\nconst selected = global.get(\"SEL_CISTERNA\");\nif (selected !== \"CISTERNA1\" && selected !== \"CISTERNA2\") { msg.payload = null; return msg; }\nconst isCisterna1 = selected === \"CISTERNA1\";\nconst fillKey = isCisterna1 ? \"FILL_SEGMENT1\" : \"FILL_SEGMENT2\";\nconst statusKey = isCisterna1 ? \"STATUS_CISTERNA1\" : \"STATUS_CISTERNA2\";\nconst idKey = isCisterna1 ? \"ID_CISTERNA1\" : \"ID_CISTERNA2\";\nconst productKey = isCisterna1 ? \"ID_PRODUCTO1\" : \"ID_PRODUCTO2\";\nconst data = global.get(fillKey) || {};\nconst cisternaId = Number(row && (row.id ?? row.ID));\nconst productId = ({ PROPANO: 1, BUTANO: 2, MEZCLA: 3 })[String(data.producto || \"\").trim().toUpperCase()];\nconst status = Number(global.get(statusKey) ?? 0);\nif (msg.topic !== \"OK\" || !cisternaId || !productId || !Number(data.Vol_full) || (status !== 0 && status !== 4)) { msg.payload = null; return msg; }\nconst timestamp = new Date().toISOString().slice(0, 19).replace(\"T\", \" \");\nglobal.set(idKey, cisternaId);\nglobal.set(productKey, productId);\nglobal.set(\"PROMEDIOS\", { llenado_id: 0, flujo_promedio: 0, densidad_promedio: 0, presion_promedio: 0, temperatura_promedio: 0, volumen_total: 0 });\nglobal.set(statusKey, 1);\nglobal.set(isCisterna1 ? \"CISTERNA2_VISIBLE\" : \"CISTERNA1_VISIBLE\", 1);\nglobal.set(\"SEND_STATUS_CISTERNA1\", true);\nmsg.params = [cisternaId, timestamp, productId, Number(data.Vol_full), 0, Number(data.rvp) || 180];\nmsg.payload = \"UpdateData\";\nreturn msg;",
+        "func": "const row = Array.isArray(msg.payload) ? msg.payload[0] : null;\nconst selected = global.get(\"SEL_CISTERNA\");\nconst isCisterna1 = selected === \"CISTERNA1\";\nconst fillKey = isCisterna1 ? \"FILL_SEGMENT1\" : \"FILL_SEGMENT2\";\nconst statusKey = isCisterna1 ? \"STATUS_CISTERNA1\" : \"STATUS_CISTERNA2\";\nconst idKey = isCisterna1 ? \"ID_CISTERNA1\" : \"ID_CISTERNA2\";\nconst productKey = isCisterna1 ? \"ID_PRODUCTO1\" : \"ID_PRODUCTO2\";\nconst loadIdKey = isCisterna1 ? \"ID_LLENADO1\" : \"ID_LLENADO2\";\nconst data = global.get(fillKey) || {};\nconst cisternaId = Number(row && (row.id ?? row.ID));\nconst productId = ({ PROPANO: 1, BUTANO: 2, MEZCLA: 3 })[\n    String(data.producto || \"\").trim().toUpperCase()\n];\nconst status = Number(global.get(statusKey) ?? 0);\n\nif (msg.topic !== \"OK\" || !cisternaId || !productId || !data.Vol_full ||\n    (status !== 0 && status !== 4)) {\n    msg.payload = null;\n    return msg;\n}\n\nconst timestamp = String(data.fecha || \"\").trim();\nif (!/^\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}$/.test(timestamp)) {\n    msg.payload = null;\n    return msg;\n}\nglobal.set(idKey, cisternaId);\nglobal.set(productKey, productId);\nglobal.set(\"PROMEDIOS\", {\n    llenado_id: 0,\n    flujo_promedio: 0,\n    densidad_promedio: 0,\n    presion_promedio: 0,\n    temperatura_promedio: 0,\n    volumen_total: 0\n});\nglobal.set(statusKey, 1);\nglobal.set(isCisterna1 ? \"CISTERNA2_VISIBLE\" : \"CISTERNA1_VISIBLE\", 1);\nglobal.set(\"SEND_STATUS_CISTERNA1\", true);\n\nmsg.params = [cisternaId, timestamp, productId, Number(data.Vol_full), 0, Number(data.rvp) || 180];\nmsg.payload = \"UpdateData\";\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -4695,7 +4705,7 @@
         "type": "function",
         "z": "002b5cf35f2cdda5",
         "name": "Prepare Query",
-        "func": "// Ejemplo de cómo manejar las acciones\nconst data = msg.payload;\nconst action = msg.topic;\nconst sel_cisterna=global.get(\"SEL_CISTERNA\");\n\nswitch(action) {\n    case \"CISTERNA_SELECCIONADA\":\n        global.set(\"NoPLACA\",data.placa);\n        let dtCisterna=global.get(sel_cisterna);\n        dtCisterna.numero_sisterna=data.placa;\n        dtCisterna.empresa_cliente=data.cliente;\n        dtCisterna.galones_objetivo=data.capacidad;\n        global.set(sel_cisterna,dtCisterna);\n        global.set(\"NoPLACA\",data.placa);\n        msg.payload=null;\n        break;\n    case \"INSERT\":\n        msg.topic = `INSERT INTO cisternas (placa, cliente, capacidad, activa) VALUES ('${data.placa}', '${data.cliente}', ${data.capacidad}, ${data.activa})`;\n        break;\n    case \"UPDATE\":\n        msg.topic = `UPDATE cisternas SET placa='${data.placa}', cliente='${data.cliente}', capacidad=${data.capacidad}, activa=${data.activa} WHERE id=${data.id}`;\n        break;\n    case \"DELETE\":\n        msg.topic = `DELETE FROM cisternas WHERE id=${data.id}`;\n        break;\n    default:\n        msg.payload=null;    \n}\n\nreturn msg;",
+        "func": "// Ejemplo de c\u00f3mo manejar las acciones\nconst data = msg.payload;\nconst action = msg.topic;\nconst sel_cisterna=global.get(\"SEL_CISTERNA\");\n\nswitch(action) {\n    case \"CISTERNA_SELECCIONADA\":\n        global.set(\"NoPLACA\",data.placa);\n        let dtCisterna=global.get(sel_cisterna);\n        dtCisterna.numero_sisterna=data.placa;\n        dtCisterna.empresa_cliente=data.cliente;\n        dtCisterna.galones_objetivo=data.capacidad;\n        global.set(sel_cisterna,dtCisterna);\n        global.set(\"NoPLACA\",data.placa);\n        msg.payload=null;\n        break;\n    case \"INSERT\":\n        msg.topic = `INSERT INTO cisternas (placa, cliente, capacidad, activa) VALUES ('${data.placa}', '${data.cliente}', ${data.capacidad}, ${data.activa})`;\n        break;\n    case \"UPDATE\":\n        msg.topic = `UPDATE cisternas SET placa='${data.placa}', cliente='${data.cliente}', capacidad=${data.capacidad}, activa=${data.activa} WHERE id=${data.id}`;\n        break;\n    case \"DELETE\":\n        msg.topic = `DELETE FROM cisternas WHERE id=${data.id}`;\n        break;\n    default:\n        msg.payload=null;    \n}\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -4810,7 +4820,56 @@
         "y": 160,
         "wires": [
             [
-                "uib-terminal-galan-v2"
+                "main-ui-updates-out"
+            ]
+        ]
+    },
+    {
+        "id": "aa000000000000e7",
+        "type": "link out",
+        "z": "619addbf2da107aa",
+        "name": "UIB cisternas a Prepare Query",
+        "mode": "link",
+        "links": [
+            "aa000000000000e8"
+        ],
+        "x": 1370,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "aa000000000000e8",
+        "type": "link in",
+        "z": "002b5cf35f2cdda5",
+        "name": "UIB Cisternas",
+        "links": [
+            "aa000000000000e7"
+        ],
+        "x": 105,
+        "y": 760,
+        "wires": [
+            [
+                "49958ca9210d0c38"
+            ]
+        ]
+    },
+    {
+        "id": "aa000000000000e9",
+        "type": "function",
+        "z": "002b5cf35f2cdda5",
+        "name": "Refresh cisternas tras CRUD",
+        "func": "msg.topic = \"SELECT * FROM cisternas\";\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1450,
+        "y": 700,
+        "wires": [
+            [
+                "f59c6d604bec2dab"
             ]
         ]
     },
@@ -4955,51 +5014,42 @@
         "wires": []
     },
     {
-        "id": "aa000000000000e7",
-        "type": "link out",
-        "z": "619addbf2da107aa",
-        "name": "UIB cisternas a Prepare Query",
-        "mode": "link",
-        "links": [
-            "aa000000000000e8"
-        ],
-        "x": 1370,
-        "y": 180,
-        "wires": []
-    },
-    {
-        "id": "aa000000000000e8",
-        "type": "link in",
-        "z": "002b5cf35f2cdda5",
-        "name": "UIB Cisternas",
-        "links": [
-            "aa000000000000e7"
-        ],
-        "x": 105,
-        "y": 760,
-        "wires": [
-            [
-                "49958ca9210d0c38"
-            ]
-        ]
-    },
-    {
-        "id": "aa000000000000e9",
+        "id": "trigger-ticket-close",
         "type": "function",
-        "z": "002b5cf35f2cdda5",
-        "name": "Refresh cisternas tras CRUD",
-        "func": "msg.topic = \"SELECT * FROM cisternas\";\nreturn msg;",
+        "z": "619addbf2da107aa",
+        "name": "Trigger Tiquete on Close",
+        "func": "// Trigger ticket generation when closing\nmsg.payload = {\n    \"massFlow\": 22000,\n    \"fluid\": \"propano\",\n    \"observedTempF\": 95,\n    \"observedPressurePSI\": 120,\n    \"observedDensity\": 474.48,\n    \"rvp\": 180,\n    \"mFactor\": 1,\n    \"cliente\": global.get(\"FILL_SEGMENT1\") ? global.get(\"FILL_SEGMENT1\").cliente : \"RAYOGAS_SAS\",\n    \"numeroTiquete\": global.get(\"TIKET_N\") || global.get(\"FILL_SEGMENT1\") ? (global.get(\"FILL_SEGMENT1\").tiquete || \"100\") : \"100\",\n    \"stream\": \"1\",\n    \"bala\": \"BA - 1\",\n    \"pulsosBatch\": \"4315244\",\n    \"kFactor\": \"14000.00\"\n};\nif (global.get(\"FILL_SEGMENT1\")) {\n    msg.payload.cliente = global.get(\"FILL_SEGMENT1\").cliente || msg.payload.cliente;\n    msg.payload.numeroTiquete = global.get(\"FILL_SEGMENT1\").tiquete || msg.payload.numeroTiquete;\n}\nreturn msg;\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1450,
-        "y": 700,
+        "x": 1600,
+        "y": 200,
         "wires": [
             [
-                "f59c6d604bec2dab"
+                "db08240ca43407ed"
+            ]
+        ]
+    },
+    {
+        "id": "force-tiquete-uib-direct",
+        "type": "function",
+        "z": "619addbf2da107aa",
+        "name": "FORCE TIQUETE_LPG -> UIB",
+        "func": "var sel = global.get(\"SEL_CISTERNA\") || \"CISTERNA1\";\nvar fs1 = global.get(\"FILL_SEGMENT1\") || {};\nvar fs2 = global.get(\"FILL_SEGMENT2\") || {};\nvar fs = (sel === \"CISTERNA2\") ? fs2 : fs1;\nvar seg = global.get(\"SEGMENT_DISPLAY\") || {};\nvar pro = global.get(\"PROMEDIOS\") || {};\nvar uit1 = global.get(\"UIT_2001\") || {};\nvar uit3 = global.get(\"UIT_2003\") || {};\nvar pit1 = global.get(\"PIT_2001\") || {};\nvar tit1 = global.get(\"TIT_2001\") || {};\nvar dit1 = global.get(\"DIT_2001\") || {};\nvar tiket_n = global.get(\"TIKET_N\") || fs.tiquete || 0;\n\nmsg.topic = \"TIQUETE_LPG\";\nmsg.payload = {\n    cliente: fs.cliente || \"\",\n    producto: fs.producto || global.get(\"INLINE_PRODUCT\") || \"\",\n    cisterna: fs.cisterna || (global.get(sel)||{}).numero_sisterna || \"\",\n    tiquete: tiket_n,\n    fecha: fs.fecha || new Date().toLocaleString('es-CO'),\n    rvp: fs.rvp || 0,\n    Vol_full: fs.Vol_full || 0,\n    volumenActual: pro.volumen_total || 0,\n    masaCoriolis: seg.MASA_CORIOLIS || 0,\n    volIndicado: seg.VOL_INDICADO || 0,\n    masaVapores: seg.MASA_VAPORES || 0,\n    presionPromedio: pro.presion_promedio || pit1.PV || 0,\n    temperaturaPromedio: pro.temperatura_promedio || tit1.PV || 0,\n    densidadPromedio: pro.densidad_promedio || dit1.PV || 0,\n    totalMasa: uit1.TOTAL_MASS_KG || 0,\n    totalVapores: uit3.TOTAL_MASS_KG || 0,\n    masaNeta: (uit1.TOTAL_MASS_KG||0) - (uit3.TOTAL_MASS_KG||0),\n    origen: fs.origen || \"LLENADO\"\n};\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1780,
+        "y": 300,
+        "wires": [
+            [
+                "uib-terminal-galan-v2"
             ]
         ]
     }

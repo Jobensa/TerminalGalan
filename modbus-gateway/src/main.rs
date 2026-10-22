@@ -29,22 +29,37 @@ fn timestamp() -> u128 {
         .as_millis()
 }
 
-fn float32_or_raw(registers: &[u16], field: &types::Field, format: &RegisterFormat) -> f32 {
+fn value_from_registers(registers: &[u16], field: &types::Field, format: &RegisterFormat) -> f64 {
     match format {
         RegisterFormat::Float32 => modbus::float32(registers, field.register_offset)
-            .map(|f| f * field.scale + field.offset)
-            .unwrap_or(f32::NAN),
+            .map(|f| (f * field.scale + field.offset) as f64)
+            .unwrap_or(f64::NAN),
+        RegisterFormat::Int32 | RegisterFormat::Uint32 => {
+            let offset = field.register_offset;
+            let Some((&low, &high)) = registers.get(offset).zip(registers.get(offset + 1)) else {
+                return f64::NAN;
+            };
+            let raw = ((high as u32) << 16) | low as u32;
+            let value = if matches!(format, RegisterFormat::Int32) {
+                raw as i32 as f64
+            } else {
+                raw as f64
+            };
+            value * field.scale as f64 + field.offset as f64
+        }
         RegisterFormat::Registers => {
             let register = registers
                 .get(field.register_offset)
-                .copied()
-                .unwrap_or(0);
-            let raw = if field.signed {
-                register as i16 as f32
-            } else {
-                register as f32
+                .copied();
+            let Some(register) = register else {
+                return f64::NAN;
             };
-            raw * field.scale + field.offset
+            let raw = if field.signed {
+                register as i16 as f64
+            } else {
+                register as f64
+            };
+            raw * field.scale as f64 + field.offset as f64
         }
     }
 }
@@ -63,9 +78,39 @@ mod tests {
             signed: true,
         };
 
+        let value = value_from_registers(&[63036], &field, &RegisterFormat::Registers);
+        assert!((value + 250.0).abs() < 0.00001);
+    }
+
+    #[test]
+    fn unitronics_ml_uses_low_word_first_and_preserves_count_precision() {
+        let field = types::Field {
+            tag: "UIT_2001_PULSES".into(),
+            register_offset: 0,
+            scale: 1.0,
+            offset: 0.0,
+            signed: false,
+        };
+
         assert_eq!(
-            float32_or_raw(&[63036], &field, &RegisterFormat::Registers),
-            -250.0
+            value_from_registers(&[0xE240, 0x0001], &field, &RegisterFormat::Uint32),
+            123_456.0
+        );
+    }
+
+    #[test]
+    fn int32_ml_applies_scale_after_signed_decode() {
+        let field = types::Field {
+            tag: "signed_ml".into(),
+            register_offset: 0,
+            scale: 0.5,
+            offset: 0.0,
+            signed: true,
+        };
+
+        assert_eq!(
+            value_from_registers(&[0xFFFE, 0xFFFF], &field, &RegisterFormat::Int32),
+            -1.0
         );
     }
 }
@@ -249,7 +294,7 @@ fn main() -> anyhow::Result<()> {
                         );
                         if !config.publish_registers_only {
                             for field in &block.fields {
-                                let value = float32_or_raw(&registers, field, &block.format);
+                                let value = value_from_registers(&registers, field, &block.format);
                                 if value.is_nan() {
                                     device_ok = false;
                                     warn!("{} / {}: campo fuera de rango", device.name, field.tag);

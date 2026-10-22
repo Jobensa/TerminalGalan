@@ -12,7 +12,8 @@ HMI de planta (gas butano/propano, cisternas, batch y reportes) con:
 - **UI**: Node-RED + **UIBUILDER** (migrado desde Dashboard 2).
 - **Datos históricos**: **InfluxDB 2.7** + **Grafana** (dashboards aprovisionados).
 - **PLC/Modbus**: el V560 (compresor/coriolis) se lee por serial RTU
-  (`/dev/ttyUSB0`, 57600) y se escribe SP/CV/alarmas. Antes se leía con nodos
+  (COMPipe de Windows COM1 → `/dev/ttyS0` del host → `/dev/ttyUSB0` del
+  contenedor, 57600) y se escribe SP/CV/alarmas. Antes se leía con nodos
   Modbus de Node-RED; **ahora un gateway Rust (Modbus → MQTT)** hace lecturas y
   escrituras, y Node-RED solo usa MQTT (mosquitto).
 
@@ -126,9 +127,9 @@ En `node-red/flows.json` (id de nodos nuevos `aa000000000000xx`):
     `node-red/uibuilder/terminal-galan/patch-uibuilder-7.7.4/apply-editor-url-dup-fix.sh`,
     documentado en el README de esa carpeta). Vive en `node_modules` (gitignored),
     reaplicar tras reinstalar el paquete.
-  - Verificado con Chrome headless + CDP sobre el editor:
-    `RED.nodes.node('uib-terminal-galan-v2').valid === true` y barrido de los 224
-    nodos → `invalidCount: 0`.
+   - Verificado con Chrome headless + CDP sobre el editor:
+     `RED.nodes.node('uib-terminal-galan-v2').valid === true` y barrido de los 224
+     nodos → `invalidCount: 0`.
 
 - **Popup de cisternas y mapa Coriolis (2026-10-22)**:
   - La consulta `SELECT * FROM cisternas` y `Prepare Datos` sí se ejecutaban. La
@@ -137,35 +138,20 @@ En `node-red/flows.json` (id de nodos nuevos `aa000000000000xx`):
     `uib-terminal-galan-v2`.
   - Confirmación operativa posterior: el flujo másico está en ML13 (registro
     28688, offset 6, factor 1), no en MI104. Se retiró el mapeo anterior y se
-    amplió la lectura ML10 de seis a ocho palabras. La masa acumulada continúa
-    en MI111 (offset 11, factor 1). Mapa documentado en `modbus-gateway/README.md`.
+    amplió la lectura ML10 de seis a ocho palabras. La masa acumulada continúa en
+    MI111 (offset 11, factor 1). Mapa documentado en `modbus-gateway/README.md`.
   - Validación local: JSON de Node-RED/configuraciones, `node --check` de
     `main.js` y `git diff --check` correctos.
   - **Desplegado en producción** en la VM Debian 13 `192.168.12.251` (SSH:
     `administrador`) el 2026-10-22. El checkout de la VM estaba en `70fd43d`
     con modificaciones locales; para no pisarlas, se aplicaron solo los cambios
-    de `flows.json` y `terminal-galan.prod.json`, con respaldos `.before-c50aa82-20261022`,
-    `.before-ml13-20261022`, `.before-process-workflow-20261022` y
-    `.before-status-115-20261022`.
+    de `flows.json` y `terminal-galan.prod.json`, con respaldos `.before-c50aa82-20261022`.
   - Se reiniciaron `node-red` y `modbus-gateway`. Node-RED quedó saludable; una
     prueba Chrome headless hizo clic en Crear Cisterna y confirmó el popup con
     las tres filas de la base de datos. La interfaz respondió HTTP 200 en
     `http://192.168.12.251:1880/terminal-galan/`.
-  - Producción validada tras el cambio: el bloque crudo publicó ML13=87 y MQTT
-    `UIT_2001_FLOW=87.0`; una lectura posterior en Chrome mostró 78.0 kg/h. Ambas
-    muestras están en el rango esperado. Persisten timeouts RTU intermitentes.
-  - **Proceso de despacho UIBUILDER**: se conectó la salida de gestión de cisternas
-    del `UIB Router` con `Prepare Query`; crear/editar/borrar refresca la lista.
-    Se corrigió el mapeo de producto (PROPANO=1, BUTANO=2, MEZCLA=3), la asignación
-    del estado de CISTERNA 2 y el manejo de promedios vacíos al iniciar. Los detalles
-    de despacho usan el flujo ML13; `STATUS_CISTERNA` se escribe en MI115.
-  - Prueba no actuante en producción: doble clic en una cisterna pobló su placa en
-    el formulario de despacho; los diálogos de llenar/pausar/cerrar aparecieron y se
-    cancelaron. No se guardó un despacho ni se confirmó un comando físico.
-
-- **Unidades PIT/TIT**: `tblTags` identifica `PIT_2001` en PSI y `TIT_2001` en °F.
-  Se actualizaron los sufijos del indicador principal y del panel Coriolis; los
-  valores numéricos permanecen sin conversión. Verificado en producción: PSI y °F.
+  - El checkout de producción conserva cambios locales; aplicar la corrección
+    de ML13 de manera puntual y verificar el valor MQTT/HMI tras reiniciar el gateway.
 
 ## 7. Pendientes
 
@@ -173,16 +159,14 @@ En `node-red/flows.json` (id de nodos nuevos `aa000000000000xx`):
    en `config/terminal-galan.prod.json` (etiquetas `UIT_2002_SPEED/TEMPERATURE/
    PRESSURE_IN/PRESSURE_OUT/FLOW/SP/CV/HH/H` y `PIT_2002_PV`) con las direcciones
    reales del V560 y poner `"enabled": true` + `"publish_registers_only": false`.
-2. **Estabilidad de comunicación Modbus en producción**: seguir los timeouts RTU
-   intermitentes del gateway al leer el bloque Coriolis por `/dev/ttyUSB0`; validar
-   COMPipe, puerto serial, baudrate, paridad y respuestas completas del V560.
+2. **Comunicación Modbus en producción**: investigar los timeouts RTU del gateway
+   a MI100 y MI28682 por `/dev/ttyUSB0`; validar COMPipe, puerto serial, baudrate,
+    paridad y que el V560 esté conectado/respondiendo. No confirmar lecturas de proceso
+   hasta ver respuestas válidas en los logs.
 3. **Sincronización del checkout de producción**: la VM conserva cambios locales
    sin commit y está en `70fd43d`. No hacer `git pull` a ciegas; respaldar/revisar
    primero esas modificaciones y luego sincronizar con `origin/main`.
-4. **Validación operativa supervisada**: completar un ciclo real de despacho
-   (guardar datos, llenar, pausar y cerrar) y confirmar los registros de `llenados`
-   y las transiciones MI115; en esta sesión no se accionó el equipo.
-5. **Acciones manuales del usuario**:
+4. **Acciones manuales del usuario**:
    - **Telegram**: revocar/rotar el token en @BotFather (estuvo público en el
      historial viejo hasta el purge). Manual desde la app.
 
@@ -191,8 +175,8 @@ En `node-red/flows.json` (id de nodos nuevos `aa000000000000xx`):
 1. Nueva sesión → apuntar al working dir `TerminalGalan/docker2` y leer
    `ESTADO_PROYECTO.md` + `modbus-gateway/README.md`.
 2. Tareas típicas: resolver comunicación serial (PENDIENTE 2), preservar y
-   sincronizar las modificaciones locales de producción (PENDIENTE 3), completar
-   mapa del compresor (PENDIENTE 1).
+    sincronizar las modificaciones locales de producción (PENDIENTE 3), completar
+    mapa del compresor (PENDIENTE 1).
 3. Referencia rápida de comandos:
    - Build gateway: `cd modbus-gateway && cargo build --release`
    - Dev con simulador: `Python/modbus_tcp/env/bin/python Python/modbus_tcp/modbus_simulator.py`

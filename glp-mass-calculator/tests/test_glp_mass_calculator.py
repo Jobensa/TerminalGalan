@@ -12,6 +12,7 @@ class GlpMassCalculatorTests(unittest.TestCase):
             {
                 "mass_pulses": 100_000,
                 "k_factor_pulses_per_kg": 1000,
+                "vapor_mass_pulses": 0,
                 "relative_density_60f": 0.534,
             }
         )
@@ -29,6 +30,7 @@ class GlpMassCalculatorTests(unittest.TestCase):
             {
                 "mass_pulses": 22_202_850,
                 "k_factor_pulses_per_kg": 1000,
+                "vapor_mass_pulses": 0,
                 "relative_density_60f": 0.572649,
             }
         )
@@ -45,6 +47,7 @@ class GlpMassCalculatorTests(unittest.TestCase):
                 "pulse_start": 1_000,
                 "pulse_end": 51_000,
                 "k_factor_pulses_per_kg": 1000,
+                "vapor_mass_pulses": 0,
                 "relative_density_60f": 0.534,
                 "meter_factor": 1.01,
                 "sediment_water_pct": 0.5,
@@ -57,10 +60,63 @@ class GlpMassCalculatorTests(unittest.TestCase):
         self.assertAlmostEqual(result["mass_net_kg"], 50.2475)
         self.assertAlmostEqual(result["nsv_us_gal"], result["gsv_us_gal"] * 0.995)
 
+    def test_subtracts_vapor_mass_from_main_coriolis_for_liquid_ticket(self):
+        result = calculate_glp_ticket(
+            {
+                "mass_pulses": 2_000,
+                "vapor_mass_pulses": 400,
+                "relative_density_60f": 0.534,
+            }
+        )
+
+        self.assertEqual(result["mass_gross_kg"], 100)
+        self.assertEqual(result["vapor_mass_kg"], 20)
+        self.assertEqual(result["k_factor_pulses_per_kg"], 20)
+        self.assertEqual(result["vapor_k_factor_pulses_per_kg"], 20)
+        self.assertEqual(result["mass_liquid_gross_kg"], 80)
+        self.assertEqual(result["mass_net_kg"], 80)
+        self.assertEqual(result["vapor_mass_pulses"], 400)
+
+    def test_rejects_vapor_mass_greater_than_main_coriolis_mass(self):
+        with self.assertRaises(CalculationError):
+            calculate_glp_ticket(
+                {
+                    "mass_pulses": 100,
+                    "k_factor_pulses_per_kg": 20,
+                    "vapor_mass_pulses": 200,
+                    "relative_density_60f": 0.534,
+                }
+            )
+
+    def test_accepts_vapor_counter_start_and_end_values(self):
+        result = calculate_glp_ticket(
+            {
+                "mass_pulses": 2_000,
+                "k_factor_pulses_per_kg": 20,
+                "vapor_pulse_start": 10_000,
+                "vapor_pulse_end": 10_400,
+                "relative_density_60f": 0.534,
+            }
+        )
+
+        self.assertEqual(result["vapor_mass_pulses"], 400)
+        self.assertEqual(result["vapor_mass_kg"], 20)
+
+    def test_requires_vapor_pulse_delta_for_final_liquid_ticket(self):
+        with self.assertRaises(CalculationError):
+            calculate_glp_ticket(
+                {
+                    "mass_pulses": 2_000,
+                    "k_factor_pulses_per_kg": 20,
+                    "relative_density_60f": 0.534,
+                }
+            )
+
     def test_preserves_ticket_metadata(self):
         result = calculate_glp_ticket(
             {
                 "mass_pulses": 1000,
+                "vapor_mass_pulses": 0,
                 "relative_density_60f": 0.55,
                 "request_id": "test-1",
                 "ticket": {"cliente": "CLIENTE"},
@@ -75,6 +131,7 @@ class GlpMassCalculatorTests(unittest.TestCase):
                 {
                     "pulse_start": 90_000,
                     "pulse_end": 1_000,
+                    "vapor_mass_pulses": 0,
                     "relative_density_60f": 0.55,
                 }
             )

@@ -11,7 +11,12 @@
     {
       "family": "Chrome",
       "version": "155",
-      "count": 149
+      "count": 151
+    },
+    {
+      "family": "Other",
+      "version": "0",
+      "count": 1
     }
   ]
 }

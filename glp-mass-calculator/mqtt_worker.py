@@ -45,8 +45,12 @@ def on_message(client: mqtt.Client, _userdata, message: mqtt.MQTTMessage):
             retain=False,
         )
         logging.info(
-            "Liquidación publicada: pulsos=%s masa_neta=%.3f kg NSV=%.3f gal",
+            "Liquidación publicada: pulsos_principal=%s pulsos_vapor=%s "
+            "masa_vapor=%.3f kg masa_liquida=%.3f kg masa_neta=%.3f kg NSV=%.3f gal",
             result["mass_pulses"],
+            result["vapor_mass_pulses"],
+            result["vapor_mass_kg"],
+            result["mass_liquid_gross_kg"],
             result["mass_net_kg"],
             result["nsv_us_gal"],
         )

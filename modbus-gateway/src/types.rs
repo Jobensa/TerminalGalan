@@ -135,6 +135,10 @@ pub enum RegisterFormat {
     #[default]
     Registers,
     Float32,
+    /// Unitronics ML: 32-bit integer, low word then high word.
+    Int32,
+    /// Unsigned view of a 32-bit word pair, low word then high word.
+    Uint32,
 }
 
 #[derive(Debug, Clone, Deserialize)]

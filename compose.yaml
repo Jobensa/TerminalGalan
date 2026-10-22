@@ -85,7 +85,8 @@ services:
       - TZ=America/Bogota
     volumes:
       - ./modbus-gateway/config:/etc/terminalgalan:ro
-    # Producción: puerto serie real del V560.
+    # Windows COMPipe / Hyper-V presenta COM1 al host como /dev/ttyS0;
+    # dentro del contenedor se conserva la ruta configurada /dev/ttyUSB0.
     devices:
-      - /dev/ttyUSB0:/dev/ttyUSB0
+      - /dev/ttyS0:/dev/ttyUSB0
     command: ["/etc/terminalgalan/terminal-galan.prod.json"]

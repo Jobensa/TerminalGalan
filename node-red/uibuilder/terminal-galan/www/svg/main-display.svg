@@ -3,9 +3,9 @@
    version="1.1"
    id="svg1"
    xml:space="preserve"
-   width="1230.3337"
+   width="1600"
    height="786.73712"
-   viewBox="0 0 1230.3337 786.73712"
+   viewBox="0 0 1600 786.73712"
    preserveAspectRatio="xMinYMin meet"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
@@ -506,7 +506,7 @@
    id="stop57" />
     </linearGradient></defs><sodipodi:namedview
      id="namedview1"
-     pagecolor="#ffffff"
+      pagecolor="#050709"
      bordercolor="#000000"
      borderopacity="0.25"
      inkscape:showpageshadow="2"
@@ -517,8 +517,14 @@
      max="1230.3337,786.73712"
      geom-min="2.3741028e-08,0.42294449"
      geom-max="1230.3337,786.73712" /><g
-     id="g57"><rect
-       style="opacity:0.98;fill:#969696;fill-opacity:1;stroke:#050509;stroke-width:0.82668;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+      id="g57"><rect
+        id="svg-background"
+        x="0"
+        y="0"
+        width="1600"
+        height="786.73712"
+        style="fill:#050709;fill-opacity:1;stroke:none" /><rect
+        style="opacity:0.98;fill:#969696;fill-opacity:1;stroke:#050509;stroke-width:0.82668;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="rect90"
        width="367.38129"
        height="423.00577"
@@ -2371,4 +2377,49 @@
        y="585.51727"
        id="text68-5"
        transform="scale(1.0621556,0.94148165)"
-       inkscape:label="LABEL">DE POLIDUCT</text></g></svg>
+       inkscape:label="LABEL">DE POLIDUCT</text><g
+       id="coriolis-mass-panel">
+      <rect x="1238" y="50" width="340" height="630" rx="12"
+         style="fill:#263746;stroke:#101820;stroke-width:2" />
+      <rect x="1248" y="60" width="320" height="42" rx="6"
+         style="fill:#0d526f;stroke:#88d8e8;stroke-width:1" />
+      <text x="1408" y="88" text-anchor="middle"
+         style="font-family:Arial;font-size:20px;font-weight:bold;fill:#ffffff">DATOS CORIOLIS</text>
+      <text x="1260" y="132" style="font-family:Arial;font-size:17px;font-weight:bold;fill:#8be9fd">PRODUCTO</text>
+      <text id="CORIOLIS_PRODUCT" x="1555" y="132" text-anchor="end"
+         style="font-family:Arial;font-size:17px;font-weight:bold;fill:#ffffff">---</text>
+      <path d="M1255 144 H1570" style="stroke:#66808e;stroke-width:1" />
+      <text x="1260" y="178" style="font-family:Arial;font-size:16px;fill:#e5edf1">Flujo masa</text>
+      <text id="CORIOLIS_FLOW" x="1555" y="178" text-anchor="end"
+         style="font-family:Arial;font-size:17px;font-weight:bold;fill:#7df9ff">---</text>
+      <text x="1260" y="216" style="font-family:Arial;font-size:16px;fill:#e5edf1">Densidad</text>
+      <text id="CORIOLIS_DENSITY" x="1555" y="216" text-anchor="end"
+         style="font-family:Arial;font-size:17px;font-weight:bold;fill:#7df9ff">--- kg/m³</text>
+      <text x="1260" y="254" style="font-family:Arial;font-size:16px;fill:#e5edf1">Presión</text>
+      <text id="CORIOLIS_PRESSURE" x="1555" y="254" text-anchor="end"
+          style="font-family:Arial;font-size:17px;font-weight:bold;fill:#7df9ff">--- PSI</text>
+      <text x="1260" y="292" style="font-family:Arial;font-size:16px;fill:#e5edf1">Temperatura</text>
+      <text id="CORIOLIS_TEMPERATURE" x="1555" y="292" text-anchor="end"
+          style="font-family:Arial;font-size:17px;font-weight:bold;fill:#7df9ff">--- °F</text>
+      <rect x="1250" y="316" width="316" height="34" rx="5" style="fill:#174b3c" />
+      <text x="1260" y="339" style="font-family:Arial;font-size:16px;font-weight:bold;fill:#a8f0d0">TOTAL PRODUCTO</text>
+      <text x="1260" y="384" style="font-family:Arial;font-size:16px;fill:#e5edf1">Masa total</text>
+      <text id="PRODUCT_TOTAL_MASS" x="1555" y="384" text-anchor="end"
+         style="font-family:Arial;font-size:17px;font-weight:bold;fill:#a8f0d0">--- kg</text>
+      <text x="1260" y="422" style="font-family:Arial;font-size:16px;fill:#e5edf1">Pulsos</text>
+      <text id="PRODUCT_PULSES" x="1555" y="422" text-anchor="end"
+         style="font-family:Arial;font-size:17px;font-weight:bold;fill:#a8f0d0">---</text>
+      <rect x="1250" y="446" width="316" height="34" rx="5" style="fill:#4b3b1b" />
+      <text x="1260" y="469" style="font-family:Arial;font-size:16px;font-weight:bold;fill:#ffe0a3">TOTAL VAPORES</text>
+      <text x="1260" y="514" style="font-family:Arial;font-size:16px;fill:#e5edf1">Masa total</text>
+      <text id="VAPOR_TOTAL_MASS" x="1555" y="514" text-anchor="end"
+         style="font-family:Arial;font-size:17px;font-weight:bold;fill:#ffe0a3">--- kg</text>
+      <text x="1260" y="552" style="font-family:Arial;font-size:16px;fill:#e5edf1">Pulsos</text>
+      <text id="VAPOR_PULSES" x="1555" y="552" text-anchor="end"
+         style="font-family:Arial;font-size:17px;font-weight:bold;fill:#ffe0a3">---</text>
+      <rect x="1250" y="574" width="316" height="38" rx="5" style="fill:#174b3c" />
+      <text x="1260" y="599" style="font-family:Arial;font-size:15px;font-weight:bold;fill:#a8f0d0">MASA LÍQUIDA POR PULSOS</text>
+      <text id="LIQUID_NET_MASS" x="1555" y="645" text-anchor="end"
+         style="font-family:Arial;font-size:18px;font-weight:bold;fill:#a8f0d0">--- kg</text>
+      <text x="1260" y="665" style="font-family:Arial;font-size:12px;fill:#a9bbc4">Principal menos vapores (K = 20 pulsos/kg)</text>
+    </g></g></svg>

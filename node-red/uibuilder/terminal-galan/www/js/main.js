@@ -29,7 +29,7 @@ const BUTTONS = {
 };
 
 const SVG_SOURCES = {
-    main: './svg/main-display.svg',
+    main: './svg/main-display.svg?v=20261020-fullscreen',
     raspador: './svg/raspador.svg',
 };
 
@@ -124,6 +124,12 @@ function fieldValue(popup, name) {
     return input ? input.value : undefined;
 }
 
+function currentDateTimeLocal() {
+    const now = new Date();
+    const pad = (value) => String(value).padStart(2, '0');
+    return `${now.getFullYear()}-${pad(now.getMonth() + 1)}-${pad(now.getDate())}T${pad(now.getHours())}:${pad(now.getMinutes())}`;
+}
+
 /* ---------- 1. Formulario de llenado (topic "LLENADO") ---------- */
 function showFillPopup(data) {
     const popup = openPopup('Datos de carga', `
@@ -131,7 +137,7 @@ function showFillPopup(data) {
         <label>Producto<select name="producto"><option value="">Seleccione</option><option>PROPANO</option><option>BUTANO</option></select></label>
         <label>Cisterna<input name="cisterna" type="text"></label>
         <label>Nro. tiquete<input name="tiquete" type="number"></label>
-        <label>Fecha<input name="fecha" type="text"></label>
+        <label>Fecha y hora<input name="fecha" type="datetime-local" step="60" required></label>
         <label>RVP<input name="rvp" type="number" step="0.01"></label>
         <label>Volumen objetivo<input name="Vol_full" type="number" step="0.01"></label>`,
         `<button class="tg-cancel" type="button">Cancelar</button><button class="tg-save" type="button">Guardar</button>`);
@@ -139,12 +145,18 @@ function showFillPopup(data) {
         const input = popup.querySelector(`[name="${key}"]`);
         if (input) input.value = value ?? '';
     });
+    // El formato del mensaje legado puede no ser válido para datetime-local.
+    // El despacho inicia con la fecha/hora local actual y el operador puede ajustarla.
+    popup.querySelector('[name="fecha"]').value = currentDateTimeLocal();
     popup.querySelector('.tg-cancel').onclick = closePopup;
     popup.querySelector('.tg-save').onclick = () => {
         if (!fieldValue(popup, 'producto')) { alert('Por favor seleccione un producto'); return; }
+        const fecha = fieldValue(popup, 'fecha');
+        if (!fecha) { alert('Por favor indique fecha y hora'); return; }
         const payload = {};
         popup.querySelectorAll('[name]').forEach((input) => { payload[input.name] = input.value; });
         ['tiquete', 'rvp', 'Vol_full'].forEach((key) => { if (payload[key] !== '') payload[key] = Number(payload[key]); });
+        payload.fecha = `${fecha.replace('T', ' ')}:00`;
         payload.origen = 'LLENADO';
         uibuilder.send({ topic: 'OK', payload });
         closePopup();
@@ -390,13 +402,17 @@ function buildTiquete(datos) {
             <div class="tiquete-section-title">DATOS DEL MEDIDOR</div>
             ${tiqueteRow('Pulsos de masa del batch', fmt(datos.mass_pulses, 0), 'pulsos')}
             ${tiqueteRow('K-Factor', fmt(datos.k_factor_pulses_per_kg, 2), 'pulsos/kg')}
+            ${tiqueteRow('Pulsos Coriolis de vapores', fmt(datos.vapor_mass_pulses, 0), 'pulsos')}
+            ${tiqueteRow('K-Factor vapores', fmt(datos.vapor_k_factor_pulses_per_kg, 2), 'pulsos/kg')}
             ${tiqueteRow('M-Factor', fmt(datos.meter_factor, 5), '')}
             ${tiqueteRow('CTL / CPL', 'No requeridos: medición directa de masa', '')}
           </div>
           <div class="tiquete-section tiquete-totales">
             <div class="tiquete-section-title">TOTALES A 60°F</div>
-            ${tiqueteRow('Masa bruta corregida', fmt(datos.mass_gross_kg, 3), 'kg')}
-            ${tiqueteRow('Volumen bruto estándar (GSV)', fmt(datos.gsv_us_gal, 2), 'U.S. gal')}
+            ${tiqueteRow('Masa bruta Coriolis principal', fmt(datos.mass_gross_kg, 3), 'kg')}
+            ${tiqueteRow('Masa vapores descontada (TEA)', fmt(datos.vapor_mass_kg, 3), 'kg')}
+            ${tiqueteRow('Masa líquida antes de S&W', fmt(datos.mass_liquid_gross_kg, 3), 'kg')}
+            ${tiqueteRow('Volumen bruto estándar líquido (GSV)', fmt(datos.gsv_us_gal, 2), 'U.S. gal')}
             ${tiqueteRow('Masa neta', fmt(datos.mass_net_kg, 3), 'kg')}
             ${tiqueteRow('Volumen neto estándar (NSV)', fmt(datos.nsv_us_gal, 2), 'U.S. gal')}
           </div>
@@ -520,6 +536,13 @@ function printTiquete() {
 
 function showTicketPopup(datos) {
     if (!datos || typeof datos !== 'object' || Array.isArray(datos)) return;
+    if (datos.status === 'error') {
+        const popup = openPopup('No se pudo liquidar el tiquete',
+            `<p class="tg-text">${esc(datos.error || 'Verifique los datos de los dos Coriolis.')}</p>`,
+            '<button class="tg-cancel" type="button">Cerrar</button>');
+        popup.querySelector('.tg-cancel').onclick = closePopup;
+        return;
+    }
     const popup = openPopup('Tiquete LPG', buildTiquete(datos),
         `<button class="tg-cancel" type="button">Cerrar</button>
          <button class="tg-print" type="button">🖨️ Imprimir</button>`, 'tg-popup-ticket');
