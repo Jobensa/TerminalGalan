@@ -133,13 +133,13 @@ function currentDateTimeLocal() {
 /* ---------- 1. Formulario de llenado (topic "LLENADO") ---------- */
 function showFillPopup(data) {
     const popup = openPopup('Datos de carga', `
-        <label>Cliente<input name="cliente" type="text"></label>
+        <label>Cliente<input name="cliente" type="text" required></label>
         <label>Producto<select name="producto"><option value="">Seleccione</option><option>PROPANO</option><option>BUTANO</option></select></label>
         <label>Cisterna<input name="cisterna" type="text"></label>
-        <label>Nro. tiquete<input name="tiquete" type="number"></label>
+        <label>Nro. tiquete<input name="tiquete" type="number" required></label>
         <label>Fecha y hora<input name="fecha" type="datetime-local" step="60" required></label>
-        <label>RVP<input name="rvp" type="number" step="0.01"></label>
-        <label>Volumen objetivo<input name="Vol_full" type="number" step="0.01"></label>`,
+        <label>RVP<input name="rvp" type="number" step="0.01" required></label>
+        <label>Volumen objetivo<input name="Vol_full" type="number" step="0.01" required></label>`,
         `<button class="tg-cancel" type="button">Cancelar</button><button class="tg-save" type="button">Guardar</button>`);
     Object.entries(data || {}).forEach(([key, value]) => {
         const input = popup.querySelector(`[name="${key}"]`);
@@ -156,6 +156,10 @@ function showFillPopup(data) {
         const payload = {};
         popup.querySelectorAll('[name]').forEach((input) => { payload[input.name] = input.value; });
         ['tiquete', 'rvp', 'Vol_full'].forEach((key) => { if (payload[key] !== '') payload[key] = Number(payload[key]); });
+        if (!(payload.rvp > 0)) { alert('Indique el RVP del laboratorio'); return; }
+        if (!payload.cliente) { alert('Indique el cliente'); return; }
+        if (!(payload.tiquete > 0)) { alert('Indique el número de tiquete'); return; }
+        if (!(payload.Vol_full > 0)) { alert('Indique el volumen objetivo'); return; }
         payload.fecha = `${fecha.replace('T', ' ')}:00`;
         payload.origen = 'LLENADO';
         uibuilder.send({ topic: 'OK', payload });
@@ -405,13 +409,21 @@ function buildTiquete(datos) {
             ${tiqueteRow('Pulsos Coriolis de vapores', fmt(datos.vapor_mass_pulses, 0), 'pulsos')}
             ${tiqueteRow('K-Factor vapores', fmt(datos.vapor_k_factor_pulses_per_kg, 2), 'pulsos/kg')}
             ${tiqueteRow('M-Factor', fmt(datos.meter_factor, 5), '')}
-            ${tiqueteRow('CTL / CPL', 'No requeridos: medición directa de masa', '')}
+            ${tiqueteRow('Densidad observada promedio', fmt(datos.observedDensity, 2), 'kg/m³')}
+            ${tiqueteRow('Presión de equilibrio (Pe)', fmt(datos.vapor_pressure_equilibrium_psig, 2), 'psig')}
+          </div>
+          <div class="tiquete-section">
+            <div class="tiquete-section-title">FACTORES DE CORRECCIÓN</div>
+            ${tiqueteRow('CTL (API 11.2.4)', fmt(datos.ctl, 5), '')}
+            ${tiqueteRow('CPL (API 11.2.2)', fmt(datos.cpl, 5), '')}
+            ${tiqueteRow('CCF = MF × CTL × CPL', fmt(datos.ccf, 5), '')}
           </div>
           <div class="tiquete-section tiquete-totales">
             <div class="tiquete-section-title">TOTALES A 60°F</div>
             ${tiqueteRow('Masa bruta Coriolis principal', fmt(datos.mass_gross_kg, 3), 'kg')}
             ${tiqueteRow('Masa vapores descontada (TEA)', fmt(datos.vapor_mass_kg, 3), 'kg')}
             ${tiqueteRow('Masa líquida antes de S&W', fmt(datos.mass_liquid_gross_kg, 3), 'kg')}
+            ${tiqueteRow('Volumen bruto (GUV)', fmt(datos.gross_volume_us_gal, 2), 'U.S. gal')}
             ${tiqueteRow('Volumen bruto estándar líquido (GSV)', fmt(datos.gsv_us_gal, 2), 'U.S. gal')}
             ${tiqueteRow('Masa neta', fmt(datos.mass_net_kg, 3), 'kg')}
             ${tiqueteRow('Volumen neto estándar (NSV)', fmt(datos.nsv_us_gal, 2), 'U.S. gal')}

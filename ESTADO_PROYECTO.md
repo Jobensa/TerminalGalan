@@ -3,7 +3,7 @@
 > **Para continuar en una sesión nueva**: leer este documento y
 > `modbus-gateway/README.md`. Si se retoma el trabajo, empezar por la sección
 > "Pendientes" y "Cómo continuar".
-> Actualizado: 2026-10-22.
+> Actualizado: 2026-10-23.
 
 ## 1. Qué es
 
@@ -153,7 +153,43 @@ En `node-red/flows.json` (id de nodos nuevos `aa000000000000xx`):
   - El checkout de producción conserva cambios locales; aplicar la corrección
     de ML13 de manera puntual y verificar el valor MQTT/HMI tras reiniciar el gateway.
 
+- **Tiquete LPG por masa y CCF (2026-10-23, solo local)**:
+  - Cálculo en Python (`glp-mass-calculator/`): `glp_properties.py` replica las hojas
+    de `docs/GENERACIÓN -TIQUETE GLP (1).xlsx`: SG 60 °F (GPA TP-27), CTL (API 11.2.4),
+    Pe y CPL (API 11.2.2). Pruebas en `tests/` contra valores del libro (propano y
+    butano). Volumen: GUV = masa líquida / densidad observada promedio; GSV = GUV × CCF.
+  - Entrada: pulsos del batch (K = 20 pulsos/kg, MF = 1.000 por defecto), promedios de
+    temperatura, presión y densidad observada guardados en `llenado_promedios` (se
+    actualizan con cada muestra), y RVP ingresado por el operador.
+  - `flows.json` (`flujo-tiquete-lpg`): `Armar solicitud CALCULAR` publica en
+    `TIQUETE_LPG/CALCULAR`. Se eliminaron `flujo-estandar`, `merge-datos`, `function 14`
+    (valores fijos) y la ruta que disparaba el tiquete dos veces. Ahora el cierre dispara
+    una sola vez.
+  - Interfaz (`main.js`): el tiquete muestra CTL, CPL, CCF, Pe, GUV y GSV. Formulario de
+    llenado: RVP, cliente, tiquete, volumen objetivo y producto son obligatorios. Se
+    quitaron los valores de prueba (ALMAGAS, tiquete 123, volumen 14000) y el RVP fijo 180.
+  - Verificado: pruebas Python (17 OK), simulación de la función de Node-RED y
+    sintaxis de `main.js`. **No verificado en vivo**: falta correr Mosquitto +
+    calculador + simulador Modbus + Node-RED en local.
+  - Producción (VM `192.168.12.251`): sin cambios en esta sesión; el checkout de
+    producción sigue sin aplicar estos cambios.
+
 ## 7. Pendientes
+
+0. **Tiquete LPG (nuevo)**:
+   - Unidad del "Volumen objetivo" del formulario (galones o kg): en consulta con la planta.
+   - Cliente prioritario: pendiente de confirmar.
+   - RVP por producto: sin valores por defecto; el operador lo ingresa. Si la planta
+     recomienda valores de referencia, se agregan después.
+   - `stream` (1 o 2 según cisterna) y `bala` ("BA - 1" fija): confirmar con la planta.
+   - Método de volumen: GSV por CCF (decidido). La verificación por masa queda solo en el
+     log (`gsv_mass_check_us_gal`), difiere ~0.5 % en propano.
+   - Confirmar en banco que `llenado_promedios` toma densidad, temperatura y presión de
+     los registros correctos (la densidad sale de `int16(3)/10` en `function 2`, no del
+     tag `DIT_2001`).
+   - Probar la cadena completa en local con Docker (Mosquitto, calculador, simulador
+     Modbus, Node-RED).
+   - Los datos de `llenadero.db` y `despacho.db` son de prueba.
 
 1. **Mapa de registros del compresor (producción)**: completar bloque `compresor`
    en `config/terminal-galan.prod.json` (etiquetas `UIT_2002_SPEED/TEMPERATURE/

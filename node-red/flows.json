@@ -2557,7 +2557,7 @@
         "type": "function",
         "z": "619addbf2da107aa",
         "name": "Llenado 1",
-        "func": "msg.topic=\"LLENADO\";\nglobal.set(\"SEL_CISTERNA\",\"CISTERNA1\");\nlet cisterna= global.get(\"CISTERNA1\");\nlet date = new Date().toLocaleString().replaceAll('/','-')\n\n\n\nmsg.payload={\n    cliente: \"ALMAGAS\",\n    producto: \"select\",\n    cisterna: cisterna.numero_sisterna,\n    tiquete: 123,\n    fecha : date,\n    rvp:180,\n    Vol_full: 14000\n}\n\nreturn msg;",
+        "func": "msg.topic=\"LLENADO\";\nglobal.set(\"SEL_CISTERNA\",\"CISTERNA1\");\nlet cisterna= global.get(\"CISTERNA1\");\nlet date = new Date().toLocaleString().replaceAll('/','-')\n\n\n\nmsg.payload={\n    cliente: \"\",\n    producto: \"\",\n    cisterna: cisterna.numero_sisterna,\n    tiquete: \"\",\n    fecha : date,\n    rvp: \"\",\n    Vol_full: \"\"\n}\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -2660,7 +2660,7 @@
         "type": "function",
         "z": "619addbf2da107aa",
         "name": "Llenado 2",
-        "func": "msg.topic=\"LLENADO\";\nglobal.set(\"SEL_CISTERNA\",\"CISTERNA2\");\nlet cisterna= global.get(\"CISTERNA2\");\nlet date = new Date().toLocaleString().replaceAll('/','-')\n\nmsg.payload={\n    cliente: \"ALMAGAS\",\n    producto: \"select\",\n    cisterna: cisterna.numero_sisterna,\n    tiquete: 123,\n    fecha : date,\n    rvp:180,\n    Vol_full: 14000\n}\n\nreturn msg;",
+        "func": "msg.topic=\"LLENADO\";\nglobal.set(\"SEL_CISTERNA\",\"CISTERNA2\");\nlet cisterna= global.get(\"CISTERNA2\");\nlet date = new Date().toLocaleString().replaceAll('/','-')\n\nmsg.payload={\n    cliente: \"\",\n    producto: \"\",\n    cisterna: cisterna.numero_sisterna,\n    tiquete: \"\",\n    fecha : date,\n    rvp: \"\",\n    Vol_full: \"\"\n}\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -2680,8 +2680,8 @@
         "type": "function",
         "z": "619addbf2da107aa",
         "name": "SetClose2",
-        "func": "let status_cisterna=global.get(\"STATUS_CISTERNA2\");\n\nif (String(msg.payload).toLowerCase() === \"cancel\") {\n    return null;\n}\n\nif(status_cisterna===3)\n{\n    global.set(\"SEL_CISTERNA\",\"CISTERNA2\");\n    global.set(\"STATUS_CISTERNA2\",4);\n    global.set(\"SEND_STATUS_CISTERNA1\",true);\n    global.set(\"CISTERNA1_VISIBLE\",1);\n    msg.topic=\"OK\";\n    node.send([msg, {topic:'TRIGGER_TICKET', payload:{cisterna:'CISTERNA2'}}]);\n    return null;\n}\nelse\n{\n    msg.topic=null;\n    msg.payload = \"\u26a0\ufe0f El batch debe estar PAUSADO antes de borrar los totalizadore\";\n}\nreturn msg;\n",
-        "outputs": 2,
+        "func": "let status_cisterna=global.get(\"STATUS_CISTERNA2\");\n\nif (String(msg.payload).toLowerCase() === \"cancel\") {\n    return null;\n}\n\nif(status_cisterna===3)\n{\n    global.set(\"SEL_CISTERNA\",\"CISTERNA2\");\n    global.set(\"STATUS_CISTERNA2\",4);\n    global.set(\"SEND_STATUS_CISTERNA1\",true);\n    global.set(\"CISTERNA1_VISIBLE\",1);\n    global.set(\"STOP_BATCH\", true);\n    node.send([{topic:'STOP_BATCH_TRIGGER'}, {payload:true}, null]);\n    node.send([null, null, {topic:'TRIGGER_TICKET', payload:{cisterna:'CISTERNA2'}}]);\n    return null;\n}\nelse\n{\n    msg.topic=null;\n    msg.payload = \"\u26a0\ufe0f El batch debe estar PAUSADO antes de borrar los totalizadore\";\n}\nreturn msg;\n",
+        "outputs": 3,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
@@ -2694,8 +2694,10 @@
                 "fdfdc844ae550cda"
             ],
             [
-                "52fc38c5e78f186b",
-                "force-tiquete-uib-direct"
+                "4dfbb168def9e801"
+            ],
+            [
+                "52fc38c5e78f186b"
             ]
         ]
     },
@@ -2776,8 +2778,8 @@
         "type": "function",
         "z": "619addbf2da107aa",
         "name": "SetClose1",
-        "func": "let status_cisterna1=global.get(\"STATUS_CISTERNA1\");\n\nif (String(msg.payload).toLowerCase() === \"cancel\") {\n    return null;\n}\n\nif(status_cisterna1===3)\n{\n    global.set(\"SEL_CISTERNA\",\"CISTERNA1\");\n    global.set(\"STATUS_CISTERNA1\",4);\n    global.set(\"SEND_STATUS_CISTERNA1\",true);\n    global.set(\"CISTERNA2_VISIBLE\",1);\n    msg.topic=\"OK\";\n    // Also trigger tiquete generation\n    node.send([msg, {topic:'TRIGGER_TICKET', payload:{cisterna:'CISTERNA1'}}]);\n    return null;\n}\nelse\n{\n    msg.topic=null;\n    msg.payload = \"\u26a0\ufe0f El batch debe estar PAUSADO antes de borrar los totalizadore\";\n}\nreturn msg;\n",
-        "outputs": 2,
+        "func": "let status_cisterna1=global.get(\"STATUS_CISTERNA1\");\n\nif (String(msg.payload).toLowerCase() === \"cancel\") {\n    return null;\n}\n\nif(status_cisterna1===3)\n{\n    global.set(\"SEL_CISTERNA\",\"CISTERNA1\");\n    global.set(\"STATUS_CISTERNA1\",4);\n    global.set(\"SEND_STATUS_CISTERNA1\",true);\n    global.set(\"CISTERNA2_VISIBLE\",1);\n    global.set(\"STOP_BATCH\", true);\n    node.send([{topic:'STOP_BATCH_TRIGGER'}, {payload:true}]); // trigger\n    // Also trigger normal close flow\n    node.send([null, {topic:'TRIGGER_TICKET', payload:{cisterna:'CISTERNA1'}}]);\n    return null;\n}\nelse\n{\n    msg.topic=null;\n    msg.payload = \"\u26a0\ufe0f El batch debe estar PAUSADO antes de borrar los totalizadore\";\n}\nreturn msg;\n",
+        "outputs": 3,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
@@ -2790,8 +2792,10 @@
                 "fdfdc844ae550cda"
             ],
             [
-                "52fc38c5e78f186b",
-                "force-tiquete-uib-direct"
+                "4dfbb168def9e801"
+            ],
+            [
+                "52fc38c5e78f186b"
             ]
         ]
     },
@@ -2872,8 +2876,8 @@
         "type": "function",
         "z": "619addbf2da107aa",
         "name": "function 12",
-        "func": "let status_cisterna1 = global.get(\"STATUS_CISTERNA1\");\nmsg.topic=null;\n\nif (msg.payload === \"cancel\") {\n    return null;  // Cancel\u00f3, no hacer nada\n}\n\nif (status_cisterna1 > 0 && status_cisterna1 < 3) {\n    msg.topic=\"OK\";\n    global.set(\"SEL_CISTERNA\", \"CISTERNA1\");\n\n}else\n{    \n    msg.topic=null;\n    msg.payload = \"\u26a0\ufe0f Seleccione Cisterna y llene el formulario de llenado\";\n}\n\nreturn msg;",
-        "outputs": 1,
+        "func": "let status_cisterna1 = global.get(\"STATUS_CISTERNA1\");\nmsg.topic=null;\n\nif (msg.payload === \"cancel\") {\n    return null;  // Cancel\u00f3, no hacer nada\n}\n\nif (status_cisterna1 > 0 && status_cisterna1 < 3) {\n    msg.topic=\"OK\";\n    global.set(\"SEL_CISTERNA\", \"CISTERNA1\");\n    global.set(\"START_BATCH\", true);\n    node.send([null, {payload: true}]); // trigger batch control\n    return msg;\n\n}else\n{    \n    msg.topic=null;\n    msg.payload = \"\u26a0\ufe0f Seleccione Cisterna y llene el formulario de llenado\";\n}\n\nreturn msg;\n",
+        "outputs": 2,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
@@ -2884,6 +2888,9 @@
         "wires": [
             [
                 "0a330a783cf157c5"
+            ],
+            [
+                "4dfbb168def9e801"
             ]
         ]
     },
@@ -2892,8 +2899,8 @@
         "type": "function",
         "z": "619addbf2da107aa",
         "name": "function 16",
-        "func": "let status_cisterna = global.get(\"STATUS_CISTERNA2\");\n\nif (String(msg.payload).toLowerCase() === \"cancel\") {\n    return null;  // Cancel\u00f3, no hacer nada\n}\n\nif (status_cisterna > 0 && status_cisterna < 3) {\n    global.set(\"SEL_CISTERNA\", \"CISTERNA2\");\n\n}else\n{    \n    msg.topic=null;\n    msg.payload = \"\u26a0\ufe0f Seleccione Cisterna y llene el formulario de llenado\";\n}\nreturn msg;",
-        "outputs": 1,
+        "func": "let status_cisterna = global.get(\"STATUS_CISTERNA2\");\n\nif (String(msg.payload).toLowerCase() === \"cancel\") {\n    return null;  // Cancel\u00f3, no hacer nada\n}\n\nif (status_cisterna > 0 && status_cisterna < 3) {\n    global.set(\"SEL_CISTERNA\", \"CISTERNA2\");\n    global.set(\"START_BATCH\", true);\n    node.send([{payload: true}, {topic:'OK'}]);\n    return null;\n\n}else\n{    \n    msg.topic=null;\n    msg.payload = \"\u26a0\ufe0f Seleccione Cisterna y llene el formulario de llenado\";\n    return msg;\n}\n",
+        "outputs": 2,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
@@ -2902,6 +2909,9 @@
         "x": 1650,
         "y": 280,
         "wires": [
+            [
+                "4dfbb168def9e801"
+            ],
             [
                 "f6f66db1c4cf61c6"
             ]
@@ -3010,8 +3020,7 @@
         "y": 240,
         "wires": [
             [
-                "199bf417fa875596",
-                "trigger-ticket-close"
+                "199bf417fa875596"
             ],
             [
                 "uib-notify"
@@ -3738,7 +3747,7 @@
         "type": "function",
         "z": "33c28a10b022eebb",
         "name": "function 4",
-        "func": "var coilAddress = 0;\n\nif (global.get(\"START_BATCH\")==true) {\n    coilAddress = 0;  // Iniciar\n    global.set(\"START_BATCH\",false);\n    global.set(\"STATUS_BATCH\", \"ACTIVO\");\n    \n} else if (global.get(\"STOP_BATCH\")==true) {\n    coilAddress = 1;  // Parar\n    global.set(\"STOP_BATCH\",false);\n    global.set(\"STATUS_BATCH\", \"PAUSADO\");\n} else if (global.get(\"CLEAR_BATCH\")==true) {\n    coilAddress = 2;  // Borrar\n    global.set(\"CLEAR_BATCH\",false);\n    global.set(\"STATUS_BATCH\", \"LISTO\");\n}else {\n    msg.payload=null;\n    return msg;\n}\n\n// Nuevo: publicar por MQTT al gateway modbus (plant/write/START_BATCH ...)\nvar topicMap = {0:'START_BATCH', 1:'STOP_BATCH', 2:'CLEAR_BATCH'};\nmsg.topic = 'plant/write/' + (topicMap[coilAddress] || String(coilAddress));\nmsg.payload = true;\nreturn msg;",
+        "func": "var coilAddress = 0;\n\nif (global.get(\"START_BATCH\")==true) {\n    coilAddress = 0;\n    global.set(\"START_BATCH\",false);\n    global.set(\"STATUS_BATCH\", \"ACTIVO\");\n} else if (global.get(\"STOP_BATCH\")==true) {\n    coilAddress = 1;\n    global.set(\"STOP_BATCH\",false);\n    global.set(\"STATUS_BATCH\", \"PAUSADO\");\n} else if (global.get(\"CLEAR_BATCH\")==true) {\n    coilAddress = 2;\n    global.set(\"CLEAR_BATCH\",false);\n    global.set(\"STATUS_BATCH\", \"LISTO\");\n}else {\n    // If triggered directly\n    if (msg.topic === 'STOP_BATCH_TRIGGER') {\n        coilAddress = 1;\n        global.set(\"STOP_BATCH\",false);\n        global.set(\"STATUS_BATCH\", \"PAUSADO\");\n    } else {\n        msg.payload=null;\n        return msg;\n    }\n}\n\nvar topicMap = {0:'START_BATCH', 1:'STOP_BATCH', 2:'CLEAR_BATCH'};\nmsg.topic = 'plant/write/' + (topicMap[coilAddress] || String(coilAddress));\nmsg.payload = true;\nreturn msg;\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -4114,77 +4123,6 @@
         ]
     },
     {
-        "id": "nodo-calculo",
-        "type": "function",
-        "z": "flujo-tiquete-lpg",
-        "name": "Preparar datos adicionales",
-        "func": "// Guardar datos adicionales antes del c\u00e1lculo\nmsg.datosAdicionales = {\n    cliente: msg.payload.cliente,\n    numeroTiquete: msg.payload.numeroTiquete,\n    stream: msg.payload.stream,\n    bala: msg.payload.bala,\n    pulsosBatch: msg.payload.pulsosBatch,\n    kFactor: msg.payload.kFactor,\n    operacion: msg.payload.operacion || 'Ventas',\n    empresa: msg.payload.empresa || 'PETROSANTANDER COLOMBIA INC',\n    origen: msg.payload.origen || 'PETROSANTANDER',\n    tipoMedidor: msg.payload.tipoMedidor || 'CORIOLIS'\n};\n\nreturn msg;",
-        "outputs": 1,
-        "timeout": "",
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 380,
-        "y": 100,
-        "wires": [
-            [
-                "flujo-estandar"
-            ]
-        ]
-    },
-    {
-        "id": "flujo-estandar",
-        "type": "flujo-estandar",
-        "z": "flujo-tiquete-lpg",
-        "name": "Calcular Flujo Est\u00e1ndar",
-        "x": 650,
-        "y": 100,
-        "wires": [
-            [
-                "merge-datos"
-            ]
-        ]
-    },
-    {
-        "id": "merge-datos",
-        "type": "function",
-        "z": "flujo-tiquete-lpg",
-        "name": "Combinar con datos adicionales",
-        "func": "// Combinar resultado del c\u00e1lculo con datos adicionales\n\nif (msg.datosAdicionales) {\n    msg.payload.cliente = msg.datosAdicionales.cliente;\n    msg.payload.numeroTiquete = msg.datosAdicionales.numeroTiquete;\n    msg.payload.stream = msg.datosAdicionales.stream;\n    msg.payload.bala = msg.datosAdicionales.bala;\n    msg.payload.pulsosBatch = msg.datosAdicionales.pulsosBatch;\n    msg.payload.kFactor = msg.datosAdicionales.kFactor;\n    msg.payload.operacion = msg.datosAdicionales.operacion;\n    msg.payload.empresa = msg.datosAdicionales.empresa;\n    msg.payload.origen = msg.datosAdicionales.origen;\n    msg.payload.tipoMedidor = msg.datosAdicionales.tipoMedidor;\n    msg.payload.fechaHora = new Date().toLocaleString('es-CO');\n}\n\nmsg.topic = \"TIQUETE_LPG\";\nmsg.payload._force_show = true;\nreturn msg;\n",
-        "outputs": 1,
-        "timeout": "",
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 930,
-        "y": 100,
-        "wires": [
-            [
-                "debug-output",
-                "uib-terminal-galan-v2"
-            ]
-        ]
-    },
-    {
-        "id": "debug-output",
-        "type": "debug",
-        "z": "flujo-tiquete-lpg",
-        "name": "Debug Tiquete",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1180,
-        "y": 120,
-        "wires": []
-    },
-    {
         "id": "2e62e22aabdf80a2",
         "type": "link in",
         "z": "flujo-tiquete-lpg",
@@ -4240,9 +4178,9 @@
         "id": "44a2eea2b0da613a",
         "type": "function",
         "z": "flujo-tiquete-lpg",
-        "name": "function 18",
-        "func": "let data=msg.payload[0];\nlet fill_segment=global.get(\"FILL_SEGMENT1\");\nglobal.set(\"PROMEDIOS\",data);\n\n\n\nmsg.payload = {\n    \"massFlow\": data.flujo_promedio,\n    \"fluid\": fill_segment.producto.toLowerCase(),\n    \"observedTempF\": data.temperatura_promedio,\n    \"observedPressurePSI\": data.presion_promedio,\n    \"observedDensity\": data.densidad_promedio,\n    \"rvp\": fill_segment.rvp,\n    \"mFactor\": 1.001,\n    \"cliente\": fill_segment.cliente,\n    \"numeroTiquete\": fill_segment.tiquete,\n    \"stream\": \"2\",\n    \"bala\": \"BA - 1\",\n    \"pulsosBatch\": \"3392190\",\n    \"kFactor\": \"14000.00\"\n}\nreturn msg;",
-        "outputs": 1,
+        "name": "Armar solicitud CALCULAR",
+        "func": "// Solicitud de liquidaci\u00f3n al servicio glp-mass-calculator (TIQUETE_LPG/CALCULAR).\n// Datos reales: promedios del batch (llenado_promedios) y pulsos del Coriolis\n// (contador en cero al iniciar el batch). Sin valores fijos del batch.\nconst sel = global.get(\"SEL_CISTERNA\") === \"CISTERNA2\" ? \"CISTERNA2\" : \"CISTERNA1\";\nconst fs = global.get(sel === \"CISTERNA2\" ? \"FILL_SEGMENT2\" : \"FILL_SEGMENT1\") || {};\nconst promedios = (msg.payload && msg.payload[0]) || null;\nconst uit1 = global.get(\"UIT_2001\") || {};\nconst uit3 = global.get(\"UIT_2003\") || {};\n\nconst fallo = (texto) => {\n    node.status({fill: \"red\", shape: \"ring\", text: texto});\n    return [null, {topic: \"TIQUETE_LPG\", payload: {status: \"error\", error: texto, numeroTiquete: fs.tiquete}}];\n};\n\nif (!promedios) return fallo(\"No hay promedios guardados para el batch\");\nglobal.set(\"PROMEDIOS\", promedios);\n\nconst pulsosPrincipal = Math.round(Number(uit1.PULSES) || 0);\nif (pulsosPrincipal <= 0) return fallo(\"El Coriolis principal no reporta pulsos del batch\");\n\nmsg.topic = \"TIQUETE_LPG/CALCULAR\";\nmsg.payload = JSON.stringify({\n    request_id: sel + \"-\" + (fs.tiquete || 0) + \"-\" + Date.now(),\n    mass_pulses: pulsosPrincipal,\n    k_factor_pulses_per_kg: 20,\n    meter_factor: 1,\n    vapor_mass_pulses: Math.round(Number(uit3.PULSES) || 0),\n    vapor_k_factor_pulses_per_kg: 20,\n    vapor_meter_factor: 1,\n    observedTempF: promedios.temperatura_promedio,\n    observedPressurePSI: promedios.presion_promedio,\n    observedDensity: promedios.densidad_promedio,\n    rvp: fs.rvp,\n    fluid: String(fs.producto || \"\").toLowerCase(),\n    cliente: fs.cliente || \"\",\n    numeroTiquete: fs.tiquete,\n    stream: sel === \"CISTERNA2\" ? \"2\" : \"1\",\n    bala: \"BA - 1\",\n    operacion: \"Ventas\",\n    empresa: \"PETROSANTANDER COLOMBIA INC\",\n    origen: fs.origen || \"PETROSANTANDER\",\n    tipoMedidor: \"CORIOLIS\",\n    fechaHora: new Date().toLocaleString(\"es-CO\")\n});\nnode.status({fill: \"blue\", shape: \"ring\", text: \"Calculando tiquete...\"});\nreturn [msg, null];",
+        "outputs": 2,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
@@ -4252,7 +4190,10 @@
         "y": 40,
         "wires": [
             [
-                "nodo-calculo"
+                "aa000000000000c1"
+            ],
+            [
+                "uib-terminal-galan-v2"
             ]
         ]
     },
@@ -4447,73 +4388,7 @@
         "x": 250,
         "y": 440,
         "wires": [
-            [
-                "db08240ca43407ed"
-            ],
-            []
-        ]
-    },
-    {
-        "id": "db08240ca43407ed",
-        "type": "function",
-        "z": "002b5cf35f2cdda5",
-        "name": "function 14",
-        "func": "msg.payload = {\n    \"massFlow\": 22000,\n    \"fluid\": \"propano\",\n    \"observedTempF\": 95,\n    \"observedPressurePSI\": 120,\n    \"observedDensity\": 474.48,\n    \"rvp\": 180,\n    \"mFactor\": 1,\n    \"cliente\": \"RAYOGAS_SAS\",\n    \"numeroTiquete\": \"100\",\n    \"stream\": \"1\",\n    \"bala\": \"BA - 1\",\n    \"pulsosBatch\": \"4315244\",\n    \"kFactor\": \"14000.00\"\n}\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 450,
-        "y": 440,
-        "wires": [
-            [
-                "6e1fd277c82c8121",
-                "52fc38c5e78f186b"
-            ]
-        ]
-    },
-    {
-        "id": "6e1fd277c82c8121",
-        "type": "delay",
-        "z": "002b5cf35f2cdda5",
-        "name": "",
-        "pauseType": "delay",
-        "timeout": "2",
-        "timeoutUnits": "seconds",
-        "rate": "1",
-        "nbRateUnits": "1",
-        "rateUnits": "second",
-        "randomFirst": "1",
-        "randomLast": "5",
-        "randomUnits": "seconds",
-        "drop": false,
-        "allowrate": false,
-        "outputs": 1,
-        "x": 620,
-        "y": 440,
-        "wires": [
-            [
-                "7b7ba2f3f91a6f0f"
-            ]
-        ]
-    },
-    {
-        "id": "7b7ba2f3f91a6f0f",
-        "type": "function",
-        "z": "002b5cf35f2cdda5",
-        "name": "function 15",
-        "func": "msg.payload = { \"tab\": \"Tiquete2\" };\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 810,
-        "y": 440,
-        "wires": [
+            [],
             []
         ]
     },
@@ -4599,7 +4474,7 @@
         "type": "function",
         "z": "002b5cf35f2cdda5",
         "name": "InserNewSegment",
-        "func": "const row = Array.isArray(msg.payload) ? msg.payload[0] : null;\nconst selected = global.get(\"SEL_CISTERNA\");\nconst isCisterna1 = selected === \"CISTERNA1\";\nconst fillKey = isCisterna1 ? \"FILL_SEGMENT1\" : \"FILL_SEGMENT2\";\nconst statusKey = isCisterna1 ? \"STATUS_CISTERNA1\" : \"STATUS_CISTERNA2\";\nconst idKey = isCisterna1 ? \"ID_CISTERNA1\" : \"ID_CISTERNA2\";\nconst productKey = isCisterna1 ? \"ID_PRODUCTO1\" : \"ID_PRODUCTO2\";\nconst loadIdKey = isCisterna1 ? \"ID_LLENADO1\" : \"ID_LLENADO2\";\nconst data = global.get(fillKey) || {};\nconst cisternaId = Number(row && (row.id ?? row.ID));\nconst productId = ({ PROPANO: 1, BUTANO: 2, MEZCLA: 3 })[\n    String(data.producto || \"\").trim().toUpperCase()\n];\nconst status = Number(global.get(statusKey) ?? 0);\n\nif (msg.topic !== \"OK\" || !cisternaId || !productId || !data.Vol_full ||\n    (status !== 0 && status !== 4)) {\n    msg.payload = null;\n    return msg;\n}\n\nconst timestamp = String(data.fecha || \"\").trim();\nif (!/^\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}$/.test(timestamp)) {\n    msg.payload = null;\n    return msg;\n}\nglobal.set(idKey, cisternaId);\nglobal.set(productKey, productId);\nglobal.set(\"PROMEDIOS\", {\n    llenado_id: 0,\n    flujo_promedio: 0,\n    densidad_promedio: 0,\n    presion_promedio: 0,\n    temperatura_promedio: 0,\n    volumen_total: 0\n});\nglobal.set(statusKey, 1);\nglobal.set(isCisterna1 ? \"CISTERNA2_VISIBLE\" : \"CISTERNA1_VISIBLE\", 1);\nglobal.set(\"SEND_STATUS_CISTERNA1\", true);\n\nmsg.params = [cisternaId, timestamp, productId, Number(data.Vol_full), 0, Number(data.rvp) || 180];\nmsg.payload = \"UpdateData\";\nreturn msg;",
+        "func": "const row = Array.isArray(msg.payload) ? msg.payload[0] : null;\nconst selected = global.get(\"SEL_CISTERNA\");\nconst isCisterna1 = selected === \"CISTERNA1\";\nconst fillKey = isCisterna1 ? \"FILL_SEGMENT1\" : \"FILL_SEGMENT2\";\nconst statusKey = isCisterna1 ? \"STATUS_CISTERNA1\" : \"STATUS_CISTERNA2\";\nconst idKey = isCisterna1 ? \"ID_CISTERNA1\" : \"ID_CISTERNA2\";\nconst productKey = isCisterna1 ? \"ID_PRODUCTO1\" : \"ID_PRODUCTO2\";\nconst loadIdKey = isCisterna1 ? \"ID_LLENADO1\" : \"ID_LLENADO2\";\nconst data = global.get(fillKey) || {};\nconst cisternaId = Number(row && (row.id ?? row.ID));\nconst productId = ({ PROPANO: 1, BUTANO: 2, MEZCLA: 3 })[\n    String(data.producto || \"\").trim().toUpperCase()\n];\nconst status = Number(global.get(statusKey) ?? 0);\n\nif (msg.topic !== \"OK\" || !cisternaId || !productId || !data.Vol_full ||\n    (status !== 0 && status !== 4) || !(Number(data.rvp) > 0)) {\n    msg.payload = null;\n    return msg;\n}\n\nconst timestamp = String(data.fecha || \"\").trim();\nif (!/^\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}$/.test(timestamp)) {\n    msg.payload = null;\n    return msg;\n}\nglobal.set(idKey, cisternaId);\nglobal.set(productKey, productId);\nglobal.set(\"PROMEDIOS\", {\n    llenado_id: 0,\n    flujo_promedio: 0,\n    densidad_promedio: 0,\n    presion_promedio: 0,\n    temperatura_promedio: 0,\n    volumen_total: 0\n});\nglobal.set(statusKey, 1);\nglobal.set(isCisterna1 ? \"CISTERNA2_VISIBLE\" : \"CISTERNA1_VISIBLE\", 1);\nglobal.set(\"SEND_STATUS_CISTERNA1\", true);\n\nmsg.params = [cisternaId, timestamp, productId, Number(data.Vol_full), 0, Number(data.rvp)];\nmsg.payload = \"UpdateData\";\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -5014,43 +4889,21 @@
         "wires": []
     },
     {
-        "id": "trigger-ticket-close",
-        "type": "function",
-        "z": "619addbf2da107aa",
-        "name": "Trigger Tiquete on Close",
-        "func": "// Trigger ticket generation when closing\nmsg.payload = {\n    \"massFlow\": 22000,\n    \"fluid\": \"propano\",\n    \"observedTempF\": 95,\n    \"observedPressurePSI\": 120,\n    \"observedDensity\": 474.48,\n    \"rvp\": 180,\n    \"mFactor\": 1,\n    \"cliente\": global.get(\"FILL_SEGMENT1\") ? global.get(\"FILL_SEGMENT1\").cliente : \"RAYOGAS_SAS\",\n    \"numeroTiquete\": global.get(\"TIKET_N\") || global.get(\"FILL_SEGMENT1\") ? (global.get(\"FILL_SEGMENT1\").tiquete || \"100\") : \"100\",\n    \"stream\": \"1\",\n    \"bala\": \"BA - 1\",\n    \"pulsosBatch\": \"4315244\",\n    \"kFactor\": \"14000.00\"\n};\nif (global.get(\"FILL_SEGMENT1\")) {\n    msg.payload.cliente = global.get(\"FILL_SEGMENT1\").cliente || msg.payload.cliente;\n    msg.payload.numeroTiquete = global.get(\"FILL_SEGMENT1\").tiquete || msg.payload.numeroTiquete;\n}\nreturn msg;\n",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 1600,
-        "y": 200,
-        "wires": [
-            [
-                "db08240ca43407ed"
-            ]
-        ]
-    },
-    {
-        "id": "force-tiquete-uib-direct",
-        "type": "function",
-        "z": "619addbf2da107aa",
-        "name": "FORCE TIQUETE_LPG -> UIB",
-        "func": "var sel = global.get(\"SEL_CISTERNA\") || \"CISTERNA1\";\nvar fs1 = global.get(\"FILL_SEGMENT1\") || {};\nvar fs2 = global.get(\"FILL_SEGMENT2\") || {};\nvar fs = (sel === \"CISTERNA2\") ? fs2 : fs1;\nvar seg = global.get(\"SEGMENT_DISPLAY\") || {};\nvar pro = global.get(\"PROMEDIOS\") || {};\nvar uit1 = global.get(\"UIT_2001\") || {};\nvar uit3 = global.get(\"UIT_2003\") || {};\nvar pit1 = global.get(\"PIT_2001\") || {};\nvar tit1 = global.get(\"TIT_2001\") || {};\nvar dit1 = global.get(\"DIT_2001\") || {};\nvar tiket_n = global.get(\"TIKET_N\") || fs.tiquete || 0;\n\nmsg.topic = \"TIQUETE_LPG\";\nmsg.payload = {\n    cliente: fs.cliente || \"\",\n    producto: fs.producto || global.get(\"INLINE_PRODUCT\") || \"\",\n    cisterna: fs.cisterna || (global.get(sel)||{}).numero_sisterna || \"\",\n    tiquete: tiket_n,\n    fecha: fs.fecha || new Date().toLocaleString('es-CO'),\n    rvp: fs.rvp || 0,\n    Vol_full: fs.Vol_full || 0,\n    volumenActual: pro.volumen_total || 0,\n    masaCoriolis: seg.MASA_CORIOLIS || 0,\n    volIndicado: seg.VOL_INDICADO || 0,\n    masaVapores: seg.MASA_VAPORES || 0,\n    presionPromedio: pro.presion_promedio || pit1.PV || 0,\n    temperaturaPromedio: pro.temperatura_promedio || tit1.PV || 0,\n    densidadPromedio: pro.densidad_promedio || dit1.PV || 0,\n    totalMasa: uit1.TOTAL_MASS_KG || 0,\n    totalVapores: uit3.TOTAL_MASS_KG || 0,\n    masaNeta: (uit1.TOTAL_MASS_KG||0) - (uit3.TOTAL_MASS_KG||0),\n    origen: fs.origen || \"LLENADO\"\n};\nreturn msg;\n",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 1780,
-        "y": 300,
-        "wires": [
-            [
-                "uib-terminal-galan-v2"
-            ]
-        ]
+        "id": "aa000000000000c1",
+        "type": "mqtt out",
+        "z": "flujo-tiquete-lpg",
+        "name": "TIQUETE_LPG/CALCULAR",
+        "topic": "",
+        "qos": "1",
+        "retain": "false",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "b7cd64c1a1262f26",
+        "x": 800,
+        "y": 40,
+        "wires": []
     }
 ]
